@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Prescription: before and after</title>
+    <meta name="description" content="Here's a case.">
+    <link href='css/styles.css' rel='stylesheet'>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="index.html#prescriptions" target="_self">&#8592;</a></li>
+    </ul>
+</div>
+<div class="header">
+    <!--<div class='video-container'>
+        <video id="#video" width="1280" height="680" poster="img/what-is-ux.png" autoplay loop>
+                <source src="video/urbantranslations_1.mp4" type="video/mp4">
+                <source src="video/what-is-ux.ogv" type="video/ogg">
+                <source src="video/what-is-ux.webm" type="video/webm">
+        </video>
+    </div>-->
+    <div class="case-intro blue">
+        <h1 class="case-title">
+            Prescriptions: before and after
+        </h1>
+        <p class="intro">
+            Redesign of the existing prescriptions feature on the Gather Health platform.
+        </p>
+    </div>
+</div>
+<div class='problem'>
+    
+    <p>
+        This started out as a quick redesign of the modal on the Gather Health platform where patient prescriptions could be added, modified and deleted. The issue was that each medication row was taking up too much space, and the readability of the modal wasn't great - which is important especially for things like a prescription where mistakes can be costly.
+    </p>
+</div>
+<div class="spacer-small"></div>
+<div class='solution'>
+    <div id="sliders" class="ux-slider">
+                
+        <!--<div class="slider-title">
+                <p class="title">User experience is...</p>
+                <p class="subtitle">Context-dependent</p>
+        </div>-->
+        <div class="slider-holder">
+                <div class="slider-wrapper">
+                        <div class="move-me">&larr; move &rarr;</div>
+                        <div class="slider-left" style="width: 430px; height: 530px">
+                                <img src="img/prescriptions_case_after.png"/>
+                        </div>
+                        <div class="slider-right">
+                                <img src="img/med_modal_before.png"/>
+                        </div>
+                </div>
+        </div>
+    </div>
+    <p></p>
+    <figcaption>Move the cursor to the left for the original, and to the right for the redesigned version</figcaption>
+    <h3>Improvements</h3>
+    
+    <ul>
+        <li>
+            Decreased row height
+        </li>
+        <li>
+            Color-coded mealtimes (the more daylight, the lighter the color-coding), for improved legibility
+        </li>
+        <li>
+            Added an instructions/notes and a duration/quantity field to support printing the prescription straight from the modal (this used to be a separate action)
+        </li>
+        <li>
+            Clearly separated adding a new medication from saving or printing the prescription
+        </li>
+        <li>
+            Tried to improve field validation by making that inline, which came with its own drawbacks
+        </li>
+        <li>
+            Removed mealtime checkboxes
+        </li>
+        <li>
+            Added support for all types of medication, not just oral and insulin. This came a the cost of adding a strength and a units field. 
+        </li>
+        <li>
+            Added support punctuation in the amount fields/combination medications. 
+        </li>
+        <li>
+            Added support for weekly and monthly medications, instead of just daily. 
+        </li>
+    </ul>
+    
+
+    
+</div>
+
+
+</body>
+<footer>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>	
+    <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+    <script type="text/javascript" src="TangleKit/BVTouchable.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+	$( ".slider-wrapper" ).mousemove(function( e ) {
+			var offX  = (e.offsetX || e.clientX - $(e.target).offset().left);
+			$(".slider-left").css("width", offX);
+			//$('.move-me').css('left', offX);
+		});
+		
+		$( document ).on ( "vmousemove", ".slider-wrapper", function(e) {
+			var offX  = (e.offsetX || e.clientX - $(e.target).offset().left);
+			$(".slider-left").css("width", offX);
+			//$('.move-me').css('left', offX);
+			e.preventDefault();
+			//TODO disable up-downwards swiping dragging
+			$('.move-me').fadeOut('slow');
+		});
+		
+		$( ".slider-wrapper" ).mouseover(function( e ) {
+			$('.move-me').fadeOut('slow');
+		});
+		// video
+		var uxVideo = document.getElementById("what-is-ux");
+
+		function playPause() { 
+			if (uxVideo.paused) {
+				uxVideo.play();
+				$('.pijl').fadeOut();
+			} else {
+				uxVideo.pause();
+				$('.pijl').fadeIn();
+			}
+		}
+		$('video#what-is-ux').click(function(){
+			playPause();
+		});
+    </script>
+</footer>
+</html>

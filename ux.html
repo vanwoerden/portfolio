@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+    <head>
+        <title> What I consider UX to be.</title>
+        <meta name="description" content="UX UX UX">
+	<meta charset="UTF-8">
+        <!-- CSS -->
+        <link href='css/styles.css' rel='stylesheet'>
+	
+        
+
+    </head>
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="index.html" target="_self">&#8592;</a></li>
+    </ul>
+</div>
+    <div class="video-holder">
+	    <article>
+		    <video id="what-is-ux" width="861" height="484" poster="img/what-is-ux.png" loop>
+			    <source src="video/what-is-ux.mp4" type="video/mp4">
+			    <source src="video/what-is-ux.ogv" type="video/ogg">
+			    <source src="video/what-is-ux.webm" type="video/webm">
+		    </video>
+	    </article>
+    </div>
+    
+    <div id="sliders" class="ux-slider">
+	    
+			    <div class="slider-title">
+				    <p class="title">User experience is...</p>
+				    <p class="subtitle">Context-dependent</p>
+			    </div>
+			    <div class="slider-holder">
+				    <div class="slider-wrapper">
+					    <div class="move-me">&larr; move &rarr;</div>
+					    <div class="slider-left" style="width: 430px">
+						    <img src="img/ux-context-dependent-white.png"/>
+					    </div>
+					    <div class="slider-right">
+						    <img src="img/ux-is-white.png"/>
+					    </div>
+				    </div>
+			    </div>
+		    
+			    <div class="slider-title">
+				    <p class="title">User experience is...</p>
+				    <p class="subtitle">Subjective: it's different for everyone</p>
+			    </div>
+			    <div class="slider-holder">
+				    <div class="slider-wrapper">
+					    <div class="slider-left" style="width: 430px">
+						    <img src="img/ux-subjective-white.png"/>
+					    </div>
+					    <div class="slider-right">
+						    <img src="img/ux-is-white.png"/>
+					    </div>
+				    </div>
+			    </div>
+		    
+			    <div class="slider-title">
+				    <p class="title">User experience is...</p>
+				    <p class="subtitle">Dynamic: it changes over time</p>
+			    </div>
+			    <div class="slider-holder">
+				    <div class="slider-wrapper">
+					    <div class="slider-left" style="width: 430px">
+						    <img src="img/ux-dynamic-white.png"/>
+					    </div>
+					    <div class="slider-right">
+						    <img src="img/ux-is-white.png"/>
+					    </div>
+				    </div>
+			    </div>
+			    
+			    
+	    
+    </div>
+    <div class="green">
+	<div class="slider-title-last">
+				    <p class="title">User experience design is...</p>
+				    <p class="subtitle">Using design methods and techniques to (positively) impact user experience</p>
+			    </div>
+    </div>
+</body>
+<footer>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>	
+    <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+    <script type="text/javascript" src="/TangleKit/BVTouchable.js"></script>
+	    	<!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+mixpanel.init("14916f8ff77dd81eef6985b3c33f3c55");</script><!-- end Mixpanel -->
+    <script type="text/javascript">
+	$( ".slider-wrapper" ).mousemove(function( e ) {
+			var offX  = (e.offsetX || e.clientX - $(e.target).offset().left);
+			$(".slider-left").css("width", offX);
+			//$('.move-me').css('left', offX);
+		});
+		
+		$( document ).on ( "vmousemove", ".slider-wrapper", function(e) {
+			var offX  = (e.offsetX || e.clientX - $(e.target).offset().left);
+			$(".slider-left").css("width", offX);
+			//$('.move-me').css('left', offX);
+			e.preventDefault();
+			//TODO disable up-downwards swiping dragging
+			$('.move-me').fadeOut('slow');
+		});
+		
+		$( ".slider-wrapper" ).mouseover(function( e ) {
+			$('.move-me').fadeOut('slow');
+		});
+		// video
+		var uxVideo = document.getElementById("what-is-ux");
+
+		function playPause() { 
+			if (uxVideo.paused) {
+				uxVideo.play();
+				$('.pijl').fadeOut();
+			} else {
+				uxVideo.pause();
+				$('.pijl').fadeIn();
+			}
+		}
+		$('video#what-is-ux').click(function(){
+			playPause();
+		});
+		$(document).ready(function() {
+			mixpanel.track('What Is UX Loaded');
+		});
+    </script>
+</footer>
+</html>

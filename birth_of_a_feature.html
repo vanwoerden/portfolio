@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Patient education: Birth of a feature</title>
+    <meta name="description" content="Patient education: Birth of a feature">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href='css/styles.css' rel='stylesheet'>
+</head>
+
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="index.html#patient-education" target="_self">&#8592;</a></li>
+    </ul>
+</div>
+<div class="header">
+    <div class='video-container'>
+        <img src="img/gather_characters_bkg.png" alt="interactive education background"/>
+    </div>
+    <div class="case-intro gray">
+        <h1 class="case-title">
+            Patient education: birth of a feature
+        </h1>
+        <p class="intro">
+            Motivating Indian diabetes patients to make a healthy choice in their lives is a tough nut to crack, but a bit of knowledge never hurt anyone.
+        </p>
+    </div>
+</div>
+<div class='problem'>
+    <h3>Patients</h3>
+    <p>
+Diabetes is a chronic disease that confronts people who suffer from it every day. Luckily, there are a lot of things patients can do to successfully manage their disease. Besides taking medication on time, most of these things involve changing daily habits or adopting new daily behaviors.
+    </p>
+    <p>
+        Relying on a mobile app to change behavior is quite a task. We believed a good first step to changing behavior is knowing which habits are healthy, and what behavior is likely to cause trouble.
+    </p>
+    <h3>Doctors in India</h3>
+    <p>
+Doctors in India see hundreds of patients every day, and spend 5 to 10 minutes on average with a patient. Just enough to assess their current situation, do a quick check, and update medication. They lack the time to do any thorough form of patient education. Doctors also tend to have 2 or 3 jobs, in order to make an adequate income.
+    </p>
+    <figure>
+        <img src="img/dr_kiran.jpg" alt="Doctor and patient"/>
+        <figcaption>A doctor spends 5 to 10 minutes on average with a patient</figcaption>
+    </figure>
+
+    <h3>Support staff</h3>
+    <p>
+Nurses, dietists and other support staff spend a little more time but the patient volume is simply overwhelming, especially because most patients come to the practice around the same time in the morning. 
+    </p>
+    <figure>
+        <img src="img/patient_visit.jpg" alt="mumbai clinic dietist"/>
+        <figcaption>Dietist in Mumbai clinic</figcaption>
+    </figure>
+    
+    <p>
+        From the patient side there is a clear need for education, but the practices simply do not have the resources to deliver.
+    </p>
+
+</div>
+<div class='solution'>
+    <h3>The pilot</h3>
+    <p>
+        Before investing a lot of resources in building anything, we wanted to see how many patients would respond and keep responding if we sent them educational content about their diet. A healthy diet is one of the most effective ways for diabetics to control their blood sugar levels. It’s also something that happens (at least) three times a day, so there are lots of opportunities to improve throughout the day.
+    </p>
+    <figure>
+        <img src="img/brainstorm_pilot.jpg" alt="pilot brainstorm"/>
+        <figcaption>Brainstorming the pilot content</figcaption>
+    </figure>
+    <figure>
+        <img src="img/week1_example.jpg" alt="whatsapp pilot"/>
+        <figcaption>Example of a question asked to a patient</figcaption>
+    </figure>
+    <p>
+        Two weeks of testing yielded the following wisdom:
+        <ul>
+            <li>
+                Patients who were already involved and active responded best, but overall results were good, with over 60% of patients making it to the end of the two week pilot;
+            </li>
+            <li>
+                Most patient answers were very short, which strengthened our belief that most of the content in this form could be automated;
+            </li>
+            <li>
+                Once a patient was engaged and responsive, less energy was needed to keep them engaged and responsive.
+            </li>
+        </ul>
+    </p>
+    <h3>Version 1</h3>
+    <p>
+        The first version we released was pretty bareboned; it didn't have pictures, but because the pilot results were good we wanted to get something out as soon as possible and decided text-based education was OK for the first version. Similarly, we settled on a frequency of three questions per week, instead of one per day. This would give us some extra time to write more content.
+    </p>
+    <figure>
+        <img src="img/ic_flowchart.png" alt="flowchart"/>
+        <figcaption>Exploring the logic of automated messages with a flowchart</figcaption>
+    </figure>
+    <p>
+        I built an early prototype, to play around with timing and automated responses.
+    </p>
+    <iframe class="chatbot" src="http://seriousness.nl/diet"></iframe>
+    <p>
+        To make it easier for patients and less error prone for us, we went with A B C D buttons instead of patients having to type their answers.
+    </p>
+    <figure>
+        <img src="img/edu_threaded.jpg" alt="education as part of chat"/>
+        <figcaption>Should the new feature be a second thread within the existing Chat feature? Should users reply with text or use buttons?</figcaption>
+    </figure>
+    <figure>
+        <img src="img/ic_buttons.jpg" alt="whatsapp pilot"/>
+        <figcaption>Exploring buttons instead of replying with text</figcaption>
+    </figure>
+    <h3>Version 2</h3>
+    <p>
+        In version 2 we:
+        <ul>
+            <li>
+                added pictures to increase fun and engagement;
+            </li>
+            <li>
+                added short trivia quizzes between each 'regular' module of questions;
+            </li>
+            <li>
+                increased the frequency to daily for regular modules
+            </li>
+        </ul>
+    </p>
+    <figure>
+        <img width="300px" src="img/ic_pics.jpg" alt="flowchart"/>
+        <figcaption>V2, now with pictures</figcaption>
+    </figure>
+    <p>
+        Unsurprisingly, after these changes, we saw improved retention and more intensive use of the feature. Good news!
+    </p>
+    
+    <h3>Version 3</h3>
+    <p>
+        In the third version we added sound effects and animations to make the experience even more engaging.
+    </p>
+    <video class="phone-vid" width="368" height="720" poster="img/nudge_2_poster.jpg" muted autoplay loop>
+        <source src="video/nudge2.mp4" type="video/mp4">
+    </video>
+    
+    <h3>Version 4</h3>
+    <p>
+        For the 4th version we upped the frequency to three questions per day. We also added the ability to enter data like blood sugar, medication intake, weight, etc. Finally, we added the ability to set daily reminders based on patients' answers to a specific set of questions. 
+    </p>
+    <div class="spacer"></div>
+</div>
+<div class='video-container'>
+    <video id="#video" width="1280" height="680" poster="img/ic_video_background.jpg" autoplay loop>
+            <source src="video/ic.mp4" type="video/mp4">
+    </video>
+    <!--<figcaption>
+        Video of the 4th version interface
+    </figcaption>-->
+</div>
+
+
+</body>
+<footer>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+</footer>
+</html>

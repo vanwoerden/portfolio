@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>bot</title>
+</head>
+
+<body>
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        $.ajax({
+            url: 'https://api.wit.ai/message',
+            data: {
+              'q': 'what kind of designer are you',
+              'access_token' : 'DR6NK6XSBOGCRRLQHRCWYEBGLMSXPMUG'
+            },
+            dataType: 'jsonp',
+            method: 'GET',
+            success: function(response) {
+                console.log("success!", response);
+            }
+        });
+    });
+    
+</script>
+</body>
+</html>

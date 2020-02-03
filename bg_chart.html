@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>BG Chart: before and after</title>
+    <meta name="description" content="Blood sugar chart redesign">
+    <link href='css/styles.css' rel='stylesheet'>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+</head>
+
+<body>
+<div class="menu">
+    <ul>
+        <li><a href="index.html#blood-sugar-chart" target="_self">&#8592;</a></li>
+    </ul>
+</div>
+<div class="header">
+    <!--<div class='video-container'>
+        <video id="#video" width="1280" height="680" poster="img/what-is-ux.png" autoplay loop>
+                <source src="video/urbantranslations_1.mp4" type="video/mp4">
+                <source src="video/what-is-ux.ogv" type="video/ogg">
+                <source src="video/what-is-ux.webm" type="video/webm">
+        </video>
+    </div>-->
+    <div class="case-intro blue">
+        <h1 class="case-title">
+            Blood sugar chart
+        </h1>
+        <p class="intro">
+            How helpful is a weekly average blood sugar value? Presenting progress to patients in a more meaningful way.
+        </p>
+    </div>
+</div>
+<div class='problem'>
+    
+    <p>
+        One of the first projects I took on at Gather Health was a redesign of the blood sugar chart in the Gather Health patient app. The existing chart was quite basic, showing only a weekly average over the last 8 weeks.
+    </p>
+</div>
+<div class='solution'>
+    <h3>Improvements</h3>
+    <ul>
+	<li>
+	    Plotting individual blood sugar data points (the smaller dots) along with the average
+	</li>
+	<li>
+	    Color-coding the data points to show whether they were inside the patient's target range
+	</li>
+	<li>
+	    Showing the actual target range both in the chart and as a label
+	</li>
+	<li>
+	    Adding a dropdown to look at mealtimes separately, and to separate before-meal readings from after-meal readings. For diabetics, a daily blood sugar average is not that helpful because values before and after meals tend to fluctuate a lot
+	</li>
+	<li>
+	    Showing the appropriate target range for before-meal and after-meal readings
+	</li>
+    </ul>
+    <figure>
+        <img src="img/bg_chart_before_after.jpg" alt="blood sugar chart before and after"/>
+        <figcaption>Original on the left, redesign on the right</figcaption>
+    </figure>
+    <!--<div class="slider-title">
+            <p class="title">User experience is...</p>
+            <p class="subtitle">Context-dependent</p>
+    </div>
+    <div class="slider-holder">
+            <div class="slider-wrapper">
+                    <div class="move-me">&larr; move &rarr;</div>
+                    <div class="slider-left" style="width: 430px">
+                            <img src="img/ux-context-dependent-white.png"/>
+                    </div>
+                    <div class="slider-right">
+                            <img src="img/ux-is-white.png"/>
+                    </div>
+            </div>
+    </div>-->
+</div>
+
+
+</body>
+<footer>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+</footer>
+</html>

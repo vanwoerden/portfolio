@@ -1,0 +1,471 @@
+<html>
+<head>
+	<title>Chat with Seriousness</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="style.css" type="text/css">
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/randomColor.js"></script>
+	<script src="js/find-in-json.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<!-- start Mixpanel -->
+	<script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+mixpanel.init("4ba1e2452454f9c21109ded0ef350ca1");</script><!-- end Mixpanel -->
+	<!-- emailJS -->
+	<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+	<script type="text/javascript">
+	   (function(){
+		  emailjs.init("user_kD7CIzXpVXfLnfKXwCBca");
+	   })();
+	</script>
+	<script type="text/javascript">
+		var accessToken = "380e6d33ba2341a082dded596cb11f7a";
+		var baseUrl = "https://api.api.ai/v1/";
+		var fonts = [
+						"Avenir Next",
+						"Helvetica",
+						"Georgia",
+						"Oxford"
+					 ];
+		var _text;
+		$(document).ready(function() {
+			mixpanel.track("bot started");
+			//randomBackgroundColor();
+			//mixpanel.track("Video played", {
+			//    "Video length": 213,
+			//    "id": "hY7gQr0"
+			//});
+			send('start');
+			$("#input").keypress(function(event) {
+				if (event.which == 13) {
+					event.preventDefault();
+					send($("#input").val());
+					blink();
+					printText($("#input").val());
+					//startRecognition();
+				}
+			});
+			$("#rec").click(function(event) {
+				switchRecognition();
+			});
+			var canv = $('<canvas id="canvas"></canvas>');
+			$( 'body' ).append(canv);
+			
+			var canvas = document.getElementById('canvas');
+			canvas.width = $(window).width() * 2;
+			canvas.height = $(window).height() * 2;
+			
+			canvas.style.width = $(window).width();
+			canvas.style.height = $(window).height();
+			
+			var ctx = canvas.getContext('2d');
+			ctx.scale(2,2);
+			
+			drawCircles(150, ctx);
+			drawTriangles(150, ctx);
+			
+		});
+		function randomBackgroundColor() {
+			var colors = randomColor({
+				count: 2,
+				luminosity: 'light',
+				alpha: 0.1,
+				hue: 'blue'
+			});
+			
+			var gradient = 'linear-gradient(to top, ' + colors[0] + ' 0%, ' + colors[0] + ' 1%, ' + colors[1] + ' 100%)';
+			console.log(gradient);
+			
+			//$('body').css({"background-color": colors[0]});
+			$('body').css({"background-image": gradient});
+		}
+		var recognition;
+		function startRecognition() {
+			recognition = new webkitSpeechRecognition();
+			recognition.onstart = function(event) {
+				updateRec();
+			};
+			recognition.onresult = function(event) {
+				var text = "";
+			    for (var i = event.resultIndex; i < event.results.length; ++i) {
+			    	text += event.results[i][0].transcript;
+			    }
+			    setInput(text);
+				stopRecognition();
+			};
+			recognition.onend = function() {
+				stopRecognition();
+			};
+			recognition.lang = "en-US";
+			recognition.start();
+		}
+	
+		function stopRecognition() {
+			if (recognition) {
+				recognition.stop();
+				recognition = null;
+			}
+			updateRec();
+		}
+		function switchRecognition() {
+			if (recognition) {
+				stopRecognition();
+			} else {
+				startRecognition();
+			}
+		}
+		function setInput(text) {
+			$("#input").val(text);
+			send();
+		}
+		function updateRec() {
+			$("#rec").text(recognition ? "Stop" : "Speak");
+		}
+		function send(msg) {
+			
+			$.ajax({
+				type: "POST",
+				url: baseUrl + "query?v=20150910",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				headers: {
+					"Authorization": "Bearer " + accessToken
+				},
+				data: JSON.stringify({ query: msg, lang: "en", sessionId: "somerandomthing" }),
+				success: function(data) {
+					setResponse(JSON.stringify(data, undefined, 2));
+					
+					var intent = '';
+					
+					if(data.result.metadata.intentName) {
+					    intent = data.result.metadata.intentName;
+					}
+					mixpanel.track('message sent', {
+					    'message': msg,
+					    'intent': data.result.metadata.intentName,
+					    'source': data.result.source
+					})
+					
+					//console.log(data);
+					
+					// parse json for key 'messages' and print all of them
+					
+					// test if we have messages
+					if(data.result.fulfillment.messages) {
+						console.log('msg length ' + data.result.fulfillment.messages.length);
+						var msgs = data.result.fulfillment.messages;
+						
+						for (var i = 0; i < msgs.length; i++) {
+							console.log(msgs[i].type);
+							// type = 0 for text
+							// type = 1 for card
+							// type = 2 for quick reply
+							// type = 3 for image
+							// TODO custom payload --> type 4?
+							
+							switch (msgs[i].type) {
+								case 0:
+									printResponse(msgs[i].speech);
+									break;
+								case 1:
+									// TODO
+									break;
+								case 2:
+									printQuickReplies(msgs[i].replies);
+									break;
+								case 3:
+									printImage(msgs[i].imageUrl);
+									break;
+								case 4:
+									console.log(msgs[i].payload.type);
+									switch (msgs[i].payload.type) {
+										case 'video':
+											console.log(msgs[i].payload.videourl);
+											printVideo(msgs[i].payload.videourl);
+											if(msgs[i].payload.projecturl) {
+												showLink(msgs[i].payload.projecturl, msgs[i].payload.title);
+											}
+											
+											break;
+										case 'link':
+											showLink(msgs[i].payload.url, msgs[i].payload.title);
+											break;
+										case 'color':
+											randomBackgroundColor();
+											console.log('random bkg)');
+											break;
+										case 'meeting':
+											//date
+											//time
+											//location
+											//who
+											//email
+											var date, time, location, who, email;
+											date = data.result.contexts[0].parameters.date;
+											time = data.result.contexts[0].parameters.time;
+											location = data.result.contexts[0].parameters["location.original"];
+											who = data.result.contexts[0].parameters["given-name.original"];
+											email = data.result.contexts[0].parameters["email.original"];
+											
+											//console.log(data.result.contexts[0].parameters);
+											sendEmail(date, time, location, who, email);
+											break;
+										case 'design':
+											var copyOne, copyTwo, author;
+											
+											var options = {
+												title: "The Adventures Of Ollie & Bear",
+												subtitle: "Once upon a time, there were two cool cats. Also, they were brothers.",
+												author: "Amy Tu",
+												layout: "portrait",
+												colorful: true
+											};
+											var style = ['modern', 'minimalist'];
+											createBookCover(options, style);
+									}
+									break;
+							}
+						}
+					} else {
+						// if we don't have messages then it must be just the one
+						printResponse(data.result.fulfillment.speech);
+					}
+					
+				},
+				error: function() {
+					setResponse("Internal Server Error");
+				}
+			});
+			setResponse("Loading...");
+		}
+		function sendEmail(d,t,l,w,e) {
+			console.log('sending email');
+			emailjs.send("gmail","template_6tBAZppB",{
+				date: d,
+				time: t,
+				location: l,
+				who: w,
+				email: e
+			});
+		}
+		function createBookCover(options, style) {
+			//var fontOne, fontTwo, baseFontSize, colorOne, colorTwo, colorThree, layout, title, subtitle;
+			var width, height, ratio;
+			ratio = 1.618;
+			if(options.layout == "landscape") {
+				height = 400;
+				width = height * ratio;
+			} else {
+				console.log('layout portrait');
+				width = 400;
+				height = width * ratio;
+			}
+			// now we should have a base container in either portrait or landscape layout, so let's create the container the title, subtitle and author
+			var colors = randomColor({
+				count: 2,
+				luminosity: 'light',
+				alpha: 0.1,
+				hue: 'blue'
+			});
+			
+			var bookContainer = $("<div class='bookcontainer'></div>");
+			$(bookContainer).css({'width': width, 'height': height});
+			
+			$( "#messages" ).append(bookContainer);
+			// add a canvas to draw designy things on
+			
+			// add title, subtitle, author
+			var title = $("<h1 class='randomclass'>" + options.title + "</h1>");
+			var subtitle = $("<h2 class='randomclass'>" + options.subtitle + "</h2>");
+			var author = $("<p class='randomclass'>" + options.author + "</p>");
+			
+			var titleFontSize = randomIntFromInterval(24, 48);
+			var subtitleFontSize = titleFontSize * (1/ratio);
+			var authorFontSize = subtitleFontSize * (1/ratio);
+			
+			$( title ).css({'font-family': 'Avenir Next', 'font-size': titleFontSize });
+			$( subtitle ).css({'font-family': fonts[3], 'font-size': subtitleFontSize});
+			$( author ).css({'font-family': fonts[3], 'font-size': authorFontSize});
+			
+			if (options.colorful) {
+				var gradient = 'linear-gradient(to top, ' + colors[0] + ' 0%, ' + colors[0] + ' 1%, ' + colors[1] + ' 100%)';
+				//$(bookContainer).css({"background-image": gradient});
+				
+				$( title ).css({ 'color': '#fff' });
+				$( subtitle ).css({'color': '#fff'});
+				$( author ).css({'color': '#fff'});
+			}
+			
+			$( bookContainer ).append(title, subtitle, author);
+			
+			var canvas = document.getElementById('canvas');
+			canvas.width = $(window).width();
+			canvas.height = $(window).height();
+			var ctx = canvas.getContext('2d');
+			
+			drawCircles(50, ctx);
+			drawTriangles(50, ctx);
+			$("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight}, 1200, "easeOutQuart");
+		}
+		function drawCircles(amount, ctx) {
+			
+			for (i = 0; i < amount; i++) {
+				
+				ctx.translate(0.5, 0.5);
+				var randomX = randomIntFromInterval(0, canvas.width);
+				var randomY = randomIntFromInterval(0, canvas.height);
+				var randomRadius = randomIntFromInterval(2, 6);
+				ctx.strokeStyle = randomColor({luminosity: 'light', hue: 'blue'});
+				ctx.beginPath();
+				ctx.arc(randomX, randomY, randomRadius, 0, 2 * Math.PI);
+				ctx.stroke();				
+			}
+		}
+		function drawTriangles(amount, ctx) {
+			
+			for (i = 0; i < amount; i++) {
+				drawEqTriangle(ctx, randomIntFromInterval(4,12), randomIntFromInterval(0, canvas.width), randomIntFromInterval(0, canvas.height));
+			}
+		}
+		function drawEqTriangle(ctx, side, cx, cy){
+    
+		    var h = side * (Math.sqrt(3)/2);
+		    var randomX = randomIntFromInterval(0, canvas.width);
+		    var randomY = randomIntFromInterval(0, canvas.height);
+			
+		    var height = side * (Math.sqrt(3)/2);
+		    ctx.rotate(randomIntFromInterval(0,360)*Math.PI/180)
+		    ctx.beginPath();
+		    ctx.moveTo(randomX, randomY);
+		    ctx.lineTo(randomX+side/2, randomY+height);
+		    ctx.lineTo(randomX-side/2, randomY+height);
+		    ctx.lineTo(randomX, randomY);
+		    
+		    ctx.strokeStyle = "#000";
+		    ctx.fillStyle = '#FFF';
+		    
+		    ctx.stroke();
+		    //context.fill();
+		    ctx.closePath();
+		
+		}
+		function sendQuickReply(txt) {
+			send(txt);
+		}
+		function setResponse(val) {
+			$("#response").text(val);
+			unblink();
+		}
+		function blink(){
+			//$( "#messages" ).append($('.blink'));
+			//$(".blink").fadeIn();
+		}
+		function unblink(){
+			$(".blink").fadeOut();
+		}
+		function printText(val){
+			//clear text
+			$("#input").val('');
+			// print text
+			var txt_el = $("<div class='messagecontainer'><div class='message right'>" + val + "</div></div>");
+			
+			$( "#messages" ).append(txt_el);
+			var color = randomColor({luminosity: 'light', hue: 'random'});
+			$('.message:last').css({"display": 'none'});
+			$('.message:last').css({"background-color": color});
+			
+			//fade in
+			$('.message:last').fadeIn();
+		}
+		function printResponse(val) {
+			if(val !== '') {
+				$( "#messages" ).append("<div class='messagecontainer'><div class='avatar'></div><div class='message left'>" + val + "</div></div>");
+				$('.message:last').css({"display": 'none'});
+				$('.message:last').fadeIn();
+				//$( "#messages" ).animate({ scrollTop: $('body').height() }, 1200, "easeOutQuart");
+				//$('#messages').animate({scrollTop: $('#messages').innerHeight() + "px"});
+				$("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight}, 1200, "easeOutQuart");
+				console.log($(document).height());
+			}
+			
+		}
+		function printQuickReplies(val) {
+			//console.log('val ' + val);
+			if(val != 'null') {
+				$('#messages').append("<div class='qrc'><div class='quick-reply-container'></div></div>");
+				var txt;
+				var color = randomColor({luminosity: 'bright', hue: 'blue'});
+				for (var i = 0; i < val.length; i++) {
+					//console.log(val[i]);
+					// create button
+					
+					var el = $('<div class="quick-reply">' + val[i] + '</div>');
+					txt = val[i];
+					el.css({
+						"border": '2px solid ' + color,
+						//"border": '2px solid white',
+						"color": '#fff',
+						"background": color
+						});
+					el.click(clickQuickReply(val[i]));
+					$('.quick-reply-container:last').append(el);
+					
+				}
+			}
+		}
+		function showLink(url, title) {
+			//console.log("showLink() " + url);
+			if (url !== '') {
+				$('#messages').append("<div class='messagecontainer'><div class='avatar'></div><div class='message left'><a href=" + url + " target='_blank'>" + title + "</a></div></div>");
+			}
+		}
+		function printImage(url) {
+			var img_el = $("<div class='imagecontainer'><div class='image'><img class='full-width' src='" + url + "'></img></div></div>");
+			
+			$( "#messages" ).append(img_el);
+		}
+		function printVideo(url) {
+			console.log('printVideo ' + url);
+			var video_el = $("<div class='videocontainer'><div class='video'><video class='full-width' autoplay controls><source src='" + url + "' type='video/mp4'></video></div></div>");
+			//<source src="video/what-is-ux.mp4" type="video/mp4">
+			
+			$( "#messages" ).append(video_el);
+		}
+		function clickQuickReply(txt) {
+			return function (){
+				sendQuickReply(txt);
+				printText(txt);
+				//console.log(txt);
+			}
+		}
+		function randomIntFromInterval(min,max)
+		{
+			return Math.floor(Math.random()*(max-min+1)+min);
+		}
+	</script>
+	<style type="text/css">
+		
+		/*div {  position: absolute; }*/
+		input { width: 400px; }
+		button { width: 50px; }
+		textarea { width: 100%; }
+	</style>
+</head>
+<body>
+	<div>
+		<div class="blink">
+			...
+		</div>
+		<div id="inputcontainer">
+			<input id="input" type="text" placeholder="type your message here">
+		</div>
+		<button id="rec">Speak</button>
+		<div id="messages">
+				
+		</div>
+		
+		<textarea id="response" cols="40" rows="20"></textarea>
+	</div>
+</body>
+</html>

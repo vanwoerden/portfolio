@@ -1,0 +1,18 @@
+@font-face {
+	font-family: 'BaskervilleURWNar-Bol';
+	src: url('../fonts/BaskervilleURWNar-Bol.eot');
+	src: url('../fonts/BaskervilleURWNar-Bol.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/BaskervilleURWNar-Bol.woff') format('woff'),
+	     url('../fonts/BaskervilleURWNar-Bol.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'FranklinGothicURW-Boo';
+	src: url('../fonts/FranklinGothicURW-Boo.eot');
+	src: url('../fonts/FranklinGothicURW-Boo.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/FranklinGothicURW-Boo.woff') format('woff'),
+	     url('../fonts/FranklinGothicURW-Boo.ttf') format('truetype');
+	font-weight: regular;
+	font-style: normal;
+}

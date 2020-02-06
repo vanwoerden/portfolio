@@ -298,6 +298,24 @@ span.toggle-link {
    margin-bottom: 1em;
    border: 0 dashed #555;
 }
+#airplane {
+  /*offset-path: path('M0,20 C20,100 200,0 200,100');*/
+  offset-path: path("M0,126.532671 C33.2158609,136.044155 71.8019508,139.71004 115.75827,137.530325 C209.916481,132.861188 243.132367,105.739917 245.060265,75.7056801 C249.715649,3.18061639 144.932562,-8.11427057 144.996183,75.7056801 C145.059804,159.525631 284.025445,145.555639 335.639313,126.532671 C387.253181,107.509704 393.359989,76.0029139 420.071247,67.0858979 C437.878752,61.1412206 454.188337,59.9522851 469,63.5190915");
+  animation: move 3000ms infinite alternate ease-in-out;
+  width: 40px;
+  height: 40px;
+  background: url(../assets/paper_plane.svg) no-repeat center center;
+  background-size: contain;
+}
+
+@keyframes move {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
 .plane-window {
    border: 2px solid #555;
    background: white;

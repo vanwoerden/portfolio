@@ -12,7 +12,7 @@
     <div class="container-1200 center flex header">
         <div class="column-10 hello">
             <p class="large">
-                <span>Hi. </span>
+                <span>Hello. </span>
             </p>
         </div>
         <div class="column intro">
@@ -36,7 +36,7 @@
                 </div>
                     <p class="large">
                     <!--<a href="resume">Download résumé</a>-->
-                    <a href="http://seriousness.nl/ux.html">What is UX?</a>
+                    <a href="ux.html">What is UX?</a>
                     
                     </p>
                 <p class="large">
@@ -150,6 +150,7 @@
                                 Moved to Beijing
                                 ✈
                             </div>
+                            <div id="airplane"></div>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -216,13 +217,7 @@
         //experiences[i].setAttribute("style", "background-color:" +  colors[i] +";");
     }
     
-    var roles = [
-        "designer",
-        "recruiter",
-        "hiring manager",
-        "fellow traveler",
-        "AI &#x1F916"
-    ];
+    
     var yes = false;
     function toggleCode() {
         if(yes) {
@@ -233,62 +228,12 @@
             document.getElementById("toggle-code").innerHTML = "yes";
         }
     }
-    var ideal = false;
-    function toggleVenn() {
-        if(ideal) {
-            ideal = false;
-            document.getElementById("ideal").classList.add("hide");
-            document.getElementById("typical").classList.remove("hide");
-            document.getElementById("toggle-venn").innerHTML = "How I prefer to work &#8594";
-        } else {
-            ideal = true;
-            document.getElementById("ideal").classList.remove("hide");
-            document.getElementById("typical").classList.add("hide");
-            document.getElementById("toggle-venn").innerHTML = "Typical situation &#8594";
-        }
-    }
-    var old = true;
-    function toggleBML() {
-        if(old) {
-            old = false;
-            document.getElementById("build").classList.add("counter-rotate");
-            document.getElementById("measure").classList.add("counter-rotate");
-            document.getElementById("learn").classList.add("counter-rotate");
-            document.getElementById("lean-container").classList.add("rotate");
-            document.getElementById("toggle-bml").innerHTML = "no, build comes first";
-        } else {
-            old = true;
-            document.getElementById("build").classList.remove("counter-rotate");
-            document.getElementById("measure").classList.remove("counter-rotate");
-            document.getElementById("learn").classList.remove("counter-rotate");
-            document.getElementById("lean-container").classList.remove("rotate");
-            document.getElementById("toggle-bml").innerHTML = "Don't hesitate, iterate";
-        }
-    }
-    var count = 1;
-    function toggleContent() {
-        document.getElementById("role").innerHTML = roles[count];
-        showContent(roles[count]);
-        if(count >= roles.length-1) {
-            count = 0;
-        } else {
-            count++;
-        }
-    }
-    function showContent(role) {
-        var hide = document.getElementsByClassName("content");
-        for (var i = 0; i < hide.length; i ++) {
-            hide[i].style.display = 'none';
-        }
-        
-        var show = document.getElementsByClassName(role);
-        //console.log(show.length);
-        //console.log(role);
-        for (var j = 0; j < show.length; j ++) {
-            console.log(show[j]);
-            show[j].style.display = 'block';
-        }
-    }
-    //showContent('designer');
+    
+    /*
+     * paper plane animation
+     * 1. css motionpath based on svg
+     * 2. once plane div in viewport, listen for scroll
+     * 3. if scroll, update position of plane by calculating percentage of offset as % of height of viewport
+     */
 </script>
 </html>

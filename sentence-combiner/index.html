@@ -4,10 +4,10 @@
 <head>
     <title>Sentence combiner 3000</title>
     <style>
-        select, .title {
+        body, select, .title {
             font-family: "Playfair Display", cursive;
             font-size: 22.4px;
-            line-height: 180%;
+            /*line-height: 180%;*/
         }
         a, a:visited {
             color: #3F9EFE;
@@ -50,7 +50,7 @@
 <body>
     <div class="chart">
         <div class="title">
-            <a href="#">China, France, and Italy</a>
+            <a href="#">China</a>
             <!--<select name="countries" id="countries">-->
             <!--    <option value="daily">China, France, and Italy</option>-->
             <!--    <option value="total">China</option>-->
@@ -59,8 +59,8 @@
             : 
             <select name="frequency" id="frequency">
                 <option value="daily">Daily</option>
-                <option value="total">Cumulative</option>
-                <option value="daily_total">Daily and cumulative</option>
+                <option value="total">Total</option>
+                <option value="daily_total">Daily and total</option>
             </select>
             
             <select name="metric" id="metric">
@@ -73,15 +73,18 @@
                 <option value="cases-tests">confirmed cases and tests</option>
             </select>
             
-            <select name="count" id="count">
-                <option value="million">per million people</option>
-                <option value="1000">per 1000 people</option>
-                <option value="-">----</option>
-                <option value="total">total</option>
-                <option value="space"> </option>
-            </select>
+            <!--<select name="count" id="count">-->
+            <!--    <option value="million">per million people</option>-->
+            <!--    <option value="1000">per 1000 people</option>-->
+            <!--    <option value="-">----</option>-->
+            <!--    <option value="total">total</option>-->
+            <!--    <option value="space"> </option>-->
+            <!--</select>-->
             
         </div>
+        <br>
+        <input type="checkbox" id="count" name="per million" checked>
+            <label for="count">per million</label>
         <br>
         <br>
         <h2>or like this</h2>

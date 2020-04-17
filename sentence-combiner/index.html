@@ -7,7 +7,7 @@
         select, .title {
             font-family: "Playfair Display", cursive;
             font-size: 22.4px;
-            line-height: 160%;
+            line-height: 180%;
         }
         a, a:visited {
             color: #3F9EFE;
@@ -50,12 +50,13 @@
 <body>
     <div class="chart">
         <div class="title">
-            <!--<a href="#">China, France, and Italy:</a>-->
-            <select name="countries" id="countries">
-                <option value="daily">China, France, and Italy</option>
-                <option value="total">China</option>
-                <option value="daily_total">France and Italy</option>
-            </select>
+            <a href="#">China, France, and Italy</a>
+            <!--<select name="countries" id="countries">-->
+            <!--    <option value="daily">China, France, and Italy</option>-->
+            <!--    <option value="total">China</option>-->
+            <!--    <option value="daily_total">France and Italy</option>-->
+            <!--</select>-->
+            : 
             <select name="frequency" id="frequency">
                 <option value="daily">Daily</option>
                 <option value="total">Cumulative</option>
@@ -80,6 +81,80 @@
                 <option value="space"> </option>
             </select>
             
+        </div>
+        <br>
+        <br>
+        <h2>or like this</h2>
+        <br>
+        <br>
+        <br>
+
+        <div class="title">
+            <!--<a href="#">China, France, and Italy</a>-->
+            <select name="countries" id="countries">
+                <option value="daily">China, France, and Italy</option>
+                <option value="total">China</option>
+                <option value="daily_total">France and Italy</option>
+            </select>
+            : 
+            <select name="frequency" id="frequency">
+                <option value="daily">Daily</option>
+                <option value="total">Cumulative</option>
+                <option value="daily_total">Daily and cumulative</option>
+            </select>
+            
+            <select name="metric" id="metric">
+                <option value="deaths">confirmed deaths</option>
+                <option value="cases">confirmed cases</option>
+                <option value="tests">tests</option>
+                <option value="deaths-cases">confirmed deaths and cases</option>
+                <option value="deaths-tests">confirmed cases and tests</option>
+                <option value="deaths-cases-tests">confirmed deaths, cases, and tests</option>
+                <option value="cases-tests">confirmed cases and tests</option>
+            </select>
+            
+            <select name="count" id="count">
+                <option value="million">per million people</option>
+                <option value="1000">per 1000 people</option>
+                <option value="-">----</option>
+                <option value="total">total</option>
+                <option value="space"> </option>
+            </select>
+            
+        </div>
+        <br>
+        <br>
+        <h2>or like this</h2>
+        <br>
+        <br>
+        <br>
+
+        <div class="title">
+            <select name="frequency" id="frequency">
+                <option value="daily">Daily</option>
+                <option value="total">Cumulative</option>
+                <option value="daily_total">Daily and cumulative</option>
+            </select>
+            
+            <select name="metric" id="metric">
+                <option value="deaths">confirmed deaths</option>
+                <option value="cases">confirmed cases</option>
+                <option value="tests">tests</option>
+                <option value="deaths-cases">confirmed deaths and cases</option>
+                <option value="deaths-tests">confirmed cases and tests</option>
+                <option value="deaths-cases-tests">confirmed deaths, cases, and tests</option>
+                <option value="cases-tests">confirmed cases and tests</option>
+            </select>
+            
+            <select name="count" id="count">
+                <option value="million">per million people</option>
+                <option value="1000">per 1000 people</option>
+                <option value="-">----</option>
+                <option value="total">total</option>
+                <option value="space"> </option>
+            </select>
+            
+            in <a href="#">China, France, and Italy</a>
         </div>
     </div>
 </body>

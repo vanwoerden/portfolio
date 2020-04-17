@@ -50,6 +50,12 @@
 <body>
     <div class="chart">
         <div class="title">
+            <!--<a href="#">China, France, and Italy:</a>-->
+            <select name="countries" id="countries">
+                <option value="daily">China, France, and Italy</option>
+                <option value="total">China</option>
+                <option value="daily_total">France and Italy</option>
+            </select>
             <select name="frequency" id="frequency">
                 <option value="daily">Daily</option>
                 <option value="total">Cumulative</option>
@@ -69,10 +75,11 @@
             <select name="count" id="count">
                 <option value="million">per million people</option>
                 <option value="1000">per 1000 people</option>
-                <option value="-">-</option>
+                <option value="-">----</option>
                 <option value="total">total</option>
+                <option value="space"> </option>
             </select>
-            in <a href="#">China, France, and Italy</a>
+            
         </div>
     </div>
 </body>

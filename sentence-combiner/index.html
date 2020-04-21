@@ -17,59 +17,74 @@
             /*font-size: 16px;*/
             /*font-family: sans-serif;*/
             /*font-weight: 700;*/
-            color: #3F9EFE;
+            color: #1d3d63;
             font-weight: bold;
             line-height: 1.3;
-            padding: .3em 2em .4em .6em;
+            text-decoration: underline;
+            padding: .1em 1em 0.2em 0em;
             /*width: 100%;*/
             max-width: 100%;
             box-sizing: border-box;
             margin: 0;
-            border: 1px solid #dfdfdf;
+            border: 1px solid #fff;
             /*text-decoration: underline;*/
-            box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+            /*box-shadow: 0 1px 0 1px rgba(0,0,0,.04);*/
             border-radius: 4px;
             -moz-appearance: none;
             -webkit-appearance: none;
             appearance: none;
-            background-color: #f5f5f5;
-            background-image: url('triangle.svg');
+            background-color: #fff;
+            background-image: url('chevron-dark-blue.svg');
             background-repeat: no-repeat, repeat;
-            background-position: right .7em top 50%, 0 0;
-            background-size: .65em auto, 100%;
+            background-position: right .2em top 55%, 0 0;
+            background-size: 0.55em auto, 100%;
+        }
+        .small {
+            font-size: 15px;
+            font-family: "Lato";
+            font-weight: bold;
+            color: #3F9EFE;
+            color: #1d3d63;
+        }
+        .title {
+            padding-bottom: 12px;
+        }
+        .subtitle {
+            font-family: "Lato";
+            font-size: 15px;
+            color: #777;
         }
         .chart {
             width: 980px;
-            height: 690px;
-            margin: 200px auto;
+            height: auto;
+            margin: 100px auto;
             box-shadow: rgba(0,0,0,0.1) 0px 0px 2px 0px, rgba(0,0,0,0.25) 0px 2px 2px 0px;
             padding: 16px;
+        }
+        .checkbox {
+            font-size: 15px;
+            font-family: "Lato";
+            padding-right: 1em;
         }
     </style>
 </head>
 <body>
     <div class="chart">
         <div class="title">
-            <a href="#">China</a>
-            <!--<select name="countries" id="countries">-->
-            <!--    <option value="daily">China, France, and Italy</option>-->
-            <!--    <option value="total">China</option>-->
-            <!--    <option value="daily_total">France and Italy</option>-->
-            <!--</select>-->
-            : 
+             
             <select name="frequency" id="frequency">
-                <option value="daily">Daily</option>
+                <option value="daily">Daily and total</option>
                 <option value="total">Total</option>
-                <option value="daily_total">Daily and total</option>
+                <option value="daily_total">Daily</option>
             </select>
             
             <select name="metric" id="metric">
-                <option value="deaths">confirmed deaths</option>
+                <option value="deaths">confirmed deaths, cases, and tests</option>
                 <option value="cases">confirmed cases</option>
                 <option value="tests">tests</option>
                 <option value="deaths-cases">confirmed deaths and cases</option>
                 <option value="deaths-tests">confirmed cases and tests</option>
-                <option value="deaths-cases-tests">confirmed deaths, cases, and tests</option>
+                <option value="deaths-cases-tests">confirmed deaths</option>
                 <option value="cases-tests">confirmed cases and tests</option>
             </select>
             
@@ -81,84 +96,50 @@
             <!--    <option value="space"> </option>-->
             <!--</select>-->
             
-        </div>
-        <br>
-        <input type="checkbox" id="count" name="per million" checked>
-            <label for="count">per million</label>
-        <br>
-        <br>
-        <!--<h4>or like this</h2>
-        <br>
-        <br>
-        <br>
-
-        <div class="title">
-            <a href="#">China, France, and Italy</a>
+            in
+            
             <select name="countries" id="countries">
                 <option value="daily">China, France, and Italy</option>
-                <option value="total">China</option>
-                <option value="daily_total">France and Italy</option>
-            </select>
-            : 
-            <select name="frequency" id="frequency">
-                <option value="daily">Daily</option>
-                <option value="total">Cumulative</option>
-                <option value="daily_total">Daily and cumulative</option>
+                <option value="total">Germany</option>
+                <option value="daily_total">The Netherlands</option>
             </select>
             
-            <select name="metric" id="metric">
-                <option value="deaths">confirmed deaths</option>
-                <option value="cases">confirmed cases</option>
-                <option value="tests">tests</option>
-                <option value="deaths-cases">confirmed deaths and cases</option>
-                <option value="deaths-tests">confirmed cases and tests</option>
-                <option value="deaths-cases-tests">confirmed deaths, cases, and tests</option>
-                <option value="cases-tests">confirmed cases and tests</option>
-            </select>
+            <!--in <a href="#">China, France, and Italy</a>-->
             
-            <select name="count" id="count">
-                <option value="million">per million people</option>
-                <option value="1000">per 1000 people</option>
-                <option value="-">----</option>
-                <option value="total">total</option>
-                <option value="space"> </option>
-            </select>
+            per million people.
             
         </div>
-        <br>
-        <br>
-        <h4>or like this</h2>
-        <br>
-        <br>
-        <br>
-
-        <div class="title">
-            <select name="frequency" id="frequency">
-                <option value="daily">Daily</option>
-                <option value="total">Cumulative</option>
-                <option value="daily_total">Daily and cumulative</option>
+        <div class="subtitle">
+            Shown
+            
+            <select class="small" name="smoothing" id="smoothing">
+                <option value="daily">is the 3 day rolling average</option>
+                <option value="total">is the 5 day rolling average</option>
+                <option value="daily_total">are the normal numbers</option>
             </select>
             
-            <select name="metric" id="metric">
-                <option value="deaths">confirmed deaths</option>
-                <option value="cases">confirmed cases</option>
-                <option value="tests">tests</option>
-                <option value="deaths-cases">confirmed deaths and cases</option>
-                <option value="deaths-tests">confirmed cases and tests</option>
-                <option value="deaths-cases-tests">confirmed deaths, cases, and tests</option>
-                <option value="cases-tests">confirmed cases and tests</option>
+            <!--<select class="small" name="smoothing" id="smoothing">-->
+            <!--    <option value="daily">in absolute numbers</option>-->
+            <!--    <option value="total">per million people</option>-->
+            <!--    <option value="daily_total">per 1000 people</option>-->
+            <!--</select>-->
+            
+            
+            <select class="small" name="smoothing" id="smoothing">
+                <option value="daily">on an indexed timeline</option>
+                <option value="total">on a normal timeline</option>
             </select>
             
-            <select name="count" id="count">
-                <option value="million">per million people</option>
-                <option value="1000">per 1000 people</option>
-                <option value="-">----</option>
-                <option value="total">total</option>
-                <option value="space"> </option>
-            </select>
-            
-            in <a href="#">China, France, and Italy</a>
+            Limited testing and challenges in the attribution of the cause of death means that the number of confirmed deaths may not be an accurate count of the true number of deaths from COVID-19.
         </div>
-    </div>-->
+        
+        <input type="checkbox" id="count" name="per million" checked>
+            <label class="checkbox" for="count">per million</label>
+        <!--<input type="checkbox" id="indexed" name="indexed" checked>-->
+        <!--    <label class="checkbox" for="count">normal timeline-->
+        <br>
+        <br>
+        <img src="chart.png" width="1012" style="margin-left:-16px;">
+        
 </body>
 </html>

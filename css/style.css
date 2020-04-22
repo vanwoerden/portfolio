@@ -42,8 +42,9 @@ p {
    /*width: 70%;*/
 }
 .hello {
-    font-family: "BaskervilleURWNar-Bol";
+    font-family: "Georgia";
     font-size: 4em;
+    margin-top: -0.25em;
 }
 .header {
    padding: 10em 0 2em 0;
@@ -52,12 +53,15 @@ h1 {
     font-weight: normal;
 }
 h2 {
-   font-family: "BaskervilleURWNar-Bol";
-   font-size: 3em;
+   font-family: "Georgia";
+   font-size: 1.5em;
+   font-weight: normal;
+   /*font-style: italic;*/
+   text-transform: uppercase;
 }
 h3 {
     font-size: 1.8em;
-    font-family: "BaskervilleURWNar-Bol";
+    font-family: "Georgia";
 }
 p {
     margin: 0;
@@ -71,7 +75,7 @@ li {
    padding-bottom: 0.5em;
 }
 a, a:visited {
-   color: black;
+   color: #333;
 }
 img.project-thumb {
    max-width: 100%;
@@ -345,10 +349,10 @@ span.toggle-link {
    /*margin-left: 1.5em;*/
 }
 .job-title {
-    font-size: 1.8em;
-    font-family: "BaskervilleURWNar-Bol";
+    font-size: 2em;
+    font-family: "Georgia";
     padding-bottom: 0.6em;
-    margin-top: -0.25em;
+    margin-top: -0.5em;
 }
 
 @media (max-width: 840px) {

@@ -12,15 +12,24 @@
     <div class="container-600 center flex header">
         <div class="column intro">
             <h1>
-                Welcome to ernst.works
+                Ernst van Woerden is a <a class="green" id="designer-link" href="#" onclick="toggleDesigner();">designer</a>.
             </h1>
             <div class="content container-600 designer">
                 <p class="large">
-                    I'm Ernst, a Dutch designer working on the intersection of data and storytelling.
+                    I'm Ernst, a Dutch designer currently working on the intersection of data and storytelling for <a href="ourworldindata.org">Our World in Data</a>.
                 </p>
-                <!--<p class="large">
-                     I believe good design is about understanding, and designing for, human beings. Ultimately, products are tools. Tools to help human beings accomplish a goal or share a meaningful experience.
-                </p>-->
+                <p class="large">
+                    I help companies and organizations build better products through user research, design, and product management. 
+                </p>
+                <p class="large">
+                    I do my best work in places where there's lots of collaboration between the different disciplines that are involved in the product development process. 
+                </p>
+                <p class="large">
+                    Over the past 10 years, I've worked in UX, branding, video and animation, even sound design. I've worked for myself, for agencies and in-house at startups. 
+                </p>
+                <p class="large">
+                    I've come to realize that I'm happiest working on the product side of design, in organisations where I can be involved in the end-to-end design process; from research and roadmapping to detailed design and delivery. 
+                </p>
             </div>
             <div class="content container-600 designer">
                 <div class="toggle-container">
@@ -185,6 +194,25 @@
             setTimeout(function(){
                 toggleCode();
             }, 1000);
+        }
+    }
+    function toggleDesigner() {
+        switch(document.getElementById("designer-link").innerHTML) {
+            case "designer":
+                document.getElementById("designer-link").innerHTML = "product manager";
+                break;
+            case "product manager":
+                document.getElementById("designer-link").innerHTML = "bit of everything";
+                break;
+            case "bit of everything":
+                document.getElementById("designer-link").innerHTML = "pretty allround design generalist";
+                break;
+            case "pretty allround design generalist":
+                document.getElementById("designer-link").innerHTML = "believer in doing the research";
+                break;
+            case "believer in doing the research":
+                document.getElementById("designer-link").innerHTML = "designer";
+                break;
         }
     }
     

@@ -48,9 +48,6 @@ p {
 }
 .header {
    padding: 10em 0 8em 0;
-   background: url(../assets/standvlak_rect.svg) no-repeat;
-   background-position: 20px 20%;
-   background-size: 800px 220px;
 }
 h1 {
     font-family: 'BaskervilleURWNar-Bol';
@@ -85,6 +82,9 @@ a, a:visited {
    color: #333;
    text-decoration: none;
    background: linear-gradient(to bottom, transparent 0%, transparent 60%, #e2e2e2 60%, #e2e2e2 100%);
+}
+a.green {
+  background: linear-gradient(to bottom, transparent 0%, transparent 60%, #A5F2C9 60%, #A5F2C9 100%);
 }
 img.project-thumb {
    max-width: 100%;
@@ -351,14 +351,15 @@ span.toggle-link {
    /*margin-left: 1.5em;*/
 }
 .job-title {
-    font-size: 2.3em;
-    font-family: 'BaskervilleURWNar-Bol';
+    font-size: 2em;
+    /*font-family: 'BaskervilleURWNar-Bol';*/
+    font-weight: 800;
     padding-bottom: 0.2em;
 }
 .date {
   padding: 0.4em 0;
   color: #777;
-  font-size: 1.1em;
+  font-size: 1.3em;
 }
 
 @media (max-width: 840px) {

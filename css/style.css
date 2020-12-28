@@ -42,7 +42,7 @@ p {
    /*width: 70%;*/
 }
 .hello {
-    font-family: "Georgia";
+    font-family: 'BaskervilleURWNar-Bol';
     font-size: 4em;
     margin-top: -0.25em;
 }
@@ -53,7 +53,7 @@ h1 {
     font-weight: normal;
 }
 h2 {
-   font-family: "Georgia";
+   font-family: 'BaskervilleURWNar-Bol';
    font-size: 1.5em;
    font-weight: normal;
    /*font-style: italic;*/
@@ -76,6 +76,8 @@ li {
 }
 a, a:visited {
    color: #333;
+   text-decoration: none;
+   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #e2e2e2 60%, #e2e2e2 100%);
 }
 img.project-thumb {
    max-width: 100%;
@@ -350,9 +352,14 @@ span.toggle-link {
 }
 .job-title {
     font-size: 2em;
-    font-family: "Georgia";
+    font-family: 'BaskervilleURWNar-Bol';
     padding-bottom: 0.6em;
     margin-top: -0.5em;
+}
+.date {
+  padding: 1.5em 0;
+  color: #777;
+  font-size: 1.1em;
 }
 
 @media (max-width: 840px) {

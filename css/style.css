@@ -10,6 +10,8 @@ body {
 }
 p {
    padding-bottom: 1em;
+   font-size: 1.5em;
+   line-height: 1.4em;
 }
 .container-1200 {
     max-width: 1200px;
@@ -34,8 +36,6 @@ p {
    width: 85%;
 }
 .intro {
-   /*width: 30%;*/
-   margin-left: 4.7em;
    margin-top: 3.9em;
 }
 .resume {
@@ -47,10 +47,17 @@ p {
     margin-top: -0.25em;
 }
 .header {
-   padding: 10em 0 2em 0;
+   padding: 10em 0 8em 0;
+   background: url(../assets/standvlak_rect.svg) no-repeat;
+   background-position: 20px 20%;
+   background-size: 800px 220px;
 }
 h1 {
+    font-family: 'BaskervilleURWNar-Bol';
     font-weight: normal;
+    font-size: 6em;
+    padding-bottom: 2em;
+    line-height: 0.8em;
 }
 h2 {
    font-family: 'BaskervilleURWNar-Bol';
@@ -93,7 +100,7 @@ img.venn {
     display: none
 }
 .toggle-container {
-    max-width: 540px;
+
 }
 #toggle-venn, #toggle-bml {
     margin: 0 auto;
@@ -156,9 +163,8 @@ img.venn {
 /* end select */
 
 .large {
-    font-size: 1.4em;
-    line-height: 1.5;
-    max-width: 540px;
+    font-size: 2em;
+    line-height: 1.4em;
 }
 
 span.toggle-link {
@@ -236,8 +242,7 @@ span.toggle-link {
 
 /* TIMELINE */
 .timeline {
-    /*padding-top: 2em;*/
-    margin-left: 2.9em;
+
 }
 .timeline-item {
     display: flex;
@@ -282,13 +287,8 @@ span.toggle-link {
    /*border: none;*/
 }
 .timeline-experience {
-    padding-left: 2em;
-   
     padding-bottom: 3em;
-    /*padding-top: 3em;*/
-    padding-right: 2em;
     /*border-top: 1px dashed #333;*/
-    width: 560px;
     /*border-left: 1px solid #eee;*/
 }
 .plane-event {
@@ -351,13 +351,12 @@ span.toggle-link {
    /*margin-left: 1.5em;*/
 }
 .job-title {
-    font-size: 2em;
+    font-size: 2.3em;
     font-family: 'BaskervilleURWNar-Bol';
-    padding-bottom: 0.6em;
-    margin-top: -0.5em;
+    padding-bottom: 0.2em;
 }
 .date {
-  padding: 1.5em 0;
+  padding: 0.4em 0;
   color: #777;
   font-size: 1.1em;
 }

@@ -16,3 +16,12 @@
 	font-weight: regular;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'Tiempos Headline Medium';
+	src: url('../fonts/TiemposHeadline-Medium.eot');
+	src: url('../fonts/TiemposHeadline-Medium.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/TiemposHeadline-Medium.woff') format('woff'),
+	     url('../fonts/TiemposHeadline-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}

@@ -42,7 +42,7 @@ p {
    /*width: 70%;*/
 }
 .hello {
-    font-family: 'BaskervilleURWNar-Bol';
+    font-family: 'Tiempos Headline Medium';
     font-size: 4em;
     margin-top: -0.25em;
 }
@@ -50,14 +50,14 @@ p {
    padding: 10em 0 8em 0;
 }
 h1 {
-    font-family: 'BaskervilleURWNar-Bol';
-    font-weight: normal;
-    font-size: 6em;
+    font-family: 'Tiempos Headline Medium';
+    font-size: 5em;
     padding-bottom: 2em;
-    line-height: 0.8em;
+    line-height: 0.9em;
+    letter-spacing: -0.02em;
 }
 h2 {
-   font-family: 'BaskervilleURWNar-Bol';
+   font-family: 'Tiempos Headline Medium';
    font-size: 1.5em;
    font-weight: normal;
    /*font-style: italic;*/
@@ -297,7 +297,7 @@ span.toggle-link {
    max-width: 540px;
    margin: 0 auto;
    font-size: 1.4em;
-   /*font-family: "BaskervilleURWNar-Bol";*/
+   /*font-family: "Tiempos Headline Medium";*/
    border-radius: 2em 7em 3em 4em;
    display: flex;
    align-items: center;
@@ -352,12 +352,12 @@ span.toggle-link {
 }
 .job-title {
     font-size: 2em;
-    /*font-family: 'BaskervilleURWNar-Bol';*/
+    font-family: 'Tiempos Headline Medium';
     font-weight: 800;
-    padding-bottom: 0.2em;
+    padding-bottom: 0.4em;
 }
 .date {
-  padding: 0.4em 0;
+  padding: 0.2em 0;
   color: #777;
   font-size: 1.3em;
 }

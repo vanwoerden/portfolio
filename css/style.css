@@ -427,6 +427,9 @@ span.toggle-link {
    .container-1200 {
       /*width: 100%;*/
    }
+   .container-600 {
+    padding: 0 20px;
+   }
    .timeline {
       margin-left: 0;
    }

@@ -2,35 +2,50 @@
 
 <html>
 <head>
+    <!--
+    1. social previews and meta tags                30 mins
+    2. rewrite experience descriptions and titles   30 mins
+    3. mobile css                                   60 mins
+    -->
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-</head>
+    
+    <meta property="og:title" content="European Travel Destinations">
+    <meta property="og:description" content="Offering tour packages for individuals or groups.">
+    <meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg">
+    <meta property="og:url" content="http://euro-travel-example.com/index.htm">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!--  Non-Essential, But Recommended -->
+    <meta property="og:site_name" content="European Travel, Inc.">
+    <meta name="twitter:image:alt" content="Alt text for image">
+    
+    <!--  Non-Essential, But Required for Analytics -->
+    <meta property="fb:app_id" content="your_app_id" />
+    <meta name="twitter:site" content="@website-username">
+    </head>
 <body>
     <div class="container-1200 center master">
-        <div class="container-40 flex header">
+        <div class="container-600 flex header">
             <div class="column">
                 <h1>
                     Ernst van Woerden is a <a class="green" id="designer-link" href="#" onclick="toggleDesigner();">designer</a>.
                 </h1>
                 <div class="content designer">
                     <p class="large">
-                        A Dutch designer at that. I'm currently working on the intersection of data and storytelling for <a href="ourworldindata.org">Our World in Data</a>.
+                        A Dutch <span id="thing-me">designer</span> at that. I'm currently working on the intersection of data and storytelling for <a href="ourworldindata.org">Our World in Data</a>.
                     </p>
                     <p class="large">
                         I help companies and organizations build better products through user research, design, and product management. 
                     </p>
                     <p class="large">
-                        Over the past 10 years, I've worked in <a href="ux.html" class="blue">UX</a>, <a href="/what-is-ux" class="yellow">branding</a>, <a href="https://vimeo.com/74286050" target="_blank" class="orange">video and animation</a>, even <a href="/what-is-ux" class="pink">sound design</a>. I've worked for myself, for agencies and in-house at startups. 
+                        Over the past 10 years, I've worked in <a href="ux.html" class="blue">UX</a>, branding, <a href="nhlo.html" class="orange">video and animation</a>, even <a href="https://soundcloud.com/reelactivate/sets/samen-gaan-we-ervoor" target="_blank" class="pink">music and sound design</a>. I've worked for myself, for agencies and in-house at startups. 
                     </p>
                     <p class="large">
-                        I'm happiest when I work on the product side of design, in highly collaborative organizations. I enjoy sitting at your table and asking you: <span class="why">"why?"</span>
-                    </p>
-                    <p class="large">
-                        Repeatedly.
-                    </p>
+                        I'm happiest when I work on the product side of design, in highly collaborative organizations.
                 </div>
                 <div class="content designer">
                     <div class="toggle-container">
@@ -39,16 +54,11 @@
                             <span id="toggle-code" class="toggle-link" onclick="toggleCode();">no</span>
                         </p>
                     </div>
-                        <!--<p class="large">
-                        <a href="resume">Download résumé</a>
-                        <a href="ux.html">What is UX?</a>
-                        
-                        </p>-->
                 </div>
             </div>
         </div>
     
-        <div class="container-1200 resume">
+        <div class="container-600 resume">
             <div class="column">
                 <div class="content designer">
                     <div class="timeline">
@@ -58,33 +68,33 @@
                                 <div class="job-title">I help <a href="http://ourworldindata.org" target="_blank">Our World in Data</a> with product and design.</div>
                                 <div class="job-description">
                                     <p>
-                                        We're a small team with big ambitions.
+                                        Our World in Data presents research and data to make progress against the world’s largest problems. I guide the product design cycle from user research, roadmapping and product strategy to detailed design, delivery, and analyzing product performance.
                                     </p>                                
                                 </div>
                             </div>
-                            <div class="project-teasers">
-                                <div class="teaser">
-                                    <div class="tile">
-                                        
-                                    </div>
-                                    <div class="description">
-                                        A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. 
-                                    </div>
-                                </div>
-                                <div class="teaser">
-                                    <div class="tile">
-                                        
-                                    </div>
-                                    <div class="description">
-                                        A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. 
-                                    </div>
-                                </div> 
-                            </div>
+                            <!--<div class="project-teasers">-->
+                            <!--    <div class="teaser">-->
+                            <!--        <div class="tile">-->
+                            <!--            -->
+                            <!--        </div>-->
+                            <!--        <div class="description">-->
+                            <!--            A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. -->
+                            <!--        </div>-->
+                            <!--    </div>-->
+                            <!--    <div class="teaser">-->
+                            <!--        <div class="tile">-->
+                            <!--            -->
+                            <!--        </div>-->
+                            <!--        <div class="description">-->
+                            <!--            A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. -->
+                            <!--        </div>-->
+                            <!--    </div> -->
+                            <!--</div>-->
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-experience first">
                                 <div class="date">Aug 2017 - Mar 2020 (Beijing)</div>
-                                <div class="job-title">I headed product design at <a href="cgpo2o.com" target="_blank">CGP O2O</a></div>
+                                <div class="job-title">I headed product design at <a href="cgpo2o.com" target="_blank">CGP O2O</a>.</div>
                                 <div class="job-description">
                                     
                                     <p>
@@ -108,32 +118,32 @@
                                     
                                 </div>
                             </div>
-                            <div class="project-teasers">
-                                <div class="teaser">
-                                    <div class="tile">
-                                        
-                                    </div>
-                                    <div class="description">
-                                        A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. 
-                                    </div>
-                                </div>
-                                <div class="teaser">
-                                    <div class="tile">
-                                        
-                                    </div>
-                                    <div class="description">
-                                        A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. 
-                                    </div>
-                                </div> 
-                            </div>
+                            <!--<div class="project-teasers">-->
+                            <!--    <div class="teaser">-->
+                            <!--        <div class="tile">-->
+                            <!--            -->
+                            <!--        </div>-->
+                            <!--        <div class="description">-->
+                            <!--            A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. -->
+                            <!--        </div>-->
+                            <!--    </div>-->
+                            <!--    <div class="teaser">-->
+                            <!--        <div class="tile">-->
+                            <!--            -->
+                            <!--        </div>-->
+                            <!--        <div class="description">-->
+                            <!--            A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. -->
+                            <!--        </div>-->
+                            <!--    </div> -->
+                            <!--</div>-->
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-experience">
                                 <div class="date">Jun 2016 - Jul 2017 (Beijing)</div>
-                                <div class="job-title">Senior Designer and Creative @ <a href="https://mi.com" target="_blank">Xiaomi</a></div>
+                                <div class="job-title">I told product and brand stories on <a href="https://mi.com" target="_blank">Xiaomi</a>'s global marketing team.</div>
                                 <div class="job-description">
                                     <p>
-                                        A brief venture back into corporate marketing and branding, which turned out not to be for me.
+                                        A brief venture back into corporate marketing and branding at an incredibly fast-paced Chinese consumer tech company. I worked on product launches, global marketing campaigns and dipped my feet into a few TV commercials. 
                                     </p>
                                 </div>
                             </div>
@@ -141,28 +151,25 @@
                         <div class="timeline-item">
                             <div class="timeline-experience">
                                 <div class="date">Oct 2014 - Mar 2016 (moved to Beijing)</div>
-                                <div class="job-title">Senior UX Designer @ <a href="https://play.google.com/store/apps/details?id=com.gatherhealth.gatherdm&hl=en&gl=US" target="_blank">Gather Health</a></div>
+                                <div class="job-title">I led UX design at <a href="https://play.google.com/store/apps/details?id=com.gatherhealth.gatherdm&hl=en&gl=US" target="_blank">Gather Health</a>.</div>
                                 <div class="job-description">
                                     <p>
-                                        Led design for a diabetes management platform. Noble, rewarding, but challenging work.
+                                        I Led UX design for a diabetes management platform. Noble, rewarding, but challenging work.
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="plane-triangle"></div>
                             <div id="airplane">
                                 
                             </div>
                         </div>
+                       
                         <div class="timeline-item">
                             <div class="timeline-experience">
                                 <div class="date">Apr 2010 - Sep 2014 (Rotterdam, Amsterdam)</div>
-                                <div class="job-title">Creative Director and Motion Designer @ <a href="studiotony.nl" target="_blank">Studio Tony</a></div>
+                                <div class="job-title">I started <a href="studiotony.nl" target="_blank">Studio Tony</a> to help companies get their ideas across.</div>
                                 <div class="job-description">
                                     <p>
-                                        Startups and other business with great ideas but trouble getting them across would come to us for help.
+                                        A lot of businesses, especially startups, have great ideas but struggle to communicate them clearly. They would come to us for help. Under the banner of Studio Tony, I did lots of short explainer videos and animations.
                                     </p>
                                 </div>
                             </div>
@@ -170,10 +177,10 @@
                         <div class="timeline-item">
                             <div class="timeline-experience">
                                 <div class="date"> Jun 2011 - Dec 2012 (Rotterdam)</div>
-                                <div class="job-title">Interaction Designer @ Redmax</div>
+                                <div class="job-title">I worked on interaction designs for online healthcare products at Redmax.</div>
                                 <div class="job-description">
                                     <p>
-                                        Interesting combination of working for insurers and pharmaceuticals, while trying to design patient-friendly products and services. Those two aren't always aligned.
+                                        This was an interesting combination of working for insurers and pharmaceuticals, while trying to design user-friendly products and services. Those two aren't always aligned.
                                     </p>
                                 </div>
                             </div>
@@ -181,19 +188,17 @@
                         <div class="timeline-item">
                             <div class="timeline-experience">
                                 <div class="date">April 2010 - today (Rotterdam → Beijing → New York)</div>
-                                <div class="job-title">Designer, Chief @ <a href="seriousness.nl" target="_blank">Seriousness</a></div>
+                                <div class="job-title">Designer, Chief @ <a href="http://seriousness.nl" target="_blank">Seriousness</a>.</div>
                                 <div class="job-description">
                                     <p>
-                                        A friend translated my first name into English. That day, Seriousness was born. 
+                                        A friend translated my first name into English. That day, Seriousness was born. I started out as a Flash websites guy. These days, I focus on  the designs, and work with developers for implementation. 
                                     </p>
                                 </div>
                             </div>
                             
                         </div>
-                        <p class="large">
+                        <p class="large timeline-item">
                             <a href="https://twitter.com/erniedesigns" target="_blank">@erniedesigns</a>
-                            <a href="###">resume</a>
-                            <a href="####">linkedin</a>
                         </p>
                     </div>
                     
@@ -213,14 +218,6 @@
 
 </body>
 <script>
-    // colors
-    var colors = ['#f7f7f7', '#eef9f1', '#e6faed', '#defbeb', '#d6fbea', '#d0fcec', '#c9fdef', '#c4fef4', '#befffb'];
-    var experiences = document.getElementsByClassName("timeline-experience");
-    for(var i = 0; i < experiences.length; i++) {
-        //experiences[i].setAttribute("style", "background-color:" +  colors[i] +";");
-    }
-    
-    
     var yes = false;
     function toggleCode() {
         if(yes) {
@@ -243,26 +240,29 @@
         }
     }
     function toggleDesigner() {
+        var str;
         switch(document.getElementById("designer-link").innerHTML) {
             case "designer":
-                document.getElementById("designer-link").innerHTML = "product manager";
+                str = "product manager";
                 break;
             case "product manager":
-                document.getElementById("designer-link").innerHTML = "pretty allround design generalist";
+                str = "pretty allround design generalist";
                 break;
             case "pretty allround design generalist":
-                document.getElementById("designer-link").innerHTML = "bit of everything, really";
+                str = "bit of everything, really";
                 break;
             case "bit of everything, really":
-                document.getElementById("designer-link").innerHTML = "believer in doing the research";
+                str = "believer in doing the research";
                 break;
             case "believer in doing the research":
-                document.getElementById("designer-link").innerHTML = "designerd";
+                str = "designerd";
                 break;
             case "designerd":
-                document.getElementById("designer-link").innerHTML = "designer";
+                str = "designer";
                 break;
         }
+        document.querySelector("#thing-me").innerHTML = str;
+        document.querySelector("#designer-link").innerHTML = str;
     }
 </script>
 </html>

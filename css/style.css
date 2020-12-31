@@ -17,7 +17,7 @@ body {
   padding-top: 10%;
 }
 .container-600 {
-    max-width: 680px;
+    max-width: 600px;
     padding: 0 40px;
 }
 .container-900 {
@@ -35,7 +35,7 @@ body {
    flex-wrap: wrap;
 }
 .column {
-   padding-top: 10%;
+   padding-top: 5%;
 }
 .column-10 {
    width: 15%;
@@ -97,7 +97,7 @@ a.green {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #A5F2C9 60%, #A5F2C9 100%);
 }
 a.blue {
-  background: linear-gradient(to bottom, transparent 0%, transparent 60%, #A3D0EF 60%, #A3D0EF 100%);
+  background: linear-gradient(to bottom, transparent 0%, transparent 60%, #ABDCFC 60%, #ABDCFC 100%);
 }
 a.yellow {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #F7EB97 60%, #F7EB97 100%);
@@ -106,7 +106,10 @@ a.pink {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #FFAEFD 60%, #FFAEFD 100%);
 }
 a.orange {
-  background: linear-gradient(to bottom, transparent 0%, transparent 60%, #F7CB97 60%, #F7CB97 100%);
+  background: linear-gradient(to bottom, transparent 0%, transparent 60%, #FFC4A5 60%, #FFC4A5 100%);
+}
+a:hover {
+  background-size: 80%;
 }
 span.why {
   font-family: 'Tiempos Headline Medium';
@@ -153,9 +156,9 @@ img.venn {
 .timeline-item {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 2.5%;
+    padding: 0;
     margin-bottom: 5%;
-    /*padding-top: 3em;*/
+    padding-top: 4em;
 }
 .experience-logo {
   width: 50px;
@@ -357,7 +360,7 @@ span.toggle-link {
   background-size: contain;
   position: absolute;
   left: -10%;
-  margin-top: -15%;
+  margin-top: 0;
   transform: rotate(15deg);
 }
 
@@ -418,11 +421,8 @@ span.toggle-link {
       width: 100%;
       margin: 0;
    }
-   .no-shadow {
-      box-shadow: none !important;
-   }
    .header {
-      padding: 0 2em;
+      /*padding: 0 2em;*/
    }
    .container-1200 {
       /*width: 100%;*/
@@ -431,9 +431,7 @@ span.toggle-link {
       margin-left: 0;
    }
    .timeline-item {
-      box-shadow: 0px 4px 36px -10px rgba(0,0,0,0.13);
-      border-radius: 1em;
-      margin: 2em 0.5em;
+      /*margin: 2em 0.5em;*/
    }
    .timeline-meta {
       padding-top: 2em;

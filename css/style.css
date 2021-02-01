@@ -48,7 +48,7 @@ body {
    /*background: #eee;*/
 }
 .hello {
-    font-family: 'Tiempos Headline Medium';
+    font-family: 'TiemposHeadline-Medium';
     font-size: 4em;
     margin-top: -0.25em;
 }
@@ -62,7 +62,7 @@ p {
    margin: 0;
 }
 h1 {
-    font-family: 'Tiempos Headline Medium';
+    font-family: 'TiemposHeadline-Medium';
     font-size: 5em;
     padding: 0 0 3em 0;
     margin: 0;
@@ -70,13 +70,13 @@ h1 {
     letter-spacing: -0.02em;
 }
 h2 {
-   font-family: 'Tiempos Headline Medium';
+   font-family: 'TiemposHeadline-Medium';
    font-size: 2.5em;
    /*font-weight: normal;*/
 }
 h3 {
     font-size: 1.8em;
-    font-family: 'Tiempos Headline Medium';
+    font-family: 'TiemposHeadline-Medium';
     line-height: 1.2em;
     letter-spacing: -0.02em;
 }
@@ -112,7 +112,7 @@ a:hover {
   background-size: 80%;
 }
 span.why {
-  font-family: 'Tiempos Headline Medium';
+  font-family: 'TiemposHeadline-Medium';
   font-size: 0.9em;
 }
 img.project-thumb {
@@ -402,7 +402,7 @@ span.toggle-link {
 }
 .job-title {
     font-size: 2.5em;
-    font-family: 'Tiempos Headline Medium';
+    font-family: 'TiemposHeadline-Medium';
     font-weight: 800;
     padding-bottom: 0.4em;
 }

@@ -71,14 +71,14 @@ h1 {
 }
 h2 {
    font-family: 'Tiempos Headline Medium';
-   font-size: 1.5em;
-   font-weight: normal;
-   /*font-style: italic;*/
-   text-transform: uppercase;
+   font-size: 2.5em;
+   /*font-weight: normal;*/
 }
 h3 {
     font-size: 1.8em;
-    font-family: "Georgia";
+    font-family: 'Tiempos Headline Medium';
+    line-height: 1.2em;
+    letter-spacing: -0.02em;
 }
 ul {
    padding-inline-start: 1em;

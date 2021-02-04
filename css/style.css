@@ -67,7 +67,7 @@ h1 {
     padding: 0 0 3em 0;
     margin: 0;
     line-height: 0.9em;
-    /*letter-spacing: -0.02em;*/
+    letter-spacing: -0.02em;
     font-weight: 700;
 }
 h2 {
@@ -80,6 +80,14 @@ h3 {
     font-family: 'TiemposHeadline-Medium';
     line-height: 1.2em;
     letter-spacing: -0.02em;
+}
+@-moz-document url-prefix(){
+    h1, h2, h3, .job-title {
+        letter-spacing: -0.04em;
+    }
+    .job-title {
+        letter-spacing: -0.02em;
+    }
 }
 ul {
    padding-inline-start: 1em;

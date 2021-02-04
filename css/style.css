@@ -55,7 +55,7 @@ body {
 .header {
    /*padding: 10em 0 8em 0;*/
 }
-p {
+p, ol {
    padding-bottom: 1em;
    font-size: 1.7em;
    line-height: 1.4em;
@@ -67,7 +67,8 @@ h1 {
     padding: 0 0 3em 0;
     margin: 0;
     line-height: 0.9em;
-    letter-spacing: -0.02em;
+    /*letter-spacing: -0.02em;*/
+    font-weight: 700;
 }
 h2 {
    font-family: 'TiemposHeadline-Medium';
@@ -101,6 +102,10 @@ a.blue {
 }
 a.yellow {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #F7EB97 60%, #F7EB97 100%);
+}
+span.yellow {
+  background: #F7EB97;
+  padding: 6px 0 0 0;
 }
 a.pink {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #FFAEFD 60%, #FFAEFD 100%);

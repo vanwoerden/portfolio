@@ -82,13 +82,23 @@ h3 {
     letter-spacing: -0.02em;
 }
 @-moz-document url-prefix(){
-    h1, h2, h3, .job-title {
+    h1, h2, h3 {
         letter-spacing: -0.04em;
     }
     .job-title {
         letter-spacing: -0.02em;
     }
 }
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+    h1, h2, h3 {
+        letter-spacing: -0.08em;
+    }
+    .job-title {
+        letter-spacing: -0.07em;
+    }
+}
+
+
 ul {
    padding-inline-start: 1em;
    list-style-type: disc;

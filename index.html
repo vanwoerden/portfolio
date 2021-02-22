@@ -20,7 +20,7 @@
     
     <!--  Non-Essential, But Required for Analytics -->
     <meta name="twitter:site" content="@erniedesigns">
-    <!-- VISA Tracking Code for ernst.works --><script>(function(v,i,s,a){if(!v._visaSettings){v._visaSettings={};}v._visaSettings["48635548-4b9f-11eb-b589-901b0edac50a"]={v:"0.3",s:"48635548-4b9f-11eb-b589-901b0edac50a",a:"1"};_v=i.getElementsByTagName("head")[0];_a=_v;_i=i.createElement("script");_s=_i;_s.defer="defer";_s.src=s+a+v._visaSettings["48635548-4b9f-11eb-b589-901b0edac50a"].v;_a.appendChild(_s);})(window,document,"//app-worker.visitor-analytics.io/main",".js?s=48635548-4b9f-11eb-b589-901b0edac50a&v=")</script><!-- VISA Tracking Code for ernst.works -->
+    
     </head>
 <body>
     <div class="container-1200 center master">
@@ -67,24 +67,6 @@
                                     </p>                                
                                 </div>
                             </div>
-                            <!--<div class="project-teasers">-->
-                            <!--    <div class="teaser">-->
-                            <!--        <div class="tile">-->
-                            <!--            -->
-                            <!--        </div>-->
-                            <!--        <div class="description">-->
-                            <!--            A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. -->
-                            <!--        </div>-->
-                            <!--    </div>-->
-                            <!--    <div class="teaser">-->
-                            <!--        <div class="tile">-->
-                            <!--            -->
-                            <!--        </div>-->
-                            <!--        <div class="description">-->
-                            <!--            A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. -->
-                            <!--        </div>-->
-                            <!--    </div> -->
-                            <!--</div>-->
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-experience first">
@@ -113,24 +95,6 @@
                                     
                                 </div>
                             </div>
-                            <!--<div class="project-teasers">-->
-                            <!--    <div class="teaser">-->
-                            <!--        <div class="tile">-->
-                            <!--            -->
-                            <!--        </div>-->
-                            <!--        <div class="description">-->
-                            <!--            A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. -->
-                            <!--        </div>-->
-                            <!--    </div>-->
-                            <!--    <div class="teaser">-->
-                            <!--        <div class="tile">-->
-                            <!--            -->
-                            <!--        </div>-->
-                            <!--        <div class="description">-->
-                            <!--            A lot of people were relying on us for daily COVID-19 updates. We built a data explorer to help them. It increased interactivity by 20 percentage points. -->
-                            <!--        </div>-->
-                            <!--    </div> -->
-                            <!--</div>-->
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-experience">
@@ -193,7 +157,9 @@
                             
                         </div>
                         <p class="large timeline-item">
-                            <a href="https://twitter.com/erniedesigns" target="_blank">@erniedesigns</a>
+                            <a href="https://twitter.com/erniedesigns" target="_blank">
+                                @erniedesigns <!--<span><img alt="twitter icon" width="20" src="img/twitter_icon_white.svg"></span>-->
+                            </a>
                         </p>
                     </div>
                     
@@ -205,16 +171,11 @@
         
     </div>
 
-    <!--<div class="content container-1200 center designer">
-        <button onclick="RadarChart('.radarChart', data, radarChartOptions);">typical UX</button>
-        <button onclick="RadarChart('.radarChart', data2, radarChartOptions);">le me</button>
-        <div class="radarChart"></div>
-    </div>-->
-
 </body>
 <script>
     var yes = false;
     function toggleCode() {
+        console.log("toggleCode");
         if(yes) {
             yes = false;
             document.getElementById("toggle-code").innerHTML = "no";
@@ -235,6 +196,7 @@
         }
     }
     function toggleDesigner() {
+        console.log("toggleDesigner");
         var str;
         switch(document.getElementById("designer-link").innerHTML) {
             case "designer":

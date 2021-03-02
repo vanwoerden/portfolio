@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Yup prototype</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            background: url("home-page.png") no-repeat center top fixed;
+            background-size: cover;
+            height: 100%;
+            margin: 0;
+            display: flex;
+        }
+        a.button {
+            padding: 16px 48px 8px 48px;
+            background: #2E69E1;
+            border: 2px solid #2E69E1;
+            border-radius: 32px;
+            margin-left: 630px;
+            margin-top: 528px;
+            height: 24px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1.4px;
+            color: white;
+            font-family: "CircularStd-Medium", sans-serif;
+            cursor: pointer;
+            position: relative;
+            z-index: 20;
+        }
+        #loading-animation {
+            width: 370px;
+            position: absolute;
+            margin-left: 541px;
+            margin-top: 136px;
+        }
+        .hide {
+            display: none;
+        }
+        .end-shift {
+            margin-left: 638px !important;
+            background: transparent !important;
+            border: 2px solid #2E69E1;
+            color: #2E69E1 !important;
+        }
+        .good-morning {
+            color: black;
+            font-size: 32px;
+            font-family: "PostGrotesk-Medium";
+            position: absolute;
+            margin-left: 567px;
+            margin-top: 172px;
+            background: #FFFBF5;
+            padding: 8px;
+        }
+    </style>
+    <script src="lottie.min.js" type="text/javascript"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var loading = lottie.loadAnimation({
+                container: document.getElementById("loading-animation"), 
+                renderer: 'svg',
+                loop: true,
+                autoplay: false,
+                path: 'loading.json' 
+            });
+            var isPlaying = false;
+            document.querySelector(".button").onclick = function toggleAnimation(e) {
+                if(!isPlaying) {
+                    playAndThenLoop();
+                    e.target.classList.add("end-shift");
+                    e.target.innerHTML = "end shift";
+                    document.querySelector(".good-morning").innerHTML = "Waiting for student...";
+                    isPlaying = true;
+                } else {
+                    loading.goToAndStop(1, false);
+                    e.target.classList.remove("end-shift");
+                    e.target.innerHTML = "start shift";
+                    document.querySelector(".good-morning").innerHTML = "Good morning, Robin";
+                    isPlaying = false;
+                }
+            };
+            function playAndThenLoop(){
+                loading.playSegments([21,87], false);
+            }
+        });
+
+    </script>
+</head>
+<body>
+    <div class="good-morning">Good morning, Robin</div>
+    <!--<div>-->
+        <a class="button">start shift</a>
+    <!--</div>-->
+    <div id="loading-animation">
+        
+    </div>
+    
+
+
+</body>
+</html>

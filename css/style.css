@@ -72,7 +72,7 @@ h1 {
 }
 h2 {
    font-family: 'TiemposHeadline-Medium';
-   font-size: 2.5em;
+   font-size: 2.8em;
    /*font-weight: normal;*/
 }
 h3 {
@@ -370,7 +370,6 @@ blockquote {
       width: 100%;
    }
    body {
-      /*font-size: 1.4em;*/
       width: 100%;
       margin: 0;
    }
@@ -418,5 +417,35 @@ blockquote {
   }
   .date {
     color: #c95d6b;
+  }
+}
+/*
+ * Print style
+ */
+@media print {
+  html {
+    margin-top: 2em;
+  }
+  body {
+    color: black;
+    font-size: 14px;
+    padding: 2em;
+  }
+  h1 {
+    padding: 0;
+    padding-bottom: 1em;
+  }
+  .job-title {
+    /*font-size: 1.2em;*/
+  }
+  .timeline-item {
+    padding: 0;
+    margin-bottom: 1%
+  }
+  #airplane {
+    display: none;
+  }
+  .container-600, .timeline-experience {
+    max-width: 800px;
   }
 }

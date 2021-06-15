@@ -5,8 +5,8 @@ $(window).load(function() {
         //});
         //$('.ux-slider').unslider();
         //var s = skrollr.init({});
-        mixpanel.track('Homepage Loaded')
-        console.log('home loaded');
+        //mixpanel.track('Homepage Loaded')
+        //console.log('home loaded');
         
         // init bot
         //Smooch.init({ appToken: '5nawp8t2ljdh9jzp819rk8h96' });

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>The Works of Ernst</title>
+    <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    
+    <meta property="og:title" content="The Works of Ernst">
+    <meta property="og:description" content="Ernst van Woerden is a designer.">
+    <meta property="og:image" content="https://ernst.works/img/twitter_card.png">
+    <meta property="og:url" content="https://ernst.works">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!--  Non-Essential, But Recommended -->
+    <meta property="og:site_name" content="Ernst.works">
+    <meta name="twitter:image:alt" content="Ernst is a designer.">
+    
+    <!--  Non-Essential, But Required for Analytics -->
+    <meta name="twitter:site" content="@erniedesigns">
+    
+    </head>
+<body>
+    <div class="container-1200 center">
+        <div class="container-600 flex">
+            <div>
+                <div class="content designer">
+                    <p class="large">
+                        <a style="margin-right: 0.5em;" href="../../" class="pink">home</a>  <a style="margin-right: 0.5em;" href="https://www.linkedin.com/in/evanwoerden/" target="_blank" class="blue">linkedin</a>  <a style="margin-right: 1em;" class="green" href="../../resume.html">resume</a>
+                    </p>
+                </div>
+                <div class="spacer-8em">
+
+                </div>
+                <h1 class="crb">
+                    Ernst & Cerebral?
+                </h1>
+            </div>
+        </div>
+    
+        <div class="container-600 resume">
+            <div>
+                <div>
+                    <p class="large">
+                        Let me outline why I could be a Principal Product Designer at Cerebral, and why I'm interested in the position.
+                    </p>
+                </div>
+                <div class="spacer-8em"></div>
+                <div>
+                    <p class="job-title">
+                        Product design experience in healthcare 
+                    </p>
+                    <p>
+                        I have healthcare experience. First in a ehealth agency working for pharma and insurance. Not enough end user contact pretty commercial and risk averse soured me a bit. Then on the startup side in Beijing a much more user centered approach but a very tough problem to solve.
+                    </p>
+                    <p>
+                        Mentored designers and it’s exciting to see someone grow and become better every week
+                    </p>
+                    <p class="job-title">
+                        A desire to learn
+                    </p>
+                    <p>
+                        There are many books on design and product development I haven't read. At the moment I'm reading Christina Wodtke's Radical Focus, to learn more about OKRs and whether they would be a good way to execute org strategy where I am now. Before that, I read Vision in Product Design by Paul Hekkert and Matthijs van Dijk
+                    </p>
+                    <p>
+                        Recently I've been interested in becoming a better writer. Communicating effectively, clearly, and convincingly/compellingly is an essential skill for someone in product and design, and even more so on remote teams where asynchronous work is often the default. I've always been interested in the power of fiction and stories. I love how Neil Gaiman puts it with the example of Little Red Riding Hood: fiction uses a lie (wolf pretending to be a grandma) to tell you the truth (stranger danger). I'm reading Stephen King's On Writing, and watching Neil Gaiman and James Patterson on Masterclass to take a page or two from fiction. Next on the list is Draft No. 4 by John McPhee. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    var yes = false;
+    function toggleCode() {
+        console.log("toggleCode");
+        if(yes) {
+            yes = false;
+            document.getElementById("toggle-code").innerHTML = "no";
+        } else {
+            yes = true;
+            document.getElementById("toggle-code").innerHTML = "yes, but";
+            document.querySelector("#toggle-code").style.textDecorationColor = "#c95d6b";
+            document.querySelector("#toggle-code").style.color = "#c95d6b";
+            document.querySelector("#toggle-code").style.textDecoration = "line-through";
+            document.querySelector("#toggle-code").style.cursor = "default";
+            setTimeout(function(){
+                toggleCode();
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.querySelector("#toggle-code").style.textDecorationColor = "#F2E06F";
+                    document.querySelector("#toggle-code").style.color = "#F2E06F";
+                } else {
+                    document.querySelector("#toggle-code").style.textDecorationColor = "black";
+                    document.querySelector("#toggle-code").style.color = "black";
+                }
+                document.querySelector("#toggle-code").style.textDecoration = "underline";
+                document.querySelector("#toggle-code").style.cursor = "pointer";
+            }, 1000);
+        }
+    }
+    function toggleDesigner() {
+        console.log("toggleDesigner");
+        var str;
+        switch(document.getElementById("designer-link").innerHTML) {
+            case "designer":
+                str = "product manager";
+                break;
+            case "product manager":
+                str = "pretty allround design generalist";
+                break;
+            case "pretty allround design generalist":
+                str = "bit of everything, really";
+                break;
+            case "bit of everything, really":
+                str = "believer in doing the research";
+                break;
+            case "believer in doing the research":
+                str = "designerd";
+                break;
+            case "designerd":
+                str = "designer";
+                break;
+        }
+        document.querySelector("#thing-me").innerHTML = str;
+        document.querySelector("#designer-link").innerHTML = str;
+    }
+</script>
+</html>

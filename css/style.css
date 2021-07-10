@@ -456,6 +456,34 @@ blockquote {
 video {
   padding-bottom: 0.4em;
 }
+.spacer-4em {
+  height: 4em;
+}
+.spacer-8em {
+  height: 12em;
+}
+form {
+  width: 400px;
+  margin: 0 auto;
+  font-family: "FranklinGothicURW-Boo", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  font-size: 1.2em;
+  padding-top: 6em;
+}
+input {
+  padding: 0.5em;
+  margin: 0.2em;
+}
+input[type="password"] {
+
+}
+input[type="submit"] {
+  /* background: white;
+  font-size: 0.9em;
+  border: 1px solid black; */
+}
+h1.crb {
+  padding-bottom: 0.2em;
+}
 
 @media (max-width: 840px) {
    html {

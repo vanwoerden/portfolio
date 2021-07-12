@@ -92,7 +92,6 @@ path.you-are-here {
    flex-wrap: wrap;
    /*justify-content: center;*/
    align-items: center;
-   
 }
 .column {
    padding-top: 5%;
@@ -115,12 +114,30 @@ path.you-are-here {
 .header {
    padding: 5em 0 2em 0;
 }
-p, ol {
+#cv-intro {
+  display: none;
+}
+p, ol, ul {
    padding-top: 0.5em;
    padding-bottom: 0.5em;
    font-size: 1.7em;
    line-height: 1.4em;
    margin: 0;
+}
+ul {
+  /* font-size: 1.5em; */
+  /* line-height: 1.3em; */
+}
+.bright {
+  opacity: 1;
+}
+sub.sub {
+  font-size: 1.2em;
+  line-height: 1.2em;
+  opacity: 0.75;
+}
+sub.sub > a {
+  opacity: 1;
 }
 h1 {
     font-family: 'TiemposHeadline-Medium';
@@ -156,10 +173,10 @@ h3 {
 }
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
     h1, h2, h3 {
-        letter-spacing: -0.08em;
+        letter-spacing: -0.04em;
     }
     .job-title {
-        letter-spacing: -0.07em;
+        letter-spacing: -0.03em;
     }
 }
 
@@ -492,6 +509,7 @@ h1.crb {
    body {
       width: 100%;
       margin: 0;
+      font-size: 1.2em;
    }
    .header {
       /*padding: 0 2em;*/
@@ -500,6 +518,8 @@ h1.crb {
       /*width: 100%;*/
    }
    .container-600 {
+    max-width: 100%;
+    min-width: 100px;
     padding: 0 20px;
    }
    .timeline {
@@ -552,34 +572,75 @@ h1.crb {
   figcaption {
     color: #f5f5f5;
   }
+  #airplane {
+    filter: invert(1);
+  }
 }
 /*
  * Print style
  */
 @media print {
-  html {
-    margin-top: 2em;
+  html, body, .resume, .header, .master {
+    margin: 0;
+    padding: 0;
   }
   body {
     color: black;
     font-size: 14px;
     padding: 2em;
   }
+  .flex {
+    display: block;
+  }
+  .container-1200 {
+    max-width: 95%;
+    margin: 0;
+    padding: 0;
+  }
+  .container-600 {
+    width: 100%;
+    margin: 0; 
+    padding: 0;
+  }
   h1 {
     padding: 0;
-    padding-bottom: 1em;
+    padding-bottom: 0;
+    font-size: 2em;
   }
   .job-title {
-    /*font-size: 1.2em;*/
+    font-size: 1.5em;
+  }
+  p {
+    font-size: 1.2em;
+  }
+  a {
+    text-decoration: underline;
+  }
+  p.large {
+    font-size: 1.2em;
+  }
+  span.contact-info {
+    padding-right: 0.5em;
+  }
+  ul {
+    font-size: 1.2em;
+  }
+  li {
+    padding-bottom: 0.2em;
   }
   .timeline-item {
     padding: 0;
-    margin-bottom: 1%
+    margin-bottom: 0;
   }
-  #airplane {
+  .date {
+    font-size: 1em;
+    padding: 0;
+    color: #555;
+  }
+  #cv-intro {
+    display: block;
+  }
+  #airplane, sub, #intro {
     display: none;
-  }
-  .container-600, .timeline-experience {
-    max-width: 800px;
   }
 }

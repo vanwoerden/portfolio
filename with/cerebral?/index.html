@@ -20,8 +20,10 @@
     
     <!--  Non-Essential, But Required for Analytics -->
     <meta name="twitter:site" content="@erniedesigns">
+
     <meta name="robots" content="noindex">
-</head>
+    
+    </head>
 <body>
     <div class="container-1200 center">
         <div class="container-600 flex">
@@ -54,7 +56,7 @@
                         Product design experience in healthcare 
                     </p>
                     <p>
-                        I <a class="green" href="../../#gather-health">led UX design for Gather Health</a>, a Beijing-based startup building a diabetes management platform, and worked for a <a class="pink" href="../../#redmax">digital agency</a> that specialized in e-mental health early in my career. I know what it's like to work in a heavily regulated industry, where the tech often trails behind doctors' and patients' needs.
+                        I <a class="green" href="../../#gather-health">led UX design for Gather Health</a>, a Beijing-based startup building a diabetes management platform, and worked for a <a class="orange" href="../../#redmax">digital agency</a> that specialized in e-mental health early in my career. I know what it's like to work in a heavily regulated industry, often with the tech trailing behind doctors' and patients' needs.
                     </p>
                     <p>
                         Today, I'm still very interested in healthcare; I think the combination of meaningful work and so much room for improvement is particularly powerful. Being the child of a general practioner and a child's psychiatrist may have something to do with it too.
@@ -63,29 +65,6 @@
                         Related experience in recruitment
                     </p>
                     <p>
-                        From late 2017 to early 2020 I <a class="orange" href="../../#top20talent" target="_blank">led product design for Top20Talent</a>, a recruitment platform. There are quite a few parallels between recruitment and healthcare:
-                    </p>
-                    <ul>
-                        <li>
-                            set workflows and rigid protocols,
-                        </li>
-                        <li>
-                            healthcare professionals (and HR) being forced to work with non-optimal tools and tech,
-                        </li>
-                        
-                        <li>
-                            low visibility into the process for patients (and jobseekers),
-                        </li>
-                        <li>
-                            the incentives for insurers/big pharma (and recruiters) to cut costs/make a profit,
-                        </li>
-                        <li>
-                            "digital transformations" that don't seem to take hold.
-                        </li>
-                    </ul>
-                    <p>
-                        Just to name a few. Building solutions that somehow reconcile all of these opposing forces and misaligned incentives is hard. But it's also what makes design so interesting.
-                    </p>
                     <p class="job-title">
                         A desire to learn
                     </p>
@@ -101,4 +80,59 @@
     </div>
 
 </body>
+<script>
+    var yes = false;
+    function toggleCode() {
+        console.log("toggleCode");
+        if(yes) {
+            yes = false;
+            document.getElementById("toggle-code").innerHTML = "no";
+        } else {
+            yes = true;
+            document.getElementById("toggle-code").innerHTML = "yes, but";
+            document.querySelector("#toggle-code").style.textDecorationColor = "#c95d6b";
+            document.querySelector("#toggle-code").style.color = "#c95d6b";
+            document.querySelector("#toggle-code").style.textDecoration = "line-through";
+            document.querySelector("#toggle-code").style.cursor = "default";
+            setTimeout(function(){
+                toggleCode();
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.querySelector("#toggle-code").style.textDecorationColor = "#F2E06F";
+                    document.querySelector("#toggle-code").style.color = "#F2E06F";
+                } else {
+                    document.querySelector("#toggle-code").style.textDecorationColor = "black";
+                    document.querySelector("#toggle-code").style.color = "black";
+                }
+                document.querySelector("#toggle-code").style.textDecoration = "underline";
+                document.querySelector("#toggle-code").style.cursor = "pointer";
+            }, 1000);
+        }
+    }
+    function toggleDesigner() {
+        console.log("toggleDesigner");
+        var str;
+        switch(document.getElementById("designer-link").innerHTML) {
+            case "designer":
+                str = "product manager";
+                break;
+            case "product manager":
+                str = "pretty allround design generalist";
+                break;
+            case "pretty allround design generalist":
+                str = "bit of everything, really";
+                break;
+            case "bit of everything, really":
+                str = "believer in doing the research";
+                break;
+            case "believer in doing the research":
+                str = "designerd";
+                break;
+            case "designerd":
+                str = "designer";
+                break;
+        }
+        document.querySelector("#thing-me").innerHTML = str;
+        document.querySelector("#designer-link").innerHTML = str;
+    }
+</script>
 </html>

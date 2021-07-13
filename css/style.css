@@ -135,9 +135,13 @@ sub.sub {
   font-size: 1.2em;
   line-height: 1.2em;
   opacity: 0.75;
+  display: block;
+  margin-left: 1.4em;
 }
-sub.sub > a {
-  opacity: 1;
+sup {
+  font-family: "FranklinGothicURW-Boo", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  font-size: 0.6em;
+  opacity: 0.75;
 }
 h1 {
     font-family: 'TiemposHeadline-Medium';
@@ -387,6 +391,13 @@ blockquote {
     margin-left: 204px !important;
     margin-top: 92px;
 }
+span.tag {
+  background: rgb(233, 233, 233);
+  padding: 0.2em 0.4em;
+  margin: -0.1em 0 0 0.3em;
+  border-radius: 0.2em;
+  font-size: 0.8em;
+}
 .rotate {
     transform: rotateZ(120deg);
     transition-duration: .3s;
@@ -503,42 +514,39 @@ h1.crb {
 }
 
 @media (max-width: 840px) {
-   html {
-      width: 100%;
-   }
-   body {
-      width: 100%;
-      margin: 0;
-      font-size: 1.2em;
-   }
-   .header {
-      /*padding: 0 2em;*/
-   }
-   .container-1200 {
-      /*width: 100%;*/
-   }
-   .container-600 {
+  html {
+    width: 100%;
+  }
+  body {
+    width: 100%;
+    margin: 0;
+    font-size: 1.2em;
+  }
+  .header {
+    /*padding: 0 2em;*/
+  }
+  .container-1200 {
+    /*width: 100%;*/
+  }
+  .container-600 {
+  max-width: 100%;
+  min-width: 100px;
+  padding: 0 20px;
+  }
+  .timeline {
+    margin-left: 0;
+  }
+  .timeline-meta {
+    padding-top: 2em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    text-align: left;
+    font-size: 1em;
+  }
+  .timeline-experience {
+    padding-bottom: 2em;
     max-width: 100%;
-    min-width: 100px;
-    padding: 0 20px;
-   }
-   .timeline {
-      margin-left: 0;
-   }
-   .timeline-item {
-      /*margin: 2em 0.5em;*/
-   }
-   .timeline-meta {
-      padding-top: 2em;
-      padding-bottom: 1em;
-      padding-left: 2em;
-      text-align: left;
-      font-size: 1em;
-   }
-   .timeline-experience {
-      /*border-bottom: 2px dashed #eee;*/
-      padding-bottom: 2em;
-   }
+  }
 }
 /*
  * Dark mode
@@ -603,27 +611,34 @@ h1.crb {
     padding: 0;
   }
   h1 {
-    padding: 0;
-    padding-bottom: 0;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
     font-size: 2em;
   }
   .job-title {
     font-size: 1.5em;
+    padding: 0;
+    padding-bottom: 0.4em;
+  }
+  p, ol, ul {
+    padding-top: 0.2em;
+    padding-bottom: 0.3em;
+    line-height: 1.4em;
   }
   p {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   a {
     text-decoration: underline;
   }
   p.large {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   span.contact-info {
-    padding-right: 0.5em;
+    padding-right: 1em;
   }
   ul {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   li {
     padding-bottom: 0.2em;
@@ -640,7 +655,7 @@ h1.crb {
   #cv-intro {
     display: block;
   }
-  #airplane, sub, #intro {
+  #airplane, sub.sub, sup, #intro, .twitter {
     display: none;
   }
 }

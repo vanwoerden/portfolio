@@ -191,7 +191,7 @@ figcaption {
   font-size: 1.2em;
   padding: 0.2em;
   color: #555;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 ul {
    padding-inline-start: 1em;
@@ -628,6 +628,10 @@ span.code {
   min-width: 100px;
   padding: 0 20px;
   }
+  h1 {
+    font-size: 3em;
+    padding-bottom: 1.5em;
+  }
   h1.non-front-page {
     font-size: 4em;
   }
@@ -636,6 +640,9 @@ span.code {
   }
   p, ol, ul, .case-meta {
     font-size: 1.2em;
+  }
+  p.large {
+    font-size: 1.4em;
   }
   .larger {
     font-size: 1.4em;
@@ -653,6 +660,12 @@ span.code {
   .timeline-experience {
     padding-bottom: 2em;
     max-width: 100%;
+  }
+  .job-title {
+    font-size: 2em;
+  }
+  .date {
+    font-size: 1em;
   }
 }
 footer {

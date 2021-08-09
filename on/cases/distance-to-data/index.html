@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html class="gray">
 <head>
     <title>Decreasing the distance to data.</title>
     <link rel="stylesheet" type="text/css" href="../../../css/fonts.css">
@@ -27,7 +27,7 @@
 </head>
 <body>
     <div class="line"></div>
-    <div class="container-full master">
+    <div class="container-full master distance-data-hero">
         <div class="container-600">
             <img class="decrease-distance" src="../../../img/distance-to-data.svg" alt="vertical line partially filled in representing a small distance to data"/>
             <h1 class="non-front-page">
@@ -47,7 +47,7 @@
                     </thead> -->
                     <tbody>
                         <tr>
-                            <td class="key">live example:</td>
+                            <td class="key">Live example:</td>
                             <td class="value"><a class="blue" href="https://ourworldindata.org/covid-vaccinations" target="_blank">ourworldindata.org/covid-vaccinations</a></td>
                         </tr>
                         <tr class="alt">
@@ -60,39 +60,50 @@
                         </tr>
                         <tr class="alt">
                             <td class="key">Team:</td>
-                            <td class="value">founder, writer/researchers, data scientists, engineer</td>
+                            <td class="value">founder, writers/researchers, data scientists, engineer</td>
                         </tr>
                         <tr>
                             <td class="key">My role:</td>
-                            <td class="value">design, evangelism, product management, reporting</td>
+                            <td class="value">user research, design, evangelism, product management, reporting</td>
                         </tr>
                         <tr class="alt">
                             <td class="key">Outcome:</td>
-                            <td class="value"><span class="yellow">great success</span></td>
+                            <td class="value"><a href="#outcomes">less scrolling</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <div class="container-full center flex">
+        <div class="aside case-image">
+            <img src="../../../img/key-figures-012.png" alt="the final redesign of the header of the covid-19 vaccinations page on ourworldindata.org"/>
+        </div>
+    </div>
     <div class="container-full center">
         <div class="container-600">
             <h2>Background</h2>
             <p>
-                Our entries were getting long. We had a lot of elements we thought were important, and moving them to the top and emphasizing them were the main two ways to reflect that importance. But if everything's important, nothing is. We saw user feedback coming in that our entries were long and that it was hard to find a quick overview of the most important things. On desktop, no data was visible on the first screen. On mobile, the distance to data was more than 2 screens! For a website called our world in data, that's not great.
+                Our page on COVID-19 vaccinations was getting long. There were a lot of elements we thought were important, and moving them to the top of the page and/or emphasizing them were the main two ways to reflect that importance. But if everything's important, nothing is. On desktop, no actual data was visible without scrolling. On mobile, the distance to data was more than two screens. It was time for some adjustments.
             </p>
             <p>
-                Too many things at the top of the page competing for the user's attention. None of these things were actual data
+                User interviews and usability testing confirmed that—especially for COVID-related pages—users expected to see data more quickly, and for a lot of them, anything else was getting in the way.
             </p>
         </div>
     </div>
     <div class="container-full center">
         <div class="container-600">
             <h2>
-                Google is more convenient for getting a quick update
+                User research highlights
             </h2>
             <p>
-                We actually lost this user to Google, because he just wanted a quick update, and Google did a better job at that. The Google search results page for <span class="code">COVID-19 vaccinations</span> puts data front and center. There's some space reserved for navigation, and a fraction of the screen is taken up by metadata. 
+                A few examples to illustrate the main pain points:
+            </p>
+            <h3>
+                Google is more convenient
+            </h3>
+            <p>
+                We lost this user to Google, because he just wanted a quick update, and Google did a better job at that. The Google search results page for <a class="code" href="https://www.google.com/search?q=covid+vaccinations" target="_blank">COVID-19 vaccinations</a> puts data front and center. There's some space reserved for navigation, and a fraction of the screen is taken up by metadata. 
             </p>
         </div>
         <div class="container-600 flex-center">
@@ -120,14 +131,14 @@
     
     <div class="container-full center">
         <div class="container-600">
-            <h2>
+            <h3>
                 Don't make me think
-            </h2>
+            </h3>
             <p>
-                This is Steve Krug's classic almost to a tee. This user really felt we were overdoing it with the details.
+                This is Steve Krug's classic almost to a tee. This strategy director really felt we were too text-heavy and didn't get into the meat quickly enough.
             </p>
             <p>    
-                We have navigation (arguably necessary), metadata, our mission, a link to our dataset, but no actual data or research on a 1920x1080px screen resolution.
+                And he made a good point: we had navigation (arguably necessary), metadata, our mission, a link to our dataset, but no actual data or research on a 1920x1080px screen resolution.
             </p>
         </div>
         <div class="container-600 flex-center">
@@ -145,41 +156,45 @@
             </div>
         </div>
         <div class="aside case-image">
-            <img src="../../../img/key-figures-005.png" alt="screenshot of a deck in which the users explains that Google is convenient for him to get a quick update on COVID-19 data"/>
+            <img src="../../../img/key-figures-005.png" alt="screenshot of the previous version of Our World in Data's covid vaccinations page, with no data visible without scrolling down."/>
             <figcaption>No data in sight...</figcaption>
         </div>
     </div>
-    <div class="container-full center">
-        <div class="container-600">
-            <h2>
-                Does this belong here?
-            </h2>
-            <p>
-                We put too many elements at the top of the page that don't serve a primary purpose. If everything's important, nothing is.
-            </p>
-        </div>
-        <div class="container-600 flex-center">
-            <div class="head flex-user-quote">
-                <img src="../../../img/consultant.png" alt="blurred photo of a data scientist user">
-                <figcaption>Content Specialist <br></figcaption>
+    <div class="container-full center flex">
+        <div>
+            <div class="container-600">
+                <h3>
+                    Does this belong here?
+                </h3>
+                <p>
+                    This consultant in magazine publishing acknowledged that sometimes, a link to source data for him to explore was exactly what he wants, but his primary use for our work was “read this quickly”.
+                </p>
             </div>
-            <div class="quote">
-                    <p>
-                        About the 'our work belongs to everyone' block:
-                    </p>
-                    <p>
-                        “There are times when I'm like oh my god this is great, I wanna play around with this all day, and there are other times where I'm like, <b>I just want to read this quickly.”</b>
-                    </p>
+            <div class="container-600 flex-center">
+                <div class="head flex-user-quote">
+                    <img src="../../../img/consultant.png" alt="blurred photo of a data scientist user">
+                    <figcaption>Content Specialist <br></figcaption>
+                </div>
+                <div class="quote">
+                        <p>
+                            “There are times when I'm like oh my god this is great, I wanna play around with this all day, and there are other times where I'm like, <b>I just want to read this quickly.”</b>
+                        </p>
+                </div>
+            </div>
+        </div>
+        <div class="container-900">
+            <div class="case-image aside">
+                <img src="../../../img/our-work-belongs-to-everyone.png" alt="screenshot of a block on the vaccinations page with links to the dataset, citation, and a sentence or two about how our work is open source and belongs to everyone"/>
             </div>
         </div>
     </div>
     <div class="container-full center">
         <div class="container-600">
-            <h2>
+            <h3>
                 But don't remove all of these details
-            </h2>
+            </h3>
             <p>
-                Academic researchers are much more used to reading detailed texts; but even for them, it's hard to imagine that having a quick overview (or abstract, if you will) of what's to come wouldn't be helpful.
+                Academic researchers are much more used to reading detailed texts; but even for them, it's hard to imagine that having a quick overview (or abstract, if you will) of what's to come wouldn't be helpful, or expected.
             </p>
         </div>
         <div class="container-600 flex-center">
@@ -188,42 +203,45 @@
                 <figcaption>Researcher <br></figcaption>
             </div>
             <div class="quote">
-                    <p>
-                        “The amount of information, it was <b>thorough, but not too long, not too complicated,</b> it gave a good overview without being too detailed.”</b>
-                    </p>
-                    <p>
-                        “Then <b>when I read the text</b> and there is reference to the charts <b>I will start looking at the charts.”</b>
-                    </p>
-                    <p>
-                        “I will usually use some time to maneuver a little around the pages when I look at them, and then I usually do find what I want. <b>Maybe not in the first try</b>, but relatively easy.”
-                    </p>
+                <p>
+                    “The amount of information, it was <b>thorough, but not too long, not too complicated,</b> it gave a good overview without being too detailed.”</b>
+                </p>
+                <p>
+                    “Then <b>when I read the text</b> and there is reference to the charts <b>I will start looking at the charts.”</b>
+                </p>
+                <p>
+                    “I will usually use some time to maneuver a little around the pages when I look at them, and then I usually do find what I want. <b>Maybe not in the first try</b>, but relatively easy.”
+                </p>
             </div>
         </div>
+        <!-- <div class="container-600">
+            <h2>
+                Conclusion
+            </h2>
+            <p>
+                We had been stuffing too many secondary elements at the top of the page, so much that it flipped the entire page hierarchy. Users interested in COVID-19 expected to see data closer to the top.
+            </p>
+        </div> -->
     </div>
     <div class="container-full center flex">
         <div class="container-600">
-            <h2>Live data in text</h2>
+            <h2>Bringing live data into our text</h2>
         </div>
     </div>
-    
     <div class="container-full center flex">
-        
         <div class="container-600">
-            <!-- <h2>Live data in text</h2> -->
             <p>
-                We were dreaming about being able to use live data in our writing, but that was technically challenging to get right. Consider the following sentence:
-            
+                The need for up-to-date data in our text was clear. We had been dreaming about using live data in our writing, but that was technically challenging to get right. Consider the following sentence:
+            </p>
+            <p>
                 <span class="code">In 2000, the UK emitted 2.45 tons of coal per capita.</span>
             </p>
-
             <p>
                 When the underlying data changes, we could automatically update this to:
             </p>
-
             <p>
                 <span class="code">In <b>2010</b>, the UK emitted <b>1.86</b> tons of coal per capita.</span>
             </p>
-
             <p>
                 Now imagine we add some context, for example: 
             
@@ -233,7 +251,7 @@
                 Our automatic update becomes tricky when China's emissions surpass those of the UK in 2004; a phrase like <span class="code"><i>that's very close to China</i></span> makes more sense for 2003, and after that it should be <span class="code"><i>less than China.</i></span>
             </p>
             <p>
-                And since (global) progress is all about changes over time, not being able to add this contextual layer to the writing would in many cases only be a partial solution for our authors. Big problems require a long-term view, looking at changes over years, decades, sometimes centuries, and organizations publishing data on these problems often do so only once a year.
+                And since (global) progress is all about change over time, not being able to add this contextual layer to the writing would in many cases only be a partial solution for our authors. Big problems require a long-term view, looking at changes over years, decades, sometimes centuries, and organizations publishing data on these problems often do so only once a year.
             </p>
         </div>
         <div class="aside chart">
@@ -247,15 +265,15 @@
     </div>
     <div class="container-full center flex">
         <div class="container-600">
-                <h2>
-                    COVID-19 data: a different beast
-                </h2>
-                <p>
-                    From December 1 to July 31, 2021, <span class="code"><b>64% of people</b></span> that visited our page on COVID-19 vaccinations were returning users. In the same period, the  percentage of returning users was <span class="code">53%</span> sitewide. Pre-pandemic—in 2019—that number sat at <span class="code">29%</span>.
-                </p>
-                <p>
-                    A much more active audience and a dataset that was updated daily made it much more appealing to go ahead with a form of live data in text. It also became much more important to start with the data users were coming to this and other covid-related pages for. 
-                </p>
+            <h2>
+                COVID-19 data: a different beast
+            </h2>
+            <p>
+                From December 1, 2020 to July 31, 2021, <span class="code"><b>64% of people</b></span> that visited our page on COVID-19 vaccinations were returning users. In the same period, the  percentage of returning users was <span class="code">53%</span> sitewide. Pre-pandemic—in 2019—that number sat at <span class="code">29%</span>.
+            </p>
+            <p>
+                A much more active audience and a dataset that was updated daily made it appealing to go ahead with a form of live data in text. And we had proof that for active, returning visitors, not having to scroll down a page or two before getting to the meat, was important.
+            </p>
         </div>
     </div>
     <div class="container-full center flex">
@@ -264,19 +282,23 @@
                 Design
             </h2>
             <p>
-                Live data at the top, the data explorer (at least partially) in view on desktop. In the end, having the authors' names prominently at the top was—surprisingly—less of a requirement than I had thought, and we just moved the names to the bottom of the page.
+                Based on the insights from user research and the data on returning visitors, I decided to put a few key stats on vaccinations right below the page title. That was a quick way that didn't require any dev effort; just some inline CSS to style the numbers to give them some extra attention, and a daily manual update for the time being.
             </p>
-        </div>
-        <div class="aside case-image">
-            <img src="../../../img/key-figures-012.png" alt="the final redesign of the header of the covid-19 vaccinations page on ourworldindata.org"/>
-        </div>
-        <div class="container-600">
-            <p>    
-                final design
+            <p>
+                I also moved the “Our work belongs to everyone” block down below the data explorer. 
+            </p>
+            <p>
+                This then brought the data explorer in view on desktop, and at the very least, surfaced the key stats at the top of the page on mobile. In the end, having the authors' names prominently at the top was not as important as I had thought, and we just moved them to the bottom of the page.
             </p>
         </div>
     </div>
     <div class="container-full center flex">
+        <div class="aside case-image">
+            <img src="../../../img/key-figures-012.png" alt="the final redesign of the header of the covid-19 vaccinations page on ourworldindata.org"/>
+            <figcaption>Final design with more data closer to the top of the page.</figcaption>
+        </div>
+    </div>
+    <div class="container-full center flex" id="outcomes">
         <div class="container-600">
             <h2>
                 Outcomes
@@ -286,15 +308,18 @@
             </p>
             <p>Changes we actually saw:</p>
             <ul>
-                <li>No significant increase in return visits or interaction with the data explorer</li>
-                <li>a decrease in clicks on links to the dataset, which we mitigated by linking to it elsewhere. And also, the fact that it used to be the first link perhaps played a role in its popularity</li>
+                <li>No significant increase in return visits or interaction with the data explorer (yet);</li>
+                <li>a decrease in clicks on links to the dataset, which we mitigated by linking to it elsewhere. The fact that it used to be the first link on the page perhaps played a role in its popularity as well;</li>
                 <li>
-                    no user complaints
+                    no user complaints;
                 </li>
                 <li>
-                    A decrease in the ratio of scroll events divided by page views for the vaccinations page of <span class="code">0.74</span> to <span class="code">0.59</span>
+                    a decrease in the ratio of scroll events divided by page views for the vaccinations page of <span class="code">0.74</span> to <span class="code">0.59</span>.
                 </li>
             </ul>
+            <p>
+                This was enough for us to move forward and implement a first version with automated live data at the top of the vaccinations page.
+            </p>
         </div>
         <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Underappreciated in dataviz: Well-crafted text, highlighting the key numbers. High information density, high accessibility, often the best intro to a complex dashboard.<br><br>* <a href="https://t.co/Pl8fumxelt">https://t.co/Pl8fumxelt</a><br>* <a href="https://t.co/aAnMricqdX">https://t.co/aAnMricqdX</a> <a href="https://t.co/0yosnRm9lf">pic.twitter.com/0yosnRm9lf</a></p>&mdash; David Bauer (@davidbauer) <a href="https://twitter.com/davidbauer/status/1418166974820069378?ref_src=twsrc%5Etfw">July 22, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
@@ -302,81 +327,33 @@
     <div class="container-full center flex">
         <div class="container-600">
             <h2>
-                Broader context of decreasing distance to data
+                What's next?
             </h2>
             <p>
-                Ultimately, the goal behind these changes is to get data closer to everyone who's interested in it and especially to people who can use it to make decisions that affect real long-term progress. These are only two examples of how we aim to accomplish this goal. My role is often to ask why a few times when new ideas come up amongst the founders, so we go from "let's build a super powerful and flexible data analysis tool" to the goal behind that and then suggesting that perhaps a more efficient way to reach that goal is to make our data or visualization tools more easily available inside of existing tools and platforms out there like Jupyter notebooks or Observable, or having our data show up directly on <a href="https://www.google.com/search?q=covid+vaccinations" target="_blank">Google's SERPs</a>. 
+                Ultimately, the goal behind these changes is to get data closer to everyone who's interested in it. Especially to people who can use it to make decisions that affect real, long-term progress. Next steps to achieve this goal include:
             </p>
+            <ul>
+                <li>
+                    Roll out this header with live data to many more parts of Our World in Data;
+                </li>
+                <li>
+                    include visualizations in addition to text-only elements;
+                </li>
+                <li>
+                    instead of improving our own tools, pages, and visualizations, pushing our data to other places and platforms (<a href="https://www.google.com/search?q=covid+vaccinations" target="_blank">Google's SERPs already use it</a>, and we're experimenting with making our data and tools available in Jupyter notebooks);
+                </li>
+                <li>
+                    chart thumbnails that accurately select author- or user-set parameters so both on-site and on social media, the chart that is shared contains accurate, up-to-date data;
+                </li>
+                <li>
+                    exploring new ways of telling interactive stories with our data.
+                </li>
+            </ul>
         </div>
+        <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">These data points at the top of the vaccinations page come directly from our datasets. Now that we can use &quot;live&quot; data in our writing as well as in our charts, we can connect those two in many new and hopefully useful ways. An example: <a href="https://t.co/e2eJA3gjGO">pic.twitter.com/e2eJA3gjGO</a></p>&mdash; Ernst (@erniedesigns) <a href="https://twitter.com/erniedesigns/status/1408463270319738885?ref_src=twsrc%5Etfw">June 25, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
     <footer>
 
     </footer>
-    
-    <!-- add animations -->
-    <script src="../../../js/lottie.min.js" type="text/javascript"></script>
-    <script src="../../../js/lottie-player.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            //var loading = lottie.loadAnimation({
-            //    container: document.getElementById("story-arc-animation"), 
-            //    renderer: 'svg',
-            //    loop: true,
-            //    autoplay: false,
-            //    path: '../../../json/data.json' 
-            //});
-            //lottie.play();
-            
-            LottieInteractivity.create({
-                mode: 'scroll',
-                player: '#firstLottie',
-                actions: [
-                    {
-                        visibility: [0.05, 0.65],
-                        type: 'seek',
-                        frames: [0, 443],
-                    },
-                ],
-            });
-
-            
-            LottieInteractivity.create({
-                mode: 'scroll',
-                player: '#where-is-north',
-                actions: [
-                    {
-                        visibility: [0.35, 0.75],
-                        type: 'seek',
-                        frames: [384, 595],
-                    },
-                ],
-            });
-            
-            LottieInteractivity.create({
-                mode: 'scroll',
-                player: '#you-are-here',
-                actions: [
-                    {
-                        visibility: [0.4, 0.9],
-                        type: 'seek',
-                        frames: [569, 864],
-                    },
-                ],
-            });
-            
-            const img1 = document.querySelector('#firstLottie');
-            const img2 = document.querySelector('#where-is-north');
-            const img3 = document.querySelector('#you-are-here');
-            //if (window.matchMedia && 
-            //    window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            //} else {
-            //    img1.style.filter="invert(100%)";
-            //    img2.style.filter="invert(100%)";
-            //    img3.style.filter="invert(100%)";
-            //}
-        });
-
-    </script>
 </body>
 </html>

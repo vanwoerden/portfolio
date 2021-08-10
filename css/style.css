@@ -704,6 +704,22 @@ span.code {
   .date {
     font-size: 1em;
   }
+  img.teaser-image {
+    width: 92px;
+  }
+  .case-image {
+    margin: 0;
+    padding: 0 20px;
+  }
+  .case-image > figcaption {
+    font-size: 1em;
+  }
+  .flex-user-quote {
+    margin-right: 1em;
+  }
+  .flex-user-quote > figcaption {
+    font-size: 1.2em;
+  }
 }
 footer {
   padding: 4em 0;

@@ -718,7 +718,10 @@ span.code {
     margin-right: 1em;
   }
   .flex-user-quote > figcaption {
-    font-size: 1.2em;
+    font-size: 1em;
+  }
+  .case-meta {
+    padding-bottom: 2em;
   }
 }
 footer {

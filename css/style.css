@@ -44,6 +44,10 @@ body {
     max-width: 600px;
     padding-right: 4em;
 }
+.extra-pad {
+  padding-right: 8em;
+  padding-bottom: 6em;
+}
 .container-800 {
   max-width: 800px;
 }
@@ -118,7 +122,7 @@ path.you-are-here {
     margin-top: -0.25em;
 }
 .header {
-   padding: 5em 0 2em 0;
+   padding: 5em 0 10em 0;
 }
 #cv-intro {
   display: none;
@@ -129,6 +133,9 @@ p, ol, ul {
    font-size: 1.7em;
    line-height: 1.4em;
    margin: 0;
+}
+p.smaller {
+  font-size: 1.4em;
 }
 ul {
   /* font-size: 1.5em; */
@@ -270,6 +277,9 @@ img.project-thumb {
 .project-teaser {
   margin: 2em 0 4em 0;
 }
+.teaser-description.home {
+  max-width: 400px;
+}
 .teaser-title {
   font-family: "TiemposHeadline-Medium";
   font-size: 2em;
@@ -316,16 +326,6 @@ img.teaser-image {
     /*border-right: 1px solid #EAEAEA;*/
     color: #999;
     /*margin-top: 2.8em;*/
-}
-.timeline-experience.first {
-   /*border: none;*/
-}
-.timeline-experience {
-    max-width: 600px;
-}
-.timeline-experience:hover {
-  /*background: #f3f3f3;*/
-  /*transition: ease-out 0.2s;*/
 }
 .white {
    color: white;

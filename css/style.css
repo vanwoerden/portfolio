@@ -487,6 +487,11 @@ span.tag {
   margin-top: 0;
   transform: rotate(15deg);
 }
+.disclaimer {
+  font-size: 1.2em;
+  color: 1.2em;
+  padding: 0 0 1em 0;
+}
 
 @keyframes move {
   0% {

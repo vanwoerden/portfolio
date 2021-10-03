@@ -181,6 +181,11 @@ h3 {
     letter-spacing: -0.02em;
     margin: 1em 0 0.2em;
 }
+details summary {
+  margin: 0.4em 0 0.2em 0;
+  font-size: 1.4em;
+  cursor: pointer;
+}
 @-moz-document url-prefix(){
     h1, h2, h3 {
         letter-spacing: -0.04em;
@@ -211,6 +216,10 @@ ul {
 }
 li {
    padding-bottom: 0.5em;
+}
+a.project-link {
+  background: none;
+  display: block;
 }
 a, a:visited {
    color: #333;
@@ -284,6 +293,7 @@ img.project-thumb {
   font-family: "TiemposHeadline-Medium";
   font-size: 2em;
   padding: 0 0 0.2em 0;
+  line-height: 1.2;
 }
 .teaser-description {
   max-width: 460px;
@@ -670,6 +680,20 @@ span.code {
     min-width: 100px;
     padding: 0 20px;
   }
+  .flex {
+    /* flex-direction: column-reverse; */
+  }
+  .extra-pad {
+    padding: 1.6em 20px;
+  }
+  .project-teaser {
+    border: 1px solid #333;
+    border-radius: 1em;
+    padding: 1em;
+  }
+  details summary {
+    font-size: 1.2em;
+  }
   h1 {
     font-size: 3em;
     padding-bottom: 1.5em;
@@ -684,7 +708,10 @@ span.code {
     font-size: 1.5em;
   }
   p, ol, ul, .case-meta {
-    font-size: 1.2em;
+    font-size: 1.4em;
+  }
+  p.twitter {
+    padding: 0 20px;
   }
   p.large {
     font-size: 1.4em;
@@ -712,8 +739,11 @@ span.code {
   .date {
     font-size: 1em;
   }
+  .teaser-description {
+    /* width: 75%; */
+  }
   img.teaser-image {
-    width: 92px;
+    width: 72px;
   }
   .case-image {
     margin: 0;
@@ -723,10 +753,15 @@ span.code {
     font-size: 1em;
   }
   .flex-user-quote {
-    margin-right: 1em;
+    margin-right: 3%;
+    width: 22%;
+    flex-direction: row;
+    justify-content: flex-start;
   }
   .flex-user-quote > figcaption {
     font-size: 1em;
+    white-space: nowrap;
+    padding-left: 1em;
   }
   .case-meta {
     padding-bottom: 2em;

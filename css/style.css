@@ -708,7 +708,7 @@ span.code {
     font-size: 1.2em;
   }
   .header {
-    /*padding: 0 2em;*/
+    margin-bottom: 4em;
   }
   .container-full {
     padding: 0;
@@ -731,6 +731,7 @@ span.code {
   .project-teaser {
     max-width: 100%;
     width: 100%;
+    min-width: 100%;
   }
   details summary {
     font-size: 1.2em;
@@ -822,9 +823,13 @@ footer {
     background: #2C2835;
     color: #EDEAEA;
   }
-  a, a:visited, a.green, a.orange, a.yellow, a.pink, a.blue {
+  a, a:visited, a.green, a.orange, a.yellow, a.pink, a.blue, span.green, span.orange, span.pink, span.blue {
     color: #F2E06F;
     background: linear-gradient(to bottom, transparent 0%, transparent 60%, #2F2E6B 60%, #5452B7 100%);
+  }
+  a.project-link {
+    background: none;
+    color: white;
   }
   span.yellow, span.yellow > a {
     /* color: black; */

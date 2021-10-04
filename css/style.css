@@ -728,11 +728,10 @@ span.code {
   .extra-pad {
     padding: 1.6em 20px;
   }
-  /* .project-teaser {
-    border: 1px solid #333;
-    border-radius: 1em;
-    padding: 1em;
-  } */
+  .project-teaser {
+    max-width: 100%;
+    width: 100%;
+  }
   details summary {
     font-size: 1.2em;
   }

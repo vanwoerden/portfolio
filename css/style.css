@@ -46,7 +46,8 @@ body {
 }
 .extra-pad {
   padding-right: 8em;
-  padding-bottom: 6em;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 .container-800 {
   max-width: 800px;
@@ -185,6 +186,7 @@ details summary {
   margin: 0.4em 0 0.2em 0;
   font-size: 1.4em;
   cursor: pointer;
+  text-decoration: underline #ccc;
 }
 @-moz-document url-prefix(){
     h1, h2, h3 {
@@ -219,17 +221,17 @@ li {
 }
 a.project-link {
   background: none;
-  display: block;
+  /* display: block; */
 }
-a, a:visited {
+a, a:visited, span.gray {
    color: #333;
    text-decoration: none;
    background: linear-gradient(to bottom, transparent 0%, transparent 60%, #e2e2e2 60%, #e2e2e2 100%);
 }
-a.green {
+a.green, span.green {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #A5F2C9 60%, #A5F2C9 100%);
 }
-a.blue {
+a.blue, span.blue {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #ABDCFC 60%, #ABDCFC 100%);
 }
 a.yellow {
@@ -239,10 +241,10 @@ span.yellow {
   background: #F7EB97;
   padding: 6px 0 0 0;
 }
-a.pink {
+a.pink, span.pink {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #FFAEFD 60%, #FFAEFD 100%);
 }
-a.orange {
+a.orange, span.orange {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #FFC4A5 60%, #FFC4A5 100%);
 }
 a:hover {
@@ -263,6 +265,39 @@ img.project-thumb {
   padding: 2.5%;
   display: none;
 }
+.project-teaser {
+  border: 1px dashed rgb(101, 105, 121);
+  border-radius: 1.1em;
+  width: fit-content;
+  max-width: 400px;
+  margin: 2em 3em 4em 0;
+  transition: 0.25s;
+}
+.project-teaser:hover {
+  /* box-shadow: 5px 4px 2px 1px rgba(63, 63, 106, 0.201); */
+  box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(13, 8, 23, 0.02),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.03),
+    22.3px 22.3px 17.9px rgba(8, 8, 23, 0.035),
+    41.8px 41.8px 33.4px rgba(15, 11, 27, 0.05),
+    100px 100px 80px rgba(18, 16, 31, 0.055)
+  ;
+  border: 1px dashed rgb(9, 9, 69);
+  transition: 0.15s;
+}
+/* .project-teaser.orange {
+  border: 2px solid #d2875f;
+}
+.project-teaser.green {
+  border: 2px solid #60ce93;
+}
+.project-teaser.blue {
+  border: 2px solid #6fa2c4;
+}
+.project-teaser.pink {
+  border: 2px solid #d270d0;
+} */
 .teaser {
   display: flex;
   align-items: flex-start;
@@ -283,15 +318,13 @@ img.project-thumb {
   width: 60%;
   color:#777;
 }
-.project-teaser {
-  margin: 2em 0 4em 0;
-}
 .teaser-description.home {
-  max-width: 400px;
+  width: fit-content;
+  padding: 2em 2em 1.2em 2em;
 }
 .teaser-title {
   font-family: "TiemposHeadline-Medium";
-  font-size: 2em;
+  font-size: 1.7em;
   padding: 0 0 0.2em 0;
   line-height: 1.2;
 }
@@ -305,6 +338,10 @@ img.teaser-image {
   border-radius: 56px;
   margin-bottom: 0.6em;
   /* margin-right: 2.1em; */
+}
+img.teaser-image-rect {
+  width: 100%;
+  border-radius: 1em 1em 0 0;
 }
 /* TIMELINE */
 .timeline {
@@ -407,6 +444,10 @@ blockquote {
   align-items: center;
   text-align: center;
   margin-right: 2.1em;
+}
+.flex-project-teaser-meta {
+  display: flex;
+  flex-direction: column; 
 }
 .quote {
   /* padding: 1.5em 2em; */
@@ -675,22 +716,23 @@ span.code {
   .container-1200 {
     /*width: 100%;*/
   }
-  .container-600 {
+  .container-600, .container-900 {
     max-width: 100%;
     min-width: 100px;
     padding: 0 20px;
   }
-  .flex {
-    /* flex-direction: column-reverse; */
+  .flex-reverse {
+    display: flex;
+    flex-direction: column;
   }
   .extra-pad {
     padding: 1.6em 20px;
   }
-  .project-teaser {
+  /* .project-teaser {
     border: 1px solid #333;
     border-radius: 1em;
     padding: 1em;
-  }
+  } */
   details summary {
     font-size: 1.2em;
   }
@@ -715,6 +757,9 @@ span.code {
   }
   p.large {
     font-size: 1.4em;
+  }
+  p.smaller {
+    font-size: 1.2em;
   }
   .larger {
     font-size: 1.4em;

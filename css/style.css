@@ -228,6 +228,10 @@ a, a:visited, span.gray {
    text-decoration: none;
    background: linear-gradient(to bottom, transparent 0%, transparent 60%, #e2e2e2 60%, #e2e2e2 100%);
 }
+a.simple {
+  background: none;
+  text-decoration: underline;
+}
 a.green, span.green {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #A5F2C9 60%, #A5F2C9 100%);
 }
@@ -823,7 +827,7 @@ footer {
     background: #2C2835;
     color: #EDEAEA;
   }
-  a, a:visited, a.green, a.orange, a.yellow, a.pink, a.blue, span.green, span.orange, span.pink, span.blue {
+  a, a:visited, a.simple, a.green, a.orange, a.yellow, a.pink, a.blue, span.green, span.orange, span.pink, span.blue {
     color: #F2E06F;
     background: linear-gradient(to bottom, transparent 0%, transparent 60%, #2F2E6B 60%, #5452B7 100%);
   }

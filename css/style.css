@@ -46,7 +46,7 @@ body {
 }
 .extra-pad {
   padding-right: 8em;
-  padding-top: 2em;
+  padding-top: 6em;
   padding-bottom: 2em;
 }
 .container-800 {
@@ -274,7 +274,7 @@ img.project-thumb {
   border-radius: 1.1em;
   width: fit-content;
   max-width: 400px;
-  margin: 2em 3em 4em 0;
+  margin: 8em 3em 4em 0;
   transition: 0.25s;
 }
 .project-teaser:hover {
@@ -602,7 +602,7 @@ video {
   height: 4em;
 }
 .spacer-8em {
-  height: 12em;
+  height: 8em;
 }
 form {
   width: 400px;

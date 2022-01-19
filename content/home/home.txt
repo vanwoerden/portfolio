@@ -1,0 +1,13 @@
+Title: Home
+
+----
+
+Headline: Ernst van Woerden is a designer
+
+----
+
+Subheadline: A Dutch designer at that.
+
+----
+
+Paragraph: I help companies and organizations build better products through user research, design, and product management. Over the past 11 years, I've worked in UX, branding, video and animation, even music and sound design. I've worked for myself, in agencies and in-house at startups. I'm happiest when I work on the product side of design, in highly collaborative organizations.

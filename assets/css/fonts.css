@@ -1,31 +1,4 @@
 @font-face {
-	font-family: 'BaskervilleURWNar-Bol';
-	src: url('../fonts/BaskervilleURWNar-Bol.eot');
-	src: url('../fonts/BaskervilleURWNar-Bol.eot?#iefix') format('embedded-opentype'),
-	     url('../fonts/BaskervilleURWNar-Bol.woff') format('woff'),
-	     url('../fonts/BaskervilleURWNar-Bol.ttf') format('truetype');
-	font-weight: bold;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'FranklinGothicURW-Boo';
-	src: url('../fonts/FranklinGothicURW-Boo.eot');
-	src: url('../fonts/FranklinGothicURW-Boo.eot?#iefix') format('embedded-opentype'),
-	     url('../fonts/FranklinGothicURW-Boo.woff') format('woff'),
-	     url('../fonts/FranklinGothicURW-Boo.ttf') format('truetype');
-	font-weight: regular;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'TiemposHeadline-Medium';
-	src: url('../fonts/TiemposHeadline-Medium.eot');
-	src: url('../fonts/TiemposHeadline-Medium.eot?#iefix') format('embedded-opentype'),
-	     url('../fonts/TiemposHeadline-Medium.woff') format('woff'),
-	     url('../fonts/TiemposHeadline-Medium.ttf') format('truetype');
-	font-weight: 500;
-	font-style: normal;
-}
-@font-face {
     font-family: 'Tiempos Text';
     src: url('../fonts/TiemposText-Italic.eot');
     src: url('../fonts/TiemposText-Italic.eot?#iefix') format('embedded-opentype'),
@@ -73,6 +46,45 @@
         url('../fonts/TiemposText-Bold.ttf') format('truetype'),
         url('../fonts/TiemposText-Bold.svg#TiemposText-Bold') format('svg');
     font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Post Grotesk';
+    src: url('../fonts/PostGrotesk-LightItalic.eot');
+    src: url('../fonts/PostGrotesk-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/PostGrotesk-LightItalic.woff2') format('woff2'),
+        url('../fonts/PostGrotesk-LightItalic.woff') format('woff'),
+        url('../fonts/PostGrotesk-LightItalic.ttf') format('truetype'),
+        url('../fonts/PostGrotesk-LightItalic.svg#PostGrotesk-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Post Grotesk';
+    src: url('../fonts/PostGrotesk-Bold.eot');
+    src: url('../fonts/PostGrotesk-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/PostGrotesk-Bold.woff2') format('woff2'),
+        url('../fonts/PostGrotesk-Bold.woff') format('woff'),
+        url('../fonts/PostGrotesk-Bold.ttf') format('truetype'),
+        url('../fonts/PostGrotesk-Bold.svg#PostGrotesk-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Post Grotesk';
+    src: url('../fonts/PostGrotesk-Light.eot');
+    src: url('../fonts/PostGrotesk-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/PostGrotesk-Light.woff2') format('woff2'),
+        url('../fonts/PostGrotesk-Light.woff') format('woff'),
+        url('../fonts/PostGrotesk-Light.ttf') format('truetype'),
+        url('../fonts/PostGrotesk-Light.svg#PostGrotesk-Light') format('svg');
+    font-weight: 300;
     font-style: normal;
     font-display: swap;
 }

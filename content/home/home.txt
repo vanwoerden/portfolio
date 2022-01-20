@@ -6,8 +6,12 @@ Headline: Ernst van Woerden is a designer
 
 ----
 
-Subheadline: A Dutch designer at that.
+Subheadline: I help companies build better products through user research, design, and product management.
 
 ----
 
-Paragraph: I help companies and organizations build better products through user research, design, and product management. Over the past 11 years, I've worked in UX, branding, video and animation, even music and sound design. I've worked for myself, in agencies and in-house at startups. I'm happiest when I work on the product side of design, in highly collaborative organizations.
+Paragraph: [{"content":{"text":"<p>Over the past 11 years, I've worked in UX, branding, video and animation, even music and sound design. I've worked for myself, in agencies and in-house at startups. I'm happiest when I work on the product side of design, in highly collaborative organizations.<\/p>"},"id":"5948c80f-54f6-4cf3-b3df-ef3bbc2d6571","isHidden":false,"type":"text"}]
+
+----
+
+Paragraph2: [{"content":{"text":"<p>I'm currently working on QuickBooks Commerce at Intuit.<\/p>"},"id":"ae067b61-aa6b-48e5-887e-fbf4f3d6c657","isHidden":false,"type":"text"},{"content":{"text":"<p>you know ta<\/p>"},"id":"9d9f0305-e7be-44d3-ba67-d1b3f0caa504","isHidden":false,"type":"text"}]

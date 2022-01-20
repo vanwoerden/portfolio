@@ -45,8 +45,12 @@ li {
   list-style: none;
 }
 a {
-  color: currentColor;
-  text-decoration: none;
+  color: black;
+  text-decoration-color: #f0c674;
+  text-decoration-thickness: 2px;
+}
+p {
+  margin: 1rem 0;
 }
 button {
   font: inherit;
@@ -428,9 +432,11 @@ hr {
 .subheadline {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  line-height: 2rem;
 }
 .paragraph {
-  max-width: 36rem;
+  max-width: 40rem;
   font-size: 1.2rem;
   line-height: 1.8rem;
 }

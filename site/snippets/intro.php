@@ -20,6 +20,7 @@
 </header>
 <div class="paragraph">
     <?php if ($page->paragraph()->isNotEmpty()): ?>
-  <p class="color-grey"><?= $page->paragraph()->html() ?></p>
+  <!-- <p class="color-grey"><?= $page->paragraph()->html() ?></p> -->
+  <p class="color-grey"><?= $page->paragraph()->text()->toBlocks() ?></p>
   <?php endif ?>
 </div>

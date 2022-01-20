@@ -23,9 +23,11 @@ sections:
       subheadline:
         type: text
         width: 1/2
+      gap: 
+        width: 1/2
       paragraph:
-        type: text
-        width: 1/3
+        type: blocks
+        width: 1/2
 
 
 # The photography section extends a pages section defined in the `/site/blueprints/section/album.yml` blueprint

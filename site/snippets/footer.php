@@ -13,12 +13,12 @@
 
   <footer class="footer">
     <div class="grid">
-      <!-- <div class="column" style="--columns: 8">
-        <h2><a href="https://getkirby.com">Made with Kirby</a></h2>
+      <div class="column" style="--columns: 8">
+        <h2>This site does not track you.</h2>
         <p>
-          Kirby: the file-based CMS that adapts to any project, loved by developers and editors alike
+          If you found something of use here, or have suggestions, please <a href="mailto:hello@seriousness.nl?subject=ernst.works feedback" target="_blank">let me know!</a>
         </p>
-      </div> -->
+      </div>
       <!-- <div class="column" style="--columns: 2">
         <h2>Pages</h2>
         <ul>
@@ -28,7 +28,7 @@
         </ul>
       </div> -->
       <div class="column" style="--columns: 2">
-        <h2>As seen on:</h2>
+        <h2>Come say hi.</h2>
         <ul>
           <li><a href="https://twitter.com/erniedesigns" target="_blank">Twitter</a></li>
           <li><a href="https://www.polywork.com/seriousness" target="_blank">Polywork</a></li>

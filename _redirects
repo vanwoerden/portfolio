@@ -1,6 +1,6 @@
 # Redirects from what the browser requests to what we serve
 /with/p44/              /
-/with/mparticle/              /
-/with/prosper/              /
-/with/heap/              /
-/               /static
+/with/mparticle/        /
+/with/prosper/          /
+/with/heap/             /               force
+/                       /static         force

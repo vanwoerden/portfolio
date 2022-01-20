@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <g fill="none" fill-rule="evenodd">
+    <g transform="translate(7 48)">
+      <g stroke="#EDEDED" transform="translate(73 32)">
+        <circle cx="220" cy="220" r="47"/>
+        <circle cx="220" cy="220" r="98"/>
+        <circle cx="220" cy="220" r="148"/>
+        <circle cx="220" cy="220" r="198"/>
+      </g>
+      <text fill="#000" font-family="UntitledSansTest-Regular, Untitled Sans Test" font-size="14">
+        <tspan x="264.192" y="14">Strategy</tspan>
+      </text>
+      <text fill="#000" font-family="UntitledSansTest-Regular, Untitled Sans Test" font-size="14">
+        <tspan x="417.314" y="85">Roadmapping</tspan>
+      </text>
+      <text fill="#000" font-family="UntitledSansTest-Regular, Untitled Sans Test" font-size="14">
+        <tspan x="513.756" y="239">Research </tspan> <tspan x="539.619" y="256" font-family="LucidaGrande, Lucida Grande">&amp;</tspan> <tspan x="511.81" y="273">Discovery</tspan>
+      </text>
+      <text fill="#000" font-family="UntitledSansTest-Regular, Untitled Sans Test" font-size="14">
+        <tspan x="436.477" y="428">Design</tspan>
+      </text>
+      <text fill="#000" font-family="UntitledSansTest-Regular, Untitled Sans Test" font-size="14">
+        <tspan x="249.477" y="497">Development</tspan>
+      </text>
+      <text fill="#000" font-family="UntitledSansTest-Regular, Untitled Sans Test" font-size="14">
+        <tspan x="112.28" y="428">QA</tspan>
+      </text>
+      <text fill="#000" font-family="UntitledSansTest-Regular, Untitled Sans Test" font-size="14">
+        <tspan x="4.771" y="239">Documentation </tspan> <tspan x="50.619" y="256" font-family="LucidaGrande, Lucida Grande">&amp;</tspan> <tspan x="60.381" y="256"> </tspan> <tspan x="27.738" y="273">Training</tspan>
+      </text>
+      <text fill="#000" font-family="UntitledSansTest-Regular, Untitled Sans Test" font-size="14">
+        <tspan x="59.866" y="85">Measure </tspan> <tspan x="119.576" y="85" font-family="LucidaGrande, Lucida Grande">&amp;</tspan> <tspan x="129.338" y="85"> Report</tspan>
+      </text>
+    </g>
+    <path fill="#00F" fill-opacity=".15" stroke="#000" stroke-width="2" d="M300.5,180.5 C339,180 376.5,167 415.5,185 C454.5,203 503.501158,251.5 503.501158,300 C503.501158,348.5 500,421 444,444.5 C388,468 324,336.5 300.5,333.5 C277,330.5 274.5,347.5 254,346.5 C233.5,345.5 201,326 194.5,300.5 C188,275 185.5,236 208,208.5 C230.5,181 262,181 300.5,180.5 Z"/>
+    <path fill="#00F" fill-opacity=".15" stroke="#000" stroke-width="2" d="M300,132 C338,131 402.5,126.5 435.5,165.5 C468.5,204.5 430.5,279.5 421.5,300.5 C412.5,321.5 395.5,357.5 373.5,374 C351.5,390.5 327.5,312.5 300,312 C272.5,311.5 258.5,362 236.5,364 C214.5,366 188,338 172.5,300 C157,262 141.5,215 173.5,173.5 C205.5,132 262,133 300,132 Z"/>
+    <path fill="#00F" fill-opacity=".65" stroke="#000" stroke-width="4" d="M415.5,185 C426.230358,189.952473 437.71781,197.213814 448.733451,206.148766 C448.962381,243.3313 427.899649,285.567486 421.5,300.5 C412.5,321.5 395.5,357.5 373.5,374 C351.5,390.5 327.5,312.5 300,312 C282.878996,311.688709 270.990704,331.145442 259.146788,346.359063 C257.559359,346.533699 255.853231,346.590402 254,346.5 C233.5,345.5 201,326 194.5,300.5 C188,275 185.5,236 208,208.5 C230.5,181 262,181 300.5,180.5 C339,180 376.5,167 415.5,185 Z"/>
+  </g>
+</svg>

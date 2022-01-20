@@ -27,7 +27,9 @@
 }
 
 html {
-  font-family: var(--font-family-sans);
+  /* font-family: var(--font-family-sans); */
+  font-family: "PostGrotesk-Light";
+  /* font-family: "FranklinGothicURW-Boo"; */
   color: var(--color-text);
   background: var(--color-background);
 }
@@ -131,9 +133,9 @@ small {
 
 h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
-  font-weight: bold;
+  font-weight: inherit;
   line-height: inherit;
-  /* font-family: 'Tiempos Text'; */
+  font-family: 'Tiempos Text';
   letter-spacing: -0.02em;
 }
 

@@ -142,6 +142,9 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Tiempos Text';
   letter-spacing: -0.02em;
 }
+h1 {
+  line-height: 110%;
+}
 
 .text {
   line-height: 1.5em;
@@ -441,4 +444,8 @@ hr {
   line-height: 1.8rem;
 }
 
-
+@media screen and (max-width: 46rem) {
+  .subheadline {
+    margin-top: 1.5rem;
+  }
+}

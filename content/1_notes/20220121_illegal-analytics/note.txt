@@ -1,0 +1,23 @@
+Title: Illegal analytics
+
+----
+
+Text: [{"content":{"level":"h2","text":"What it does"},"id":"74ea2f2e-e5d4-4930-b854-941543d8d917","isHidden":false,"type":"heading"},{"content":{"text":"<p>illegal.analyticsscanner.com scans your website for the presence of analytics tools that <\/p><p>- are based in the US<\/p><p>- whose servers are in the EU but owned by a US company<\/p><p>In both cases, the US government can lawfully require the company to turn over privacy sensitive data. This tool tells you if your analytics are currently breaking the law in the EU.<\/p>"},"id":"e1b5151b-6823-4c4f-a23d-83184a7d4595","isHidden":false,"type":"text"},{"content":{"level":"h2","text":"Background"},"id":"3cb8fe0b-dfb2-4d93-8882-8c2370438690","isHidden":false,"type":"heading"},{"content":{"text":"<p>On January 13, 2022, the Austrian Data Protection Authority ruled that the use of Google Analytics is illegal. There was a 2020 EU court ruling that said so but now the Austrian govt has basically said they will enfore this Schrems II ruling.<\/p><p>There are two rules. If the US govt has a way to make the company that owns the servers comply and handover data, it's illegal. <\/p><p>Fathom is one of the few website analytics providers that is above board. They explain more in this blog post and this podcast episode. They even made a tool that scans your website and tells you whether your website analytics are kosher. Pretty neat, right?<\/p>"},"id":"05473c53-831a-4ba8-ba3e-cfada298a298","isHidden":false,"type":"text"}]
+
+----
+
+Cover: 
+
+----
+
+Date: 2022-01-21 00:00:00
+
+----
+
+Author:
+
+- dNW51RqB
+
+----
+
+Tags: Tools

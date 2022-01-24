@@ -49,6 +49,10 @@ a {
   text-decoration-color: #f0c674;
   text-decoration-thickness: 2px;
 }
+.note-excerpt-text {
+  display: inline-block;
+  width: 100%;
+}
 p {
   margin: 1rem 0;
 }
@@ -430,6 +434,11 @@ hr {
 }
 .note-excerpt-date {
   color: var(--color-text-grey);
+  display: inline-block;
+  width: 100%;
+  font-size: 0.8rem;
+  letter-spacing: -0.03rem;
+  text-transform: uppercase;
 }
 
 .subheadline {

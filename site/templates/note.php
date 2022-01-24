@@ -23,11 +23,11 @@
 ?>
 <?php snippet('header') ?>
 
-<?php if ($cover = $page->cover()): ?>
+<!-- <?php if ($cover = $page->cover()): ?>
 <a href="<?= $cover->url() ?>" data-lightbox class="img" style="--w:2; --h:1">
   <?= $cover->crop(1200, 600) ?>
 </a>
-<?php endif ?>
+<?php endif ?> -->
 
 <article class="note">
   <header class="note-header h1">

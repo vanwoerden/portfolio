@@ -1,4 +1,4 @@
-Title: Illegal analytics
+Title: Illegal analytics Copy
 
 ----
 
@@ -6,9 +6,7 @@ Text: [{"content":{"level":"h2","text":"What it does"},"id":"74ea2f2e-e5d4-4930-
 
 ----
 
-Cover:
-
-- screen-shot-2022-01-21-at-9.43.09-pm.png
+Cover: - screen-shot-2022-01-21-at-9.43.09-pm.png
 
 ----
 
@@ -16,9 +14,7 @@ Date: 2022-01-21 00:00:00
 
 ----
 
-Author:
-
-- dNW51RqB
+Author: - dNW51RqB
 
 ----
 

@@ -19,7 +19,7 @@ body {
 }
 
 a, a:hover, a:visited {
-    color: yellow;
+    color: rgb(240, 78, 255);
     text-decoration: underline;
 }
 

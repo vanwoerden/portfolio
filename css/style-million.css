@@ -1,0 +1,104 @@
+@font-face {
+    font-family: Henrietta Regular;
+    src: url('../fonts/VCHenrietta-Regular.woff2') format('woff2'), 
+      url('../fonts/VCHenrietta-Regular.woff') format('woff');
+  }
+
+
+html {
+    background: #000;
+    color: #fff;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Henrietta Regular";
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+a, a:hover, a:visited {
+    color: yellow;
+    text-decoration: underline;
+}
+
+.container {
+    /* display: flex; */
+    margin: 0 auto;
+    /* margin-top: 15%; */
+}
+
+.million {
+    font-size: 23rem;
+    font-weight: normal;
+    /* text-transform: uppercase; */
+    padding: 0;
+    padding-right: 0.1rem;
+    margin: 0;
+    line-height: 15rem;
+    line-height: clamp(7rem, 22vmin, 18rem);
+    letter-spacing: -0.1rem;
+    /* border: 1px solid white; */
+
+    --bg-size: 400%;
+    --color-one: rgb(255, 116, 243);
+    --color-two: rgb(53, 117, 255);
+    --color-three: rgb(91, 240, 158);
+    font-size: clamp(3rem, 25vmin, 24rem);
+    background: linear-gradient(
+        90deg,
+        var(--color-one),
+        var(--color-two),
+        var(--color-three),
+        var(--color-two),
+        var(--color-one)
+    ) 0 0 / var(--bg-size) 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    animation: move-bg 36s infinite linear reverse;
+}
+
+@keyframes move-bg {
+    to {
+        background-position: var(--bg-size) 0;
+    }
+}
+
+.top-left, .bottom-right {
+    font-size: 2rem;
+    /* font-size: clamp(3rem, 25vmin, 24rem); */
+    font-size: clamp(0.5rem, 3.5vmin, 4rem);
+    font-weight: normal;
+}
+.top-left {
+    position: absolute;
+    margin-left: 0.6rem;
+    margin-top: 0.6em;
+    /* background: #333; */
+    width: fit-content;
+}
+
+.bottom-right {
+    display: flex;
+    justify-content: flex-end;
+    /* text-align: right; */
+    width: 100%;
+}
+
+p.subtitle {
+    font-size: 1.2rem;
+    font-weight: normal;
+    position: absolute;
+    bottom: 2rem;
+    letter-spacing: 0.02rem;
+    opacity: 0.6;
+    max-width: 520px;
+}
+
+p.designer {
+    margin: 0;
+    margin-top: -0.6rem;
+}

@@ -90,6 +90,7 @@ a, a:hover, a:visited {
 
 p.subtitle {
     font-size: 1.2rem;
+    font-size: clamp(0.5rem, 3.5vmin, 1.5rem);
     font-weight: normal;
     position: absolute;
     bottom: 2rem;

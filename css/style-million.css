@@ -4,17 +4,43 @@
       url('../fonts/VCHenrietta-Regular.woff') format('woff');
   }
 
+@font-face {
+  font-family: Franklin Gothic Book;
+  src: url('../fonts/FranklinGothicURW-Boo.woff') format('woff');
+}
+
+@font-face {
+  font-family: Tiempos Regular;
+  src: url('../fonts/TiemposText-Regular.woff2') format('woff2'), 
+    url('../fonts/TiemposText-Regular.woff') format('woff');
+}
+
+/* Colors */
+:root {
+  --yellow: yellow;
+  --green: lightgreen;
+  --pink: pink;
+  --blue: lightblue;
+  --orange: orange;
+  --very-light-yellow: rgb(255, 250, 224);
+  --very-light-yellow-darker: rgb(204, 199, 170);
+  --darkgray: rgb(29, 26, 35);
+  --darkblue: rgb(9, 8, 21);
+}
 
 html {
-    background: #000;
+    background: var(--darkblue) ;
     color: #fff;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-family: "Henrietta Regular";
 }
 
 body {
-    
+    margin: 0;
     min-height: 100vh;
+    line-height: 200%;
+    font-family: "Tiempos Regular", "Franklin Gothic Book", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--very-light-yellow);
 }
 
 a, a:hover, a:visited {
@@ -22,9 +48,151 @@ a, a:hover, a:visited {
     text-decoration: underline;
 }
 
+menu.menu {
+  margin: 0 !important;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding-inline-start: 0;
+    background: var(--darkblue);
+    width: 100%;
+    z-index: 999;
+}
+
+.menu > ol {
+  display: flex;
+  justify-content: center;
+}
+
+.menu > ol > li {
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 1rem;
+    /* background: black; */
+    color: rgb(170, 170, 170);
+    list-style: none;
+    padding: 0.3rem 0.5rem;
+}
+
+.menu > li.coming-soon {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* .menu > li.coming-soon:hover {
+  background: none;
+  color: white;
+} */
+
+.menu > ol > li:hover {
+    transition: 0.2s;
+    /* background:rgb(248, 169, 255); */
+    /* color: black; */
+}
+
+.menu > ol > li:focus {
+    background:rgb(53, 117, 255);
+    color: black;
+}
+
+.menu > ol > li > a {
+  color: var(--very-light-yellow);
+}
+
+.menu > li > a:hover {
+  color: white;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  padding: 2rem 0 1rem 0;
+  /* width: 820px; */
+  width: 75%;
+}
+
+.container-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  padding: 5rem 5rem 2rem 5rem;
+}
+
+.grid-container {
+  display: grid;
+}
+
+.header {
+  padding: 15rem 0 2rem 0;
+}
+
+.footer {
+  padding-bottom: 10rem;
+}
+
+section {
+  /* min-height: 100vh; */
+}
+
+.medium-width {
+  min-width: 65%;
+}
+
+.center {
+  /* display: flex;; */
+  /* align-items: center; */
+  margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
+
+h1 {
+  margin: 0;
+}
+
+h1.large, .large {
+  font-size: 5rem;
+  font-family: "Henrietta Regular";
+  color: var(--very-light-yellow);
+}
+
+h1.principle {
+  font-size: 4rem;
+  font-size: clamp(1.4rem, 5vw, 4rem);
+  font-family: "Henrietta Regular";
+  line-height: 100%;
+  color: var(--very-light-yellow-darker);
+  /* opacity: 0.7; */
+  /* max-width: 820px; */
+  transition: color 0.5s;
+  display: inline;
+}
+
+h1.principle:hover {
+  color: var(--very-light-yellow);
+  transition: all 0.2s;
+}
+
 h1.one-in-a-million {
     width: fit-content;
     padding-bottom: 10rem;
+    font-family: "Henrietta Regular";
 }
 
 h2 {
@@ -34,26 +202,64 @@ h2 {
     width: fit-content;
 }
 
+h3.subtitle {
+  font-size: 2rem;
+  color: orangered;
+  font-family: "Henrietta Regular";
+}
+
+ol {
+  list-style: none;
+}
+
+li::marker {
+  font-size: 4rem;
+  font-family: "Henrietta Regular";
+  color:#ffeeb167;
+}
+
+summary::marker {
+  margin-bottom: 1rem;
+  color: gray;
+}
+
+details > summary {
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+}
+
+details {
+  /* padding-bottom: 10rem; */
+}
+
+summary:hover {
+  cursor: pointer;
+}
+
+span.attention {
+  color:rgb(79, 246, 140);
+  opacity: 1;
+  /* text-decoration: underline dashed; */
+  /* border-bottom: 3px dashed rgb(79, 246, 140); */
+}
+
+.headshot-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+img.jobs-headshot {
+  width: 200px;
+  border-radius: 200px;
+  border: 2px solid rgba(255, 240, 209, 0.6);
+  background: rgba(255, 240, 209, 0.6);
+  margin-left: 2rem;
+}
+
 .emf {
     padding: 1rem 2rem;
     border: 3px dashed rgb(43, 160, 95);
     width: fit-content;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5rem 0 2rem 0;
-}
-
-.header {
-    padding: 15rem 0 2rem 0;
-}
-
-.footer {
-    padding-bottom: 10rem;
 }
 
 .million {
@@ -99,11 +305,12 @@ h2 {
     /* font-size: clamp(3rem, 25vmin, 24rem); */
     font-size: clamp(0.5rem, 3.5vmin, 4rem);
     font-weight: normal;
+    color: var(--very-light-yellow);
 }
 .top-left {
     position: absolute;
     margin-left: 0.6rem;
-    margin-top: 0.6em;
+    margin-top: 1.8rem;
     /* background: #333; */
     width: fit-content;
 }
@@ -113,19 +320,28 @@ h2 {
     justify-content: flex-end;
     /* text-align: right; */
     width: 100%;
+    margin-top: 0.4rem;
 }
 
-p.subtitle, p.text {
+p.subtitle, p.money-quote, p.text {
     font-size: 1.2rem;
-    font-size: clamp(0.5rem, 3.5vmin, 1.5rem);
+    font-size: clamp(0.5rem, 3.5vmin, 1.3rem);
     font-weight: normal;
-    letter-spacing: 0.02rem;
     opacity: 0.6;
-    max-width: 540px;
+    max-width: 800px;
+}
+
+p.money-quote {
+  opacity: 0.9;
+  font-weight: 500;
+  /* font-size: 1.4rem; */
+  line-height: 140%;
+  font-size: clamp(1rem, 2vw, 2rem);
+  padding-bottom: clamp(2rem, 2vw, 15rem);
 }
 
 p.subtitle {
-    padding-bottom: 18rem;
+    /* padding-bottom: 18rem; */
 }
 
 p.text {
@@ -136,3 +352,499 @@ p.designer {
     margin: 0;
     margin-top: -0.6rem;
 }
+
+.quote {
+  /* font-style: italic; */
+}
+
+/* Sections */
+#one-in-a-million {
+  /* padding: 15rem 0 2rem 0; */
+  background:rgb(9, 8, 21);
+  color: rgb(206, 217, 255);
+}
+
+#teams-should-start-together {
+
+}
+
+.discipline-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4px;
+}
+
+.discipline-label {
+  margin-right: 12px;
+  min-width: 100px;
+  text-align: right;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: row;
+}
+
+.block {
+  width: 20px;
+  height: 20px;
+  background:rgb(37, 19, 34);
+  border: 1px solid #000000;
+  text-align: center;
+  color: #555555;
+}
+
+.project-a {
+  background: var(--yellow);
+  color: black;
+  border: 1px solid black;
+}
+
+.project-b {
+  background: var(--pink);
+  color: black;
+  border: 1px solid black;
+}
+
+.project-c {
+  background: var(--orange);
+  color: black;
+  border: 1px solid black;
+}
+
+.handoff {
+  background: rgb(246, 213, 79);
+  color: black;
+  border: 1px solid black;
+  background: linear-gradient(to bottom left, var(--pink) 50%, var(--yellow) 50%);
+}
+
+.handoff-mirrored {
+  background: rgb(246, 213, 79);
+  color: black;
+  border: 1px solid black;
+  background: linear-gradient(to bottom left, rgb(255, 255, 113) 50%, rgb(79, 246, 140) 50%);
+}
+
+.zero-one {
+  background: linear-gradient(to bottom left, var(--yellow) 50%, var(--darkgray)50% );
+}
+
+.a-b {
+  /* background: linear-gradient(to bottom left, var(--yellow) 50%, var(--darkgray)50% ); */
+}
+
+.b-c {
+  background: linear-gradient(to bottom left, var(--orange) 50%, var(--pink)50% );
+}
+
+.context-switching {
+  background: rgb(246, 79, 98);
+  color: black;
+  border: 1px solid black;
+}
+
+.timeline {
+  margin-bottom: 8px;
+}
+
+#learn-build-measure {
+  
+}
+
+#bml-container {
+  /* border: 1px dashed #777; */
+  width: 12em;
+  height: 12em;
+  border-radius: 10em;
+  margin-top: 6em;
+}
+
+.bml {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10em;
+  border: 1px solid rgb(125, 125, 125);
+  text-align: center;
+  width: 5em;
+  height: 5em;
+  position: absolute;
+  font-size: 1.2rem;
+  /* transition: all 0.4s; */
+}
+
+.bml-title {
+  font-size: 2rem;
+}
+
+.number {
+  width: 18px;
+  height: 18px;
+  border-radius: 10px;
+  background: yellow;
+  color: black;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 0.2rem;
+}
+
+#build {
+  margin-left: 2.5em;
+  margin-top: -3.5em;
+}
+
+#measure {
+  margin-top: 5.5em;
+  margin-left: 7.5em;
+}
+
+#learn {
+  margin-top: 5.5em;
+  margin-left: -2.5em;
+}
+
+#reset {
+  transition: all 0.2s;
+}
+
+span.fake-link {
+  color: rgb(240, 78, 255);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+span.reset {
+  color: rgb(86, 86, 86);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.rotated {
+  transform: rotate(120deg);
+  transition: all 0.4s;
+}
+
+.rotated-element {
+  transform: rotate(-120deg);
+  transition: all 0.4s;
+}
+
+#designers-should-code {
+  /* background: rgb(37, 19, 34); */
+  font-family: "Henrietta Regular";
+}
+
+#designers-code-container > label {
+  cursor: pointer;
+  color: var(--green);
+  position: absolute;
+  margin-top: 0.1rem;
+  margin-left: 0.4rem;
+}
+
+#designers-code {
+  cursor: pointer;
+}
+
+input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* end Sections */
+
+
+
+/* toggles */
+
+  
+  form {
+    padding: 1em 2em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  fieldset {
+    margin: 1em;
+    flex: 1 0 10em;
+  }
+  
+  fieldset.toggles div {
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  fieldset.toggles > div {
+    margin: 1.5em 0;
+  }
+  
+  fieldset.toggles > div:first-of-type {
+    margin-top: 1em;
+  }
+  
+  fieldset.toggles > div:last-of-type {
+    margin-bottom: 1em;
+  }
+  
+  fieldset {
+    border: none;
+  }
+  
+  .toggles [disabled] + label,
+  .toggles [disabled]:hover + label {
+    color: #999;
+  }
+  
+  .toggles [type="checkbox"] {
+    position: absolute;
+    top: auto;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    white-space: nowrap;
+  }
+  
+  .toggles [type="checkbox"] + label {
+    display: block;
+    position: relative;
+    padding: 0.5em;
+    padding-left: 4em;
+    max-width: calc(100% - 2em);
+  }
+  
+  .toggles [type="checkbox"]:focus + label,
+  .toggles [type="checkbox"]:hover + label {
+    color: #00f;
+  }
+  
+  .toggles [type="checkbox"]:focus + label::before,
+  .toggles [type="checkbox"]:hover + label::before {
+    box-shadow: 0 0 0.5em #333;
+  }
+  
+  .toggles [type="checkbox"]:focus + label::after,
+  .toggles [type="checkbox"]:hover + label::after {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50' fill='rgba(0,0,0,.25)'/%3E%3C/svg%3E");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  
+  .toggles [type="checkbox"] + label::before,
+  .toggles [type="checkbox"] + label::after {
+    content: "";
+    position: absolute;
+    height: 1.5em;
+    transition: all 0.25s ease;
+  }
+  
+  .toggles [type="checkbox"] + label::before {
+    left: 0;
+    top: 0.2em;
+    width: 3em;
+    border: 0.2em solid #767676;
+    background: #767676;
+    border-radius: 1.1em;
+  }
+  
+  .toggles [type="checkbox"] + label::after {
+    left: 0;
+    top: 0.25em;
+    background-color: #fff;
+    background-position: center center;
+    border-radius: 50%;
+    width: 1.5em;
+    border: 0.15em solid #767676;
+  }
+  
+  .toggles [type="checkbox"]:checked + label::after {
+    left: 1.6em;
+    border-color: #36a829;
+    color: #36a829;
+  }
+  
+  .toggles [type="checkbox"]:indeterminate + label::after {
+    left: 0.8em;
+  }
+  
+  .toggles [type="checkbox"]:indeterminate + label::before {
+    background-color: #ddd;
+  }
+  
+  .toggles [type="checkbox"]:checked + label::before {
+    background-color: #36a829;
+    border-color: #36a829;
+  }
+  
+  .toggles [type="checkbox"][disabled] + label::before {
+    background-color: transparent;
+    border-color: #ddd;
+  }
+  
+  .toggles [type="checkbox"][disabled] + label::after {
+    border-color: #ddd;
+  }
+  
+  .toggles [disabled]:hover + label {
+    color: #999; /* case for CSS custom property if not supporting IE/Edge */
+  }
+  
+  .toggles [type="checkbox"][disabled]:hover + label::before {
+    box-shadow: none;
+  }
+  
+  .toggles [type="checkbox"][disabled]:hover + label::after {
+    background-image: none;
+  }
+  
+  /* Put toggles on the right like the iOS the kids like */
+  
+  .toggles.flip [type="checkbox"] + label::before,
+  .toggles.flip [type="checkbox"] + label::after {
+    left: auto;
+    right: 0;
+  }
+  
+  .toggles.flip [type="checkbox"] + label::after {
+    left: auto;
+    right: 1.6em;
+  }
+  
+  .toggles.flip [type="checkbox"]:checked + label::after {
+    right: 0;
+  }
+  
+  .toggles.flip [type="checkbox"]:indeterminate + label::after {
+    right: 0.8em;
+  }
+  
+  .toggles.flip [type="checkbox"] + label {
+    padding-left: 0;
+    padding-right: 4em;
+  }
+  
+  /* Windows High Contrast Mode Support */
+  @media screen and (-ms-high-contrast: active) {
+    .toggles [type="checkbox"]:focus + label::before,
+    .toggles [type="checkbox"]:hover + label::before {
+      outline: 1px dotted windowText;
+      outline-offset: 0.25em;
+    }
+    .toggles [type="checkbox"] + label::after {
+      background-color: windowText;
+    }
+    .toggles [type="checkbox"][disabled] + label::after {
+      background-color: transparent;
+    }
+  }
+  
+  /* Reduced motion */
+  @media screen and (prefers-reduced-motion: reduce) {
+    .toggles [type="checkbox"] + label::before,
+    .toggles [type="checkbox"] + label::after {
+      transition: none;
+    }
+  }
+  
+  /* Dark mode */
+  @media screen and (prefers-color-scheme: dark) {
+    form {
+      
+    }
+    .toggles {
+      /* color: #fff; */
+    }
+    fieldset {
+      border: none;
+    }
+    .toggles [type="checkbox"]:focus + label,
+    .toggles [type="checkbox"]:hover + label {
+      color: #99f;
+    }
+    .toggles [type="checkbox"] + label::before {
+      border-color: #808080;
+      background: #808080;
+    }
+    .toggles [type="checkbox"] + label::after {
+      background-color: #101010;
+    }
+    .toggles [type="checkbox"]:not([disabled]):indeterminate + label::before {
+      background-color: #444;
+    }
+    .toggles [type="checkbox"]:focus + label::after,
+    .toggles [type="checkbox"]:hover + label::after {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50' fill='rgba(255,255,255,.25)'/%3E%3C/svg%3E");
+    }
+    .toggles [type="checkbox"][disabled] + label::before,
+    .toggles [type="checkbox"][disabled] + label::after {
+      border-color: #555;
+    }
+  }
+  
+  /* RTL */
+  /* https://twitter.com/dror3go/status/1102946375396982784 */
+  *[dir="rtl"] .toggles [type="checkbox"] + label {
+    padding-left: 0;
+    padding-right: 4em;
+  }
+  
+  *[dir="rtl"] .toggles [type="checkbox"] + label::before,
+  *[dir="rtl"] .toggles [type="checkbox"] + label::after {
+    left: auto;
+    right: 0;
+  }
+  
+  *[dir="rtl"] .toggles [type="checkbox"] + label::after {
+    right: 0;
+  }
+  
+  *[dir="rtl"] .toggles [type="checkbox"]:checked + label::after {
+    right: 1.6em;
+  }
+  
+  *[dir="rtl"] .toggles [type="checkbox"]:indeterminate + label::after {
+    right: 0.8em;
+  }
+  
+  /* Put toggles on the right like the iOS the kids like */
+  
+  *[dir="rtl"] .toggles.flip [type="checkbox"] + label::before,
+  *[dir="rtl"] .toggles.flip [type="checkbox"] + label::after {
+    left: 0;
+    right: auto;
+  }
+  
+  *[dir="rtl"] .toggles.flip [type="checkbox"] + label::after {
+    right: auto;
+    left: 1.6em;
+  }
+  
+  *[dir="rtl"] .toggles.flip [type="checkbox"]:checked + label::after {
+    left: 0;
+  }
+  
+  *[dir="rtl"] .toggles.flip [type="checkbox"]:indeterminate + label::after {
+    left: 0.8em;
+  }
+  
+  *[dir="rtl"] .toggles.flip [type="checkbox"] + label {
+    padding-right: 0;
+    padding-left: 4em;
+  }
+  
+  /* Print styles */
+  @media print {
+    .toggles [type="checkbox"] + label::before,
+    .toggles [type="checkbox"] + label::after,
+    .toggles [type="checkbox"][disabled] + label {
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+    }
+  }
+/* end toggles */

@@ -12,6 +12,21 @@ body {
   font-family: "FranklinGothicURW-Boo", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   margin: 0;
 }
+
+/* Colors */
+:root {
+  --yellow: yellow;
+  --green: lightgreen;
+  --pink: pink;
+  --blue: lightblue;
+  --orange: orange;
+  --very-light-yellow: rgb(255, 250, 224);
+  --very-light-yellow-darker: rgb(204, 199, 170);
+  --very-light-yellow-darkest: rgb(86, 83, 66);
+  --darkgray: rgb(29, 26, 35);
+  --darkblue: rgb(9, 8, 21);
+}
+
 .line {
   /*height: 400px;*/
   width: 100%;
@@ -40,10 +55,16 @@ body {
     padding: 0 40px;
 }
 .container-600 {
-    min-width: 600px;
+    /* min-width: 600px; */
     max-width: 600px;
-    padding-right: 4em;
+    /* padding-right: 4em; */
+    padding: 4rem 0 2rem 0;
 }
+
+.container-600.last {
+  padding-bottom: 4rem;
+}
+
 .extra-pad {
   padding-right: 8em;
   padding-top: 6em;
@@ -70,6 +91,12 @@ body {
 .aside img {
   width: 100%;
 }
+
+img.likes {
+  width: 600px;
+  border-radius: 2rem;
+}
+
 .padding-top-7 {
   padding-top: 7em;
 }
@@ -103,6 +130,10 @@ path.you-are-here {
    flex-wrap: wrap;
    /*justify-content: center;*/
    align-items: flex-start;
+   gap: 0 6rem;
+}
+.flex.align-center {
+  align-items: center;
 }
 .column {
    padding-top: 5%;
@@ -173,7 +204,7 @@ h1.non-front-page {
 h2 {
    font-family: 'TiemposHeadline-Medium';
    font-size: 2.8em;
-   margin: 1em 0 0.3em 0;
+   /* margin: 2em 0 1.3em 0; */
 }
 h3 {
     font-size: 2em;
@@ -182,12 +213,44 @@ h3 {
     letter-spacing: -0.02em;
     margin: 1em 0 0.2em;
 }
+
+span.like-number {
+    font-size: 1.3rem;
+    font-family: 'FranklinGothicURW-Boo';
+    letter-spacing: 0.02rem;
+    padding: 0.8rem 1rem 0.5rem 1rem;
+    background: var(--very-light-yellow-darker);
+    border-radius: 5rem;
+    margin-bottom: 2rem;
+    color: var(--darkblue);
+}
+
+header {
+  
+}
+
+h3.likes {
+  font-family: "Henrietta Regular";
+  /* opacity: 0.5; */
+  padding-top: 4rem;
+  font-size: 1.6rem;
+}
+
 details summary {
   margin: 0.4em 0 0.2em 0;
   font-size: 1.4em;
   cursor: pointer;
   text-decoration: underline #ccc;
 }
+
+.dataviz {
+  padding: 1rem 0 2rem 0;
+}
+
+.dataviz > h3 {
+  padding: 0 0 1rem 0;
+}
+
 @-moz-document url-prefix(){
     h1, h2, h3 {
         letter-spacing: -0.04em;
@@ -441,6 +504,7 @@ blockquote {
   align-items: flex-start;
   justify-content: center;
 }
+
 .flex-user-quote {
   display: flex;
   flex-direction: column;
@@ -715,15 +779,17 @@ span.code {
     margin-bottom: 4em;
   }
   .container-full {
-    padding: 0;
+    padding: 0 20px;
+    width: 100%;
   }
   .container-1200 {
     /*width: 100%;*/
   }
   .container-600, .container-900 {
     max-width: 100%;
-    min-width: 100px;
-    padding: 0 20px;
+    /* min-width: 100px; */
+    width: 100%;
+    padding: 0;
   }
   .flex-reverse {
     display: flex;
@@ -736,6 +802,9 @@ span.code {
     max-width: 100%;
     width: 100%;
     min-width: 100%;
+  }
+  img.likes {
+    width: 100%;
   }
   details summary {
     font-size: 1.2em;
@@ -824,7 +893,7 @@ footer {
  */
 @media (prefers-color-scheme: dark) {
   body, html.gray {
-    background: #2C2835;
+    background: var(--darkblue);
     color: #EDEAEA;
   }
   a, a:visited, a.simple, a.green, a.orange, a.yellow, a.pink, a.blue, span.green, span.orange, span.pink, span.blue {

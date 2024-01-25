@@ -172,6 +172,12 @@ h1.large, .large {
   color: var(--very-light-yellow);
 }
 
+h1.likes {
+  font-size: 7rem;
+  line-height: 90%;
+  padding-bottom: 2rem;
+}
+
 h1.principle {
   font-size: 4rem;
   font-size: clamp(1.4rem, 5vw, 4rem);
@@ -196,9 +202,10 @@ h1.one-in-a-million {
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 3rem;
     /* padding: 1rem 2rem;
     border: 3px dashed rgb(43, 160, 95); */
+    font-family: 'Henrietta Regular';
     width: fit-content;
 }
 
@@ -240,6 +247,16 @@ span.attention {
   opacity: 1;
   /* text-decoration: underline dashed; */
   /* border-bottom: 3px dashed rgb(79, 246, 140); */
+}
+
+footer {
+  margin-top: 4rem;
+  border-top: 1px dashed var(--very-light-yellow-darkest);
+}
+
+.meta {
+  font-size: 1.6rem;
+  padding: 4rem 0;
 }
 
 .headshot-container {

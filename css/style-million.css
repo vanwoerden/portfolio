@@ -48,6 +48,11 @@ a, a:hover, a:visited {
     text-decoration: underline;
 }
 
+figcaption > a, a:hover, a:visited {
+  color: var(--orange);
+  text-decoration: none;
+}
+
 menu.menu {
   margin: 0 !important;
 }

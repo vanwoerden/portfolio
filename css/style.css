@@ -58,7 +58,7 @@ body {
     /* min-width: 600px; */
     max-width: 600px;
     /* padding-right: 4em; */
-    padding: 4rem 0 2rem 0;
+    padding: 2rem 0 0.4rem 0;
 }
 
 .container-600.last {
@@ -163,7 +163,7 @@ p, ol, ul {
    padding-top: 0.5em;
    padding-bottom: 0.5em;
    font-size: 1.7em;
-   line-height: 1.4em;
+   line-height: 1.5em;
    margin: 0;
 }
 p.smaller {
@@ -208,18 +208,19 @@ h2 {
 }
 h3 {
     font-size: 2em;
-    font-family: 'TiemposHeadline-Medium';
+    font-family: 'Henrietta Regular';
+    letter-spacing: 0.05rem;
     line-height: 1.2em;
     letter-spacing: -0.02em;
     margin: 1em 0 0.2em;
 }
 
 span.like-number {
-    font-size: 1.3rem;
-    font-family: 'FranklinGothicURW-Boo';
-    letter-spacing: 0.02rem;
-    padding: 0.8rem 1rem 0.5rem 1rem;
-    background: var(--very-light-yellow-darker);
+    font-size: 1.2rem;
+    font-family: 'Henrietta Regular';
+    letter-spacing: 0.08rem;
+    padding: 0.4rem 1rem 0.5rem 1rem;
+    background: var(--very-light-yellow);
     border-radius: 5rem;
     margin-bottom: 2rem;
     color: var(--darkblue);
@@ -232,7 +233,7 @@ header {
 h3.likes {
   font-family: "Henrietta Regular";
   /* opacity: 0.5; */
-  padding-top: 4rem;
+  padding-top: 8rem;
   font-size: 1.6rem;
 }
 
@@ -268,10 +269,16 @@ details summary {
     }
 }
 
+figure {
+  margin: 0;
+  padding: 0;
+}
+
 figcaption {
   font-size: 1.2em;
   padding: 0.2em;
-  color: #555;
+  line-height: 140%;
+  /* color: #555; */
   /* white-space: nowrap; */
 }
 ul {
@@ -498,6 +505,30 @@ blockquote {
     line-height: 1.3em;
     display: contents;
 }
+
+blockquote.likes {
+  font-size: 1.8rem;
+  margin: 2rem 0;
+  padding: 0rem 0 0 2rem;
+  display: block;
+  border-left: 2px solid var(--very-light-yellow);
+}
+
+a.likes {
+  color: var(--orange);
+  text-decoration: none;
+}
+
+details > summary.likes {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: var(--very-light-yellow-darker);
+}
+
+details > p {
+  font-size: 1.2rem;
+}
+
 .flex-center {
   display: flex;
   flex-direction: row;
@@ -766,7 +797,7 @@ span.code {
   background-size: cover; */
 }
 
-@media (max-width: 840px) {
+@media (max-width: 640px) {
   html {
     width: 100%;
   }
@@ -789,7 +820,7 @@ span.code {
     max-width: 100%;
     /* min-width: 100px; */
     width: 100%;
-    padding: 0;
+    /* padding: 0; */
   }
   .flex-reverse {
     display: flex;
@@ -926,8 +957,10 @@ footer {
     /* border: 3px solid #424097; */
     color: #ccc;
   }
+
   figcaption {
-    color: #f5f5f5;
+    color: var(--very-light-yellow);
+    line-height: 140%;
   }
   #airplane {
     filter: invert(1);

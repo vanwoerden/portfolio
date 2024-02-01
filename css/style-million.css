@@ -181,6 +181,7 @@ h1.likes {
   font-size: 7rem;
   line-height: 90%;
   padding-bottom: 2rem;
+  word-break: break-word;
 }
 
 h1.principle {

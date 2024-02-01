@@ -230,6 +230,14 @@ li::marker {
   color:#ffeeb167;
 }
 
+ul.likes > li::marker {
+  font-size: 2rem;
+}
+
+ul.likes > li {
+  padding: 0;
+}
+
 summary::marker {
   margin-bottom: 1rem;
   color: gray;
@@ -262,6 +270,7 @@ footer {
 .meta {
   font-size: 1.6rem;
   padding: 4rem 0;
+  opacity: 0.65;
 }
 
 .headshot-container {

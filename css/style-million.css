@@ -124,7 +124,7 @@ menu.menu {
   flex-direction: column;
   /* justify-content: center; */
   /* align-items: center; */
-  padding: 2rem 0 1rem 0;
+  padding: 1rem 0 0.5rem 0;
   /* width: 820px; */
   width: 75%;
 }
@@ -151,6 +151,10 @@ menu.menu {
 
 section {
   /* min-height: 100vh; */
+}
+
+#last-million {
+  padding-top: 12rem;
 }
 
 .medium-width {
@@ -185,8 +189,8 @@ h1.likes {
 }
 
 h1.principle {
-  font-size: 4rem;
-  font-size: clamp(1.4rem, 5vw, 4rem);
+  font-size: 3.2rem;
+  /* font-size: clamp(1.4rem, 5vw, 4rem); */
   font-family: "Henrietta Regular";
   line-height: 100%;
   color: var(--very-light-yellow-darker);
@@ -204,6 +208,7 @@ h1.principle:hover {
 h1.one-in-a-million {
     width: fit-content;
     padding-bottom: 10rem;
+    padding-top: 6rem;
     font-family: "Henrietta Regular";
 }
 
@@ -240,12 +245,45 @@ ul.likes > li {
 }
 
 summary::marker {
-  margin-bottom: 1rem;
-  color: gray;
+  /* list-style: none; */
 }
 
 details > summary {
-  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  font-size: 3rem;
+  /* list-style: none; */
+  list-style-position: outside;
+  list-style-type: none;
+
+}
+
+details > summary::before {
+
+}
+
+summary::before {
+  content: '›';
+  
+  position: absolute;
+  margin-left: -1.4rem;
+  margin-top: 0.6rem;
+  /* content: ' ►';
+  vertical-align: middle;
+  margin-bottom: 1rem;
+  
+  text-align: center;
+  display: inline-flex;
+  padding-right: 0.6rem;
+  position: absolute;
+  margin-left: -1.7rem;
+  margin-top: clamp(0.7rem, 0, 1.2rem); */
+  color: var(--very-light-yellow);
+  color: var(--very-light-yellow-darker);
+}
+details[open] summary:before {
+  content: "⌄";
+  margin-left: -2rem;
+  margin-top: 0.2rem;
+  font-size: 2.2rem;
 }
 
 details {
@@ -261,6 +299,11 @@ span.attention {
   opacity: 1;
   /* text-decoration: underline dashed; */
   /* border-bottom: 3px dashed rgb(79, 246, 140); */
+}
+
+span.nermal {
+  /* display: none; */
+  /* opacity: 0.15; */
 }
 
 footer {
@@ -368,8 +411,10 @@ p.money-quote {
   font-weight: 500;
   /* font-size: 1.4rem; */
   line-height: 140%;
-  font-size: clamp(1rem, 2vw, 2rem);
-  padding-bottom: clamp(2rem, 2vw, 15rem);
+  /* font-size: clamp(1rem, 2vw, 2rem); */
+  font-size: 1.5rem;
+  /* padding-bottom: clamp(0.1rem, 2vw, 4rem); */
+  text-wrap: pretty;
 }
 
 p.subtitle {
@@ -697,8 +742,8 @@ input[type='checkbox'] {
   
   .toggles [type="checkbox"]:checked + label::after {
     left: 1.6em;
-    border-color: #36a829;
-    color: #36a829;
+    border-color: rgb(79, 246, 140);
+    color: rgb(79, 246, 140);
   }
   
   .toggles [type="checkbox"]:indeterminate + label::after {
@@ -710,8 +755,8 @@ input[type='checkbox'] {
   }
   
   .toggles [type="checkbox"]:checked + label::before {
-    background-color: #36a829;
-    border-color: #36a829;
+    background-color: rgb(79, 246, 140);
+    border-color: rgb(79, 246, 140);
   }
   
   .toggles [type="checkbox"][disabled] + label::before {

@@ -205,6 +205,7 @@ h2 {
    font-family: 'TiemposHeadline-Medium';
    font-size: 2.8em;
    /* margin: 2em 0 1.3em 0; */
+   line-height: 2.8rem;
 }
 h3 {
     font-size: 2em;
@@ -250,6 +251,16 @@ details summary {
 
 .dataviz > h3 {
   padding: 0 0 1rem 0;
+}
+
+select {
+  /* appearance: none; */
+  background: var(--darkblue);
+  color: var(--very-light-yellow);
+  font-family: "Tiempos Text";
+  font-size: 1.7rem;
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.3rem;
 }
 
 @-moz-document url-prefix(){

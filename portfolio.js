@@ -35,6 +35,24 @@
         timeToggle.checked = false;
     }
 
+    function tldr() {
+        var tldrToggle = document.getElementById("tldr");
+        console.log("tldr " + tldrToggle.checked);
+
+        if(tldrToggle.checked) {
+            const elements = document.querySelectorAll(".nermal");
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].classList.add("hidden");
+            }
+        } else {
+            const elements = document.querySelectorAll(".nermal");
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].classList.remove("hidden");
+            }
+        }
+        
+    }
+
     var rotated = false;
     function rotateBML() {
         console.log("rotateBML");

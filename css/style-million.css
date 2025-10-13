@@ -24,6 +24,7 @@
   --orange: orange;
   --very-light-yellow: rgb(255, 250, 224);
   --very-light-yellow-darker: rgb(204, 199, 170);
+  --very-light-yellow-darkest: rgb(118, 115, 93);
   --darkgray: rgb(29, 26, 35);
   --darkblue: rgb(9, 8, 21);
 }
@@ -39,13 +40,20 @@ body {
     margin: 0;
     min-height: 100vh;
     line-height: 200%;
-    font-family: "Tiempos Regular", "Franklin Gothic Book", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Kumbh Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* font-family: "Tiempos Regular", "Franklin Gothic Book", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
     color: var(--very-light-yellow);
 }
 
 a, a:hover, a:visited {
     color: rgb(240, 78, 255);
     text-decoration: underline;
+}
+.nav-link {
+  text-decoration: none;
+}
+.nav-link:hover {
+  text-decoration: underline;
 }
 
 figcaption > a, a:hover, a:visited {
@@ -80,7 +88,7 @@ menu.menu {
     /* background: black; */
     color: rgb(170, 170, 170);
     list-style: none;
-    padding: 0.3rem 0.5rem;
+    padding: 0.3rem 0.2rem 0.3rem 0;
 }
 
 .menu > li.coming-soon {
@@ -193,7 +201,7 @@ h1.principle {
   /* font-size: clamp(1.4rem, 5vw, 4rem); */
   font-family: "Henrietta Regular";
   line-height: 100%;
-  color: var(--very-light-yellow-darker);
+  color: var(--very-light-yellow-darkest);
   /* opacity: 0.7; */
   /* max-width: 820px; */
   transition: color 0.5s;
@@ -261,11 +269,12 @@ details > summary::before {
 }
 
 summary::before {
-  content: '›';
+  content: '▸';
   
   position: absolute;
   margin-left: -1.4rem;
-  margin-top: 0.6rem;
+  margin-top: 0.8rem;
+  font-size: 2.2rem;
   /* content: ' ►';
   vertical-align: middle;
   margin-bottom: 1rem;
@@ -280,9 +289,9 @@ summary::before {
   color: var(--very-light-yellow-darker);
 }
 details[open] summary:before {
-  content: "⌄";
-  margin-left: -2rem;
-  margin-top: 0.2rem;
+  content: "▾";
+  margin-left: -1.4rem;
+  margin-top: 0.8rem;
   font-size: 2.2rem;
 }
 
@@ -303,7 +312,9 @@ span.attention {
 
 span.nermal {
   /* display: none; */
-  /* opacity: 0.15; */
+  /* opacity: 0.45; */
+  /* color: transparent; */
+  /* -webkit-text-stroke: 0.2px var(--very-light-yellow); */
 }
 
 footer {
@@ -338,22 +349,22 @@ img.jobs-headshot {
 }
 
 .million {
-    font-size: 23rem;
+    font-size: 25vw;
     font-weight: normal;
     /* text-transform: uppercase; */
     padding: 0;
     padding-right: 0.1rem;
     margin: 0;
-    line-height: 15rem;
-    line-height: clamp(7rem, 22vmin, 18rem);
+    line-height: 90%;
+    /* line-height: clamp(7rem, 22vmin, 18rem); */
     letter-spacing: -0.1rem;
     /* border: 1px solid white; */
 
     --bg-size: 400%;
     --color-one: rgb(255, 116, 243);
     --color-two: rgb(53, 117, 255);
-    --color-three: rgb(91, 240, 158);
-    font-size: clamp(3rem, 25vmin, 24rem);
+    --color-three: var(--very-light-yellow);
+    /* font-size: clamp(3rem, 25vmin, 24rem); */
     background: linear-gradient(
         90deg,
         var(--color-one),
@@ -366,7 +377,8 @@ img.jobs-headshot {
     background-clip: text;
     -webkit-background-clip: text;
 
-    animation: move-bg 36s infinite linear reverse;
+    animation: move-bg 24s infinite linear reverse;
+    -webkit-text-stroke: 1px rgba(134, 193, 255, 0.531);
 }
 
 @keyframes move-bg {
@@ -376,16 +388,19 @@ img.jobs-headshot {
 }
 
 .top-left, .bottom-right {
-    font-size: 2rem;
+    font-size: 3.5dvw;
     /* font-size: clamp(3rem, 25vmin, 24rem); */
-    font-size: clamp(0.5rem, 3.5vmin, 4rem);
+    /* font-size: clamp(0.5rem, 3.5vmin, 4rem); */
     font-weight: normal;
     color: var(--very-light-yellow);
+    /* border: 1px solid white; */
+    line-height: 90%;;
 }
 .top-left {
     position: absolute;
-    margin-left: 0.6rem;
-    margin-top: 1.8rem;
+    margin-left: 1%;
+    margin-top: 3.2vw;
+    /* margin-top: clamp(0.8rem, 1.5rem, 1.8rem); */
     /* background: #333; */
     width: fit-content;
 }
@@ -399,20 +414,20 @@ img.jobs-headshot {
 }
 
 p.subtitle, p.money-quote, p.text {
-    font-size: 1.2rem;
+    line-height: 120%;
     font-size: clamp(0.5rem, 3.5vmin, 1.3rem);
     font-weight: normal;
     opacity: 0.6;
-    max-width: 800px;
+    max-width: 660px;
 }
 
 p.money-quote {
   opacity: 0.9;
-  font-weight: 500;
+  font-weight: 400;
   /* font-size: 1.4rem; */
   line-height: 140%;
   /* font-size: clamp(1rem, 2vw, 2rem); */
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   /* padding-bottom: clamp(0.1rem, 2vw, 4rem); */
   text-wrap: pretty;
 }
@@ -448,18 +463,20 @@ p.designer {
 .discipline-container {
   display: flex;
   flex-direction: row;
-  margin-top: 4px;
+  /* margin-top: 4px; */
 }
 
 .discipline-label {
   margin-right: 12px;
   min-width: 100px;
   text-align: right;
+  line-height: 100%
 }
 
 .blocks {
   display: flex;
   flex-direction: row;
+  line-height: 100%
 }
 
 .block {
@@ -468,11 +485,13 @@ p.designer {
   background:rgb(37, 19, 34);
   border: 1px solid #000000;
   text-align: center;
+  line-height: 22px;
+  font-size: 0.8rem;
   color: #555555;
 }
 
 .project-a {
-  background: var(--yellow);
+  background: var(--green);
   color: black;
   border: 1px solid black;
 }
@@ -493,7 +512,7 @@ p.designer {
   background: rgb(246, 213, 79);
   color: black;
   border: 1px solid black;
-  background: linear-gradient(to bottom left, var(--pink) 50%, var(--yellow) 50%);
+  background: linear-gradient(to bottom left, var(--pink) 50%, var(--green) 50%);
 }
 
 .handoff-mirrored {
@@ -504,7 +523,7 @@ p.designer {
 }
 
 .zero-one {
-  background: linear-gradient(to bottom left, var(--yellow) 50%, var(--darkgray)50% );
+  background: linear-gradient(to bottom left, var(--green) 50%, var(--darkgray)50% );
 }
 
 .a-b {

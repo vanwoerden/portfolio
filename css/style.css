@@ -162,7 +162,7 @@ path.you-are-here {
 p, ol, ul {
    padding-top: 0.5em;
    padding-bottom: 0.5em;
-   font-size: 1.7em;
+   font-size: 1.6em;
    line-height: 1.5em;
    margin: 0;
 }
@@ -800,7 +800,7 @@ span.code {
   background: #4479eb19;
   /* padding: 0.4em 0.6em; */
   font-family: "Tiempos Text";
-  font-size: 0.85em;
+  /* font-size: 0.85em; */
   color: rgb(0, 0, 136);
 }
 .distance-data-hero {

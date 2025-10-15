@@ -9,7 +9,7 @@ html.gray {
   background: #f5f5f5;
 }
 body {
-  font-family: "FranklinGothicURW-Boo", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  font-family: "Kumbh Sans", "FranklinGothicURW-Boo", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   margin: 0;
 }
 
@@ -189,7 +189,7 @@ sup {
   opacity: 0.75;
 }
 h1 {
-    font-family: 'TiemposHeadline-Medium';
+    font-family: 'Henrietta Regular';
     font-size: 5em;
     padding: 0 0 3em 0;
     margin: 0;
@@ -408,7 +408,7 @@ img.project-thumb {
   padding: 2em 2em 1.2em 2em;
 }
 .teaser-title {
-  font-family: "TiemposHeadline-Medium";
+  font-family: "Henrietta Regular";
   font-size: 1.7em;
   padding: 0 0 0.2em 0;
   line-height: 1.2;
@@ -692,7 +692,7 @@ span.tag {
 }
 .job-title {
     font-size: 2.5em;
-    font-family: 'TiemposHeadline-Medium';
+    font-family: 'Henrietta Regular';
     font-weight: 800;
     padding-bottom: 0.4em;
 }

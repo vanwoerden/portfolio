@@ -7,6 +7,16 @@
 	font-weight: bold;
 	font-style: normal;
 }
+@font-face {
+    font-family: Henrietta Regular;
+    src: url('../fonts/VCHenrietta-Regular.woff2') format('woff2'), 
+        url('../fonts/VCHenrietta-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: Kumbh Sans;
+    src: url('../fonts/KumbhSans-Regular.woff2') format('woff2'), 
+        url('../fonts/KumbhSans-Regular.woff') format('woff');
+}
 /* @font-face {
 	font-family: 'FranklinGothicURW-Boo';
 	src: url('../fonts/FranklinGothicURW-Boo.eot');

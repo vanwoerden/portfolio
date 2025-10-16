@@ -37,11 +37,11 @@ body {
 }
 .container-full {
     max-width: 100%;
-    align-items: center;
+    align-items: start;
     padding: 0 0 0 8vw;
 }
 .container-1200 {
-    max-width: 1400px;
+    max-width: 100%;
     align-items: center;
     padding: 1em 0;
 }
@@ -58,7 +58,7 @@ body {
     /* min-width: 600px; */
     max-width: 600px;
     /* padding-right: 4em; */
-    padding: 2rem 0 0.4rem 0;
+    /* padding: 2rem 0 0.4rem 0; */
 }
 
 .container-600.last {
@@ -66,7 +66,7 @@ body {
 }
 
 .extra-pad {
-  padding-right: 8em;
+  padding-right: 1em;
   padding-top: 6em;
   padding-bottom: 2em;
 }
@@ -238,11 +238,51 @@ h3.likes {
   font-size: 1.6rem;
 }
 
-details summary {
+/* details summary {
   margin: 0.4em 0 0.2em 0;
   font-size: 1.4em;
   cursor: pointer;
   text-decoration: underline #ccc;
+} */
+
+details > summary {
+  font-size: 3rem;
+  /* list-style: none; */
+  list-style-position: outside;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+
+summary::before {
+  content: '▸';
+  position: absolute;
+  margin-left: -1.4rem;
+  margin-top: -0.2rem;
+  font-size: 2.6rem;
+}
+details[open] > summary:before {
+  content: "▾";
+  margin-left: -1.4rem;
+  margin-top: -0.2rem;
+  font-size: 2.6rem;
+}
+
+.job-description > details > summary {
+  font-size: 1.6rem;
+  padding-top: 0.5rem;
+}
+.job-description > details > summary::before {
+  font-size: 2rem;
+  margin-top: -0.7rem;
+  margin-left: -1.2rem;
+}
+.job-description > details[open] > summary::before {
+  content: '▾';
+  position: absolute;
+  font-size: 2rem;
+  margin-top: -0.7rem;
+  margin-left: -1.2rem;
 }
 
 .dataviz {
@@ -355,7 +395,7 @@ img.project-thumb {
   border-radius: 1.1em;
   width: fit-content;
   max-width: 400px;
-  margin: 8em 3em 4em 0;
+  margin: 2em 3em 4em 0;
   transition: 0.25s;
 }
 .project-teaser:hover {
@@ -691,11 +731,20 @@ span.tag {
    /*margin-left: 1.5em;*/
 }
 .job-title {
-    font-size: 2.5em;
+    font-size: 2.5rem;
     font-family: 'Henrietta Regular';
     font-weight: 800;
     padding-bottom: 0.4em;
 }
+summary > .job-title {
+    display: inline-block;
+    font-size: 2rem;
+    color: var(--darkgray);
+}
+summary.sumlarge::marker {
+    margin-top: 0.2em;
+}
+
 .date {
   padding: 0.2em 0;
   color: #777;
@@ -848,9 +897,7 @@ span.code {
   img.likes {
     width: 100%;
   }
-  details summary {
-    font-size: 1.2em;
-  }
+  
   h1 {
     font-size: 3em;
     padding-bottom: 1.5em;
@@ -933,7 +980,7 @@ footer {
 /*
  * Dark mode
  */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body, html.gray {
     background: var(--darkblue);
     color: #EDEAEA;
@@ -947,11 +994,11 @@ footer {
     color: white;
   }
   span.yellow, span.yellow > a {
-    /* color: black; */
+    color: black;
     background: none;
   }
   span.yellow > a {
-    /* text-decoration: underline;; */
+    text-decoration: underline;;
     background: linear-gradient(to bottom, transparent 0%, transparent 60%, #2F2E6B 60%, #5452B7 100%);
   }
   .date {
@@ -965,7 +1012,7 @@ footer {
   }
   .quote {
     background: none;
-    /* border: 3px solid #424097; */
+    border: 3px solid #424097;
     color: #ccc;
   }
 
@@ -989,7 +1036,7 @@ footer {
   span.code > b, .quote > p > b {
     color: #c95d6b;
   }
-}
+} */
 /*
  * Print style
  */

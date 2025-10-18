@@ -258,7 +258,7 @@ summary::before {
   content: '▸';
   position: absolute;
   margin-left: -1.4rem;
-  margin-top: -0.2rem;
+  margin-top: -0.4rem;
   font-size: 2.6rem;
 }
 details[open] > summary:before {
@@ -735,6 +735,7 @@ span.tag {
     font-family: 'Henrietta Regular';
     font-weight: 800;
     padding-bottom: 0.4em;
+    line-height: 1.2;
 }
 summary > .job-title {
     display: inline-block;
@@ -871,7 +872,7 @@ span.code {
   }
   .container-full {
     padding: 0 20px;
-    width: 100%;
+    /* width: 100%; */
   }
   .container-1200 {
     /*width: 100%;*/
@@ -879,7 +880,7 @@ span.code {
   .container-600, .container-900 {
     max-width: 100%;
     /* min-width: 100px; */
-    width: 100%;
+    /* width: 100%; */
     /* padding: 0; */
   }
   .flex-reverse {
@@ -973,6 +974,9 @@ span.code {
   }
   .case-meta {
     padding-bottom: 2em;
+  }
+  #airplane {
+    display: none;
   }
 }
 footer {

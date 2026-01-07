@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teamwork means seeing it through together - The Works of Ernst</title>
+    <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style-million.css">
+    <link rel="stylesheet" type="text/css" href="../shared.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <style>
+        html {
+            background-color: var(--bg-seeing-it-through-together);
+        }
+    </style>
+    <script>
+        // Handle Escape key to go back to 2026.html
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' || event.keyCode === 27) {
+                event.preventDefault();
+                sessionStorage.setItem('nav-direction', 'backward');
+                window.location.href = '../../2026.html';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="close-button-container">
+        <a href="../../2026.html" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
+        <span class="close-button-label">ESC</span>
+    </div>
+    <div class="principle-page">
+        <h1 class="principle principle-title">
+            <span class="nermal">Teamwork means </span><span class="attention">seeing it through together.</span>
+        </h1>
+        <div class="principle-content">
+            <p class="money-quote">
+                (Idea: product development, the board game.)
+            </p>
+            <p class="money-quote">
+                I believe teams should start "the work" together. If they don't, it takes more time for other disciplines to understand. And bad requirements feed into bad designs that may be infeasible. 
+            </p>
+            <p class="money-quote">
+                You can't go up the waterfall.
+            </p>
+            <p class="money-quote">
+                Handoff is problematic.
+            </p>
+            <p class="money-quote">
+                Let's use an example. There's a team of 1 Product Manager, 1 Designer, and 4 Engineers. They have 3 things they've decided to put in the hands of their users: project A, B, and C.
+            </p>
+            <p class="money-quote">
+                For both the PM and the designer, each project takes 4 weeks. The 4 engineers take 8 weeks for each project.
+            </p>
+            <p class="money-quote">
+                The classic waterfall approach is to stagger the work, Which means the engineers start in week 9.
+            </p>
+            <p class="money-quote">
+                The PM writes the requirements, the designer designs the UI, and the engineers implement the code.
+            </p>
+            <p class="money-quote">
+                A year later, project A is still not done. Huh?! What happened?
+            </p>
+            <p class="money-quote">
+                The designer didn't understand why the PM had made some of the decisions. During handoff, the designer also found a gaps in the requirements. But the PM was already working on Project B. It took them a while to get back into the details of Project A. The engineers were invited to handoff, but only one could make it; the rest were still busy working on other projects.
+            </p>
+            <p class="money-quote">
+                By the time the engineers were ready to start, the designer and the PM had gone back and forth a few times, and the project was not shovel-ready. 
+            </p>
+            <p class="money-quote">
+                If the team had started together, the designer would have understood the PM's decisions, and the engineers would have understood the designer's designs.
+            </p>
+            <p class="money-quote"></p>
+            <ul>
+                <li>PM takes 4 weeks</li>
+                <li>Designer takes 4 weeks</li>
+                <li>devs take 8 weeks</li>
+            </ul>
+            <div class="start-together-example">
+                <div class="timeline">
+                    1, 2 , 3, 4
+                </div>
+                <div class="discipline-container">
+                    <div class="discipline-label">1 PM</div>
+                    <div class="blocks">
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a handoff">↘</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b handoff b-c">↘</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                    </div>
+                </div>
+                <div class="discipline-container">
+                    <div class="discipline-label">1 Designer</div>
+                    <div class="blocks">
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block project-a handoff zero-one"></div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a handoff">↘</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b handoff b-c">↘</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-b handoff b-c">↘</div>
+                        <div class="block project-c">C</div>
+                    </div>
+                </div>
+                <div class="discipline-container">
+                    <div class="discipline-label">4 Devs</div>
+                    <div class="blocks">
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block project-a handoff zero-one"></div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-b handoff">↘</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <a href="../slack-variety-cadence/index.html" class="nav-button">←</a>
+            <a href="../starting-out-informed/index.html" class="nav-button">→</a>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>It means starting out informed - The Works of Ernst</title>
+    <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style-million.css">
+    <link rel="stylesheet" type="text/css" href="../shared.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <style>
+        html {
+            background-color: var(--bg-starting-out-informed);
+        }
+    </style>
+    <script>
+        function rotateBML() {
+            console.log("rotateBML");
+            document.getElementById("bml-container").classList.add("rotated");
+            document.getElementById("build").classList.add("rotated-element");
+            document.getElementById("measure").classList.add("rotated-element");
+            document.getElementById("learn").classList.add("rotated-element");
+            document.getElementById("learn").innerHTML = "Learn first";
+            document.getElementById("build").innerHTML = "Then build";
+            document.getElementById("measure").innerHTML = "Then measure";
+            document.getElementById("reset").innerHTML = "(reset)";
+            document.getElementById("bml-title").innerHTML = "Learn, build, measure.";
+            rotated = true;
+        }
+
+        function rotateBMLBack() {
+            document.getElementById("bml-container").classList.remove("rotated");
+            document.getElementById("build").classList.remove("rotated-element");
+            document.getElementById("measure").classList.remove("rotated-element");
+            document.getElementById("learn").classList.remove("rotated-element");
+            document.getElementById("learn").innerHTML = "Learn";
+            document.getElementById("build").innerHTML = "Build";
+            document.getElementById("measure").innerHTML = "Measure";
+            document.getElementById("reset").innerHTML = "";
+            document.getElementById("bml-title").innerHTML = "Build, measure, learn?";
+        }
+    </script>
+    <script>
+        // Handle Escape key to go back to 2026.html
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' || event.keyCode === 27) {
+                event.preventDefault();
+                sessionStorage.setItem('nav-direction', 'backward');
+                window.location.href = '../../2026.html';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="close-button-container">
+        <a href="../../2026.html" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
+        <span class="close-button-label">ESC</span>
+    </div>
+    <div class="principle-page">
+        <h1 class="principle principle-title">
+            <span class="nermal">It means </span><span class="attention">starting out informed.</span>
+        </h1>
+        <div class="principle-content">
+            <h2 class="bml-title" id="bml-title">
+                Build, measure, learn?
+            </h2>
+            <p class="money-quote">
+                Don't start out building. 
+                <span class="fake-link" onclick="rotateBML()">Start out informed.</span> 
+                <span class="reset" id="reset" onclick="rotateBMLBack()"></span>
+            </p>
+            <div class="" id="bml-container">
+                <div class="bml" id="build">Build</div>
+                <div class="bml" id="measure">Measure</div>
+                <div class="bml" id="learn">Learn</div>
+            </div>
+            <p class="money-quote">
+                Design is the art of being wrong safely.
+            </p>
+        </div>
+        <div class="nav-buttons">
+            <a href="../seeing-it-through-together/index.html" class="nav-button">←</a>
+            <a href="../time-vs-scope/index.html" class="nav-button">→</a>
+        </div>
+    </div>
+</body>
+</html>
+

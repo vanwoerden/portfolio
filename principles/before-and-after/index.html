@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>And thinking about the before and after - The Works of Ernst</title>
+    <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style-million.css">
+    <link rel="stylesheet" type="text/css" href="../shared.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <style>
+        html {
+            background-color: var(--bg-before-and-after);
+        }
+    </style>
+    <script>
+        // Handle Escape key to go back to 2026.html
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' || event.keyCode === 27) {
+                event.preventDefault();
+                sessionStorage.setItem('nav-direction', 'backward');
+                window.location.href = '../../2026.html';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="close-button-container">
+        <a href="../../2026.html" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
+        <span class="close-button-label">ESC</span>
+    </div>
+    <div class="principle-page">
+        <h1 class="principle principle-title">
+            <span class="nermal">And thinking about the </span><span class="attention">before and</span> <span class="nermal"> the </span><span class="attention">after.</span>
+        </h1>
+        <div class="principle-content">
+            <!-- This principle has no additional content beyond the title -->
+        </div>
+        <div class="nav-buttons">
+            <a href="../quality/index.html" class="nav-button">←</a>
+            <a href="../../index2principles.html" class="nav-button">→</a>
+        </div>
+    </div>
+</body>
+</html>
+

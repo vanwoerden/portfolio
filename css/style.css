@@ -474,7 +474,7 @@ img.project-thumb {
 }
 .teaser-title {
   font-family: "Henrietta Regular";
-  font-size: 1.7em;
+  font-size: 1.9em;
   padding: 0 0 0.2em 0;
   line-height: 1.2;
 }
@@ -482,6 +482,20 @@ img.project-thumb {
   max-width: 460px;
   padding: 0;
   /* margin-left: 2.1em; */
+}
+.teaser-company {
+  font-size: 1.1rem;
+  padding: 0.1em 0.6em 0.2em 0.6em;
+  /* background: #a3a3a3; */
+  width: fit-content;
+  border-radius: 01em;
+  line-height: 1.2;
+  color: #4f4f4f;
+  /* position: absolute; */
+  /* margin-bottom: 1.2em; */
+  margin-right: 0.8em;
+  border: 1px solid black;
+
 }
 img.teaser-image {
   width: 112px;
@@ -1181,6 +1195,7 @@ footer {
 .nav-link.home {
     /* background-color: #FF6B6B; */
     /* color: #fff; */
+    margin-bottom: 1.4rem;
 }
 
 .nav-link.what {
@@ -1196,10 +1211,29 @@ footer {
 .nav-link.why {
     /* background-color: #FFA07A; */
     /* color: #fff; */
+    margin-bottom: 1.4rem;
 }
 
+.nav-link.resume {
+    
+}
+
+.nav-link.likes {
+    color: #333;
+}
+
+.nav-link.experiments {
+
+}
+
+.nav-link.writing {
+    margin-bottom: 1.4rem;
+}
+
+.nav-link-sub {
+    font-size: 0.8em;
+    opacity: 0.5;
+}
 @media (max-width: 768px) {
-    .nav-link {
-        font-size: 5rem;
-    }
+    
 }

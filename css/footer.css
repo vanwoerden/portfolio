@@ -23,6 +23,11 @@ footer {
     right: 0;
     z-index: 1000;
     background: #f5f5f5;
+    display: none;
+}
+
+.footer-marquee-wrapper.footer-visible {
+    display: block;
 }
 
 .footer-marquee-track {

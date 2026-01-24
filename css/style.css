@@ -4,6 +4,7 @@ html {
     font-family: "FranklinGothicURW-Boo";
     font-size: 13px;
     color: #333;
+    /* background:  rgb(243, 242, 235); */
 }
 html.gray {
   background: #f5f5f5;
@@ -89,6 +90,11 @@ body {
   display: flex;
   flex-direction: row;
   gap: 2rem;
+}
+.container-vertical {
+  display: flex;
+  flex-direction: column;
+  /* gap: 2rem; */
 }
 .container-40 {
     width: 40%;
@@ -506,6 +512,95 @@ img.teaser-image {
 img.teaser-image-rect {
   width: 100%;
   border-radius: 1em 1em 0 0;
+}
+
+/* Project Card Component */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+    border-radius: 1.1em;
+    width: fit-content;
+    max-width: 400px;
+    margin: 2em 3em 4em 0;
+    transition: 0.25s;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    box-shadow:
+        2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+        6.7px 6.7px 5.3px rgba(13, 8, 23, 0.02),
+        12.5px 12.5px 10px rgba(0, 0, 0, 0.03),
+        22.3px 22.3px 17.9px rgba(8, 8, 23, 0.035),
+        41.8px 41.8px 33.4px rgba(15, 11, 27, 0.05),
+        100px 100px 80px rgba(18, 16, 31, 0.055);
+    transition: 0.15s;
+    transform: translateY(-5px) translateX(-5px) scale(1.01);
+}
+
+.project-card:active {
+    transform: none;
+    box-shadow: none;
+    transition: 0.05s;
+}
+
+.project-card__image-container {
+    width: 100%;
+    height: stretch;
+}
+
+.project-card__image {
+    width: 100%;
+    display: block;
+    /* border-radius: 1em 1em 0 0;  Handled by overflow: hidden on card */
+}
+
+.project-card__content {
+    padding: 2em 2em 1.2em 2em;
+}
+
+.project-card__title {
+    font-family: "Henrietta Regular";
+    font-size: 1.9em;
+    padding: 0 0 0.2em 0;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.project-card__description {
+    font-size: 1.4em;
+    margin: 0;
+    padding-top: 0.5em;
+}
+
+/* Horizontal Variation */
+.project-card--horizontal {
+    flex-direction: row;
+    align-items: start;
+    max-width: 800px; /* Allow more width for horizontal */
+}
+
+.project-card--horizontal .project-card__image-container {
+    width: 40%;
+    min-width: 400px;
+}
+
+.project-card--horizontal .project-card__image {
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-card--horizontal .project-card__content {
+    width: 60%;
+    padding: 2em;
+}
+
+/* Color Modifiers (Example - reusing existing color logic if needed or defining specific ones) */
+.project-card--blue {
+    /* Specific styles for blue card if needed, e.g. border or background tint */
 }
 /* TIMELINE */
 .timeline {

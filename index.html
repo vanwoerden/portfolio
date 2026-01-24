@@ -1,47 +1,160 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <title>The Works of Ernst.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026</title>
+    <script>
+        // Synchronously check sessionStorage and set CSS custom properties before CSS evaluation
+        (function() {
+            const navDirection = sessionStorage.getItem('nav-direction');
+            if (navDirection === 'backward') {
+                document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-top');
+                document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-bottom');
+                document.documentElement.classList.add('nav-backward');
+                sessionStorage.removeItem('nav-direction');
+            } else {
+                document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-bottom');
+                document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-top');
+            }
+        })();
+    </script>
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
-    <link rel="stylesheet" type="text/css" href="css/style-million.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    
-    <meta property="og:title" content="The Works of Ernst">
-    <meta property="og:description" content="Ernst van Woerden is a designer.">
-    <meta property="og:image" content="https://ernst.works/img/twitter_card.png">
-    <meta property="og:url" content="https://ernst.works">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <!--  Non-Essential, But Recommended -->
-    <meta property="og:site_name" content="Ernst.works">
-    <meta name="twitter:image:alt" content="Ernst is a designer.">
-    
-    <!--  Non-Essential, But Required for Analytics -->
-    <meta name="twitter:site" content="@erniedesigns">    
-
-    <!-- <script src="portfolio.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <script>
+        // Handle View Transition API - only cleanup after transition completes
+        window.addEventListener('pageswap', (event) => {
+            // Only handle cleanup - class was already added by synchronous script
+            if (event.viewTransition && document.documentElement.classList.contains('nav-backward')) {
+                event.viewTransition.finished.then(() => {
+                    document.documentElement.classList.remove('nav-backward');
+                });
+            }
+        });
+    </script>
+    <script>
+        // Toggle footer visibility with 'P' key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'p' || event.key === 'P') {
+                const footerWrapper = document.querySelector('.footer-marquee-wrapper');
+                if (footerWrapper) {
+                    footerWrapper.classList.toggle('footer-visible');
+                }
+            }
+        });
+    </script>
 </head>
 <body>
-    <div class="main-container">
-        <section class="container">
-            <div class="items">
-                <h1 class="one-in-a-million">
-                    <div class="top-left">I’m a one in a </div>
-                    <div class="million">million</div>
-                    <div class="bottom-right">
-                        <p class="designer">designer *</p>
-                    </div>
-                </h1>
-                <p class="subtitle">
-                    * There are roughly <s>a million</s> <a href="https://www.google.com/search?q=how+many+ux+and+product+designers+are+there+worldwide" target="_blank">two million designers on Earth</a>.
-                </p>
+    <div class="container-full flex nowrap padding-top-7">
+        <nav class="nav-container">
+            <a href="index.html" class="nav-link home">ernst.works</a>
+            <!-- <a href="previous/index.html" class="nav-link what">what</a>
+            <a href="index2principles.html" class="nav-link how">how</a>
+            <a href="#" class="nav-link why">why</a> -->
+            <a href="likes/anwb-paddenstoel" class="nav-link likes">Likes</a>
+            <a href="#" class="nav-link experiments">Experiments</a>
+            <!-- <a href="#" class="nav-link writing">writing</a> -->
+            <!-- <a href="#" class="nav-link resume">resume</a> -->
+            <a href="https://www.linkedin.com/in/evanwoerden/" target="_blank" class="nav-link writing">LinkedIn</a>
+        </nav>
+        <div class="container-85">
+            <div class="intro">
+                <h1 class="welcome">Welcome to my world.</h1>
+                <h2>
+                    I'm Ernst, a Dutch product designer.
+                </h2>
             </div>
-        </section>
-        
-    <div class="container footer hidden">
-        <img src="img/emf.svg" alt="2x2 matrix with agency and in-house on the x-axis, branding and product design on the y-axis, and Ernst's job history plotted with circles, the size of which represents size of the company"/>
+            
+            <div class="container-600">
+                <!-- <h2>
+                    I'm Ernst, a Dutch product designer.
+                </h2> -->
+                <h2>
+                    I lead design for sales tax filing in QuickBooks. I'm also designing a multi-platform smart speaker companion app for Dutch & Dutch.
+                </h2>
+                
+                <!-- <p class="no-pad large">Currently working on:</p> -->
+            </div>
+
+            <!-- <div class="container-600 extra-pad" id="our-world-in-data">
+                <div class="date">February 2022 - today (New York/remote)</div>
+                <div class="job-title">Sales tax filing for <a class="green" href="https://quickbooks.com" target="_blank">QuickBooks</a>.</div>
+               
+                <div class="job-description">
+                    <p>
+                        50 states, thousands of sales tax jurisdictions, tens of thousands of tax rules and tax rates. <i>Exceptionally</i> complex, you could say. Our mission is to take the headache out of filing sales tax with smart automated software. 
+                    </p>
+                             
+                </div>
+            </div> -->
+            <div class="container-vertical">
+                <div class="container-900">
+                    <a class="project-card project-card--horizontal project-card--blue" href="https://quickbooks.intuit.com/learn-support/en-us/help-article/state-taxes/faq-filing-taxes/L7id93G7F_US_en_US" target="_blank">
+                        <div class="project-card__image-container">
+                            <img class="project-card__image" src="img/ideal_state_2.jpg" alt="teaser image"/>
+                        </div>
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">
+                                <span class="gray">Sales tax filing for QuickBooks</span>
+                            </h3>
+                            <p class="project-card__description">
+                                50 states, thousands of sales tax jurisdictions, tens of thousands of tax rules and tax rates. <i>Exceptionally</i> complex, you could say. Our mission: fully automated sales tax filing in all 50 states.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="container-900">
+                    <a class="project-card project-card--horizontal project-card--blue" href="https://dutchdutch.com/" target="_blank">
+                        <div class="project-card__image-container">
+                            <img class="project-card__image" src="img/6c-green.png" alt="teaser image; product screenshot of the Dutch & Dutch 6c in green"/>
+                        </div>
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">
+                                <span class="gray">Smart speaker companion app for Dutch & Dutch</span>
+                            </h3>
+                            <p class="project-card__description">
+                                Dutch & Dutch make award-winning loudspeakers. As part of expanding their product line up, I'm redesigning the companion app that lets users control their speakers.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                
+            </div>
+            <!-- <div class="container-600">
+                <h3>Previous work ></h3>
+            </div> -->
+            
+        </div>
+       
     </div>
+    <footer class="container-fullest">
+        <div class="footer-marquee-wrapper">
+            <div class="footer-marquee-track">
+                <a href="principles/design/index.html" class="footer-marquee-link">Design is the manifestation of ideas</a>
+                <a href="principles/focus/index.html" class="footer-marquee-link">A great team requires focus</a>
+                <a href="principles/slack-variety-cadence/index.html" class="footer-marquee-link">A great team craves slack, variety, and cadence</a>
+                <a href="principles/seeing-it-through-together/index.html" class="footer-marquee-link">Teamwork means seeing it through together</a>
+                <a href="principles/starting-out-informed/index.html" class="footer-marquee-link">It means starting out informed</a>
+                <a href="principles/time-vs-scope/index.html" class="footer-marquee-link">Being flexible about time and scope</a>
+                <a href="principles/quality/index.html" class="footer-marquee-link">Keeping quality constant</a>
+                <a href="principles/before-and-after/index.html" class="footer-marquee-link">And thinking about the before and after</a>
+                <!-- Duplicate set for seamless loop -->
+                <a href="principles/design/index.html" class="footer-marquee-link">Design is the manifestation of ideas</a>
+                <a href="principles/focus/index.html" class="footer-marquee-link">A great team requires focus</a>
+                <a href="principles/slack-variety-cadence/index.html" class="footer-marquee-link">A great team craves slack, variety, and cadence</a>
+                <a href="principles/seeing-it-through-together/index.html" class="footer-marquee-link">Teamwork means seeing it through together</a>
+                <a href="principles/starting-out-informed/index.html" class="footer-marquee-link">It means starting out informed</a>
+                <a href="principles/time-vs-scope/index.html" class="footer-marquee-link">Being flexible about time and scope</a>
+                <a href="principles/quality/index.html" class="footer-marquee-link">Keeping quality constant</a>
+                <a href="principles/before-and-after/index.html" class="footer-marquee-link">And thinking about the before and after</a>
+            </div>
+        </div>
+        <!-- <div class="container-600 meta">
+            <p>💚 2026</p>
+        </div> -->
+    </footer>
 </body>
 </html>
+

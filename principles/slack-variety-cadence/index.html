@@ -13,19 +13,28 @@
         }
     </style>
     <script>
-        // Handle Escape key to go back to 2026.html
+        // Handle Escape key to go back to index.html
+        // Handle Arrow keys to navigate between principles
         window.addEventListener('keydown', function(event) {
             if (event.key === 'Escape' || event.keyCode === 27) {
                 event.preventDefault();
                 sessionStorage.setItem('nav-direction', 'backward');
-                window.location.href = '../../2026.html';
+                window.location.href = '../../index.html';
+            } else if (event.key === 'ArrowLeft' || event.keyCode === 37) {
+                event.preventDefault();
+                sessionStorage.setItem('nav-direction', 'backward');
+                window.location.href = '../focus/index.html';
+            } else if (event.key === 'ArrowRight' || event.keyCode === 39) {
+                event.preventDefault();
+                sessionStorage.setItem('nav-direction', 'forward');
+                window.location.href = '../seeing-it-through-together/index.html';
             }
         });
     </script>
 </head>
 <body>
     <div class="close-button-container">
-        <a href="../../2026.html" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
+        <a href="../../index.html" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
         <span class="close-button-label">ESC</span>
     </div>
     <div class="principle-page">

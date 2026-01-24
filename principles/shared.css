@@ -189,6 +189,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   pointer-events: none;
+  view-transition-name: close-button;
 }
 
 /* Close button styles */
@@ -259,6 +260,12 @@ body {
 ::view-transition-new(content) {
   animation-duration: 0.4s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Keep close button static during transitions */
+::view-transition-old(close-button),
+::view-transition-new(close-button) {
+  animation: none;
 }
 
 /* Custom animations for smooth transitions */

@@ -44,8 +44,53 @@
             }
         });
     </script>
+    <script>
+        // Mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navContainer = document.querySelector('.nav-container');
+            const navOverlay = document.querySelector('.nav-overlay');
+            
+            function toggleNav() {
+                const isOpen = navContainer.classList.contains('nav-open');
+                navContainer.classList.toggle('nav-open');
+                navToggle.classList.toggle('nav-toggle-open');
+                navToggle.setAttribute('aria-expanded', !isOpen);
+                if (navOverlay) {
+                    navOverlay.classList.toggle('active');
+                }
+            }
+            
+            if (navToggle && navContainer) {
+                navToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleNav();
+                });
+                
+                // Close nav when clicking overlay
+                if (navOverlay) {
+                    navOverlay.addEventListener('click', function() {
+                        toggleNav();
+                    });
+                }
+                
+                // Close nav when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (navContainer.classList.contains('nav-open') && 
+                        !navContainer.contains(event.target) && 
+                        !navToggle.contains(event.target)) {
+                        toggleNav();
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+    </button>
+    <div class="nav-overlay"></div>
     <div class="container-full flex nowrap padding-top-7">
         <nav class="nav-container">
             <a href="index.html" class="nav-link home">ernst.works</a>

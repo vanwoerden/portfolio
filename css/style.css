@@ -91,6 +91,13 @@ body {
   flex-direction: row;
   gap: 2rem;
 }
+
+@media (max-width: 768px) {
+  .container-horizontal {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
 .container-vertical {
   display: flex;
   flex-direction: column;
@@ -154,6 +161,12 @@ path.you-are-here {
 }
 .nowrap {
   flex-wrap: nowrap;
+}
+
+@media (max-width: 768px) {
+  .nowrap {
+    flex-wrap: wrap;
+  }
 }
 .flex.align-center {
   align-items: center;
@@ -527,6 +540,7 @@ img.teaser-image-rect {
     text-decoration: none;
     color: inherit;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .project-card:hover {
@@ -560,6 +574,8 @@ img.teaser-image-rect {
 
 .project-card__content {
     padding: 2em 2em 1.2em 2em;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .project-card__title {
@@ -586,6 +602,8 @@ img.teaser-image-rect {
 .project-card--horizontal .project-card__image-container {
     width: 40%;
     min-width: 400px;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .project-card--horizontal .project-card__image {
@@ -596,6 +614,8 @@ img.teaser-image-rect {
 .project-card--horizontal .project-card__content {
     width: 60%;
     padding: 2em;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 /* Color Modifiers (Example - reusing existing color logic if needed or defining specific ones) */
@@ -1005,8 +1025,12 @@ span.code {
     margin-bottom: 4em;
   }
   .container-full {
-    padding: 0 20px;
+    padding: 0 1.5rem;
     /* width: 100%; */
+  }
+  
+  .container-full.flex {
+    padding-top: 5rem;
   }
   .container-1200 {
     /*width: 100%;*/
@@ -1034,14 +1058,15 @@ span.code {
   }
   
   h1 {
-    font-size: 3em;
-    padding-bottom: 1.5em;
+    font-size: 2.5em;
+    padding-bottom: 1em;
   }
   h1.non-front-page {
-    font-size: 4em;
+    font-size: 3em;
   }
   h2 {
-    font-size: 2.2em;
+    font-size: 1.5rem;
+    line-height: 1.4;
   }
   h3 {
     font-size: 1.5em;
@@ -1261,6 +1286,75 @@ footer {
     padding: 0 2rem 0 0;
     /* margin: 0 auto; */
 }
+/* Mobile Navigation Toggle Button */
+.nav-toggle {
+    display: none;
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 10001;
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    width: 3rem;
+    height: 3rem;
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.nav-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav-toggle-icon {
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: #333;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+    content: '';
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: #333;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle-icon::before {
+    top: -0.5rem;
+}
+
+.nav-toggle-icon::after {
+    top: 0.5rem;
+}
+
+.nav-toggle-open .nav-toggle-icon {
+    background: transparent;
+}
+
+.nav-toggle-open .nav-toggle-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.nav-toggle-open .nav-toggle-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
 .nav-container {
     display: flex;
     flex-direction: column;
@@ -1329,6 +1423,182 @@ footer {
     font-size: 0.8em;
     opacity: 0.5;
 }
+
+/* Mobile Responsive Styles */
 @media (max-width: 768px) {
+    /* Show hamburger menu */
+    .nav-toggle {
+        display: flex !important;
+    }
     
+    /* Hide nav by default, show when toggled */
+    .nav-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        max-width: 85vw;
+        height: 100vh;
+        background: #fff;
+        z-index: 10000;
+        padding: 5rem 2rem 2rem 2rem;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+    }
+    
+    .nav-container.nav-open {
+        transform: translateX(0);
+    }
+    
+    /* Stack main layout vertically */
+    .container-full.flex {
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 5rem 1.5rem 0 1.5rem; /* top, right, bottom, left */
+    }
+    
+    .container-full.flex.nowrap {
+        flex-wrap: wrap;
+    }
+    
+    .container-85 {
+        max-width: 100%;
+        width: 100%;
+        padding: 0; /* Remove padding since parent now has it */
+    }
+    
+    /* Stack project cards vertically */
+    .container-vertical {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .container-900 {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    /* Project cards stack vertically on mobile */
+    .project-card--horizontal {
+        flex-direction: column;
+    }
+    
+    .project-card--horizontal .project-card__image-container {
+        width: 100%;
+        min-width: 100%;
+    }
+    
+    .project-card--horizontal .project-card__content {
+        width: 100%;
+        padding: 1.5rem;
+        box-sizing: border-box;
+    }
+    
+    /* Ensure touch targets are at least 44x44px */
+    .nav-link {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 0.75rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .project-card {
+        margin: 1.5rem 0;
+        max-width: 100%;
+    }
+    
+    /* Ensure project cards are touch-friendly */
+    .project-card,
+    .project-card__image-container,
+    .project-card__content {
+        min-height: 44px;
+    }
+    
+    a.project-card {
+        min-height: auto;
+    }
+    
+    /* Adjust typography for mobile */
+    h1.welcome {
+        font-size: 2.5rem;
+        margin-left: 0;
+        padding: 1rem 0;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+    }
+    
+    .project-card__title {
+        font-size: 1.6rem;
+    }
+    
+    .project-card__description {
+        font-size: 1.2rem;
+    }
+    
+    /* Reduce padding */
+    .padding-top-7 {
+        padding-top: 2rem;
+    }
+    
+}
+
+/* Overlay when nav is open - separate element for better control */
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .nav-overlay.active {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Ensure consistent padding on very small screens */
+    .container-full.flex {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    h1.welcome {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    .project-card__title {
+        font-size: 1.4rem;
+    }
+    
+    .project-card__description {
+        font-size: 1.1rem;
+    }
 }

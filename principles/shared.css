@@ -248,6 +248,76 @@ body {
   .close-button-label {
     font-size: 0.65rem;
   }
+  
+  /* Ensure touch targets meet 44x44px minimum */
+  .close-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .nav-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Mobile adaptations for principles pages */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+    min-height: 100vh;
+  }
+  
+  .principle-page {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  
+  .principle-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .money-quote {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 1rem 0;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .principle-content {
+    padding: 0;
+  }
+  
+  /* Stack navigation buttons horizontally but with better spacing */
+  .nav-buttons {
+    padding: 0 1rem;
+  }
+  
+  .nav-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Stack navigation buttons vertically on very small screens */
+  @media (max-width: 480px) {
+    .nav-buttons {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 1rem;
+      background: rgba(9, 8, 21, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .principle-title {
+      font-size: 1.75rem;
+    }
+    
+    .money-quote {
+      font-size: 1rem;
+    }
+  }
 }
 
 ::view-transition-old(title),

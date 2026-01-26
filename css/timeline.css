@@ -1,0 +1,302 @@
+/* Timeline Container */
+.timeline-container {
+    position: relative;
+    max-width: 900px;
+    padding: 4rem 0;
+    margin: 2rem 0;
+}
+
+/* Vertical Timeline Line - runs through center column */
+.timeline-line {
+    position: absolute;
+    left: 110px; /* left column (80px) + half center column (30px) */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* Timeline Item */
+.timeline-item {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-bottom: 4rem;
+    padding-left: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    gap: 1rem;
+}
+
+.timeline-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Left Column - Year Tag */
+.timeline-left {
+    width: 80px;
+    min-width: 80px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0.4rem;
+    margin-left: 0.45rem;
+}
+
+/* Circle Marker on Timeline Line */
+.timeline-marker {
+    position: absolute;
+    left: 110px; /* Same as timeline line position (80px left + 30px center) */
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #333;
+    border: 2px solid #fff;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 2;
+    transition: all 0.2s ease-out;
+    box-sizing: border-box;
+    /* Aligned with title center: content padding (1.5rem) + half title line-height (2rem * 1.2 / 2 = 1.2rem) = 2.7rem */
+    margin-top: 1.25rem;
+    margin-left: 0.06rem;
+}
+
+
+/* Timeline Content */
+.timeline-content {
+    flex: 1;
+    max-width: 600px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 3rem;
+}
+
+.timeline-title {
+    font-family: "Henrietta Regular";
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    letter-spacing: -0.02em;
+    /* Aligned center with marker/year at 2.7rem */
+    /* Title center: padding-top (1.5rem) + half line-height (2rem * 1.2 / 2 = 1.2rem) = 2.7rem */
+}
+
+.timeline-meta {
+    margin-top: 0.6rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Tag Styles */
+.timeline-tag {
+    display: inline-block;
+    /* background: rgb(233, 233, 233); */
+    padding: 0.2em 0.6em;
+    margin: 0;
+    border-radius: 999px;
+    border: 1px solid #dedcd2;
+    font-size: 0.85em;
+    font-family: "FranklinGothicURW-Boo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #333;
+    line-height: 1.4;
+    transition: all 0.2s ease-out;
+}
+
+/* Year Tag on Timeline */
+.timeline-tag-year {
+    background: var(--very-light-yellow);
+    font-weight: 600;
+    white-space: nowrap;
+    /* Naturally positioned in timeline-left column, aligned via flexbox */
+}
+
+
+.timeline-description {
+    font-size: 1.4em;
+    line-height: 1.5;
+    color: #333;
+    margin: 1rem 0;
+    font-family: "FranklinGothicURW-Boo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.timeline-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 1.4em;
+    color: #333;
+    text-decoration: none;
+    font-family: "FranklinGothicURW-Boo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    position: relative;
+    transition: color 0.2s ease;
+    width: fit-content;
+    align-self: flex-start;
+}
+
+.timeline-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #333;
+    transition: width 0.3s ease-out;
+}
+
+.timeline-link:hover {
+    color: #000;
+}
+
+.timeline-link:hover::after {
+    width: 100%;
+}
+
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .timeline-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    
+    
+    .timeline-marker {
+        transition: none;
+    }
+    
+    .timeline-tag {
+        transition: none;
+    }
+    
+    .timeline-link::after {
+        transition: none;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .timeline-container {
+        padding: 2rem 0;
+        margin: 1rem 0;
+    }
+    
+    .timeline-line {
+        left: 60px; /* Adjusted for smaller column widths on mobile */
+    }
+    
+    .timeline-item {
+        margin-bottom: 3rem;
+        gap: 0.75rem;
+    }
+    
+    .timeline-left {
+        width: 50px;
+        min-width: 50px;
+    }
+    
+    .timeline-marker {
+        left: 60px; /* Adjusted for mobile: 50px left + 10px */
+        width: 12px;
+        height: 12px;
+        top: calc(1rem + 0.96rem); /* content padding + half title line-height for mobile */
+    }
+    
+    .timeline-content {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .timeline-title {
+        font-size: 1.6rem;
+        margin-top: 0;
+    }
+    
+    .timeline-description {
+        font-size: 1.2em;
+    }
+    
+    .timeline-tag {
+        font-size: 0.8em;
+        padding: 0.15em 0.5em;
+    }
+    
+    .timeline-link {
+        font-size: 1.2em;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-container {
+        padding: 1.5rem 0;
+    }
+    
+    .timeline-line {
+        left: 45px; /* Adjusted for smaller column widths on very small screens */
+    }
+    
+    .timeline-item {
+        margin-bottom: 2.5rem;
+        gap: 0.5rem;
+    }
+    
+    .timeline-left {
+        width: 40px;
+        min-width: 40px;
+    }
+    
+    .timeline-marker {
+        left: 45px; /* Adjusted for very small screens: 40px left + 5px */
+        width: 10px;
+        height: 10px;
+        top: calc(1rem + 0.84rem); /* content padding + half title line-height for small mobile */
+    }
+    
+    .timeline-tag-year {
+        font-size: 0.75em;
+        padding: 0.15em 0.5em;
+    }
+    
+    .timeline-content {
+        padding: 0;
+    }
+    
+    .timeline-title {
+        font-size: 1.4rem;
+        margin-top: 0;
+    }
+    
+    .timeline-description {
+        font-size: 1.1em;
+    }
+    
+    .timeline-tag {
+        font-size: 0.75em;
+        padding: 0.1em 0.4em;
+    }
+    
+    .timeline-link {
+        min-height: 44px;
+    }
+}

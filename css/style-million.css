@@ -633,12 +633,35 @@ span.reset {
   font-family: "Henrietta Regular";
 }
 
+#designers-code-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 #designers-code-container > label {
   cursor: pointer;
   color: var(--green);
-  position: absolute;
-  margin-top: 0.1rem;
-  margin-left: 0.4rem;
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 4em;
+}
+
+/* Flip toggle switch to the right when label is on the left */
+#designers-code-container #designers-code + label::before,
+#designers-code-container #designers-code + label::after {
+  left: auto;
+  right: 0;
+}
+
+#designers-code-container #designers-code + label::after {
+  right: 1.6em;
+}
+
+#designers-code-container #designers-code:checked + label::after {
+  right: 0;
 }
 
 #designers-code {
@@ -824,7 +847,109 @@ input[type='checkbox'] {
     padding-left: 0;
     padding-right: 4em;
   }
+
+  form.useless {
+    padding: 0;
+    max-width: 640px;
+  }
+
+  fieldset.useless {
+    margin-left: 0;
+  }
+
+  fieldset.useless > div{
+    margin-left: 0;
+    padding: 0.1rem;
+  }
   
+  .toggles.useless {
+    padding-left: 2em;
+    padding-right: 2em;
+    border: 1px solid var(--very-light-yellow-darker);
+    border-radius: 1em;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .toggles.useless [type="checkbox"] + label {
+    padding-top: 1.4rem;
+  }
+
+  /* Finger animation CSS custom properties with default values */
+  :root {
+    --finger-length: 4em;
+    --finger-width: 1.2em;
+    --finger-y-distance: calc(1.4rem + 0.25em + 0.75em - 1.5em);
+    --finger-rotation: -90deg;
+    --finger-animation-duration: 1s;
+    --finger-initial-rotation: -15deg;
+    --finger-hidden-bottom: -4em;
+    --finger-x-offset: 2em;
+    --finger-speed: 0.25;
+  }
+
+  /* Finger element that pushes the toggle */
+  .toggles.useless::before {
+    content: "";
+    position: absolute;
+    width: var(--finger-width, 1.2em);
+    height: var(--finger-length, 4em);
+    background-color: var(--very-light-yellow-darker);
+    border-radius: 0.6em 0.6em 0.2em 0.2em;
+    right: calc(var(--finger-x-offset, 2em) + 0.75em);
+    bottom: var(--finger-hidden-bottom, -4em);
+    transform-origin: bottom center;
+    transform: rotate(0deg);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Trigger animation when checkbox is checked */
+  .toggles.useless:has([type="checkbox"]:checked)::before {
+    animation: fingerPushToggle var(--finger-animation-duration, 1s) ease 0.25s forwards;
+  }
+
+  /* 5-step keyframe animation for finger push */
+  @keyframes fingerPushToggle {
+    /* Step 1: Initial state - finger below (hidden) */
+    0% {
+      opacity: 0;
+      bottom: var(--finger-hidden-bottom, -4em);
+      right: calc(var(--finger-x-offset, 2em) + 0.75em);
+      transform: rotate(0deg);
+    }
+    /* Step 2: Toggle on (handled by existing toggle transition, no finger movement yet) */
+    10% {
+      opacity: 0;
+      bottom: var(--finger-hidden-bottom, -4em);
+      right: calc(var(--finger-x-offset, 2em) + 0.75em);
+      transform: rotate(0deg);
+    }
+    /* Step 3: Finger emerges from below, slightly rotated from bottom anchor */
+    20% {
+      opacity: 1;
+      bottom: var(--finger-y-distance, calc(1.4rem + 0.25em + 0.75em - 1.5em));
+      right: calc(var(--finger-x-offset, 2em) + 0.75em);
+      transform: rotate(var(--finger-initial-rotation, -15deg));
+    }
+    /* Step 4: Finger rotates counter-clockwise and pushes toggle from right (on) to left (off) */
+    /* This happens at 25% (when toggle unchecks) */
+    25% {
+      opacity: 1;
+      bottom: var(--finger-y-distance, calc(1.4rem + 0.25em + 0.75em - 1.5em));
+      right: calc(var(--finger-x-offset, 2em) + 0.75em + 1.6em);
+      transform: rotate(var(--finger-rotation, -90deg));
+    }
+    /* Step 5: Finger retracts back down below */
+    100% {
+      opacity: 0;
+      bottom: var(--finger-hidden-bottom, -4em);
+      right: calc(var(--finger-x-offset, 2em) + 0.75em + 1.6em);
+      transform: rotate(var(--finger-rotation, -90deg));
+    }
+  }
+
   /* Windows High Contrast Mode Support */
   @media screen and (-ms-high-contrast: active) {
     .toggles [type="checkbox"]:focus + label::before,

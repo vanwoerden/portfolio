@@ -1,0 +1,31 @@
+- The 
+- project
+- took 
+- long.
+ - too long
+  - way too long,
+  - because we didn't start together.
+- The PM wrote 
+- the requirements.
+ - a PRD but it lacked detail,
+ - and the engineers were 
+ - busy.
+  - too busy to read it,
+  - because they were still wrapping up the work from the previous project.
+- The designer 
+- read the requirements.
+ - glossed over them. 
+ - They would get back to this soon.
+- The engineers 
+- sighed.
+ - were finally free. Or so they thought.
+- The project would take
+- long.
+ - too long.
+- They could see the project's value. But there were 
+- obstacles.
+ - so many open questions and gaps in the requirements.
+- The PM had already moved on to a new track of work.
+- And the designer 
+- kept changing his mind about the designs. 
+ - seemed to go back and forth on designs every time they talked.

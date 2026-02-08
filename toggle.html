@@ -22,6 +22,25 @@
     <meta name="twitter:site" content="@erniedesigns">    
 
     <script src="portfolio.js"></script>
+    <script>
+        var toggleTimeout = null;
+        
+        function toggleDesignersCode() {
+            var toggle = document.getElementById("designers-code");
+            
+            if (toggle.checked) {
+                // Clear any existing timeout
+                if (toggleTimeout) {
+                    clearTimeout(toggleTimeout);
+                }
+                // Set timeout to uncheck after 500ms
+                toggleTimeout = setTimeout(function() {
+                    toggle.checked = false;
+                    toggleTimeout = null;
+                }, 500);
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="">
@@ -187,7 +206,7 @@
                             <legend>Designers should:</legend>
                           
                             <div id="designers-code-container">
-                                <input type="checkbox" id="designers-code" name="designers-code" unchecked />
+                                <input type="checkbox" id="designers-code" name="designers-code" unchecked onclick="toggleDesignersCode()" />
                                 <label for="designers-code">code</label>
                             </div>
                         </fieldset>

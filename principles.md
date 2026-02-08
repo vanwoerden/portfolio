@@ -12,4 +12,5 @@ A collection of design and product development principles.
 6. **Being flexible about time and scope** → [principles/time-vs-scope/index.html](principles/time-vs-scope/index.html)
 7. **Keeping quality constant** → [principles/quality/index.html](principles/quality/index.html)
 8. **And thinking about the before and after** → [principles/before-and-after/index.html](principles/before-and-after/index.html)
+9. **Designers should code** → [principles/designers-should-code/index.html](principles/designers-should-code/index.html)
 

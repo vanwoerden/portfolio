@@ -169,25 +169,21 @@
 }
 
 
-/* Respect Reduced Motion */
+/* Reduced motion support - disable all animations */
 @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Ensure timeline items are visible immediately */
     .timeline-item {
         opacity: 1;
         transform: none;
-        transition: none;
-    }
-    
-    
-    .timeline-marker {
-        transition: none;
-    }
-    
-    .timeline-tag {
-        transition: none;
-    }
-    
-    .timeline-link::after {
-        transition: none;
     }
 }
 

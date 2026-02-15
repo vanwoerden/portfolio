@@ -7,125 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../shared.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <style>
-        html {
-            background-color: var(--bg-designers-should-code);
-        }
-        /* Flip toggle switch to the right when label is on the left */
-        #designers-should-code + label::before,
-        #designers-should-code + label::after {
-            left: auto;
-            right: 0;
-        }
-        #designers-should-code + label::after {
-            right: 1.6em;
-        }
-        #designers-should-code:checked + label::after {
-            right: 0;
-        }
-    </style>
-    <script>
-        // Load finger animation config and set CSS custom properties
-        (function() {
-            fetch('../../json/finger-animation-config.json')
-                .then(response => response.json())
-                .then(config => {
-                    const root = document.documentElement;
-                    root.style.setProperty('--finger-length', config.fingerLength);
-                    root.style.setProperty('--finger-width', config.fingerWidth);
-                    root.style.setProperty('--finger-y-distance', config.fingerYDistance);
-                    root.style.setProperty('--finger-rotation', config.fingerRotation);
-                    root.style.setProperty('--finger-animation-duration', config.fingerAnimationDuration);
-                    root.style.setProperty('--finger-initial-rotation', config.fingerInitialRotation);
-                    root.style.setProperty('--finger-x-offset', config.fingerXOffset || '2em');
-                    root.style.setProperty('--finger-speed', config.fingerSpeed || 0.25);
-                    // Calculate hidden bottom position (negative of finger length)
-                    // Extract numeric value and unit from fingerLength (e.g., "4em" -> "-4em")
-                    const fingerLengthMatch = config.fingerLength.match(/^([\d.]+)(.*)$/);
-                    if (fingerLengthMatch) {
-                        const value = parseFloat(fingerLengthMatch[1]);
-                        const unit = fingerLengthMatch[2] || 'em';
-                        root.style.setProperty('--finger-hidden-bottom', '-' + value + unit);
-                    } else {
-                        root.style.setProperty('--finger-hidden-bottom', '-' + config.fingerLength);
-                    }
-                    // Calculate when toggle should uncheck (when finger moves left based on fingerSpeed)
-                    // Animation delay: 0.25s, Finger moves left at: fingerSpeed * animation duration
-                    // Total time: 250ms (delay) + fingerSpeed * animation duration
-                    const durationMatch = config.fingerAnimationDuration.match(/^([\d.]+)(.*)$/);
-                    if (durationMatch) {
-                        const durationValue = parseFloat(durationMatch[1]);
-                        const durationUnit = durationMatch[2] || 's';
-                        let durationMs = durationValue * 1000; // Convert to milliseconds
-                        if (durationUnit === 'ms') {
-                            durationMs = durationValue;
-                        }
-                    // Get fingerSpeed (default to 0.25 if not provided)
-                    const fingerSpeed = parseFloat(config.fingerSpeed) || 0.25;
-                    // Calculate when finger moves left: animation delay (250ms) + fingerSpeed * duration
-                    const animationDelay = 250; // 0.25s delay
-                    const fingerPushTime = animationDelay + (durationMs * fingerSpeed);
-                    // Store for toggleDesignersCode to use
-                    window.fingerPushTime = fingerPushTime;
-                    
-                    // Dynamically generate keyframes based on fingerSpeed
-                    const fingerSpeedPercent = (fingerSpeed * 100).toFixed(2);
-                    const style = document.createElement('style');
-                    style.textContent = `
-                        @keyframes fingerPushToggle {
-                            /* Step 1: Initial state - finger below (hidden) */
-                            0% {
-                                opacity: 0;
-                                bottom: var(--finger-hidden-bottom, -4em);
-                                right: calc(var(--finger-x-offset, 2em) + 0.75em);
-                                transform: rotate(0deg);
-                            }
-                            /* Step 2: Toggle on (handled by existing toggle transition, no finger movement yet) */
-                            10% {
-                                opacity: 0;
-                                bottom: var(--finger-hidden-bottom, -4em);
-                                right: calc(var(--finger-x-offset, 2em) + 0.75em);
-                                transform: rotate(0deg);
-                            }
-                            /* Step 3: Finger emerges from below, slightly rotated from bottom anchor */
-                            20% {
-                                opacity: 1;
-                                bottom: var(--finger-y-distance, calc(1.4rem + 0.25em + 0.75em - 1.5em));
-                                right: calc(var(--finger-x-offset, 2em) + 0.75em);
-                                transform: rotate(var(--finger-initial-rotation, -15deg));
-                            }
-                            /* Step 4: Finger rotates counter-clockwise and pushes toggle from right (on) to left (off) */
-                            /* This happens at fingerSpeed percentage (when toggle unchecks) */
-                            ${fingerSpeedPercent}% {
-                                opacity: 1;
-                                bottom: var(--finger-y-distance, calc(1.4rem + 0.25em + 0.75em - 1.5em));
-                                right: calc(var(--finger-x-offset, 2em) + 0.75em + 1.6em);
-                                transform: rotate(var(--finger-rotation, -90deg));
-                            }
-                            /* Step 5: Finger retracts back down below */
-                            100% {
-                                opacity: 0;
-                                bottom: var(--finger-hidden-bottom, -4em);
-                                right: calc(var(--finger-x-offset, 2em) + 0.75em + 1.6em);
-                                transform: rotate(var(--finger-rotation, -90deg));
-                            }
-                        }
-                    `;
-                    // Remove existing dynamic keyframes if any
-                    const existingStyle = document.getElementById('finger-animation-keyframes');
-                    if (existingStyle) {
-                        existingStyle.remove();
-                    }
-                    style.id = 'finger-animation-keyframes';
-                    document.head.appendChild(style);
-                    }
-                })
-                .catch(error => {
-                    console.warn('Failed to load finger animation config:', error);
-                    // Fallback to default values defined in CSS
-                });
-        })();
-    </script>
     <script>
         var toggleTimeout = null;
         
@@ -137,13 +18,27 @@
                 if (toggleTimeout) {
                     clearTimeout(toggleTimeout);
                 }
-                // Set timeout to uncheck when finger moves left (at 25% of animation)
-                // Default to 500ms if config not loaded yet
-                var pushTime = window.fingerPushTime || 500;
+                // Random delay between 300-1000ms
+                var delay = Math.random() * 700 + 300;
                 toggleTimeout = setTimeout(function() {
-                    toggle.checked = false;
+                    // Trigger finger animation by adding class
+                    var container = toggle.closest('.toggles.useless');
+                    if (container) {
+                        container.classList.add('finger-push');
+                        // Uncheck toggle earlier and faster (after fade-in + 0.15s wait = ~180ms)
+                        // Animation: fade-in (5% of 600ms = 30ms) + wait (0.15s = 150ms) = 180ms
+                        setTimeout(function() {
+                            toggle.checked = false;
+                        }, 180);
+                        // Remove animation class after animation completes (600ms)
+                        setTimeout(function() {
+                            container.classList.remove('finger-push');
+                        }, 600);
+                    } else {
+                        toggle.checked = false;
+                    }
                     toggleTimeout = null;
-                }, pushTime);
+                }, delay);
             }
         }
     </script>
@@ -173,24 +68,26 @@
         <span class="close-button-label">ESC</span>
     </div>
     <div class="principle-page">
-        <h1 class="principle principle-title">
-            <span class="attention">Designers should code.</span>
+        <h1 class="principle principle-title toggles useless">
+            <span class="attention" onclick="document.getElementById('designers-should-code').click()" style="cursor: pointer;">Designers should code.</span>
+            <input type="checkbox" name="designers-should-code" id="designers-should-code" onclick="toggleDesignersCode()">
+            <label for="designers-should-code"></label>
         </h1>
         <div class="principle-content">
-            <div>
-                <h1>
-                    <form class="useless">
-                        <fieldset class="toggles useless">
-                            <div style="display: flex; flex-direction: row-reverse; align-items: center; justify-content: flex-end;">
-                            <input type="checkbox" name="designers-should-code" id="designers-should-code" onclick="toggleDesignersCode()">
-                            <label for="designers-should-code" style="padding-left: 0; padding-right: 4em;">Designers should code</label>
-                            </div>
-                        </fieldset>
-                    </form>
-                </h1>
-            </div>
             <p class="money-quote">
-                Obviously, it's more nuanced. Especially with the speed at which new tools are moving. But it's also really simple: designers should understand the final material their work will, well, materialize in. If you design a pair of jeans, you don't need to know exactly how denim is produced. But you do need to understand the constraints of blabla bla stretch.
+                Obviously, it's more nuanced. But it's also really simple: designers should understand the final material in which their work will, well, materialize. 
+            </p>
+            <p class="money-quote">
+                Say you're a carpenter. A true craftsman. You know all about the potential and the constraints of wood. You know how to design and make a great chair.   
+            </p>
+            <p class="money-quote">
+                But now you want to make a thousand great chairs. You'll need to teach others your mastery. You better write some really good and detailed instructions.
+            </p>
+            <p class="money-quote">
+                And so you do. And because you know what you're talking about, your new crew trusts you. 
+            </p>
+            <p class="money-quote">
+                Snap. You're a designer. You don't know any code. How are you going to know what the best solution is? Let alone convince a whole team of engineers to follow your lead?
             </p>
         </div>
         <div class="nav-buttons">

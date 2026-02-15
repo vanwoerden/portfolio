@@ -307,6 +307,7 @@ summary:hover {
 span.attention {
   color:rgb(79, 246, 140);
   opacity: 1;
+  transition: color 0.15s ease;
   /* text-decoration: underline dashed; */
   /* border-bottom: 3px dashed rgb(79, 246, 140); */
 }
@@ -417,6 +418,11 @@ img.jobs-headshot {
     /* text-align: right; */
     width: 100%;
     margin-top: 0.4rem;
+}
+
+.dinkus {
+  text-align: center;
+  padding: 2rem 0
 }
 
 p.subtitle, p.money-quote, p.text {
@@ -1164,3 +1170,15 @@ input[type='checkbox'] {
     }
   }
 /* end toggles */
+
+/* Reduced motion support - disable all animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

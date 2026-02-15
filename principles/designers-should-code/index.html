@@ -9,28 +9,64 @@
     <meta charset="utf-8">
     <script>
         var toggleTimeout = null;
+        var contentShown = false;
         
         function toggleDesignersCode() {
             var toggle = document.getElementById("designers-should-code");
+            var content = document.querySelector('.principle-content');
+            var principlePage = document.querySelector('.principle-page');
             
-            if (toggle.checked) {
-                // Clear any existing timeout
+            // Sequence: title moves up, toggle turns on, content appears, finger turns toggle off
+            if (toggle.checked && !contentShown) {
+                contentShown = true;
+                
+                // Step 1: Immediately move title to top (0.3s transition)
+                if (principlePage) {
+                    principlePage.classList.add('content-revealed');
+                }
+                
+                // Step 2: Toggle is already checked (from click), so title becomes green automatically
+                // Step 3: After title moves up (0.3s), show content
+                setTimeout(function() {
+                    if (content) {
+                        content.style.display = 'block';
+                        content.classList.remove('content-hidden');
+                    }
+                    
+                    // Step 4: After content appears, trigger finger animation (random delay 300-1000ms)
+                    var delay = Math.random() * 700 + 300;
+                    toggleTimeout = setTimeout(function() {
+                        // Trigger finger animation by adding class
+                        var container = toggle.closest('.toggles.useless');
+                        if (container) {
+                            container.classList.add('finger-push');
+                            // Uncheck toggle when finger pushes (after fade-in + 0.15s wait = ~180ms)
+                            setTimeout(function() {
+                                toggle.checked = false;
+                            }, 180);
+                            // Remove animation class after animation completes (600ms)
+                            setTimeout(function() {
+                                container.classList.remove('finger-push');
+                            }, 600);
+                        } else {
+                            toggle.checked = false;
+                        }
+                        toggleTimeout = null;
+                    }, delay);
+                }, 300); // Wait for title transition (0.3s)
+            } else if (toggle.checked && contentShown) {
+                // If content already shown, just handle finger animation
                 if (toggleTimeout) {
                     clearTimeout(toggleTimeout);
                 }
-                // Random delay between 300-1000ms
                 var delay = Math.random() * 700 + 300;
                 toggleTimeout = setTimeout(function() {
-                    // Trigger finger animation by adding class
                     var container = toggle.closest('.toggles.useless');
                     if (container) {
                         container.classList.add('finger-push');
-                        // Uncheck toggle earlier and faster (after fade-in + 0.15s wait = ~180ms)
-                        // Animation: fade-in (5% of 600ms = 30ms) + wait (0.15s = 150ms) = 180ms
                         setTimeout(function() {
                             toggle.checked = false;
                         }, 180);
-                        // Remove animation class after animation completes (600ms)
                         setTimeout(function() {
                             container.classList.remove('finger-push');
                         }, 600);
@@ -64,8 +100,8 @@
 </head>
 <body>
     <div class="close-button-container">
-        <a href="../../index.html" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
         <span class="close-button-label">ESC</span>
+        <a href="../../index.html" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
     </div>
     <div class="principle-page">
         <h1 class="principle principle-title toggles useless">
@@ -73,7 +109,7 @@
             <input type="checkbox" name="designers-should-code" id="designers-should-code" onclick="toggleDesignersCode()">
             <label for="designers-should-code"></label>
         </h1>
-        <div class="principle-content">
+        <div class="principle-content content-hidden" style="display: none;">
             <p class="money-quote">
                 Obviously, it's more nuanced. But it's also really simple: designers should understand the final material in which their work will, well, materialize. 
             </p>
@@ -86,14 +122,17 @@
             <p class="money-quote">
                 And so you do. And because you know what you're talking about, your new crew trusts you. 
             </p>
+            <p class="money-quote dinkus">
+                ♦ ♦ ♦
+            </p>
             <p class="money-quote">
                 Snap. You're a designer. You don't know any code. How are you going to know what the best solution is? Let alone convince a whole team of engineers to follow your lead?
             </p>
         </div>
-        <div class="nav-buttons">
-            <a href="../before-and-after/index.html" class="nav-button">←</a>
-            <a href="../design/index.html" class="nav-button">→</a>
-        </div>
+    </div>
+    <div class="nav-buttons">
+        <a href="../before-and-after/index.html" class="nav-button">➠</a>
+        <a href="../design/index.html" class="nav-button">➠</a>
     </div>
 </body>
 </html>

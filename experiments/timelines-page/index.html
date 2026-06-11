@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project timelines that don't suck - ernst.works</title>
+    <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+    <script>
+        // Set nav-direction CSS vars before paint to drive view transitions
+        (function() {
+            var d = sessionStorage.getItem('nav-direction');
+            document.documentElement.style.setProperty('--vt-new-animation',
+                d === 'backward' ? 'push-in-from-top' : 'push-in-from-bottom');
+            document.documentElement.style.setProperty('--vt-old-animation',
+                d === 'backward' ? 'push-out-to-bottom' : 'push-out-to-top');
+            sessionStorage.removeItem('nav-direction');
+        })();
+
+        // Seed localStorage with preset data for first-time visitors
+        (function() {
+            if (!localStorage.getItem('timeline-autosave')) {
+                localStorage.setItem('timeline-autosave', JSON.stringify({
+                    timeline: {
+                        startDate: "2026-01-05",
+                        zoom: 1,
+                        scrollPosition: 0,
+                        lastBadgeValue: "XD",
+                        items: [
+                            { type: "block", id: "1", startDate: "2026-01-05", duration: 10, label: "overthink scope", row: 0, badge: "PM" },
+                            { type: "block", id: "2", startDate: "2026-01-26", duration: 14, label: "make it perfect", row: 1, badge: "DS" },
+                            { type: "block", id: "3", startDate: "2026-02-02", duration: 28, label: "just ship it", row: 2, badge: "XD" },
+                            { type: "block", id: "4", startDate: "2026-03-02", duration: 5, label: "pivot", row: 0, badge: "PM" }
+                        ],
+                        annotations: [
+                            { type: "annotation", id: "5", date: "2026-02-23", row: 0, text: "deadline 😬" }
+                        ]
+                    },
+                    offTimeline: { blocks: [] }
+                }));
+            }
+        })();
+
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                sessionStorage.setItem('nav-direction', 'backward');
+                window.location.href = '/experiments/index.html';
+            }
+        });
+    </script>
+    <style>
+        @view-transition {
+            navigation: auto;
+            types: forward, backward;
+        }
+
+        @keyframes push-in-from-bottom {
+            from { transform: translateY(100%); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+        @keyframes push-in-from-top {
+            from { transform: translateY(-100%); opacity: 0; }
+            to   { transform: translateY(0);     opacity: 1; }
+        }
+        @keyframes push-out-to-top {
+            from { transform: translateY(0);    opacity: 1; }
+            to   { transform: translateY(-100%); opacity: 0; }
+        }
+        @keyframes push-out-to-bottom {
+            from { transform: translateY(0);   opacity: 1; }
+            to   { transform: translateY(100%); opacity: 0; }
+        }
+
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.5s;
+            animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        ::view-transition-new(root) { animation-name: var(--vt-new-animation, push-in-from-bottom); }
+        ::view-transition-old(root) { animation-name: var(--vt-old-animation, push-out-to-top); }
+
+        ::view-transition-old(close-button),
+        ::view-transition-new(close-button) { animation: none; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            height: 100%;
+            background: rgb(6, 8, 18);
+            overflow: hidden;
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-button-container {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            z-index: 10000;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+            view-transition-name: close-button;
+        }
+
+        .close-button-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: "Henrietta Regular", sans-serif;
+            pointer-events: none;
+        }
+
+        .close-button {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+
+        .close-button:active { transform: scale(0.95); }
+
+        @media (max-width: 480px) {
+            .close-button-container { top: 1rem; right: 1rem; }
+            .close-button { min-width: 44px; min-height: 44px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="close-button-container">
+        <span class="close-button-label">ESC</span>
+        <a href="/experiments/index.html"
+           class="close-button"
+           onclick="sessionStorage.setItem('nav-direction','backward')">×</a>
+    </div>
+    <iframe src="/experiments/timelines-demo/vanilla-gsap/index.html" title="Timeline editor"></iframe>
+</body>
+</html>

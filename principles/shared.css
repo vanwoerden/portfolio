@@ -40,11 +40,13 @@ body {
 .principle-page {
   view-transition-name: content;
   max-width: 820px;
-  width: 100%;
   padding: 0.2rem 0 0 0;
   transition: align-self 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.principle-content {
+  margin-top: 2rem;
+}
 .principle-page:has(.principle-content.content-hidden) {
   align-self: flex-start;
   margin-top: calc(50vh - 0.5rem);
@@ -53,7 +55,7 @@ body {
 
 .principle-page.content-revealed {
   align-self: flex-start;
-  margin-top: 2rem;
+  margin-top: 8rem;
 }
 
 /* Title with view transition */

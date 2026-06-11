@@ -1,0 +1,150 @@
+/* Scoped to interactive timeline on seeing-it-through-together */
+
+.timeline-playground {
+  margin-top: 2.5rem;
+  padding-bottom: 1rem;
+}
+
+.timeline-playground .tp-form {
+  margin: 1rem 0 0.5rem 0;
+}
+
+.timeline-playground .tp-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 0.75rem 1rem;
+  align-items: end;
+}
+
+.timeline-playground .tp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.timeline-playground .tp-field-wide {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 520px) {
+  .timeline-playground .tp-field-wide {
+    grid-column: span 2;
+  }
+}
+
+.timeline-playground .tp-field label {
+  font-family: "Henrietta Regular", sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.timeline-playground .tp-field input,
+.timeline-playground .tp-field select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  background: rgba(9, 8, 21, 0.6);
+  color: var(--very-light-yellow-darker, rgba(255, 255, 255, 0.9));
+  max-width: 100%;
+}
+
+.timeline-playground .tp-field select {
+  cursor: pointer;
+}
+
+.timeline-playground .tp-summary {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.timeline-playground .tp-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+  margin: 0 -0.25rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.timeline-playground .tp-chart {
+  display: inline-block;
+  min-width: min-content;
+  position: relative;
+  vertical-align: top;
+}
+
+.timeline-playground .tp-chart-inner {
+  position: relative;
+  padding-top: 0.35rem;
+}
+
+.timeline-playground .tp-target-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-right: 2px dashed rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.timeline-playground .tp-target-label {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+}
+
+.timeline-playground .tp-weeks-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 6px;
+  margin-left: 112px; /* align with .blocks: min-width label + margin */
+}
+
+.timeline-playground .tp-week-cell {
+  width: 20px;
+  min-width: 20px;
+  height: 18px;
+  font-size: 0.55rem;
+  line-height: 18px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  box-sizing: border-box;
+}
+
+.timeline-playground .tp-week-cell.tp-week-tick {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Match style-million .discipline-label width for alignment */
+.timeline-playground .discipline-container .discipline-label {
+  min-width: 100px;
+}
+
+.timeline-playground .block.tp-idle {
+  background: rgb(37, 19, 34);
+  color: #555555;
+}
+
+.timeline-playground .block.tp-project {
+  color: black;
+  border: 1px solid black;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-playground .tp-field input,
+  .timeline-playground .tp-field select {
+    transition: none;
+  }
+}

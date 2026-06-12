@@ -42,6 +42,10 @@
                     footerWrapper.classList.toggle('footer-visible');
                 }
             }
+            if (event.key === 'ArrowUp') {
+                sessionStorage.setItem('nav-direction', 'backward');
+                window.location.href = '/experiments';
+            }
         });
     </script>
     <script>

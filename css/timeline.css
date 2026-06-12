@@ -13,11 +13,12 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(
+    background: repeating-linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.1) 0%,
-        rgba(0, 0, 0, 0.15) 50%,
-        rgba(0, 0, 0, 0.1) 100%
+        rgba(255, 255, 255, 0.18) 0px,
+        rgba(255, 255, 255, 0.18) 6px,
+        transparent 6px,
+        transparent 10px
     );
     z-index: 1;
     pointer-events: none;

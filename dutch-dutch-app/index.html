@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dutch & Dutch App - ernst.works</title>
+    <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style-million.css">
+    <script>
+        (function() {
+            const d = sessionStorage.getItem('nav-direction');
+            if (d === 'backward') {
+                document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-top');
+                document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-bottom');
+            } else {
+                document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-bottom');
+                document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-top');
+            }
+            sessionStorage.removeItem('nav-direction');
+        })();
+    </script>
+    <style>
+        @view-transition { navigation: auto; types: forward, backward; }
+        @keyframes push-in-from-bottom { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes push-in-from-top    { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes push-out-to-top     { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-100%); opacity: 0; } }
+        @keyframes push-out-to-bottom  { from { transform: translateY(0); opacity: 1; } to { transform: translateY(100%); opacity: 0; } }
+        ::view-transition-new(root) { animation-name: var(--vt-new-animation, push-in-from-bottom); animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); }
+        ::view-transition-old(root) { animation-name: var(--vt-old-animation, push-out-to-top); animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); }
+
+        /* Page layout */
+        .dd-page {
+            padding: 0 8vw 8rem 8vw;
+            max-width: 1400px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .dd-header {
+            padding: 7rem 0 3rem 0;
+        }
+
+        .dd-header h1 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: var(--very-light-yellow);
+            margin: 0 0 0.5rem 0;
+            line-height: 1.1;
+        }
+
+        .dd-header .dd-subtitle {
+            font-size: 1.1rem;
+            color: var(--very-light-yellow-darker);
+            margin: 0;
+            max-width: 560px;
+            line-height: 1.6;
+        }
+
+        /* Bento grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 80px;
+            gap: 12px;
+        }
+
+        /* Base tile */
+        .tile {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background: rgb(20, 18, 34);
+        }
+
+        /* Tile size variants */
+        .tile--hero        { grid-column: span 12; grid-row: span 5; }
+        .tile--wide        { grid-column: span 8;  grid-row: span 5; }
+        .tile--tall        { grid-column: span 4;  grid-row: span 5; }
+        .tile--medium      { grid-column: span 6;  grid-row: span 4; }
+        .tile--small       { grid-column: span 4;  grid-row: span 4; }
+        .tile--squat       { grid-column: span 4;  grid-row: span 3; }
+        .tile--banner      { grid-column: span 8;  grid-row: span 3; }
+        .tile--strip       { grid-column: span 12; grid-row: span 3; }
+        .tile--third       { grid-column: span 4;  grid-row: span 4; }
+
+        /* Image tile */
+        .tile--image .tile-label,
+        .tile--video .tile-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--very-light-yellow-darker);
+            text-align: center;
+            padding: 1rem;
+            background: rgb(20, 18, 34);
+            border: 1px dashed rgba(255, 250, 224, 0.12);
+        }
+
+        .tile--video .tile-label::before {
+            content: "▶";
+            display: block;
+            font-size: 1.4rem;
+            color: rgba(255, 250, 224, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .tile--video .tile-label {
+            flex-direction: column;
+        }
+
+        /* Text tiles */
+        .tile--text {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem 1.8rem;
+            background: rgb(16, 14, 28);
+            border: 1px solid rgba(255, 250, 224, 0.07);
+        }
+
+        /* Heading tile */
+        .tile--heading {
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem 1.8rem;
+            background: rgb(16, 14, 28);
+            border: 1px solid rgba(255, 250, 224, 0.07);
+        }
+
+        .tile--heading h2 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+            color: var(--very-light-yellow);
+            margin: 0;
+            line-height: 1.15;
+        }
+
+        /* Stat tile */
+        .tile--stat {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 1.5rem 1.8rem;
+            background: rgb(16, 14, 28);
+            border: 1px solid rgba(255, 250, 224, 0.07);
+        }
+
+        .tile__stat-number {
+            font-family: "Henrietta Regular";
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            color: var(--very-light-yellow);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .tile__stat-label {
+            font-size: 0.85rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.4;
+        }
+
+        /* Description tile */
+        .tile--description {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 2.2rem;
+            background: rgb(16, 14, 28);
+            border: 1px solid rgba(255, 250, 224, 0.07);
+        }
+
+        .tile--description p {
+            font-size: 1rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .tile--description h3 {
+            font-family: "Henrietta Regular";
+            font-size: 1.3rem;
+            color: var(--very-light-yellow);
+            margin: 0 0 0.6rem 0;
+        }
+
+        /* Tag tile */
+        .tile--tags {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 1.5rem;
+            background: rgb(16, 14, 28);
+            border: 1px solid rgba(255, 250, 224, 0.07);
+        }
+
+        .tile-tag {
+            font-size: 0.78rem;
+            color: var(--very-light-yellow-darker);
+            border: 1px solid rgba(255, 250, 224, 0.15);
+            border-radius: 4px;
+            padding: 0.2rem 0.55rem;
+        }
+
+        /* Accent color tiles */
+        .tile--accent-green {
+            background: rgb(10, 36, 20);
+            border: 1px solid rgba(144, 238, 144, 0.15);
+        }
+
+        .tile--accent-blue {
+            background: rgb(10, 18, 40);
+            border: 1px solid rgba(173, 216, 230, 0.15);
+        }
+
+        /* Close button */
+        .dd-close {
+            position: fixed;
+            top: 1.5rem;
+            right: 2rem;
+            background: rgba(255, 250, 224, 0.07);
+            border: 1px solid rgba(255, 250, 224, 0.15);
+            border-radius: 8px;
+            color: var(--very-light-yellow-darker);
+            font-size: 0.8rem;
+            padding: 0.35rem 0.7rem;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: "Kumbh Sans", sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background 0.15s, color 0.15s;
+            z-index: 100;
+        }
+
+        .dd-close:hover, .dd-close:visited {
+            background: rgba(255, 250, 224, 0.13);
+            color: var(--very-light-yellow);
+            text-decoration: none;
+        }
+
+        .dd-close kbd {
+            font-size: 0.75rem;
+            background: rgba(255, 250, 224, 0.1);
+            border-radius: 4px;
+            padding: 0.1rem 0.35rem;
+            font-family: inherit;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .bento-grid {
+                grid-template-columns: repeat(6, 1fr);
+                grid-auto-rows: 70px;
+                gap: 10px;
+            }
+            .tile--hero        { grid-column: span 6; grid-row: span 5; }
+            .tile--wide        { grid-column: span 6; grid-row: span 5; }
+            .tile--tall        { grid-column: span 3; grid-row: span 5; }
+            .tile--medium      { grid-column: span 6; grid-row: span 4; }
+            .tile--small       { grid-column: span 3; grid-row: span 4; }
+            .tile--squat       { grid-column: span 3; grid-row: span 3; }
+            .tile--banner      { grid-column: span 6; grid-row: span 3; }
+            .tile--strip       { grid-column: span 6; grid-row: span 3; }
+            .tile--third       { grid-column: span 3; grid-row: span 4; }
+        }
+
+        @media (max-width: 600px) {
+            .dd-page { padding: 0 5vw 5rem 5vw; }
+            .bento-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: 90px;
+                gap: 8px;
+            }
+            .tile--hero, .tile--wide, .tile--medium, .tile--banner, .tile--strip { grid-column: span 2; }
+            .tile--tall, .tile--small, .tile--squat, .tile--third { grid-column: span 1; }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    sessionStorage.setItem('nav-direction', 'backward');
+                    window.location.href = '../index.html';
+                }
+            });
+
+            // Mobile navigation toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const navContainer = document.querySelector('.nav-container');
+            const navOverlay = document.querySelector('.nav-overlay');
+
+            function toggleNav() {
+                const isOpen = navContainer.classList.contains('nav-open');
+                navContainer.classList.toggle('nav-open');
+                navToggle.classList.toggle('nav-toggle-open');
+                navToggle.setAttribute('aria-expanded', !isOpen);
+                if (navOverlay) navOverlay.classList.toggle('active');
+            }
+
+            if (navToggle && navContainer) {
+                navToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleNav();
+                });
+                if (navOverlay) navOverlay.addEventListener('click', toggleNav);
+                document.addEventListener('click', function(event) {
+                    if (navContainer.classList.contains('nav-open') &&
+                        !navContainer.contains(event.target) &&
+                        !navToggle.contains(event.target)) {
+                        toggleNav();
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <a class="dd-close" href="../index.html"
+       onclick="sessionStorage.setItem('nav-direction','backward')">
+        <kbd>ESC</kbd> Close
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+    </button>
+    <div class="nav-overlay"></div>
+
+    <div class="dd-page">
+        <header class="dd-header">
+            <h1>Smart speaker companion app<br>for Dutch & Dutch</h1>
+            <p class="dd-subtitle">
+                Dutch & Dutch make award-winning active loudspeakers. I'm redesigning the companion app that lets users set up and control their speakers across iOS, Android, and desktop.
+            </p>
+        </header>
+
+        <div class="bento-grid">
+
+            <!-- Row 1: hero image + stat -->
+            <div class="tile tile--image tile--wide">
+                <div class="tile-label">Hero image — app on phone next to speaker</div>
+            </div>
+            <div class="tile tile--stat tile--tall">
+                <div class="tile__stat-number">4</div>
+                <div class="tile__stat-label">Platforms<br>iOS · Android · macOS · Windows</div>
+            </div>
+
+            <!-- Row 2: description + stats -->
+            <div class="tile tile--description tile--medium">
+                <h3>The challenge</h3>
+                <p>Dutch & Dutch speakers are technically sophisticated — DSP filters, room correction, multiple inputs. The existing app exposes all of this complexity at once. The redesign puts the listening experience first.</p>
+            </div>
+            <div class="tile tile--stat tile--small">
+                <div class="tile__stat-number">8C</div>
+                <div class="tile__stat-label">Flagship model, the starting point for the redesign</div>
+            </div>
+            <div class="tile tile--stat tile--small">
+                <div class="tile__stat-number">3</div>
+                <div class="tile__stat-label">Speaker models supported in the new app</div>
+            </div>
+
+            <!-- Row 3: heading + image + image -->
+            <div class="tile tile--heading tile--squat">
+                <h2>Setup flow</h2>
+            </div>
+            <div class="tile tile--image tile--banner">
+                <div class="tile-label">Setup flow — step-by-step onboarding screens</div>
+            </div>
+
+            <!-- Row 4: video + stat + tags -->
+            <div class="tile tile--video tile--small">
+                <div class="tile-label">Volume control interaction demo</div>
+            </div>
+            <div class="tile tile--stat tile--squat tile--accent-green">
+                <div class="tile__stat-number">−40dB</div>
+                <div class="tile__stat-label">Dynamic range of the custom volume slider</div>
+            </div>
+            <div class="tile tile--video tile--small">
+                <div class="tile-label">Room correction wizard walkthrough</div>
+            </div>
+
+            <!-- Row 5: wide image -->
+            <div class="tile tile--image tile--strip">
+                <div class="tile-label">Full speaker lineup — 8C, 4C, Arc — rendered in all available finishes</div>
+            </div>
+
+            <!-- Row 6: tags + description + stat -->
+            <div class="tile tile--tags tile--squat">
+                <span class="tile-tag">iOS</span>
+                <span class="tile-tag">Android</span>
+                <span class="tile-tag">Figma</span>
+                <span class="tile-tag">SwiftUI</span>
+                <span class="tile-tag">Xcode</span>
+                <span class="tile-tag">D3.js</span>
+                <span class="tile-tag">DSP</span>
+            </div>
+            <div class="tile tile--description tile--banner">
+                <h3>Frequency response</h3>
+                <p>A custom D3.js graph gives audiophile users direct control over EQ curves — designed to feel familiar to studio engineers while remaining accessible to enthusiasts.</p>
+            </div>
+
+            <!-- Row 7: image pair + stat -->
+            <div class="tile tile--image tile--small">
+                <div class="tile-label">Before — existing app home screen</div>
+            </div>
+            <div class="tile tile--image tile--small">
+                <div class="tile-label">After — redesigned home screen</div>
+            </div>
+            <div class="tile tile--stat tile--small tile--accent-blue">
+                <div class="tile__stat-number">2025</div>
+                <div class="tile__stat-label">Ongoing project started in 2024</div>
+            </div>
+
+            <!-- Row 8: heading full width -->
+            <div class="tile tile--heading tile--strip">
+                <h2>Designing with the hardware, not around it.</h2>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

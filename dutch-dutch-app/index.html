@@ -50,12 +50,13 @@
         }
 
         .dd-header .dd-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             color: var(--very-light-yellow-darker);
-            margin: 0;
-            max-width: 560px;
-            line-height: 1.6;
+            margin: 0 0 1.25rem 0;
+            max-width: 680px;
+            line-height: 1.7;
         }
+        .dd-header .dd-subtitle:last-child { margin-bottom: 0; }
 
         /* Bento grid */
         .bento-grid {
@@ -335,9 +336,11 @@
     <div class="dd-page">
         <header class="dd-header">
             <h1>Smart speaker companion app<br>for Dutch & Dutch</h1>
-            <p class="dd-subtitle">
-                Dutch & Dutch make award-winning active loudspeakers. I'm redesigning the companion app that lets users set up and control their speakers across iOS, Android, and desktop.
-            </p>
+            <p class="dd-subtitle">Dutch & Dutch make award-winning loudspeakers. Typical active loudspeakers might offer some limited controls to adjust the speaker's output. Some do this with physical switches, other brands offer companion apps.</p>
+            <p class="dd-subtitle">Dutch & Dutch go pretty far with this. Their app lets users control gain, mute, sleep, input source, phase mode, EQ. But that's just the start. The 8c and 6c speakers allow users to set the placement of the speakers within the room, and the so-called listening triangle. Based on those measurements, the speakers can adjust their output to achieve better sound quality in the room.</p>
+            <p class="dd-subtitle">And then to take things even further, it's possible to calibrate the speakers by recording a series of frequency sweeps, analyzing the response, and generating a set of EQ filters to—quite literally—flatten the room response curve.</p>
+            <p class="dd-subtitle">When I joined the project, the 6c (a smaller, new and improved version of the 8c) were being developed. The existing app had been accruing some design debt, experience rot. And the 6c's would have new hardware which would also require a software update.</p>
+            <p class="dd-subtitle">But the company also saw an opportunity in creating a platform to make "dumb" speakers smart.</p>
         </header>
 
         <div class="bento-grid">

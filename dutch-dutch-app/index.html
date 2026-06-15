@@ -291,14 +291,14 @@
 
         /* Goals carousel */
         .goals-section {
-            margin: 0 0 4rem 0;
+            margin: 2rem -8vw 3rem -8vw;
         }
 
         .goals-section h2 {
             font-family: "Henrietta Regular";
             font-size: clamp(1rem, 1.8vw, 1.3rem);
             color: var(--very-light-yellow-darker);
-            margin: 0 0 1.2rem 0;
+            margin: 0 0 1.2rem 8vw;
             letter-spacing: 0.05em;
             text-transform: uppercase;
             font-weight: normal;
@@ -306,7 +306,6 @@
 
         .goals-carousel-outer {
             position: relative;
-            max-width: 820px;
         }
 
         .goals-track {
@@ -315,7 +314,7 @@
             scroll-behavior: smooth;
             display: flex;
             gap: 1rem;
-            padding: 0.4rem 0;
+            padding: 0.4rem 8vw;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
@@ -367,8 +366,8 @@
 
         .carousel-btn:hover { background: rgba(255, 250, 224, 0.12); }
         .carousel-btn:disabled { opacity: 0.25; cursor: default; }
-        .carousel-btn--prev { left: -1.2rem; }
-        .carousel-btn--next { right: -1.2rem; }
+        .carousel-btn--prev { left: 1rem; }
+        .carousel-btn--next { right: 1rem; }
 
         @media (max-width: 600px) {
             .carousel-btn { display: none; }
@@ -465,29 +464,28 @@
             <h1>Smart speaker companion app<br>for Dutch & Dutch</h1>
             <p class="dd-intro">Dutch & Dutch make award-winning loudspeakers.</p>
             <img src="/img/6c_orange_wave.jpg" alt="Dutch & Dutch 6c in orange wave finish" class="dd-hero-image">
+            <section class="goals-section">
+                <h2>Project goals</h2>
+                <div class="goals-carousel-outer">
+                    <button class="carousel-btn carousel-btn--prev" id="goalsPrev" aria-label="Previous" disabled>&#8592;</button>
+                    <div class="goals-track" id="goalsTrack">
+                        <div class="goal-card"><p>New software platform to get ready for the next generation of speakers</p></div>
+                        <div class="goal-card"><p>Reduce time, effort, cost of manual support and setup, while still offering a best in class experience with all the bells and whistles the 8c and 6c have to offer</p></div>
+                        <div class="goal-card"><p>Have a higher % of users fully use all the goodness the 6c and 8c have to offer</p></div>
+                        <div class="goal-card"><p>Bring a social aspect into the userbase and app</p></div>
+                        <div class="goal-card"><p>Make the app more stable, especially when connecting to and detecting devices</p></div>
+                        <div class="goal-card"><p>Offer the app on more platforms</p></div>
+                        <div class="goal-card"><p>Work towards a platform that other speaker brands can build on</p></div>
+                    </div>
+                    <button class="carousel-btn carousel-btn--next" id="goalsNext" aria-label="Next">&#8594;</button>
+                </div>
+            </section>
             <p class="dd-subtitle">Typical active loudspeakers might offer some limited controls to adjust the speaker's output. Some do this with physical switches, other brands offer companion apps.</p>
             <p class="dd-subtitle">Dutch & Dutch go pretty far with this. Their app lets users control gain, mute, sleep, input source, phase mode, EQ. But that's just the start. The 8c and 6c speakers allow users to set the placement of the speakers within the room, and the so-called listening triangle. Based on those measurements, the speakers can adjust their output to achieve better sound quality in the room.</p>
             <p class="dd-subtitle">And then to take things even further, it's possible to calibrate the speakers by recording a series of frequency sweeps, analyzing the response, and generating a set of EQ filters to—quite literally—flatten the room response curve.</p>
             <p class="dd-subtitle">When I joined the project, the 6c (a smaller, new and improved version of the 8c) were being developed. The existing app had been accruing some design debt, experience rot. And the 6c's would have new hardware which would also require a software update.</p>
             <p class="dd-subtitle">But the company also saw an opportunity in creating a platform to make "dumb" speakers smart.</p>
         </header>
-
-        <section class="goals-section">
-            <h2>Project goals</h2>
-            <div class="goals-carousel-outer">
-                <button class="carousel-btn carousel-btn--prev" id="goalsPrev" aria-label="Previous" disabled>&#8592;</button>
-                <div class="goals-track" id="goalsTrack">
-                    <div class="goal-card"><p>New software platform to get ready for the next generation of speakers</p></div>
-                    <div class="goal-card"><p>Reduce time, effort, cost of manual support and setup, while still offering a best in class experience with all the bells and whistles the 8c and 6c have to offer</p></div>
-                    <div class="goal-card"><p>Have a higher % of users fully use all the goodness the 6c and 8c have to offer</p></div>
-                    <div class="goal-card"><p>Bring a social aspect into the userbase and app</p></div>
-                    <div class="goal-card"><p>Make the app more stable, especially when connecting to and detecting devices</p></div>
-                    <div class="goal-card"><p>Offer the app on more platforms</p></div>
-                    <div class="goal-card"><p>Work towards a platform that other speaker brands can build on</p></div>
-                </div>
-                <button class="carousel-btn carousel-btn--next" id="goalsNext" aria-label="Next">&#8594;</button>
-            </div>
-        </section>
 
         <div class="bento-grid">
 

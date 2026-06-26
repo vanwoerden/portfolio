@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Test</title>
+</head>
+<body>
+    <h1>CSV Data Test</h1>
+    <div id="output"></div>
+    
+    <script>
+        async function testCSV() {
+            try {
+                const response = await fetch('freq_response_mock.csv');
+                const csvText = await response.text();
+                
+                const lines = csvText.trim().split('\n');
+                const data = [];
+                
+                for (let i = 1; i < lines.length; i++) {
+                    const [frequency, dbValue] = lines[i].split(',');
+                    data.push({
+                        frequency: parseFloat(frequency),
+                        dbSPL: parseFloat(dbValue)
+                    });
+                }
+                
+                document.getElementById('output').innerHTML = `
+                    <h2>CSV Data Loaded Successfully!</h2>
+                    <p>Total data points: ${data.length}</p>
+                    <p>First data point: ${data[0].frequency}Hz, ${data[0].dbSPL}dB</p>
+                    <p>Last data point: ${data[data.length - 1].frequency}Hz, ${data[data.length - 1].dbSPL}dB</p>
+                    <h3>First 5 data points:</h3>
+                    <ul>
+                        ${data.slice(0, 5).map(d => `<li>${d.frequency}Hz: ${d.dbSPL}dB</li>`).join('')}
+                    </ul>
+                `;
+            } catch (error) {
+                document.getElementById('output').innerHTML = `<p style="color: red;">Error loading CSV: ${error.message}</p>`;
+            }
+        }
+        
+        testCSV();
+    </script>
+</body>
+</html>
+

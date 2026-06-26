@@ -28,6 +28,10 @@
   --darkgray: rgb(29, 26, 35);
   --darkblue: rgb(9, 8, 21);
   --gray: rgb(67, 67, 70);
+  --link-underline-start: #2F2E6B;
+  --link-underline-end: #5452B7;
+  --link-underline-color: #5452B7;
+  --link-underline-gradient: linear-gradient(to bottom, transparent 0%, transparent 60%, var(--link-underline-start) 60%, var(--link-underline-end) 100%);
 }
 
 html {
@@ -48,13 +52,32 @@ body {
 
 a, a:hover, a:visited {
     color: rgb(240, 78, 255);
-    text-decoration: underline;
+    text-decoration: none;
+    background: var(--link-underline-gradient);
 }
+
+.nav-link,
+.nav-link:hover,
+.nav-link:visited,
+.menu > ol > li > a,
+.menu > ol > li > a:hover,
+a.project-card,
+a.project-link,
+a.dd-key,
+a.dd-project-card,
+.dd-breadcrumb a,
+.dd-breadcrumb a:hover,
+.dd-breadcrumb a:visited {
+    background: none;
+}
+
 .nav-link {
   text-decoration: none;
 }
 .nav-link:hover {
   text-decoration: underline;
+  text-decoration-color: var(--link-underline-color);
+  text-underline-offset: 0.12em;
 }
 
 figcaption > a, a:hover, a:visited {
@@ -621,6 +644,8 @@ p.designer {
 span.fake-link {
   color: rgb(240, 78, 255);
   text-decoration: underline;
+  text-decoration-color: var(--link-underline-color);
+  text-underline-offset: 0.12em;
   cursor: pointer;
 }
 

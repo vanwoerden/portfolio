@@ -1,0 +1,42 @@
+---
+description: Do not use all caps in copy, labels, or CSS for this portfolio
+alwaysApply: true
+---
+
+# No all caps
+
+Never use all caps in this repo — in UI copy, CSS, or AI-written text.
+
+## CSS
+
+- Do not use `text-transform: uppercase`.
+- Do not add wide `letter-spacing` only to style shouted labels.
+
+```css
+/* Bad */
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Good */
+.kicker {
+  font-family: "Henrietta Regular";
+  color: var(--very-light-yellow-darker);
+}
+```
+
+## HTML and content
+
+- Write kickers, section labels, buttons, and callouts in **sentence case** or **title case**.
+- Do not type labels as `ADJUST VOLUME`, `PROJECT GOALS`, etc.
+- Prefer: `Adjust volume`, `Project goals`.
+
+## When editing existing code
+
+- If you touch a file that still uses all caps, remove the uppercase styling or rewrite the copy — do not add more.
+
+## Exceptions
+
+- Abbreviations and acronyms that are normally uppercase in prose: `EQ`, `UI`, `Esc` (keyboard key label).
+- Third-party assets or quoted text you must not change.

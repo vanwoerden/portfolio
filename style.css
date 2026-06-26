@@ -156,6 +156,7 @@ img.venn {
 span.toggle-link {
     color: blue;
     text-decoration: underline;
+    text-decoration-color: #5452B7;
     cursor: pointer;
 }
 .lean-container {

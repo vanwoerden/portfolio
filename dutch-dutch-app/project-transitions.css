@@ -1,0 +1,37 @@
+@view-transition {
+    navigation: auto;
+}
+
+@keyframes push-in-from-right {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes push-in-from-left {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes push-out-to-right {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes push-out-to-left {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-100%); opacity: 0; }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+::view-transition-new(root) {
+    animation-name: var(--vt-new-animation, push-in-from-right);
+}
+
+::view-transition-old(root) {
+    animation-name: var(--vt-old-animation, push-out-to-left);
+}

@@ -7,10 +7,15 @@
     <link rel="stylesheet" type="text/css" href="../css/fonts.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/style-million.css">
+    <link rel="stylesheet" type="text/css" href="/dutch-dutch-app/project-breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="/dutch-dutch-app/project-page.css">
     <script>
         (function() {
             const d = sessionStorage.getItem('nav-direction');
-            if (d === 'backward') {
+            if (d === 'sub-backward') {
+                document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-left');
+                document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-right');
+            } else if (d === 'backward') {
                 document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-top');
                 document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-bottom');
             } else {
@@ -38,24 +43,27 @@
         @keyframes push-in-from-top    { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes push-out-to-top     { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-100%); opacity: 0; } }
         @keyframes push-out-to-bottom  { from { transform: translateY(0); opacity: 1; } to { transform: translateY(100%); opacity: 0; } }
+        @keyframes push-in-from-right  { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes push-in-from-left   { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes push-out-to-right   { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+        @keyframes push-out-to-left    { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-100%); opacity: 0; } }
         ::view-transition-new(root) { animation-name: var(--vt-new-animation, push-in-from-bottom); animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); }
         ::view-transition-old(root) { animation-name: var(--vt-old-animation, push-out-to-top); animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); }
 
         :root {
             --dd-diagonal-angle: 28.2deg;
-            --dd-surface: rgb(20, 18, 34);
-            --dd-surface-deep: rgb(9, 8, 21);
             --dd-viewport-pad: 4rem;
             --dd-bg-cutback: 0.5rem;
             --dd-header-top: 7rem;
             --dd-h1-block: clamp(5rem, 14vh, 9rem);
-            --dd-image-lift: 3rem;
             --dd-devices-max-width: 680px;
             --dd-key-cell-w: 3.75rem;
             --dd-key-cell-h: 2.75rem;
             --dd-key-gap: 0.35rem;
             --dd-key-inset: 2rem;
             --dd-key-top: 1.5rem;
+            --dd-main-width: 640px;
+            --dd-layout-gap: clamp(1.5rem, 3vw, 2.5rem);
         }
 
         body {
@@ -72,7 +80,7 @@
             background: linear-gradient(
                 calc(180deg - var(--dd-diagonal-angle)),
                 var(--dd-surface-deep),
-                var(--dd-surface) 55%
+                var(--dd-bg-gradient-light) 55%
             );
             pointer-events: none;
             z-index: 0;
@@ -111,105 +119,192 @@
 
         .dd-layout {
             display: grid;
-            grid-template-columns: 640px 1fr;
+            grid-template-columns: var(--dd-main-width) 1fr;
             grid-template-rows: auto;
-            row-gap: 0;
-            column-gap: clamp(1.5rem, 3vw, 2.5rem);
+            column-gap: var(--dd-layout-gap);
             align-items: start;
-            margin: 0 -8vw 2rem -8vw;
+            margin: 0 -8vw 3rem -8vw;
             padding: 0 3vw 0 8vw;
         }
 
-        .dd-main--intro { grid-column: 1; align-self: start; }
+        .dd-layout:last-child {
+            margin-bottom: 0;
+        }
+
+        .dd-main {
+            grid-column: 1;
+            min-width: 0;
+        }
+
         .dd-aside {
             grid-column: 2;
-            grid-row: 1;
-            align-self: start;
+            min-width: 0;
             display: flex;
             flex-direction: column;
+            gap: 1.25rem;
             justify-content: flex-start;
         }
 
         .dd-aside .dd-figure {
             max-width: none;
-            margin-bottom: 0;
+            margin: 0;
         }
 
         .dd-aside .dd-figure figcaption {
             display: none;
         }
 
-        .dd-aside .dd-hero-image {
+        .dd-aside .dd-hero-image,
+        .dd-aside img {
             display: block;
-            width: auto;
+            width: 100%;
             max-width: min(var(--dd-devices-max-width), 100%);
             height: auto;
+            border-radius: 2rem;
         }
 
-        /* Short viewports: anchor devices image to the fold */
-        @media (max-height: 900px) and (min-width: 901px) {
-            .dd-hero-band {
-                min-height: calc(100dvh - var(--dd-viewport-pad) - var(--dd-header-top));
-            }
-
-            .dd-layout {
-                flex: 1;
-                min-height: 0;
-                grid-template-rows: 1fr;
-                align-items: end;
-            }
-
-            .dd-aside {
-                align-self: end;
-                min-height: 0;
-                justify-content: flex-end;
-            }
-
-            .dd-aside .dd-figure {
-                padding-bottom: var(--dd-viewport-pad);
-                transform: translateY(calc(-1 * var(--dd-image-lift)));
-            }
-
-            .dd-aside .dd-hero-image {
-                max-height: calc(100dvh - var(--dd-viewport-pad) - var(--dd-header-top) - var(--dd-h1-block));
-                object-fit: contain;
-            }
+        .dd-growth-image {
+            overflow: hidden;
+            border-radius: 2rem;
+            width: 100%;
+            max-width: min(var(--dd-devices-max-width), 100%);
+            /* aspect-ratio: 1296 / 342; */
+            line-height: 0;
         }
+
+        .dd-growth-image .dd-hero-image {
+            width: 100%;
+            height: auto;
+            max-width: none;
+            border-radius: 0;
+            display: block;
+        }
+
+        .dd-media-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 10rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            background: var(--dd-surface);
+            border: 1px dashed rgba(255, 250, 224, 0.12);
+            font-size: 0.85rem;
+            color: var(--very-light-yellow-darker);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .dd-block {
+            margin-bottom: 2rem;
+        }
+
+        .dd-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .dd-block h2 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+            color: var(--very-light-yellow);
+            margin: 0 0 0.75rem 0;
+            line-height: 1.15;
+            font-weight: normal;
+        }
+
+        .dd-block h3 {
+            font-family: "Henrietta Regular";
+            font-size: 1.4rem;
+            color: var(--very-light-yellow);
+            margin: 0 0 0.5rem 0;
+            line-height: 1.2;
+            font-weight: normal;
+        }
+
+        .dd-block p {
+            font-size: 1.6rem;
+            color: var(--very-light-yellow-darker);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .dd-stat {
+            margin-bottom: 1.5rem;
+        }
+
+        .dd-stat__number {
+            font-family: "Henrietta Regular";
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--very-light-yellow);
+            line-height: 1;
+            margin-bottom: 0.35rem;
+        }
+
+        .dd-stat__label {
+            font-size: 1.1rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.4;
+        }
+
+        .dd-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dd-tag {
+            font-size: 0.85rem;
+            color: var(--very-light-yellow-darker);
+            padding: 0.35rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 250, 224, 0.15);
+        }
+
+        /* Hero fold anchoring: see project-page.css */
 
         .dd-main .dd-intro,
         .dd-main .dd-subtitle {
             max-width: none;
         }
 
-        .dd-main .dd-intro {
-            margin-bottom: 1rem;
+        .dd-intro {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            color: var(--very-light-yellow);
+            margin: 0 0 1rem 0;
+            line-height: 1.25;
+        }
+
+        .dd-intro a,
+        .dd-intro a:visited {
+            color: inherit;
+            background: none;
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 250, 224, 0.35);
+            text-underline-offset: 0.14em;
+            text-decoration-thickness: 1px;
+            transition: text-decoration-color 0.2s ease;
+        }
+
+        .dd-intro a:hover {
+            text-decoration-color: rgba(255, 250, 224, 0.55);
         }
 
         .dd-meta {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin: 1.75rem 0 0 0;
-            display: flex;
             flex-direction: row;
-            column-gap: 1rem;
-            /* white-space: nowrap; */
+            flex-wrap: nowrap;
+            gap: 1rem;
+            margin: 1.75rem 0 0 0;
         }
 
         .dd-meta__item {
-            min-width: 0;
             flex: 0 0 auto;
-            max-width: 30%;
-            /* padding: 1rem 1.25rem; */
-            /* border: 1px solid var(--very-light-yellow-darkest); */
+            width: fit-content;
             background: var(--dd-surface);
             padding: 1.4rem;
             border-radius: 1.6rem;
-            width: fit-content;
-        }
-
-        .dd-meta__item:last-child {
-            max-width: 35%;
         }
 
         .dd-meta dt {
@@ -225,6 +320,7 @@
             color: var(--very-light-yellow-darker);
             margin: 0;
             line-height: 1.45;
+            white-space: nowrap;
         }
 
         .dd-traits {
@@ -236,7 +332,7 @@
 
         .dd-trait-card {
             border-radius: 1rem;
-            background: rgb(20, 18, 34);
+            background: var(--dd-surface);
             border: 1px solid rgba(255, 250, 224, 0.08);
             padding: 1.35rem 1.5rem;
         }
@@ -271,37 +367,12 @@
             line-height: 1.6;
         }
 
-        .dd-header .dd-intro {
-            font-family: "Henrietta Regular";
-            font-size: clamp(1.8rem, 3vw, 2.6rem);
-            color: var(--very-light-yellow);
-            margin: 0 0 1rem 0;
-            line-height: 1.25;
+        .dd-main .dd-subtitle + .dd-subtitle {
+            margin-top: 1rem;
         }
 
         .dd-hero-image {
-            width: 100%;
-            max-width: 640px;
             border-radius: 2rem;
-            display: block;
-            margin: 0 0 2.5rem 0;
-        }
-
-        .dd-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(1.5rem, 3vw, 2.5rem);
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .dd-split .dd-hero-image {
-            max-width: none;
-            margin-bottom: 0;
-        }
-
-        .dd-split .dd-subtitle {
-            max-width: none;
         }
 
         .dd-figure {
@@ -324,179 +395,13 @@
             width: 65%;
         }
 
-        /* Bento grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 80px;
-            gap: 12px;
-        }
-
-        /* Base tile */
-        .tile {
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            background: rgb(20, 18, 34);
-        }
-
-        /* Tile size variants */
-        .tile--hero        { grid-column: span 12; grid-row: span 5; }
-        .tile--wide        { grid-column: span 8;  grid-row: span 5; }
-        .tile--tall        { grid-column: span 4;  grid-row: span 5; }
-        .tile--medium      { grid-column: span 6;  grid-row: span 4; }
-        .tile--small       { grid-column: span 4;  grid-row: span 4; }
-        .tile--squat       { grid-column: span 4;  grid-row: span 3; }
-        .tile--banner      { grid-column: span 8;  grid-row: span 3; }
-        .tile--strip       { grid-column: span 12; grid-row: span 3; }
-        .tile--third       { grid-column: span 4;  grid-row: span 4; }
-
-        /* Image tile */
-        .tile--image .tile-label,
-        .tile--video .tile-label {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            color: var(--very-light-yellow-darker);
-            text-align: center;
-            padding: 1rem;
-            background: rgb(20, 18, 34);
-            border: 1px dashed rgba(255, 250, 224, 0.12);
-        }
-
-        .tile--video .tile-label::before {
-            content: "▶";
-            display: block;
-            font-size: 1.4rem;
-            color: rgba(255, 250, 224, 0.3);
-            margin-bottom: 0.5rem;
-        }
-
-        .tile--video .tile-label {
-            flex-direction: column;
-        }
-
-        /* Text tiles */
-        .tile--text {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 1.5rem 1.8rem;
-            background: rgb(16, 14, 28);
-            border: 1px solid rgba(255, 250, 224, 0.07);
-        }
-
-        /* Heading tile */
-        .tile--heading {
-            display: flex;
-            align-items: flex-end;
-            padding: 1.5rem 1.8rem;
-            background: rgb(16, 14, 28);
-            border: 1px solid rgba(255, 250, 224, 0.07);
-        }
-
-        .tile--heading h2 {
-            font-family: "Henrietta Regular";
-            font-size: clamp(1.8rem, 3.5vw, 3.2rem);
-            color: var(--very-light-yellow);
-            margin: 0;
-            line-height: 1.15;
-        }
-
-        /* Stat tile */
-        .tile--stat {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 1.5rem 1.8rem;
-            background: rgb(16, 14, 28);
-            border: 1px solid rgba(255, 250, 224, 0.07);
-        }
-
-        .tile__stat-number {
-            font-family: "Henrietta Regular";
-            font-size: clamp(2.8rem, 5vw, 4.5rem);
-            color: var(--very-light-yellow);
-            line-height: 1;
-            margin-bottom: 0.3rem;
-        }
-
-        .tile__stat-label {
-            font-size: 0.85rem;
-            color: var(--very-light-yellow-darker);
-            line-height: 1.4;
-        }
-
-        /* Description tile */
-        .tile--description {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 2rem 2.2rem;
-            background: rgb(16, 14, 28);
-            border: 1px solid rgba(255, 250, 224, 0.07);
-        }
-
-        .tile--description p {
-            font-size: 1rem;
-            color: var(--very-light-yellow-darker);
-            line-height: 1.7;
-            margin: 0;
-        }
-
-        .tile--description h3 {
-            font-family: "Henrietta Regular";
-            font-size: 1.3rem;
-            color: var(--very-light-yellow);
-            margin: 0 0 0.6rem 0;
-        }
-
-        /* Tag tile */
-        .tile--tags {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1.2rem 1.5rem;
-            background: rgb(16, 14, 28);
-            border: 1px solid rgba(255, 250, 224, 0.07);
-        }
-
-        .tile-tag {
-            font-size: 0.78rem;
-            color: var(--very-light-yellow-darker);
-            border: 1px solid rgba(255, 250, 224, 0.15);
-            border-radius: 4px;
-            padding: 0.2rem 0.55rem;
-        }
-
-        /* Accent color tiles */
-        .tile--accent-green {
-            background: rgb(10, 36, 20);
-            border: 1px solid rgba(144, 238, 144, 0.15);
-        }
-
-        .tile--accent-blue {
-            background: rgb(10, 18, 40);
-            border: 1px solid rgba(173, 216, 230, 0.15);
-        }
-
         /* Keyboard nav keys */
         .dd-close-group {
             position: fixed;
             top: var(--dd-key-top);
             left: var(--dd-key-inset);
-            z-index: 100;
-        }
-
-        .dd-home-group {
-            position: fixed;
-            top: calc(var(--dd-key-top) + var(--dd-key-cell-h) + var(--dd-key-gap));
-            right: calc(var(--dd-key-inset) + var(--dd-key-cell-w) + var(--dd-key-gap));
+            display: flex;
+            gap: var(--dd-key-gap);
             z-index: 100;
         }
 
@@ -553,95 +458,180 @@
             .dd-layout {
                 flex: none;
                 grid-template-columns: 1fr;
-                grid-template-rows: auto;
-                align-items: start;
+                margin-left: -5vw;
+                margin-right: -5vw;
+                padding-left: 5vw;
+                padding-right: 5vw;
             }
 
-            .dd-main--intro,
+            .dd-main,
             .dd-aside {
                 grid-column: auto;
+            }
+
+            .dd-layout--growth > .dd-intro,
+            .dd-layout--growth > .dd-growth-summary,
+            .dd-layout--growth > .dd-main,
+            .dd-layout--growth > .dd-aside {
+                grid-column: auto;
                 grid-row: auto;
-                align-self: auto;
-                display: block;
             }
 
             .dd-aside .dd-hero-image {
                 max-height: none;
             }
 
-            .dd-aside .dd-figure {
+            .dd-hero-band .dd-aside .dd-figure {
                 margin-bottom: 0;
                 padding-bottom: 0;
-                transform: none;
             }
 
-            .dd-split {
-                grid-template-columns: 1fr;
+            .dd-aside:empty {
+                display: none;
             }
-
-            .bento-grid {
-                grid-template-columns: repeat(6, 1fr);
-                grid-auto-rows: 70px;
-                gap: 10px;
-            }
-            .tile--hero        { grid-column: span 6; grid-row: span 5; }
-            .tile--wide        { grid-column: span 6; grid-row: span 5; }
-            .tile--tall        { grid-column: span 3; grid-row: span 5; }
-            .tile--medium      { grid-column: span 6; grid-row: span 4; }
-            .tile--small       { grid-column: span 3; grid-row: span 4; }
-            .tile--squat       { grid-column: span 3; grid-row: span 3; }
-            .tile--banner      { grid-column: span 6; grid-row: span 3; }
-            .tile--strip       { grid-column: span 6; grid-row: span 3; }
-            .tile--third       { grid-column: span 3; grid-row: span 4; }
         }
 
-        /* Goals carousel */
-        .goals-section {
-            margin: 2rem -8vw 3rem -8vw;
+        /* Design principles accordion */
+        .dd-principles {
+            margin: 0 0 1rem;
         }
 
-        .goals-section h2 {
+        .dd-principles-accordion {
+            border-radius: 1rem;
+            background: var(--dd-surface);
+            overflow: hidden;
+        }
+
+        .dd-principles-accordion__summary {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            color: var(--very-light-yellow);
+            margin: 0;
+            line-height: 1.25;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .dd-principles-accordion__summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dd-principles-accordion__summary::after {
+            content: "+";
+            flex-shrink: 0;
+            font-family: "Kumbh Sans", sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--very-light-yellow-darkest);
+            line-height: 1;
+        }
+
+        .dd-principles-accordion[open] .dd-principles-accordion__summary::after {
+            content: "−";
+        }
+
+        .dd-principles-accordion__panel {
+            padding: 0 1rem 1rem;
+        }
+
+        .dd-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .dd-accordion__item {
+            border-radius: 1rem;
+            background: var(--dd-surface);
+            overflow: hidden;
+        }
+
+        .dd-accordion__summary {
+            font-family: "Henrietta Regular";
+            font-size: 1.4rem;
+            color: var(--very-light-yellow);
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            line-height: 1.2;
+        }
+
+        .dd-accordion__summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dd-accordion__summary::after {
+            content: "+";
+            flex-shrink: 0;
+            font-family: "Kumbh Sans", sans-serif;
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--very-light-yellow-darkest);
+            line-height: 1;
+        }
+
+        .dd-accordion__item[open] .dd-accordion__summary::after {
+            content: "−";
+        }
+
+        .dd-accordion__panel {
+            padding: 0 1.5rem 1.35rem;
+        }
+
+        .dd-accordion__panel p {
+            font-size: 1.6rem;
+            color: var(--very-light-yellow-darker);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Project goals */
+        .dd-goals-section {
+            margin: 0 0 2rem;
+        }
+
+        .dd-goals-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .dd-goals-section h2 {
             font-family: "Henrietta Regular";
             font-size: clamp(1rem, 1.8vw, 1.3rem);
             color: var(--very-light-yellow-darker);
-            margin: 0 0 1.2rem 8vw;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            margin: 0 0 1.2rem 0;
             font-weight: normal;
         }
 
-        .goals-carousel-outer {
-            position: relative;
-        }
-
-        .goals-track {
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            display: flex;
+        .dd-goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
             gap: 1rem;
-            padding: 0.4rem 8vw;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
         }
 
-        .goals-track::-webkit-scrollbar { display: none; }
-
-        .goal-card {
-            flex-shrink: 0;
-            width: clamp(260px, 52vw, 400px);
-            height: 220px;
+        .dd-card {
+            min-height: 220px;
             border-radius: 1.5rem;
-            background: rgb(20, 18, 34);
-            border: 1px solid rgba(255, 250, 224, 0.08);
+            background: var(--dd-surface);
             padding: 1.8rem 2rem;
             display: flex;
             align-items: flex-start;
-            scroll-snap-align: start;
             box-sizing: border-box;
         }
 
-        .goal-card p {
+        .dd-card--bordered {
+            border: 1px solid rgba(255, 250, 224, 0.08);
+        }
+
+        .dd-card p {
             font-family: "Henrietta Regular";
             font-size: clamp(1.1rem, 2.2vw, 1.45rem);
             color: var(--very-light-yellow);
@@ -649,52 +639,257 @@
             margin: 0;
         }
 
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            background: rgba(9, 8, 21, 0.85);
-            border: 1px solid rgba(255, 250, 224, 0.2);
-            border-radius: 50%;
-            width: 2.4rem;
-            height: 2.4rem;
-            color: var(--very-light-yellow);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            transition: background 0.15s, border-color 0.15s, opacity 0.15s;
-            backdrop-filter: blur(4px);
-            padding: 0;
+        .dd-card p + p {
+            margin-top: 0.75rem;
         }
 
-        .carousel-btn:hover { background: rgba(255, 250, 224, 0.12); }
-        .carousel-btn:disabled { opacity: 0.25; cursor: default; }
-        .carousel-btn--prev { left: 1rem; }
-        .carousel-btn--next { right: 1rem; }
+        /* User archetypes */
+        .dd-archetypes-section h2 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            color: var(--very-light-yellow-darker);
+            margin: 0 0 1.2rem 0;
+            font-weight: normal;
+            max-width: var(--dd-main-width);
+        }
 
-        @media (max-width: 600px) {
-            .carousel-btn { display: none; }
-            .goal-card { width: 82vw; }
+        .dd-archetypes-intro {
+            font-size: 1.6rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.6;
+            margin: 0 0 1.5rem 0;
+            max-width: var(--dd-main-width);
+            position: relative;
+            z-index: 1;
+            padding: 0.6rem 0;
+        }
+
+        .dd-archetypes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.4rem;
+        }
+
+        .dd-card--archetype {
+            flex-direction: row;
+            align-items: stretch;
+            padding: 0;
+            overflow: hidden;
+            min-height: 220px;
+        }
+
+        .dd-card--archetype__media {
+            flex: 0 0 40%;
+            max-width: 40%;
+            min-width: 0;
+        }
+
+        .dd-card--archetype__media img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dd-card--archetype[data-user-archetype="home"] .dd-card--archetype__media img {
+            object-position: right center;
+        }
+
+        .dd-card--archetype__body {
+            flex: 1;
+            min-width: 0;
+            padding: 1.8rem 2rem;
+        }
+
+        .dd-card--archetype h3 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+            color: var(--very-light-yellow);
+            margin: 0 0 0.75rem 0;
+            line-height: 1.2;
+            font-weight: normal;
+        }
+
+        .dd-card--archetype p {
+            font-family: "Kumbh Sans", sans-serif;
+            font-size: 1.25rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        @media (max-width: 700px) {
+            .dd-archetypes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dd-archetypes-reveal {
+            transition: opacity 0.45s linear, transform 0.45s linear, visibility 0.45s linear;
+        }
+
+        .dd-user-links:not(.dd-user-links--unlocked) .dd-archetypes-reveal {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(0.75rem);
+        }
+
+        .dd-user-links--unlocked .dd-archetypes-reveal {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: none;
+        }
+
+        /* User archetype connector lines */
+        .dd-user-links {
+            position: relative;
+        }
+
+        .dd-user-links > .dd-layout {
+            position: relative;
+            z-index: 1;
+        }
+
+        .dd-all-users-anchor {
+            position: relative;
+            white-space: nowrap;
+            text-decoration: none;
+            cursor: pointer;
+            background-image: repeating-linear-gradient(
+                to right,
+                var(--link-underline-color, #5452B7) 0,
+                var(--link-underline-color, #5452B7) 6px,
+                transparent 6px,
+                transparent 10px
+            );
+            background-size: 10px 1px;
+            background-repeat: repeat-x;
+            background-position: left calc(100% - 0.05em);
+        }
+
+        .dd-user-links__svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: visible;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s linear, visibility 0.2s linear;
+        }
+
+        .dd-user-links--revealed .dd-user-links__svg,
+        .dd-user-links--unlocked .dd-user-links__svg {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dd-user-links__path {
+            fill: none;
+            stroke: var(--very-light-yellow-darker);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .dd-user-links__path--under {
+            stroke-width: 9;
+            opacity: 0.2;
+        }
+
+        .dd-user-links__path--main {
+            stroke-width: 1.5;
+            opacity: 0.55;
+        }
+
+        .dd-user-links__dot {
+            fill: var(--very-light-yellow-darker);
+            opacity: 0;
+            transition: opacity 0.25s linear;
+        }
+
+        .dd-user-links--revealed .dd-user-links__dot,
+        .dd-user-links--unlocked .dd-user-links__dot {
+            opacity: 0.7;
+        }
+
+        .dd-user-links--revealed .dd-user-links__dot--end:nth-of-type(2) {
+            transition-delay: 0.35s;
+        }
+
+        .dd-user-links--revealed .dd-user-links__dot--end:nth-of-type(3) {
+            transition-delay: 0.5s;
+        }
+
+        .dd-user-links--revealed #dd-user-links-dot-start {
+            transition-delay: 0.05s;
+        }
+
+        /* Projects grid */
+        .dd-layout__full {
+            grid-column: 1 / -1;
+        }
+
+        .dd-layout--growth {
+            grid-template-rows: auto auto auto;
+        }
+
+        .dd-layout--growth > .dd-intro {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .dd-growth-summary {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+            color: var(--very-light-yellow);
+            line-height: 1.35;
+            margin: 0 0 1.75rem 0;
+            padding: 1.5rem 0;
+        }
+
+        .dd-layout--growth > .dd-main {
+            grid-column: 1;
+            grid-row: 3;
+        }
+
+        .dd-layout--growth > .dd-aside {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        .dd-no-big-deal {
+            margin: clamp(3rem, 6vw, 5rem) 0 0;
+            max-width: var(--dd-main-width);
+        }
+
+        .dd-no-big-deal h2 {
+            margin: 0 0 clamp(1.5rem, 3vw, 2.5rem) 0;
+        }
+
+        .dd-vision-image {
+            margin: 2rem 0 0;
+            border-radius: 2rem;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .dd-vision-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 2rem;
         }
 
         @media (max-width: 600px) {
             .dd-page { padding: 0 5vw 5rem 5vw; }
-            .dd-layout {
-                margin-left: -5vw;
-                margin-right: -5vw;
-                padding-left: 5vw;
-                padding-right: 5vw;
-            }
-            .bento-grid {
-                grid-template-columns: 1fr 1fr;
-                grid-auto-rows: 90px;
-                gap: 8px;
-            }
-            .tile--hero, .tile--wide, .tile--medium, .tile--banner, .tile--strip { grid-column: span 2; }
-            .tile--tall, .tile--small, .tile--squat, .tile--third { grid-column: span 1; }
         }
     </style>
     <script>
@@ -727,29 +922,265 @@
                 });
             }
 
-            // Goals carousel
-            const track = document.getElementById('goalsTrack');
-            const btnPrev = document.getElementById('goalsPrev');
-            const btnNext = document.getElementById('goalsNext');
-
-            function cardStep() {
-                const card = track.querySelector('.goal-card');
-                return card.offsetWidth + parseInt(getComputedStyle(track).gap) || 16;
-            }
-
-            function updateButtons() {
-                btnPrev.disabled = track.scrollLeft <= 4;
-                btnNext.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
-            }
-
-            btnPrev.addEventListener('click', () => {
-                track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+            document.querySelectorAll('.dd-accordion').forEach(function(accordion) {
+                accordion.querySelectorAll('.dd-accordion__item').forEach(function(item) {
+                    item.addEventListener('toggle', function() {
+                        if (!item.open) return;
+                        accordion.querySelectorAll('.dd-accordion__item').forEach(function(other) {
+                            if (other !== item) other.open = false;
+                        });
+                    });
+                });
             });
-            btnNext.addEventListener('click', () => {
-                track.scrollBy({ left: cardStep(), behavior: 'smooth' });
-            });
-            track.addEventListener('scroll', updateButtons, { passive: true });
-            updateButtons();
+
+            (function initUserArchetypeLinks() {
+                const container = document.querySelector('.dd-user-links');
+                const anchor = document.getElementById('dd-all-users-anchor');
+                const cards = container
+                    ? Array.from(container.querySelectorAll('[data-user-archetype]'))
+                    : [];
+                const svg = document.getElementById('dd-user-links-svg');
+                const mainPaths = svg ? svg.querySelectorAll('.dd-user-links__path--main') : [];
+                const underPaths = svg ? svg.querySelectorAll('.dd-user-links__path--under') : [];
+                const startDot = document.getElementById('dd-user-links-dot-start');
+                const endDots = svg ? svg.querySelectorAll('.dd-user-links__dot--end') : [];
+
+                if (!container || !anchor || cards.length !== 2 || !svg || mainPaths.length !== 2 || !startDot) return;
+
+                let revealed = false;
+                let unlocked = false;
+                let revealTimer = null;
+                const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                const noHover = window.matchMedia('(hover: none)').matches;
+                const lineDrawMs = reduceMotion ? 0 : 880;
+                const scrollRevealRatio = 0.35;
+                const revealBlock = container.querySelector('.dd-archetypes-reveal');
+                const archetypesLayout = revealBlock
+                    ? revealBlock.closest('.dd-layout')
+                    : null;
+
+                function linesShouldShow() {
+                    return revealed || unlocked;
+                }
+
+                function relRect(el) {
+                    const c = container.getBoundingClientRect();
+                    const r = el.getBoundingClientRect();
+                    return {
+                        left: r.left - c.left,
+                        top: r.top - c.top,
+                        width: r.width,
+                        height: r.height,
+                        right: r.right - c.left,
+                        bottom: r.bottom - c.top
+                    };
+                }
+
+                function cubicPath(x0, y0, x1, y1) {
+                    const dy = y1 - y0;
+                    const dx = x1 - x0;
+                    const cp1x = x0 + dx * 0.08;
+                    const cp1y = y0 + dy * 0.62;
+                    const cp2x = x1 - dx * 0.06;
+                    const cp2y = y1 - dy * 0.38;
+                    return 'M ' + x0 + ' ' + y0 +
+                        ' C ' + cp1x + ' ' + cp1y +
+                        ', ' + cp2x + ' ' + cp2y +
+                        ', ' + x1 + ' ' + y1;
+                }
+
+                function applyDashState(animateIn) {
+                    mainPaths.forEach(function(path, i) {
+                        const under = underPaths[i];
+                        const len = path.getTotalLength();
+
+                        if (!len) return;
+
+                        path.style.strokeDasharray = String(len);
+                        under.style.strokeDasharray = String(len);
+
+                        if (!linesShouldShow()) {
+                            path.style.transition = 'none';
+                            under.style.transition = 'none';
+                            path.style.strokeDashoffset = String(len);
+                            under.style.strokeDashoffset = String(len);
+                            return;
+                        }
+
+                        if (animateIn && !reduceMotion && !unlocked) {
+                            path.style.transition = 'none';
+                            under.style.transition = 'none';
+                            path.style.strokeDashoffset = String(len);
+                            under.style.strokeDashoffset = String(len);
+                        } else {
+                            path.style.transition = 'none';
+                            under.style.transition = 'none';
+                            path.style.strokeDashoffset = '0';
+                            under.style.strokeDashoffset = '0';
+                        }
+                    });
+
+                    if (!linesShouldShow() || !animateIn || reduceMotion) return;
+
+                    requestAnimationFrame(function() {
+                        requestAnimationFrame(function() {
+                            mainPaths.forEach(function(path, i) {
+                                const under = underPaths[i];
+                                const delay = i * 80;
+                                const transition = 'stroke-dashoffset 0.72s linear ' + delay + 'ms';
+                                path.style.transition = transition;
+                                under.style.transition = transition;
+                                path.style.strokeDashoffset = '0';
+                                under.style.strokeDashoffset = '0';
+                            });
+                        });
+                    });
+                }
+
+                function syncArchetypesCollapse() {
+                    if (!revealBlock || !archetypesLayout || unlocked) {
+                        if (archetypesLayout) archetypesLayout.style.marginBottom = '';
+                        return;
+                    }
+                    const h = revealBlock.offsetHeight;
+                    if (h > 0) {
+                        archetypesLayout.style.marginBottom = 'calc(3rem - ' + h + 'px)';
+                    }
+                }
+
+                function updateUserLinks() {
+                    const c = container.getBoundingClientRect();
+                    if (c.width < 1 || c.height < 1) return;
+
+                    svg.setAttribute('viewBox', '0 0 ' + c.width + ' ' + c.height);
+                    svg.setAttribute('width', c.width);
+                    svg.setAttribute('height', c.height);
+
+                    const a = relRect(anchor);
+                    const startX = a.left + a.width / 2;
+                    const startY = a.bottom + 6;
+
+                    startDot.setAttribute('cx', startX);
+                    startDot.setAttribute('cy', startY);
+
+                    cards.forEach(function(card, i) {
+                        const r = relRect(card);
+                        const endX = r.left + r.width / 2;
+                        const endY = r.top - 8;
+                        const d = cubicPath(startX, startY, endX, endY);
+
+                        mainPaths[i].setAttribute('d', d);
+                        underPaths[i].setAttribute('d', d);
+
+                        if (endDots[i]) {
+                            endDots[i].setAttribute('cx', endX);
+                            endDots[i].setAttribute('cy', endY);
+                        }
+                    });
+
+                    syncArchetypesCollapse();
+                }
+
+                function showFromAnchor() {
+                    if (unlocked) return;
+
+                    clearTimeout(revealTimer);
+
+                    if (!revealed) {
+                        revealed = true;
+                        container.classList.add('dd-user-links--revealed');
+                        updateUserLinks();
+                        applyDashState(true);
+                    }
+
+                    revealTimer = setTimeout(function() {
+                        unlockArchetypes();
+                    }, lineDrawMs);
+                }
+
+                function unlockArchetypes() {
+                    if (unlocked) return;
+                    unlocked = true;
+                    revealTimer = null;
+                    revealed = true;
+                    container.classList.add('dd-user-links--unlocked');
+                    container.classList.add('dd-user-links--revealed');
+                    if (archetypesLayout) archetypesLayout.style.marginBottom = '';
+                    updateUserLinks();
+                    applyDashState(false);
+                }
+
+                function hideLinksBeforeUnlock() {
+                    if (unlocked) return;
+                    clearTimeout(revealTimer);
+                    revealTimer = null;
+                    revealed = false;
+                    container.classList.remove('dd-user-links--revealed');
+                    applyDashState(false);
+                }
+
+                function onAnchorLeave() {
+                    if (unlocked) return;
+                    hideLinksBeforeUnlock();
+                }
+
+                function hasScrolledPastAnchorThreshold() {
+                    const threshold = window.innerHeight * scrollRevealRatio;
+                    return anchor.getBoundingClientRect().top <= threshold;
+                }
+
+                function checkScrollReveal() {
+                    if (unlocked) return;
+                    if (hasScrolledPastAnchorThreshold()) showFromAnchor();
+                }
+
+                let frame = 0;
+                function scheduleUpdate() {
+                    cancelAnimationFrame(frame);
+                    frame = requestAnimationFrame(function() {
+                        updateUserLinks();
+                        applyDashState(false);
+                    });
+                }
+
+                window.addEventListener('resize', function() {
+                    scheduleUpdate();
+                    checkScrollReveal();
+                }, { passive: true });
+                window.addEventListener('scroll', function() {
+                    scheduleUpdate();
+                    checkScrollReveal();
+                }, { passive: true });
+                if (typeof ResizeObserver !== 'undefined') {
+                    const ro = new ResizeObserver(scheduleUpdate);
+                    ro.observe(container);
+                    ro.observe(anchor);
+                    cards.forEach(function(card) { ro.observe(card); });
+                }
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(scheduleUpdate);
+                }
+                container.querySelectorAll('img').forEach(function(img) {
+                    if (!img.complete) img.addEventListener('load', scheduleUpdate);
+                });
+
+                anchor.addEventListener('mouseenter', showFromAnchor);
+                anchor.addEventListener('mouseleave', onAnchorLeave);
+                anchor.addEventListener('focus', showFromAnchor);
+                anchor.addEventListener('blur', function() {
+                    if (!unlocked) hideLinksBeforeUnlock();
+                });
+                if (noHover) {
+                    anchor.addEventListener('click', function(e) {
+                        if (unlocked) return;
+                        e.preventDefault();
+                        showFromAnchor();
+                    });
+                }
+
+                scheduleUpdate();
+                checkScrollReveal();
+            })();
         });
     </script>
 </head>
@@ -758,8 +1189,6 @@
         <a class="dd-key" href="../index.html"
            aria-label="Close"
            onclick="sessionStorage.setItem('nav-direction','backward')">Esc</a>
-    </div>
-    <div class="dd-home-group">
         <a class="dd-key" href="../index.html"
            aria-label="Home"
            onclick="sessionStorage.setItem('nav-direction','backward')">Home</a>
@@ -775,10 +1204,16 @@
     <div class="dd-page">
         <header class="dd-header">
             <div class="dd-hero-band">
-                <h1>Smart speaker companion app<br>for Dutch & Dutch</h1>
-                <div class="dd-layout">
-                    <div class="dd-main dd-main--intro">
-                        <p class="dd-intro">Dutch & Dutch make award-winning loudspeakers.</p>
+                <nav class="dd-breadcrumb" aria-label="Breadcrumb">
+                    <a href="../index.html"
+                       onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>
+                    <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                    <span class="dd-breadcrumb__current" aria-current="page">Dutch &amp; Dutch control app</span>
+                </nav>
+                <h1>Smart speaker control app<br>for Dutch & Dutch</h1>
+                <div class="dd-layout dd-layout--hero">
+                    <div class="dd-main">
+                        <p class="dd-intro">Dutch &amp; Dutch make award-winning loudspeakers. <a href="https://dutchdutch.com/pages/reviews" target="_blank" rel="noopener noreferrer">Facts</a>.</p>
 
                         <p class="dd-subtitle">
                             Using a combination of hardware and software, Dutch & Dutch speakers fully adapt to the listener's room. I'm helping to overhaul the app that lets customers configure, calibrate, and control every part of their listening experience.
@@ -798,6 +1233,14 @@
                                 <dd>Paper, Figma, Cursor</dd>
                             </div>
                         </dl>
+
+                        <button type="button"
+                                class="dd-project-highlight"
+                                data-project-href="/dutch-dutch-app/volume-control/">
+                            <span class="dd-project-highlight__label">Read how I redesigned a volume control</span>
+                            <span class="dd-project-highlight__arrow" aria-hidden="true">→</span>
+                        </button>
+
                         <!--<div class="dd-traits">
                             <article class="dd-trait-card">
                                 <h3>Accurate</h3>
@@ -821,130 +1264,350 @@
                     </aside>
                 </div>
             </div>
-            <div class="dd-main dd-main--body">
-                <p class="dd-intro">Gearing up for growth</p>
-                        <div class="dd-split">
-                            <img src="/img/6c_orange_wave.jpg" alt="Dutch & Dutch 6c on orange wave background" class="dd-hero-image">
-                            <p class="dd-subtitle">
-                                Dutch & Dutch were gearing up to launch the 6c: a smaller, new and improved version of the 8c. The 6c's would have new hardware which would also require a software update. But the existing app had been accruing some design debt, to the point where it would make a poor impression when paired with a shiny, modern new speaker in the product line up.
-                            </p>
-                        </div>
-                        <p class="dd-subtitle">
-                            As a result, the app wasn't obvious to use, and users weren't getting the most out of the speakers. There was also a higher burden on manual setup and support.
-                        </p>
-                        <section class="goals-section">
-                            <h2>Project goals</h2>
-                            <div class="goals-carousel-outer">
-                                <button class="carousel-btn carousel-btn--prev" id="goalsPrev" aria-label="Previous" disabled>&#8592;</button>
+        </header>
+        <div class="dd-layout dd-layout--growth">
+            <!--<p class="dd-intro">Context: gearing up for growth</p>-->
+            <p class="dd-growth-summary">New hardware + design debt + platform plans = full redesign</p>
+            <div class="dd-main">
+                <p class="dd-subtitle">
+                    Dutch & Dutch were getting ready to launch the 6c: a smaller, new and improved version of their initial 8c model. New hardware required new software, the existing app had accrued design debt, and there was a platform play in the works. A redo started to sound increasingly appealing.
+                </p>
+                <section class="dd-goals-section">
+                    <p>
+                        When I joined the project, the ask was two-fold: help us reimagine the software as a platform from the ground up, and help <span class="dd-all-users-anchor" id="dd-all-users-anchor" tabindex="0">all users</span> get the absolute most out of their speakers.
+                    </p>
+                </section>
+            </div>
+        </div>
 
-                                <div class="goals-track" id="goalsTrack">
-                                    <div class="goal-card">
-                                        <p>Dutch & Dutch were gearing up to launch the 6c, a smaller, new and improved version of the 8c. The 6c's would have new hardware which would also require a software update. But the existing app had been accruing some design debt, to the point where it would make a poor impression when paired with a shiny, modern new speaker in the product line up.</p>
-                                    </div>
-                                    <div class="goal-card">
-                                        <p>New software platform to get ready for the next generation of speakers</p>
-                                        <p>Make the app more stable, especially when connecting to and detecting devices</p>
-                                        <p>Offer the app on more platforms</p>
-                                    </div>
-                                    <div class="goal-card">
-                                        <p>Offer a fully self-serve best in class experience with all the bells and whistles the 8c and 6c have to offer</p>
-                                        <p>Have a higher % of users fully use all the goodness the 6c and 8c have to offer</p>
+        <figure class="dd-screens-strip-figure">
+            <div class="dd-screens-strip" role="region" aria-label="App screens">
+                <div class="dd-screens-strip__track">
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_2.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_3.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_4.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_5.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_6.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_7.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_8.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_9.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                </div>
+            </div>
+            <figcaption>The first version of the redesigned Dutch &amp; Dutch app as listed on the iOS App Store.</figcaption>
+        </figure>
+
+        <div class="dd-no-big-deal">
+            <p class="dd-intro">The audience</p>
+        </div>
+        <div class="dd-layout">
+            <section class="dd-archetypes-section dd-layout__full">
+                <div class="dd-archetypes-reveal">
+                    <p class="dd-archetypes-intro">
+                        Dutch &amp; Dutch speakers attract two distinct audiences. Both care deeply about sound quality and are willing to invest in it — but they show up with different expectations and levels of technical comfort.
+                    </p>
+                    <div class="dd-archetypes-grid">
+                        <article class="dd-card dd-card--bordered dd-card--archetype" data-user-archetype="home">
+                            <div class="dd-card--archetype__media">
+                                <img src="/img/dd_home_user.jpg" alt="Home listener in a living room" width="1463" height="823">
+                            </div>
+                            <div class="dd-card--archetype__body">
+                                <h3>Home users</h3>
+                                <p>Audiophiles who listen for pleasure and want to hear music exactly as it was intended. They care just as much about fidelity, but the experience is personal — less about production workflows, more about getting the most out of a living room or listening space.</p>
+                            </div>
+                        </article>
+                        <article class="dd-card dd-card--bordered dd-card--archetype" data-user-archetype="studio">
+                            <div class="dd-card--archetype__media">
+                                <img src="/img/dd_studio_user.webp" alt="Studio user at a production desk">
+                            </div>
+                            <div class="dd-card--archetype__body">
+                                <h3>Studio users</h3>
+                                <p>Power users who make music for a living. They rely on the speakers as a professional tool — accurate, adaptable, and trustworthy in a workflow that runs all day. Usually more tech-savvy, and comfortable diving into calibration, routing, and fine-grained control.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!--<div class="dd-layout">
+            <section class="dd-layout__full">
+                <figure class="dd-vision-image">
+                    <img src="/img/vision.png" alt="Dutch & Dutch app product vision" width="960" height="540">
+                </figure>
+            </section>
+        </div>-->
+
+        <!--<div class="dd-layout">
+            <div class="dd-main">
+                <section class="dd-principles">
+                    <details class="dd-principles-accordion">
+                        <summary class="dd-principles-accordion__summary">How about some design principles</summary>
+                        <div class="dd-principles-accordion__panel">
+                            <div class="dd-accordion">
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Simple first</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Make setup, configuration, and controlling the speakers as simple as possible, but have detailed help and explanation available.</p>
+                            </div>
+                        </details>
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Targeted help</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Help is targeted and specific.</p>
+                            </div>
+                        </details>
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Gentle guidance</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Recommend and nudge users towards optimal values, but never make them feel the 8c's aren't right for them.</p>
+                            </div>
+                        </details>
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Real-world friction</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Mirror real-world weights and distances; 8c's are heavy, so moving them isn't easy. Distances in the room aren't variable. Don't over optimize for tweaking and re-tweaking these real-world values in the app.</p>
+                            </div>
+                        </details>
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Digital vs physical</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Digital values on the other hand should be easily changed. Unless… there are real-world consequences. For example, changing the volume too quickly when audio is playing might be a painful exercise.</p>
+                            </div>
+                        </details>
+                            </div>
+                        </div>
+                    </details>
+                </section>
+            </div>
+        </div>-->
+        
+        <div class="dd-no-big-deal">
+            <p class="dd-intro">Control every aspect</p>
+        </div>
+
+        <div class="dd-layout">
+            <div class="dd-main">
+                <p class="dd-subtitle">
+                    Typical active loudspeakers will have limited controls to adjust the speaker's output. Some do this with physical switches, other brands offer apps.
+                </p>
+                <p class="dd-subtitle">
+                    Dutch & Dutch go pretty far with this. The app lets users control gain, mute, sleep, input source, phase mode, EQ. But that's just the start. Users can enter the dimensions of their room, the position of the speakers in the room, and the position of the listener within the room. Based on those measurements, the speakers adjust their output to achieve optimal sound quality.
+                </p>
+                <p class="dd-intro">Microphone calibration</p>
+                <p class="dd-subtitle">
+                    And then to take things even further, it's possible to calibrate the speakers by recording a series of frequency sweeps, analyzing the response, and generating a set of EQ filters to—quite literally—flatten the room response curve.
+                </p>
+            </div>
+            <aside class="dd-aside">
+                <figure class="dd-main-video">
+                    <video
+                        class="dd-main-video__media"
+                        src="/img/gain_slider_new.mov"
+                        loop
+                        playsinline
+                        preload="metadata"
+                        aria-label="New volume control app UI demonstration"></video>
+                </figure>
+            </aside>
+            <div class="dd-main">
+                <p class="dd-intro">Microphone calibration</p>
+                <p class="dd-subtitle">
+                    Here's an overview of some of the things I worked on.
+                </p>
+            </div>
+            <div class="dd-aside-project-flow dd-layout__full">
+                    <div class="dd-aside-project-flow__header">
+                        <p class="dd-aside-project-flow__label">Feature</p>
+                        <p class="dd-aside-project-flow__label">From — (╯°□°)╯︵ ┻━┻</p>
+                        <p class="dd-aside-project-flow__label">To — ٩(^‿^)۶ ♪♬</p>
+                    </div>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Volume control</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">
+                                        A circle with zero affordances that prompted a lot of questions and confusion from users.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--linked"
+                                     data-project-href="/dutch-dutch-app/volume-control/"
+                                     tabindex="0"
+                                     aria-label="Volume control case study">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">An instantly familiar volume control that is obvious (but not boring).</p>
+                                    <div class="dd-project-card__footer">
+                                        <button type="button" class="dd-project-card__view">View</button>
                                     </div>
                                 </div>
-                                <button class="carousel-btn carousel-btn--next" id="goalsNext" aria-label="Next">&#8594;</button>
-                            </div>
-                        </section>
-                        <p class="dd-subtitle">Typical active loudspeakers might offer some limited controls to adjust the speaker's output. Some do this with physical switches, other brands offer companion apps.</p>
-                        <p class="dd-subtitle">Dutch & Dutch go pretty far with this. Their app lets users control gain, mute, sleep, input source, phase mode, EQ. But that's just the start. The 8c and 6c speakers allow users to set the placement of the speakers within the room, and the so-called listening triangle. Based on those measurements, the speakers can adjust their output to achieve better sound quality in the room.</p>
-                        <p class="dd-subtitle">And then to take things even further, it's possible to calibrate the speakers by recording a series of frequency sweeps, analyzing the response, and generating a set of EQ filters to—quite literally—flatten the room response curve.</p>
-                        <p class="dd-subtitle">When I joined the project, the 6c (a smaller, new and improved version of the 8c) were being developed. The existing app had been accruing some design debt, experience rot. And the 6c's would have new hardware which would also require a software update.</p>
-                        <p class="dd-subtitle">But the company also saw an opportunity in creating a platform to make "dumb" speakers smart.</p>
-            </div>
-        </header>
-
-        <div class="bento-grid">
-
-            <!-- Row 1: hero image + stat -->
-            <div class="tile tile--image tile--wide">
-                <div class="tile-label">Hero image — app on phone next to speaker</div>
-            </div>
-            <div class="tile tile--stat tile--tall">
-                <div class="tile__stat-number">4</div>
-                <div class="tile__stat-label">Platforms<br>iOS · Android · macOS · Windows</div>
-            </div>
-
-            <!-- Row 2: description + stats -->
-            <div class="tile tile--description tile--medium">
-                <h3>The challenge</h3>
-                <p>Dutch & Dutch speakers are technically sophisticated — DSP filters, room correction, multiple inputs. The existing app exposes all of this complexity at once. The redesign puts the listening experience first.</p>
-            </div>
-            <div class="tile tile--stat tile--small">
-                <div class="tile__stat-number">8C</div>
-                <div class="tile__stat-label">Flagship model, the starting point for the redesign</div>
-            </div>
-            <div class="tile tile--stat tile--small">
-                <div class="tile__stat-number">3</div>
-                <div class="tile__stat-label">Speaker models supported in the new app</div>
-            </div>
-
-            <!-- Row 3: heading + image + image -->
-            <div class="tile tile--heading tile--squat">
-                <h2>Setup flow</h2>
-            </div>
-            <div class="tile tile--image tile--banner">
-                <div class="tile-label">Setup flow — step-by-step onboarding screens</div>
-            </div>
-
-            <!-- Row 4: video + stat + tags -->
-            <div class="tile tile--video tile--small">
-                <div class="tile-label">Volume control interaction demo</div>
-            </div>
-            <div class="tile tile--stat tile--squat tile--accent-green">
-                <div class="tile__stat-number">−40dB</div>
-                <div class="tile__stat-label">Dynamic range of the custom volume slider</div>
-            </div>
-            <div class="tile tile--video tile--small">
-                <div class="tile-label">Room correction wizard walkthrough</div>
-            </div>
-
-            <!-- Row 5: wide image -->
-            <div class="tile tile--image tile--strip">
-                <div class="tile-label">Full speaker lineup — 8C, 4C, Arc — rendered in all available finishes</div>
-            </div>
-
-            <!-- Row 6: tags + description + stat -->
-            <div class="tile tile--tags tile--squat">
-                <span class="tile-tag">iOS</span>
-                <span class="tile-tag">Android</span>
-                <span class="tile-tag">Figma</span>
-                <span class="tile-tag">SwiftUI</span>
-                <span class="tile-tag">Xcode</span>
-                <span class="tile-tag">D3.js</span>
-                <span class="tile-tag">DSP</span>
-            </div>
-            <div class="tile tile--description tile--banner">
-                <h3>Frequency response</h3>
-                <p>A custom D3.js graph gives audiophile users direct control over EQ curves — designed to feel familiar to studio engineers while remaining accessible to enthusiasts.</p>
-            </div>
-
-            <!-- Row 7: image pair + stat -->
-            <div class="tile tile--image tile--small">
-                <div class="tile-label">Before — existing app home screen</div>
-            </div>
-            <div class="tile tile--image tile--small">
-                <div class="tile-label">After — redesigned home screen</div>
-            </div>
-            <div class="tile tile--stat tile--small tile--accent-blue">
-                <div class="tile__stat-number">2025</div>
-                <div class="tile__stat-label">Ongoing project started in 2024</div>
-            </div>
-
-            <!-- Row 8: heading full width -->
-            <div class="tile tile--heading tile--strip">
-                <h2>Designing with the hardware, not around it.</h2>
-            </div>
-
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Room view</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">
+                                        Incorrect usage of bottom bar menu; hard to switch between settings.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">Show all active room settings and their values, make it easy to select and edit settings, and allow layout customization.</p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Onboarding</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">
+                                        A very minimal setup with no explanation of the why and the how and the real power of the Dutch & Dutch speakers.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">Self-serve onboarding that balances speed and sound quality.</p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">RoomMatching Align</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">Speaker calibration via microphone measurements</p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Settings</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Design system (lite)</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Streaming music</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Configure sources</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </div>
         </div>
     </div>
+    <script src="/dutch-dutch-app/project-cards.js"></script>
 </body>
 </html>

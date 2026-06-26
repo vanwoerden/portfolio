@@ -1,0 +1,41 @@
+---
+description: Use correct semantic HTML for interactive controls — especially buttons and links
+alwaysApply: true
+---
+
+# Semantic HTML
+
+Use the right element for each job. Do not fake controls with styled `<div>` or `<span>` elements.
+
+## Buttons
+
+- Use `<button type="button">` for actions that stay on the page (toggle, submit a form, open a dialog, run in-page logic).
+- Use `<button type="submit">` only inside a `<form>`.
+- Reset button styles in CSS when needed (`appearance: none`, `border: none`, `font: inherit`, `cursor: pointer`).
+- Do not nest a `<button>` inside an `<a>` — that is invalid HTML.
+
+```html
+<!-- Bad -->
+<a href="/page/">
+  <span class="btn">View</span>
+</a>
+
+<!-- Good: navigation -->
+<a class="dd-project-card" href="/page/">View project</a>
+
+<!-- Good: action or navigation via script on a card shell -->
+<article class="dd-project-card--linked" data-project-href="/page/" tabindex="0">
+  <p>Description</p>
+  <button type="button" class="dd-project-card__view">View</button>
+</article>
+```
+
+## Links
+
+- Use `<a href="...">` for navigation to another URL, page, or in-site route.
+- Do not use `<button>` or `<div onclick="location.href=...">` when a plain link is enough and no extra card-click behavior is required.
+
+## Labels
+
+- Interactive controls need accessible names: visible text, `aria-label`, or associated `<label>`.
+- Write button and link labels in sentence case or title case — never all caps (see no-all-caps rule).

@@ -46,6 +46,7 @@ footer {
 .footer-marquee-link {
     text-decoration: none;
     color: inherit;
+    background: none;
     white-space: nowrap;
     font-size: 1.2rem;
     padding: 0;

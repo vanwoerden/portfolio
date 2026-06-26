@@ -46,7 +46,7 @@ li {
 }
 a {
   color: black;
-  text-decoration-color: #f0c674;
+  text-decoration-color: var(--link-underline-color, #5452B7);
   text-decoration-thickness: 2px;
 }
 .note-excerpt-text {

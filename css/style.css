@@ -26,6 +26,10 @@ body {
   --very-light-yellow-darkest: rgb(86, 83, 66);
   --darkgray: rgb(29, 26, 35);
   --darkblue: rgb(9, 8, 21);
+  --link-underline-start: #ffffff;
+  --link-underline-end: #e2e2e2;
+  --link-underline-color: #ccc;
+  --link-underline-gradient: linear-gradient(to bottom, transparent 0%, transparent 60%, var(--link-underline-start) 60%, var(--link-underline-end) 100%);
 }
 
 .line {
@@ -388,14 +392,25 @@ a.project-link {
   background: none;
   /* display: block; */
 }
+
+a.nav-link {
+  background: none;
+}
+
+a.project-card {
+  background: #f5f5f5;
+}
+
 a, a:visited, span.gray {
    color: #333;
    text-decoration: none;
-   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #ffffff 60%, #e2e2e2 100%);
+   background: var(--link-underline-gradient);
 }
 a.simple {
   background: none;
   text-decoration: underline;
+  text-decoration-color: var(--link-underline-color);
+  text-underline-offset: 0.12em;
 }
 a.green, span.green {
   background: linear-gradient(to bottom, transparent 0%, transparent 60%, #ffffff 60%, #A5F2C9 100%);
@@ -679,6 +694,7 @@ img.teaser-image-rect {
 span.toggle-link {
     color: #333;
     text-decoration: underline;
+    text-decoration-color: var(--link-underline-color);
     cursor: pointer;
 }
 .lean-container {
@@ -1254,6 +1270,7 @@ footer {
   }
   a {
     text-decoration: underline;
+    text-decoration-color: var(--link-underline-color);
   }
   p.large {
     font-size: 1.1em;

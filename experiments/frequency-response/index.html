@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Frequency Response Curve</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-muted: #808080;
+            --accent-primary: #00BFFF;
+            --accent-secondary: #00FF00;
+            --accent-button: #007AFF;
+            --accent-button-hover: #0056CC;
+            --border-color: #404040;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 10px;
+            font-family: 'Rigton', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: #babac3;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 343px;
+            max-width: 343px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            padding: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                max-width: 90vw;
+                width: 100%;
+                background: var(--bg-secondary);
+                border-radius: 12px;
+                box-shadow: 0 4px 20px var(--shadow);
+                padding: 20px;
+                border: 1px solid var(--border-color);
+            }
+        }
+        
+        /* Add padding for controls on mobile */
+        .controls {
+            padding: 10px;
+        }
+        
+        h3 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            text-align: center;
+            color: #babac3;
+            font-weight: 600;
+            font-family: 'Rigton', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        #chart {
+            background: #000;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 120px;
+            position: relative;
+            box-sizing: border-box;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 35vw;
+                max-height: 600px;
+                min-height: 200px;
+            }
+        }
+        
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .controls {
+                margin-top: 20px;
+                gap: 20px;
+                justify-content: center;
+            }
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 80px;
+        }
+        
+        label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #babac3;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Rigton', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        select {
+            font-size: 12px;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        select:hover {
+            border-color: var(--accent-primary);
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.2);
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--bg-tertiary);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            cursor: pointer;
+            border: 2px solid var(--bg-secondary);
+            box-shadow: 0 2px 4px var(--shadow);
+            transition: all 0.2s ease;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--accent-button);
+            transform: scale(1.1);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            cursor: pointer;
+            border: 2px solid var(--bg-secondary);
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--accent-button), var(--accent-primary));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, var(--accent-button-hover), var(--accent-button));
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .curve-info {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            line-height: 1.4;
+            text-align: center;
+        }
+        
+        .curve-info div {
+            margin-bottom: 2px;
+        }
+        
+        .optimization-control {
+            margin-bottom: 20px;
+        }
+        
+        .toggle-controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        @media (min-width: 768px) {
+            .toggle-controls {
+                margin-top: 20px;
+                gap: 40px;
+            }
+        }
+        
+        .toggle-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: var(--text-secondary);
+            user-select: none;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            display: none;
+        }
+        
+        .checkmark {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            margin-right: 8px;
+            position: relative;
+            background: var(--bg-tertiary);
+            transition: all 0.2s ease;
+        }
+        
+        .checkbox-label input[type="checkbox"]:checked + .checkmark {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+        
+        .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .checkbox-label:hover .checkmark {
+            border-color: var(--accent-primary);
+        }
+        
+        .individual-measurements {
+            margin-top: 20px;
+        }
+        
+        .individual-measurements h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+        
+        .measurement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .measurement-item {
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+        }
+        
+        .measurement-item .checkbox-label {
+            font-size: 11px;
+        }
+        
+        .measurement-item .checkmark {
+            width: 14px;
+            height: 14px;
+            margin-right: 6px;
+        }
+        
+        .stroke-controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .stroke-controls .control-group {
+            min-width: 150px;
+        }
+        
+        .value-display {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-left: 8px;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .color-controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .color-controls .control-group {
+            min-width: 150px;
+        }
+        
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        input[type="color"] {
+            width: 40px;
+            height: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-tertiary);
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 3px;
+        }
+        
+        .color-preview {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            background: var(--bg-tertiary);
+        }
+        
+        @media (min-width: 768px) {
+            .measurement-grid {
+                grid-template-columns: repeat(11, 1fr);
+                max-height: 120px;
+            }
+            
+            .stroke-controls {
+                gap: 40px;
+            }
+        }
+        
+        
+        /* Dark mode scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Frequency Response Analysis</h3>
+        
+        <div class="chart-container">
+            <svg id="chart"></svg>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="curveType">Curve Type</label>
+                <select id="curveType">
+                    <option value="basis">Basis</option>
+                    <option value="cardinal">Cardinal</option>
+                    <option value="catmull-rom">Catmull-Rom</option>
+                    <option value="monotone">Monotone</option>
+                    <option value="step">Step</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="tension">Tension</label>
+                <input type="range" id="tension" min="0" max="1" step="0.1" value="0.3">
+            </div>
+            
+            <div class="control-group">
+                <label for="opacity">Opacity</label>
+                <input type="range" id="opacity" min="0.1" max="1" step="0.1" value="0.25">
+            </div>
+            
+            <button id="downloadBtn">Download SVG</button>
+        </div>
+        
+        <div class="optimization-control">
+            <div class="control-group">
+                <label for="optimizationMode">Optimization Mode</label>
+                <select id="optimizationMode">
+                    <option value="before">Before Optimization</option>
+                    <option value="after">After Optimization</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="toggle-controls">
+            <div class="toggle-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="showMeasurements" checked>
+                    <span class="checkmark"></span>
+                    Show All Measurements
+                </label>
+            </div>
+            
+            <div class="toggle-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="showAverage" checked>
+                    <span class="checkmark"></span>
+                    Show Average
+                </label>
+            </div>
+            
+            <div class="toggle-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="showReference" checked>
+                    <span class="checkmark"></span>
+                    Show Reference Line
+                </label>
+            </div>
+            
+        </div>
+        
+        <div class="individual-measurements">
+            <h4>Individual Measurements</h4>
+            <div class="measurement-grid" id="measurementGrid">
+                <!-- Individual checkboxes will be generated here -->
+            </div>
+        </div>
+        
+        <div class="stroke-controls">
+            <div class="control-group">
+                <label for="measurementStrokeWidth">Measurement Stroke Width</label>
+                <input type="range" id="measurementStrokeWidth" min="0.5" max="3" step="0.1" value="1.5">
+                <span class="value-display" id="measurementStrokeValue">1.5</span>
+            </div>
+            
+            <div class="control-group">
+                <label for="averageStrokeWidth">Average Stroke Width</label>
+                <input type="range" id="averageStrokeWidth" min="1" max="6" step="0.5" value="2">
+                <span class="value-display" id="averageStrokeValue">2</span>
+            </div>
+        </div>
+        
+        <div class="color-controls">
+            <div class="control-group">
+                <label for="measurementColor">Measurement Color</label>
+                <div class="color-picker-container">
+                    <input type="color" id="measurementColor" value="#3d82cf">
+                    <div class="color-preview" id="measurementColorPreview"></div>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label for="averageColor">Average Color</label>
+                <div class="color-picker-container">
+                    <input type="color" id="averageColor" value="#ff785f">
+                    <div class="color-preview" id="averageColorPreview"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="curve-info">
+            <div>22 measurement curves (blue) + average curve (green)</div>
+            <div>Frequency: 10Hz - 20kHz (log scale) | Level: 55-95 dBSPL</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

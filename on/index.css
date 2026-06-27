@@ -1,0 +1,24 @@
+.on-index .container-85 > .container-full {
+    padding-left: 0;
+}
+
+.on-index .container-full > p.large {
+    margin: 0;
+    line-height: 0.88;
+}
+
+.on-index .container-full > p.large + p.large {
+    margin-top: -0.12em;
+}
+
+.on-index .container-full a,
+.on-index .container-full a:visited {
+    color: rgb(54, 168, 98);
+    background: none;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.on-index .container-full a:hover {
+    color: rgb(79, 246, 140);
+}

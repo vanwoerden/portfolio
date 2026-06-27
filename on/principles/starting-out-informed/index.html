@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>It means starting out informed - The Works of Ernst</title>
+    <script src="/on/principles/principles-boot.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="/css/style-million.css">
+    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="/on/principles/shared.css">
+    <script src="/on/principles/principles-nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <script>
+        function rotateBML() {
+            console.log("rotateBML");
+            document.getElementById("bml-container").classList.add("rotated");
+            document.getElementById("build").classList.add("rotated-element");
+            document.getElementById("measure").classList.add("rotated-element");
+            document.getElementById("learn").classList.add("rotated-element");
+            document.getElementById("learn").innerHTML = "Learn first";
+            document.getElementById("build").innerHTML = "Then build";
+            document.getElementById("measure").innerHTML = "Then measure";
+            document.getElementById("reset").innerHTML = "(reset)";
+            document.getElementById("bml-title").innerHTML = "Learn, build, measure.";
+            rotated = true;
+        }
+
+        function rotateBMLBack() {
+            document.getElementById("bml-container").classList.remove("rotated");
+            document.getElementById("build").classList.remove("rotated-element");
+            document.getElementById("measure").classList.remove("rotated-element");
+            document.getElementById("learn").classList.remove("rotated-element");
+            document.getElementById("learn").innerHTML = "Learn";
+            document.getElementById("build").innerHTML = "Build";
+            document.getElementById("measure").innerHTML = "Measure";
+            document.getElementById("reset").innerHTML = "";
+            document.getElementById("bml-title").innerHTML = "Build, measure, learn?";
+        }
+    </script>
+</head>
+<body class="principle-site">
+    <div class="close-button-container">
+        <span class="close-button-label">Esc</span>
+        <a href="/" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
+    </div>
+    <div class="principle-site__page">
+        <header class="principle-site__header">
+            <nav class="dd-breadcrumb" aria-label="Breadcrumb">
+                <a href="/" onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>
+                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                <a href="/on/">on</a>
+                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                <span class="dd-breadcrumb__current" aria-current="page">Starting out informed</span>
+            </nav>
+        </header>
+        <div class="principle-page">
+            <h1 class="principle principle-title">
+            <span class="nermal">It means </span><span class="attention">starting out informed.</span>
+        </h1>
+        <div class="principle-content">
+            <h2 class="bml-title" id="bml-title">
+                Build, measure, learn?
+            </h2>
+            <p class="money-quote">
+                Don't start out building. 
+                <span class="fake-link" onclick="rotateBML()">Start out informed.</span> 
+                <span class="reset" id="reset" onclick="rotateBMLBack()"></span>
+            </p>
+            <div class="" id="bml-container">
+                <div class="bml" id="build">Build</div>
+                <div class="bml" id="measure">Measure</div>
+                <div class="bml" id="learn">Learn</div>
+            </div>
+            <p class="money-quote">
+                Design is the art of being wrong safely.
+            </p>
+        </div>
+    </div>
+    </div>
+    <div class="nav-buttons">
+        <a href="/on/principles/seeing-it-through-together/" class="nav-button">➠</a>
+        <a href="/on/principles/time-vs-scope/" class="nav-button">➠</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Teamwork means seeing it through together - The Works of Ernst</title>
+    <script src="/on/principles/principles-boot.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="/css/style-million.css">
+    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="/on/principles/shared.css">
+    <link rel="stylesheet" type="text/css" href="/on/principles/seeing-it-through-together/timeline-playground.css">
+    <script src="/on/principles/principles-nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <script src="/on/principles/seeing-it-through-together/timeline-playground.js" defer></script>
+</head>
+<body class="principle-site">
+    <div class="close-button-container">
+        <span class="close-button-label">Esc</span>
+        <a href="/" class="close-button" aria-label="Close" onclick="sessionStorage.setItem('nav-direction', 'backward');">×</a>
+    </div>
+    <div class="principle-site__page">
+        <header class="principle-site__header">
+            <nav class="dd-breadcrumb" aria-label="Breadcrumb">
+                <a href="/" onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>
+                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                <a href="/on/">on</a>
+                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                <span class="dd-breadcrumb__current" aria-current="page">Seeing it through together</span>
+            </nav>
+        </header>
+        <div class="principle-page">
+            <h1 class="principle principle-title">
+            <span class="nermal">Teamwork means </span><span class="attention">seeing it through together.</span>
+        </h1>
+        <div class="principle-content">
+            <p class="money-quote">
+                (Idea: product development, the board game.)
+            </p>
+            <p class="money-quote">
+                I believe teams should start "the work" together. If they don't, it takes more time for other disciplines to understand. And bad requirements feed into bad designs that may be infeasible. 
+            </p>
+            <p class="money-quote">
+                You can't go up the waterfall.
+            </p>
+            <p class="money-quote">
+                Handoff is problematic.
+            </p>
+            <p class="money-quote">
+                Let's use an example. There's a team of 1 Product Manager, 1 Designer, and 4 Engineers. They have 3 things they've decided to put in the hands of their users: project A, B, and C.
+            </p>
+            <p class="money-quote">
+                For both the PM and the designer, each project takes 4 weeks. The 4 engineers take 8 weeks for each project.
+            </p>
+            <p class="money-quote">
+                The classic waterfall approach is to stagger the work, Which means the engineers start in week 9.
+            </p>
+            <p class="money-quote">
+                The PM writes the requirements, the designer designs the UI, and the engineers implement the code.
+            </p>
+            <p class="money-quote">
+                A year later, project A is still not done. Huh?! What happened?
+            </p>
+            <p class="money-quote">
+                The designer didn't understand why the PM had made some of the decisions. During handoff, the designer also found a gaps in the requirements. But the PM was already working on Project B. It took them a while to get back into the details of Project A. The engineers were invited to handoff, but only one could make it; the rest were still busy working on other projects.
+            </p>
+            <p class="money-quote">
+                By the time the engineers were ready to start, the designer and the PM had gone back and forth a few times, and the project was not shovel-ready. 
+            </p>
+            <p class="money-quote">
+                If the team had started together, the designer would have understood the PM's decisions, and the engineers would have understood the designer's designs.
+            </p>
+            <p class="money-quote"></p>
+            <ul>
+                <li>PM takes 4 weeks</li>
+                <li>Designer takes 4 weeks</li>
+                <li>devs take 8 weeks</li>
+            </ul>
+            <h3 class="example-title">Waterfall: heavy stagger</h3>
+            <p class="money-quote">PM finishes A then hands off; designer starts A only after that; engineers start A last. Each row begins the same project many blocks later.</p>
+            <div class="start-together-example">
+                <div class="timeline">
+                    1, 2 , 3, 4
+                </div>
+                <div class="discipline-container">
+                    <div class="discipline-label">1 PM</div>
+                    <div class="blocks">
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a handoff">↘</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b handoff b-c">↘</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                    </div>
+                </div>
+                <div class="discipline-container">
+                    <div class="discipline-label">1 Designer</div>
+                    <div class="blocks">
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block project-a handoff zero-one"></div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a handoff">↘</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b handoff b-c">↘</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-c">C</div>
+                        <div class="block project-b handoff b-c">↘</div>
+                        <div class="block project-c">C</div>
+                    </div>
+                </div>
+                <div class="discipline-container">
+                    <div class="discipline-label">4 Devs</div>
+                    <div class="blocks">
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block">x</div>
+                        <div class="block project-a handoff zero-one"></div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-a">A</div>
+                        <div class="block project-b handoff">↘</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                        <div class="block project-b">B</div>
+                    </div>
+                </div>
+            </div>
+            <div class="example-block">
+                <h3 class="example-title">In between</h3>
+                <p class="money-quote">Each discipline still starts a bit after the previous one, but the gap is smaller. Six blocks per project; A's (and B's, C's) line up more across rows.</p>
+                <div class="start-together-example start-together-in-between">
+                    <div class="timeline">
+                        1, 2 , 3, 4
+                    </div>
+                    <div class="discipline-container">
+                        <div class="discipline-label">1 PM</div>
+                        <div class="blocks">
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a handoff">↘</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b handoff b-c">↘</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                        </div>
+                    </div>
+                    <div class="discipline-container">
+                        <div class="discipline-label">1 Designer</div>
+                        <div class="blocks">
+                            <div class="block">x</div>
+                            <div class="block">x</div>
+                            <div class="block project-a handoff zero-one"></div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a handoff">↘</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b handoff b-c">↘</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                        </div>
+                    </div>
+                    <div class="discipline-container">
+                        <div class="discipline-label">4 Devs</div>
+                        <div class="blocks">
+                            <div class="block">x</div>
+                            <div class="block">x</div>
+                            <div class="block">x</div>
+                            <div class="block">x</div>
+                            <div class="block">x</div>
+                            <div class="block">x</div>
+                            <div class="block project-a handoff zero-one"></div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a handoff">↘</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b handoff b-c">↘</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="example-block">
+                <h3 class="example-title">Start together, nearly aligned</h3>
+                <p class="money-quote">Everyone starts on the same project within one or two blocks. Eight blocks per project; the A's (and B's, C's) line up in nearly the same column across the three rows.</p>
+                <div class="start-together-example">
+                    <div class="timeline">
+                        1, 2 , 3, 4
+                    </div>
+                    <div class="discipline-container">
+                        <div class="discipline-label">1 PM</div>
+                        <div class="blocks">
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a handoff">↘</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b handoff b-c">↘</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                        </div>
+                    </div>
+                    <div class="discipline-container">
+                        <div class="discipline-label">1 Designer</div>
+                        <div class="blocks">
+                            <div class="block">x</div>
+                            <div class="block project-a handoff zero-one"></div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a handoff">↘</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b handoff b-c">↘</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                        </div>
+                    </div>
+                    <div class="discipline-container">
+                        <div class="discipline-label">4 Devs</div>
+                        <div class="blocks">
+                            <div class="block">x</div>
+                            <div class="block">x</div>
+                            <div class="block">x</div>
+                            <div class="block project-a handoff zero-one"></div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a">A</div>
+                            <div class="block project-a handoff">↘</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b">B</div>
+                            <div class="block project-b handoff b-c">↘</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                            <div class="block project-c">C</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="example-block timeline-playground" aria-labelledby="timeline-playground-title">
+                <h3 class="example-title" id="timeline-playground-title">Try the timeline</h3>
+                <p class="money-quote">Adjust the team, projects, and how work lines up. Weeks are blocks; letters are projects.</p>
+                <form class="tp-form" id="timeline-playground-form">
+                    <div class="tp-controls" role="group" aria-label="Timeline parameters">
+                        <div class="tp-field">
+                            <label for="tp-pm">PMs</label>
+                            <input type="number" id="tp-pm" name="tp-pm" min="1" max="20" value="1" inputmode="numeric">
+                        </div>
+                        <div class="tp-field">
+                            <label for="tp-designer">Designers</label>
+                            <input type="number" id="tp-designer" name="tp-designer" min="1" max="20" value="1" inputmode="numeric">
+                        </div>
+                        <div class="tp-field">
+                            <label for="tp-eng">Engineers</label>
+                            <input type="number" id="tp-eng" name="tp-eng" min="1" max="20" value="4" inputmode="numeric">
+                        </div>
+                        <div class="tp-field">
+                            <label for="tp-projects">Projects</label>
+                            <input type="number" id="tp-projects" name="tp-projects" min="1" max="26" value="3" inputmode="numeric">
+                        </div>
+                        <div class="tp-field tp-field-wide">
+                            <label for="tp-weeks">Person-weeks per project (PM & designer)</label>
+                            <input type="number" id="tp-weeks" name="tp-weeks" min="1" max="52" value="4" inputmode="numeric">
+                        </div>
+                        <div class="tp-field tp-field-wide">
+                            <label for="tp-ratio-eng">Person-week ratio — engineers (1 : 1 : …)</label>
+                            <input type="number" id="tp-ratio-eng" name="tp-ratio-eng" min="1" max="20" value="4" inputmode="numeric" title="PM and designer each use the value above; engineers use that × this number (1 : 1 : X)">
+                        </div>
+                        <div class="tp-field tp-field-wide">
+                            <label for="tp-mode">Alignment</label>
+                            <select id="tp-mode" name="tp-mode">
+                                <option value="staggered">Staggered (finish upstream, then start)</option>
+                                <option value="between">In between (start when upstream is halfway)</option>
+                                <option value="together">Start together (small offset after upstream starts)</option>
+                            </select>
+                        </div>
+                        <div class="tp-field">
+                            <label for="tp-target">Target length (weeks)</label>
+                            <input type="number" id="tp-target" name="tp-target" min="1" max="120" value="28" inputmode="numeric">
+                        </div>
+                    </div>
+                </form>
+                <p class="tp-summary money-quote" id="timeline-playground-summary" aria-live="polite"></p>
+                <div class="tp-scroll" id="timeline-playground-scroll">
+                    <div class="tp-chart" id="timeline-playground-chart" hidden></div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="timeline-playground.js" defer></script>
+    </div>
+    <div class="nav-buttons">
+        <a href="/on/principles/slack-variety-cadence/" class="nav-button">➠</a>
+        <a href="/on/principles/starting-out-informed/" class="nav-button">➠</a>
+    </div>
+</body>
+</html>

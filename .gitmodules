@@ -1,3 +1,3 @@
 [submodule "experiments/timelines-demo"]
-	path = experiments/timelines-demo
+	path = on/experiments/timelines-demo
 	url = https://github.com/vanwoerden/timelines.git

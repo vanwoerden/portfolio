@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales tax filing projects - ernst.works</title>
+    <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style-million.css">
+    <link rel="stylesheet" type="text/css" href="../../css/timeline.css">
+    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
+    <style>
+        .stf-page {
+            overflow-x: clip;
+            --stf-date-col: 80px;
+            --stf-axis: 80px;
+            --stf-content-gap: calc(1rem + 3rem);
+            --stf-text-width: 600px;
+        }
+
+        .stf-content {
+            max-width: min(96rem, calc(100vw - 10% - 8vw));
+            margin: 0;
+            padding: 4rem 8vw 0 10%;
+        }
+
+        .stf-content--tail {
+            padding-bottom: 8rem;
+        }
+
+        .stf-header {
+            margin-bottom: 2rem;
+            padding-left: calc(var(--stf-date-col) + var(--stf-content-gap));
+            max-width: calc(var(--stf-content-gap) + var(--stf-text-width));
+        }
+
+        .stf-header .welcome {
+            margin: 0;
+            margin-left: 0;
+        }
+
+        .stf-timeline.timeline-container {
+            max-width: none;
+            margin: 0;
+            padding: 2rem 0 0;
+        }
+
+        .stf-timeline .timeline-left {
+            width: var(--stf-date-col);
+            min-width: var(--stf-date-col);
+            margin-left: 0;
+        }
+
+        .stf-timeline .timeline-line {
+            left: var(--stf-axis);
+        }
+
+        .stf-timeline .timeline-marker {
+            left: var(--stf-axis);
+            margin-left: 0;
+        }
+
+        .stf-timeline .timeline-item {
+            gap: 0;
+        }
+
+        .timeline-title { color: var(--very-light-yellow); }
+        .timeline-description { color: var(--very-light-yellow-darker); }
+        .timeline-tag { color: var(--very-light-yellow-darker); border-color: rgba(242, 237, 213, 0.15); }
+        .timeline-tag-year { color: var(--darkblue); }
+        .timeline-marker { background: var(--very-light-yellow); border-color: var(--darkblue); }
+        .timeline-line {
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.1) 0px,
+                rgba(255, 255, 255, 0.1) 6px,
+                transparent 6px,
+                transparent 10px
+            );
+        }
+
+        .stf-screens-strip-figure {
+            width: 100vw;
+            max-width: 100vw;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .stf-screens-strip {
+            overflow-x: auto;
+            overflow-y: hidden;
+            overscroll-behavior-x: contain;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .stf-screens-strip::-webkit-scrollbar {
+            display: none;
+        }
+
+        .stf-screens-strip__track {
+            display: flex;
+            align-items: flex-end;
+            gap: 0;
+            width: max-content;
+            border-radius: 1.25rem;
+            overflow: hidden;
+        }
+
+        .stf-screens-strip__slide {
+            flex: 0 0 auto;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+        }
+
+        .stf-screens-strip__slide img {
+            display: block;
+            height: clamp(380px, 68vh, 720px);
+            width: auto;
+        }
+
+        .stf-mindsets {
+            margin-top: 1.5rem;
+        }
+
+        .stf-mindsets-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stf-mindset-card {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            min-height: 11rem;
+            border-radius: 1.5rem;
+            background: rgb(37, 37, 35);
+            border: 1px solid rgba(255, 250, 224, 0.08);
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .stf-mindset-card__media {
+            flex: 0 0 36%;
+            max-width: 36%;
+            min-width: 0;
+            background: rgb(25, 25, 23);
+        }
+
+        .stf-mindset-card__media img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .stf-mindset-card__body {
+            flex: 1;
+            min-width: 0;
+            padding: 1.5rem 1.6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .stf-mindset-card h3 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.25rem, 2vw, 1.55rem);
+            color: var(--very-light-yellow);
+            margin: 0;
+            line-height: 1.25;
+            font-weight: normal;
+        }
+
+        .stf-mindset-card p {
+            margin: 0;
+            font-family: "FranklinGothicURW-Boo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.45;
+            color: var(--very-light-yellow-darker);
+        }
+
+        @media (max-width: 900px) {
+            .stf-mindsets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stf-video {
+            position: relative;
+            margin: 0;
+            line-height: 0;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            width: 100%;
+            background: rgb(25, 25, 23);
+        }
+
+        .stf-principles-video .stf-video__media {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+        }
+
+        .stf-timeline .timeline-content {
+            flex: 0 0 var(--stf-text-width);
+            max-width: var(--stf-text-width);
+            width: var(--stf-text-width);
+            min-width: var(--stf-text-width);
+            margin-left: var(--stf-content-gap);
+        }
+
+        .stf-principles-video {
+            margin-top: 1.25rem;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .stf-page {
+                --stf-date-col: 50px;
+                --stf-axis: 50px;
+                --stf-content-gap: calc(0.75rem + 2rem);
+            }
+
+            .stf-header {
+                padding-left: calc(var(--stf-date-col) + var(--stf-content-gap));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stf-page {
+                --stf-date-col: 40px;
+                --stf-axis: 45px;
+                --stf-content-gap: calc(0.5rem + 1.5rem);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .stf-timeline .timeline-content {
+                flex: 1 1 auto;
+                width: auto;
+                min-width: 0;
+                max-width: min(600px, 100%);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            timelineItems.forEach(function(item) {
+                observer.observe(item);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="stf-page">
+        <div class="stf-content">
+            <header class="stf-header">
+                <nav class="dd-breadcrumb" aria-label="Breadcrumb">
+                    <a href="/" onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>
+                    <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                    <a href="/on/">on</a>
+                    <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                    <span class="dd-breadcrumb__current" aria-current="page">Sales tax filing projects</span>
+                </nav>
+                <h1 class="welcome">Sales tax filing projects</h1>
+            </header>
+
+            <div class="timeline-container stf-timeline">
+                <div class="timeline-line"></div>
+
+                <article class="timeline-item" data-year="2023">
+                    <div class="timeline-left">
+                        <span class="timeline-tag timeline-tag-year">Apr 2023</span>
+                    </div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">Ideal state 2026</h2>
+                        <p class="timeline-description">We imagined what a perfect indirect tax world would look like 3 years out. The input was 40-some interviews with SMBs and accountants. This was just a few months after ChatGPT had launched, and while text wasn't yet a strong suit of LLMs, Midjourney proved to be extremely useful (and equally frustrating) for helping us visualize 4 key future scenarios.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="stf-screens-strip-figure">
+            <div class="stf-screens-strip" role="region" aria-label="Ideal state scenario images">
+                <div class="stf-screens-strip__track">
+                    <figure class="stf-screens-strip__slide"><img src="/img/ideal_state_1.jpg" alt="Ideal state future scenario 1" loading="lazy"></figure>
+                    <figure class="stf-screens-strip__slide"><img src="/img/ideal_state_2.jpg" alt="Ideal state future scenario 2" loading="lazy"></figure>
+                    <figure class="stf-screens-strip__slide"><img src="/img/ideal_state_3.jpg" alt="Ideal state future scenario 3" loading="lazy"></figure>
+                </div>
+            </div>
+        </div>
+
+        <div class="stf-content stf-content--tail">
+            <div class="timeline-container stf-timeline">
+                <div class="timeline-line"></div>
+
+                <article class="timeline-item">
+                    <div class="timeline-left"></div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">Historical context</h2>
+                        <p class="timeline-description">Historically, sales tax had always been a compliance thing; a must have part for businesses to consider QuickBooks as a solid business solution. We had filing in the UK and Australia, but it was never seen as a revenue opportunity. We had acquired a business who specialized in US sales tax filing, but integrating that into QuickBooks and making it work as a business hadn't been successful the first time around (circa 2017).</p>
+                        <p class="timeline-description">5 years later, the market for sales tax filing seemed a lot more attractive, and the team got executive buy in to build towards a profitable sales tax filing business.</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item" data-year="2024">
+                    <div class="timeline-left">
+                        <span class="timeline-tag timeline-tag-year">May 2024</span>
+                    </div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">Foundational research into filing</h2>
+                        <p class="timeline-description">I was put on as the lead designer. My first move was to try and understand the filing journey in detail, for both SMBs and accountants. One trick I employed was sending the interview participants a canvas before the session, with the ask to map their filing process in terms of actions, roles, highs, and lows. This is a tactic our of the context-mapping playbook called sensitization; essentially by having participants create something, and think about the topic in advance, you can prime them and they have something to reflect on immediately when the session starts. This way the output of our sessions had a lot more detail to it. I got about a 2/3 response to this request, with the remaining 1/3 we just mapped during the interview.</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-left"></div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">Mindsets (yes, more research)</h2>
+                        <p class="timeline-description">We were lucky to have a UX researcher on the team, who synthesized a lot of past research into four indirect tax mindsets.</p>
+                        <div class="stf-mindsets">
+                            <div class="stf-mindsets-grid">
+                                <article class="stf-mindset-card">
+                                    <div class="stf-mindset-card__media">
+                                        <img src="/img/mindset_detail_detective.jpeg" alt="Detail Detective mindset illustration" loading="lazy">
+                                    </div>
+                                    <div class="stf-mindset-card__body">
+                                        <h3>Detail Detective</h3>
+                                        <p>Cross-checks every line item and wants to see the math before signing off.</p>
+                                    </div>
+                                </article>
+                                <article class="stf-mindset-card">
+                                    <div class="stf-mindset-card__media">
+                                        <img src="/img/mindset_macro_manager.jpeg" alt="Macro Manager mindset illustration" loading="lazy">
+                                    </div>
+                                    <div class="stf-mindset-card__body">
+                                        <h3>Macro Manager</h3>
+                                        <p>Stays at the dashboard level and delegates the granular filing work to others.</p>
+                                    </div>
+                                </article>
+                                <article class="stf-mindset-card">
+                                    <div class="stf-mindset-card__media">
+                                        <img src="/img/mindset_cautious_conformist.jpeg" alt="Cautious Conformist mindset illustration" loading="lazy">
+                                    </div>
+                                    <div class="stf-mindset-card__body">
+                                        <h3>Cautious Conformist</h3>
+                                        <p>Follows the rules closely and needs reassurance that each step meets compliance.</p>
+                                    </div>
+                                </article>
+                                <article class="stf-mindset-card">
+                                    <div class="stf-mindset-card__media">
+                                        <img src="/img/mindset_distracted_imperfectionist.jpeg" alt="Distracted Imperfectionist mindset illustration" loading="lazy">
+                                    </div>
+                                    <div class="stf-mindset-card__body">
+                                        <h3>Distracted Imperfectionist</h3>
+                                        <p>Juggles too many priorities and accepts good enough if filing gets done on time.</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <p class="timeline-description">These mindsets remain a helpful frame to this day when evaluating concepts and balancing user needs.</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-left"></div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">0 - 1 filing</h2>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-left"></div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">Principles</h2>
+                        <p class="timeline-description">
+                            Intuit puts a lot of value in principles. But they're not easy to get right. Good design pricinples should help you make decisions. They should be opinionated. We started with very light basic principles, and let things get messy first, instead of defining behavior without knowing enough of the terrain. Over the course of the initiative, similar questions kept popping up, and within the core team, a set of more specific principles started to emerge organically between mostly the PM and myself. I just recorded them first. But then I wasn't happy with the lack of concrete examples. So I decided it was time for an experiment. I built a list of principles and connected each to one or more concrete pieces of UI in the filing system prototype. Now we could link directly to the rationale—in context—when questions about designs and product behavior came up.
+                        </p>
+                        <figure class="stf-video stf-principles-video">
+                            <video
+                                class="stf-video__media"
+                                src="/video/filing_principles.mp4"
+                                width="1920"
+                                height="1080"
+                                controls
+                                loop
+                                playsinline
+                                preload="metadata"
+                                aria-label="Filing principles prototype walkthrough"></video>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-left"></div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">Filing system</h2>
+                        <p class="timeline-description">
+                            As we were rolling out filing to all of the 45 states that have sales tax, it started to become painfully clear that designing all of this as static mocks in Figma was not going to cut it. 45 states, with 6 or more statuses for a return, and different credentials, IDs, discount rules, tax types, ways to break down the taxes,and not infrequently a few other baffling esoteric requirements and edge cases, made it clear that we needed to build a more dynamic system.
+                        </p>
+                        <p class="timeline-description">
+                            At the same time, there was a need to design some of this in parallel. Figma was to clunky to serve as a data structure. The amount of time I'd have to spend wiring up screens to prototype 45 * 6 returns, onboarding flows, extra workflows to add to and remove things from the returns, was not a favorable outlook.
+                        </p>
+                        <p class="timeline-description">
+                            So I decided to build a config driven prototype. The Figma MCP was just starting to get good, so I started with a few .md files for config structure, and pointed Cursor at a few return UI designs. 
+                        </p>
+                        <p class="timeline-description">
+                            The prototype was a success. It allowed us to design and prototype 45 * 6 returns, onboarding flows, extra workflows to add to and remove things from the returns, and more.
+                        </p>
+                        <p class="timeline-description">
+                            The prototype was a success. It allowed us to design and prototype 45 * 6 returns, onboarding flows, extra workflows to add to and remove things from the returns, and more.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-left"></div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">Agent autonomy map</h2>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

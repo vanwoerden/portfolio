@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dutch & Dutch App - ernst.works</title>
+    <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style-million.css">
+    <link rel="stylesheet" type="text/css" href="/on/dutch-dutch-app/project-breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="/on/dutch-dutch-app/project-page.css">
+    <script>
+        (function() {
+            const d = sessionStorage.getItem('nav-direction');
+            if (d === 'sub-backward') {
+                document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-left');
+                document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-right');
+            } else if (d === 'backward') {
+                document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-top');
+                document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-bottom');
+            } else {
+                document.documentElement.style.setProperty('--vt-new-animation', 'push-in-from-bottom');
+                document.documentElement.style.setProperty('--vt-old-animation', 'push-out-to-top');
+            }
+            sessionStorage.removeItem('nav-direction');
+        })();
+
+        function closeDetailPage() {
+            sessionStorage.setItem('nav-direction', 'backward');
+            window.location.href = '/';
+        }
+
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.key === 'Home' || e.keyCode === 27 || e.keyCode === 36) {
+                e.preventDefault();
+                closeDetailPage();
+            }
+        });
+    </script>
+    <style>
+        @view-transition { navigation: auto; types: forward, backward; }
+        @keyframes push-in-from-bottom { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes push-in-from-top    { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes push-out-to-top     { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-100%); opacity: 0; } }
+        @keyframes push-out-to-bottom  { from { transform: translateY(0); opacity: 1; } to { transform: translateY(100%); opacity: 0; } }
+        @keyframes push-in-from-right  { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes push-in-from-left   { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes push-out-to-right   { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+        @keyframes push-out-to-left    { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-100%); opacity: 0; } }
+        ::view-transition-new(root) { animation-name: var(--vt-new-animation, push-in-from-bottom); animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); }
+        ::view-transition-old(root) { animation-name: var(--vt-old-animation, push-out-to-top); animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); }
+
+        :root {
+            --dd-diagonal-angle: 28.2deg;
+            --dd-viewport-pad: 4rem;
+            --dd-bg-cutback: 0.5rem;
+            --dd-header-top: 7rem;
+            --dd-h1-block: clamp(5rem, 14vh, 9rem);
+            --dd-devices-max-width: 680px;
+            --dd-key-cell-w: 3.75rem;
+            --dd-key-cell-h: 2.75rem;
+            --dd-key-gap: 0.35rem;
+            --dd-key-inset: 2rem;
+            --dd-key-top: 1.5rem;
+            --dd-main-width: 640px;
+            --dd-layout-gap: clamp(1.5rem, 3vw, 2.5rem);
+        }
+
+        body {
+            position: relative;
+        }
+
+        .dd-bg-shape {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: calc(100dvh - var(--dd-viewport-pad) - var(--dd-bg-cutback));
+            background: linear-gradient(
+                calc(180deg - var(--dd-diagonal-angle)),
+                var(--dd-surface-deep),
+                var(--dd-bg-gradient-light) 55%
+            );
+            pointer-events: none;
+            z-index: 0;
+            clip-path: polygon(
+                0 0,
+                100% 0,
+                100% 100%,
+                0 calc(100% - tan(var(--dd-diagonal-angle)) * 100vw)
+            );
+        }
+
+        .dd-hero-band {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dd-hero-band > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Page layout */
+        .dd-page {
+            position: relative;
+            z-index: 1;
+            padding: 0 8vw 8rem 8vw;
+            max-width: 1680px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .dd-header {
+            padding: 7rem 0 3rem 0;
+        }
+
+        .dd-layout {
+            display: grid;
+            grid-template-columns: var(--dd-main-width) 1fr;
+            grid-template-rows: auto;
+            column-gap: var(--dd-layout-gap);
+            align-items: start;
+            margin: 0 -8vw 3rem -8vw;
+            padding: 0 3vw 0 8vw;
+        }
+
+        .dd-layout:last-child {
+            margin-bottom: 0;
+        }
+
+        .dd-main {
+            grid-column: 1;
+            min-width: 0;
+        }
+
+        .dd-aside {
+            grid-column: 2;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            justify-content: flex-start;
+        }
+
+        .dd-aside .dd-figure {
+            max-width: none;
+            margin: 0;
+        }
+
+        .dd-aside .dd-figure figcaption {
+            display: none;
+        }
+
+        .dd-aside .dd-hero-image,
+        .dd-aside img {
+            display: block;
+            width: 100%;
+            max-width: min(var(--dd-devices-max-width), 100%);
+            height: auto;
+            border-radius: 2rem;
+        }
+
+        .dd-growth-image {
+            overflow: hidden;
+            border-radius: 2rem;
+            width: 100%;
+            max-width: min(var(--dd-devices-max-width), 100%);
+            /* aspect-ratio: 1296 / 342; */
+            line-height: 0;
+        }
+
+        .dd-growth-image .dd-hero-image {
+            width: 100%;
+            height: auto;
+            max-width: none;
+            border-radius: 0;
+            display: block;
+        }
+
+        .dd-media-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 10rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            background: var(--dd-surface);
+            border: 1px dashed rgba(255, 250, 224, 0.12);
+            font-size: 0.85rem;
+            color: var(--very-light-yellow-darker);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .dd-block {
+            margin-bottom: 2rem;
+        }
+
+        .dd-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .dd-block h2 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+            color: var(--very-light-yellow);
+            margin: 0 0 0.75rem 0;
+            line-height: 1.15;
+            font-weight: normal;
+        }
+
+        .dd-block h3 {
+            font-family: "Henrietta Regular";
+            font-size: 1.4rem;
+            color: var(--very-light-yellow);
+            margin: 0 0 0.5rem 0;
+            line-height: 1.2;
+            font-weight: normal;
+        }
+
+        .dd-block p {
+            font-size: 1.6rem;
+            color: var(--very-light-yellow-darker);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .dd-stat {
+            margin-bottom: 1.5rem;
+        }
+
+        .dd-stat__number {
+            font-family: "Henrietta Regular";
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--very-light-yellow);
+            line-height: 1;
+            margin-bottom: 0.35rem;
+        }
+
+        .dd-stat__label {
+            font-size: 1.1rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.4;
+        }
+
+        .dd-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dd-tag {
+            font-size: 0.85rem;
+            color: var(--very-light-yellow-darker);
+            padding: 0.35rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 250, 224, 0.15);
+        }
+
+        /* Hero fold anchoring: see project-page.css */
+
+        .dd-main .dd-intro,
+        .dd-main .dd-subtitle {
+            max-width: none;
+        }
+
+        .dd-intro {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            color: var(--very-light-yellow);
+            margin: 0 0 1rem 0;
+            line-height: 1.25;
+        }
+
+        .dd-intro a,
+        .dd-intro a:visited {
+            color: inherit;
+            background: none;
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 250, 224, 0.35);
+            text-underline-offset: 0.14em;
+            text-decoration-thickness: 1px;
+            transition: text-decoration-color 0.2s ease;
+        }
+
+        .dd-intro a:hover {
+            text-decoration-color: rgba(255, 250, 224, 0.55);
+        }
+
+        .dd-meta {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            margin: 1.75rem 0 0 0;
+        }
+
+        .dd-meta__item {
+            flex: 0 0 auto;
+            width: fit-content;
+            background: var(--dd-surface);
+            padding: 1.4rem;
+            border-radius: 1.6rem;
+        }
+
+        .dd-meta dt {
+            font-family: "Kumbh Sans", sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.01em;
+            color: var(--very-light-yellow-darkest);
+            margin: 0 0 0.4rem 0;
+        }
+
+        .dd-meta dd {
+            font-size: 1.4rem;
+            color: var(--very-light-yellow-darker);
+            margin: 0;
+            line-height: 1.45;
+            white-space: nowrap;
+        }
+
+        .dd-traits {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dd-trait-card {
+            border-radius: 1rem;
+            background: var(--dd-surface);
+            border: 1px solid rgba(255, 250, 224, 0.08);
+            padding: 1.35rem 1.5rem;
+        }
+
+        .dd-trait-card h3 {
+            font-family: "Henrietta Regular";
+            font-size: 1.4rem;
+            color: var(--very-light-yellow);
+            margin: 0 0 0.5rem 0;
+            line-height: 1.2;
+        }
+
+        .dd-trait-card p {
+            font-size: 1.3rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.45;
+            margin: 0;
+        }
+
+        .dd-header h1 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: var(--very-light-yellow);
+            margin: 0 0 clamp(1.5rem, 3vw, 2.5rem) 0;
+            line-height: 1.1;
+        }
+
+        .dd-header .dd-subtitle {
+            font-size: 1.6rem;
+            color: var(--very-light-yellow-darker);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .dd-main .dd-subtitle + .dd-subtitle {
+            margin-top: 1rem;
+        }
+
+        .dd-hero-image {
+            border-radius: 2rem;
+        }
+
+        .dd-figure {
+            max-width: 760px;
+            margin: 0 0 5rem 0;
+        }
+
+        .dd-figure .dd-hero-image {
+            margin-bottom: 0;
+        }
+
+        .dd-figure figcaption {
+            font-size: 1.4rem;
+            color: var(--very-light-yellow-darker);
+            margin-top: -5rem;
+            padding: 0 1.25rem;
+            line-height: 1.4;
+            position: relative;
+            z-index: 1;
+            width: 65%;
+        }
+
+        /* Keyboard nav keys */
+        .dd-close-group {
+            position: fixed;
+            top: var(--dd-key-top);
+            left: var(--dd-key-inset);
+            display: flex;
+            gap: var(--dd-key-gap);
+            z-index: 100;
+        }
+
+        a.dd-key,
+        a.dd-key:hover,
+        a.dd-key:visited,
+        a.dd-key:focus,
+        a.dd-key:active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: var(--dd-key-cell-w);
+            min-height: var(--dd-key-cell-h);
+            padding: 0.75rem 0.6rem 0.5rem 0.6rem;
+            box-sizing: border-box;
+            background: var(--darkblue);
+            border: 1px solid rgba(255, 250, 224, 0.22);
+            border-bottom-width: 3px;
+            border-radius: 6px;
+            font-family: "Kumbh Sans", sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.2px;
+            line-height: 1;
+            color: var(--very-light-yellow-darker);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+            text-decoration: none !important;
+            cursor: pointer;
+            transition: opacity 0.15s;
+        }
+
+        a.dd-key:hover,
+        a.dd-key:visited {
+            color: var(--very-light-yellow-darker);
+            opacity: 0.75;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dd-close-group {
+                left: 5.5rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .dd-bg-shape {
+                height: clamp(680px, calc(115vw - var(--dd-bg-cutback)), calc(1100px - var(--dd-bg-cutback)));
+            }
+
+            .dd-hero-band {
+                min-height: auto;
+                display: block;
+            }
+
+            .dd-layout {
+                flex: none;
+                grid-template-columns: 1fr;
+                margin-left: -5vw;
+                margin-right: -5vw;
+                padding-left: 5vw;
+                padding-right: 5vw;
+            }
+
+            .dd-main,
+            .dd-aside {
+                grid-column: auto;
+            }
+
+            .dd-layout--growth > .dd-intro,
+            .dd-layout--growth > .dd-growth-summary,
+            .dd-layout--growth > .dd-main,
+            .dd-layout--growth > .dd-aside {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .dd-aside .dd-hero-image {
+                max-height: none;
+            }
+
+            .dd-hero-band .dd-aside .dd-figure {
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .dd-aside:empty {
+                display: none;
+            }
+        }
+
+        /* Design principles accordion */
+        .dd-principles {
+            margin: 0 0 1rem;
+        }
+
+        .dd-principles-accordion {
+            border-radius: 1rem;
+            background: var(--dd-surface);
+            overflow: hidden;
+        }
+
+        .dd-principles-accordion__summary {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            color: var(--very-light-yellow);
+            margin: 0;
+            line-height: 1.25;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .dd-principles-accordion__summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dd-principles-accordion__summary::after {
+            content: "+";
+            flex-shrink: 0;
+            font-family: "Kumbh Sans", sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--very-light-yellow-darkest);
+            line-height: 1;
+        }
+
+        .dd-principles-accordion[open] .dd-principles-accordion__summary::after {
+            content: "−";
+        }
+
+        .dd-principles-accordion__panel {
+            padding: 0 1rem 1rem;
+        }
+
+        .dd-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .dd-accordion__item {
+            border-radius: 1rem;
+            background: var(--dd-surface);
+            overflow: hidden;
+        }
+
+        .dd-accordion__summary {
+            font-family: "Henrietta Regular";
+            font-size: 1.4rem;
+            color: var(--very-light-yellow);
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            line-height: 1.2;
+        }
+
+        .dd-accordion__summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dd-accordion__summary::after {
+            content: "+";
+            flex-shrink: 0;
+            font-family: "Kumbh Sans", sans-serif;
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--very-light-yellow-darkest);
+            line-height: 1;
+        }
+
+        .dd-accordion__item[open] .dd-accordion__summary::after {
+            content: "−";
+        }
+
+        .dd-accordion__panel {
+            padding: 0 1.5rem 1.35rem;
+        }
+
+        .dd-accordion__panel p {
+            font-size: 1.6rem;
+            color: var(--very-light-yellow-darker);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Project goals */
+        .dd-goals-section {
+            margin: 0 0 2rem;
+        }
+
+        .dd-goals-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .dd-goals-section h2 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            color: var(--very-light-yellow-darker);
+            margin: 0 0 1.2rem 0;
+            font-weight: normal;
+        }
+
+        .dd-goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+            gap: 1rem;
+        }
+
+        .dd-card {
+            min-height: 220px;
+            border-radius: 1.5rem;
+            background: var(--dd-surface);
+            padding: 1.8rem 2rem;
+            display: flex;
+            align-items: flex-start;
+            box-sizing: border-box;
+        }
+
+        .dd-card--bordered {
+            border: 1px solid rgba(255, 250, 224, 0.08);
+        }
+
+        .dd-card p {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+            color: var(--very-light-yellow);
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        .dd-card p + p {
+            margin-top: 0.75rem;
+        }
+
+        /* User archetypes */
+        .dd-archetypes-section h2 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            color: var(--very-light-yellow-darker);
+            margin: 0 0 1.2rem 0;
+            font-weight: normal;
+            max-width: var(--dd-main-width);
+        }
+
+        .dd-archetypes-intro {
+            font-size: 1.6rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.6;
+            margin: 0 0 1.5rem 0;
+            max-width: var(--dd-main-width);
+            position: relative;
+            z-index: 1;
+            padding: 0.6rem 0;
+        }
+
+        .dd-archetypes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.4rem;
+        }
+
+        .dd-card--archetype {
+            flex-direction: row;
+            align-items: stretch;
+            padding: 0;
+            overflow: hidden;
+            min-height: 220px;
+        }
+
+        .dd-card--archetype__media {
+            flex: 0 0 40%;
+            max-width: 40%;
+            min-width: 0;
+        }
+
+        .dd-card--archetype__media img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dd-card--archetype[data-user-archetype="home"] .dd-card--archetype__media img {
+            object-position: right center;
+        }
+
+        .dd-card--archetype__body {
+            flex: 1;
+            min-width: 0;
+            padding: 1.8rem 2rem;
+        }
+
+        .dd-card--archetype h3 {
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+            color: var(--very-light-yellow);
+            margin: 0 0 0.75rem 0;
+            line-height: 1.2;
+            font-weight: normal;
+        }
+
+        .dd-card--archetype p {
+            font-family: "Kumbh Sans", sans-serif;
+            font-size: 1.25rem;
+            color: var(--very-light-yellow-darker);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        @media (max-width: 700px) {
+            .dd-archetypes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dd-archetypes-reveal {
+            transition: opacity 0.45s linear, transform 0.45s linear, visibility 0.45s linear;
+        }
+
+        .dd-user-links:not(.dd-user-links--unlocked) .dd-archetypes-reveal {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(0.75rem);
+        }
+
+        .dd-user-links--unlocked .dd-archetypes-reveal {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: none;
+        }
+
+        /* User archetype connector lines */
+        .dd-user-links {
+            position: relative;
+        }
+
+        .dd-user-links > .dd-layout {
+            position: relative;
+            z-index: 1;
+        }
+
+        .dd-all-users-anchor {
+            position: relative;
+            white-space: nowrap;
+            text-decoration: none;
+            cursor: pointer;
+            background-image: repeating-linear-gradient(
+                to right,
+                var(--link-underline-color, #5452B7) 0,
+                var(--link-underline-color, #5452B7) 6px,
+                transparent 6px,
+                transparent 10px
+            );
+            background-size: 10px 1px;
+            background-repeat: repeat-x;
+            background-position: left calc(100% - 0.05em);
+        }
+
+        .dd-user-links__svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: visible;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s linear, visibility 0.2s linear;
+        }
+
+        .dd-user-links--revealed .dd-user-links__svg,
+        .dd-user-links--unlocked .dd-user-links__svg {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dd-user-links__path {
+            fill: none;
+            stroke: var(--very-light-yellow-darker);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .dd-user-links__path--under {
+            stroke-width: 9;
+            opacity: 0.2;
+        }
+
+        .dd-user-links__path--main {
+            stroke-width: 1.5;
+            opacity: 0.55;
+        }
+
+        .dd-user-links__dot {
+            fill: var(--very-light-yellow-darker);
+            opacity: 0;
+            transition: opacity 0.25s linear;
+        }
+
+        .dd-user-links--revealed .dd-user-links__dot,
+        .dd-user-links--unlocked .dd-user-links__dot {
+            opacity: 0.7;
+        }
+
+        .dd-user-links--revealed .dd-user-links__dot--end:nth-of-type(2) {
+            transition-delay: 0.35s;
+        }
+
+        .dd-user-links--revealed .dd-user-links__dot--end:nth-of-type(3) {
+            transition-delay: 0.5s;
+        }
+
+        .dd-user-links--revealed #dd-user-links-dot-start {
+            transition-delay: 0.05s;
+        }
+
+        /* Projects grid */
+        .dd-layout__full {
+            grid-column: 1 / -1;
+        }
+
+        .dd-layout--growth {
+            grid-template-rows: auto auto auto;
+        }
+
+        .dd-layout--growth > .dd-intro {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .dd-growth-summary {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            font-family: "Henrietta Regular";
+            font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+            color: var(--very-light-yellow);
+            line-height: 1.35;
+            margin: 0 0 1.75rem 0;
+            padding: 1.5rem 0;
+        }
+
+        .dd-layout--growth > .dd-main {
+            grid-column: 1;
+            grid-row: 3;
+        }
+
+        .dd-layout--growth > .dd-aside {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        .dd-no-big-deal {
+            margin: clamp(3rem, 6vw, 5rem) 0 0;
+            max-width: var(--dd-main-width);
+        }
+
+        .dd-no-big-deal h2 {
+            margin: 0 0 clamp(1.5rem, 3vw, 2.5rem) 0;
+        }
+
+        .dd-vision-image {
+            margin: 2rem 0 0;
+            border-radius: 2rem;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .dd-vision-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .dd-page { padding: 0 5vw 5rem 5vw; }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile navigation toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const navContainer = document.querySelector('.nav-container');
+            const navOverlay = document.querySelector('.nav-overlay');
+
+            function toggleNav() {
+                const isOpen = navContainer.classList.contains('nav-open');
+                navContainer.classList.toggle('nav-open');
+                navToggle.classList.toggle('nav-toggle-open');
+                navToggle.setAttribute('aria-expanded', !isOpen);
+                if (navOverlay) navOverlay.classList.toggle('active');
+            }
+
+            if (navToggle && navContainer) {
+                navToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleNav();
+                });
+                if (navOverlay) navOverlay.addEventListener('click', toggleNav);
+                document.addEventListener('click', function(event) {
+                    if (navContainer.classList.contains('nav-open') &&
+                        !navContainer.contains(event.target) &&
+                        !navToggle.contains(event.target)) {
+                        toggleNav();
+                    }
+                });
+            }
+
+            document.querySelectorAll('.dd-accordion').forEach(function(accordion) {
+                accordion.querySelectorAll('.dd-accordion__item').forEach(function(item) {
+                    item.addEventListener('toggle', function() {
+                        if (!item.open) return;
+                        accordion.querySelectorAll('.dd-accordion__item').forEach(function(other) {
+                            if (other !== item) other.open = false;
+                        });
+                    });
+                });
+            });
+
+            (function initUserArchetypeLinks() {
+                const container = document.querySelector('.dd-user-links');
+                const anchor = document.getElementById('dd-all-users-anchor');
+                const cards = container
+                    ? Array.from(container.querySelectorAll('[data-user-archetype]'))
+                    : [];
+                const svg = document.getElementById('dd-user-links-svg');
+                const mainPaths = svg ? svg.querySelectorAll('.dd-user-links__path--main') : [];
+                const underPaths = svg ? svg.querySelectorAll('.dd-user-links__path--under') : [];
+                const startDot = document.getElementById('dd-user-links-dot-start');
+                const endDots = svg ? svg.querySelectorAll('.dd-user-links__dot--end') : [];
+
+                if (!container || !anchor || cards.length !== 2 || !svg || mainPaths.length !== 2 || !startDot) return;
+
+                let revealed = false;
+                let unlocked = false;
+                let revealTimer = null;
+                const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                const noHover = window.matchMedia('(hover: none)').matches;
+                const lineDrawMs = reduceMotion ? 0 : 880;
+                const scrollRevealRatio = 0.35;
+                const revealBlock = container.querySelector('.dd-archetypes-reveal');
+                const archetypesLayout = revealBlock
+                    ? revealBlock.closest('.dd-layout')
+                    : null;
+
+                function linesShouldShow() {
+                    return revealed || unlocked;
+                }
+
+                function relRect(el) {
+                    const c = container.getBoundingClientRect();
+                    const r = el.getBoundingClientRect();
+                    return {
+                        left: r.left - c.left,
+                        top: r.top - c.top,
+                        width: r.width,
+                        height: r.height,
+                        right: r.right - c.left,
+                        bottom: r.bottom - c.top
+                    };
+                }
+
+                function cubicPath(x0, y0, x1, y1) {
+                    const dy = y1 - y0;
+                    const dx = x1 - x0;
+                    const cp1x = x0 + dx * 0.08;
+                    const cp1y = y0 + dy * 0.62;
+                    const cp2x = x1 - dx * 0.06;
+                    const cp2y = y1 - dy * 0.38;
+                    return 'M ' + x0 + ' ' + y0 +
+                        ' C ' + cp1x + ' ' + cp1y +
+                        ', ' + cp2x + ' ' + cp2y +
+                        ', ' + x1 + ' ' + y1;
+                }
+
+                function applyDashState(animateIn) {
+                    mainPaths.forEach(function(path, i) {
+                        const under = underPaths[i];
+                        const len = path.getTotalLength();
+
+                        if (!len) return;
+
+                        path.style.strokeDasharray = String(len);
+                        under.style.strokeDasharray = String(len);
+
+                        if (!linesShouldShow()) {
+                            path.style.transition = 'none';
+                            under.style.transition = 'none';
+                            path.style.strokeDashoffset = String(len);
+                            under.style.strokeDashoffset = String(len);
+                            return;
+                        }
+
+                        if (animateIn && !reduceMotion && !unlocked) {
+                            path.style.transition = 'none';
+                            under.style.transition = 'none';
+                            path.style.strokeDashoffset = String(len);
+                            under.style.strokeDashoffset = String(len);
+                        } else {
+                            path.style.transition = 'none';
+                            under.style.transition = 'none';
+                            path.style.strokeDashoffset = '0';
+                            under.style.strokeDashoffset = '0';
+                        }
+                    });
+
+                    if (!linesShouldShow() || !animateIn || reduceMotion) return;
+
+                    requestAnimationFrame(function() {
+                        requestAnimationFrame(function() {
+                            mainPaths.forEach(function(path, i) {
+                                const under = underPaths[i];
+                                const delay = i * 80;
+                                const transition = 'stroke-dashoffset 0.72s linear ' + delay + 'ms';
+                                path.style.transition = transition;
+                                under.style.transition = transition;
+                                path.style.strokeDashoffset = '0';
+                                under.style.strokeDashoffset = '0';
+                            });
+                        });
+                    });
+                }
+
+                function syncArchetypesCollapse() {
+                    if (!revealBlock || !archetypesLayout || unlocked) {
+                        if (archetypesLayout) archetypesLayout.style.marginBottom = '';
+                        return;
+                    }
+                    const h = revealBlock.offsetHeight;
+                    if (h > 0) {
+                        archetypesLayout.style.marginBottom = 'calc(3rem - ' + h + 'px)';
+                    }
+                }
+
+                function updateUserLinks() {
+                    const c = container.getBoundingClientRect();
+                    if (c.width < 1 || c.height < 1) return;
+
+                    svg.setAttribute('viewBox', '0 0 ' + c.width + ' ' + c.height);
+                    svg.setAttribute('width', c.width);
+                    svg.setAttribute('height', c.height);
+
+                    const a = relRect(anchor);
+                    const startX = a.left + a.width / 2;
+                    const startY = a.bottom + 6;
+
+                    startDot.setAttribute('cx', startX);
+                    startDot.setAttribute('cy', startY);
+
+                    cards.forEach(function(card, i) {
+                        const r = relRect(card);
+                        const endX = r.left + r.width / 2;
+                        const endY = r.top - 8;
+                        const d = cubicPath(startX, startY, endX, endY);
+
+                        mainPaths[i].setAttribute('d', d);
+                        underPaths[i].setAttribute('d', d);
+
+                        if (endDots[i]) {
+                            endDots[i].setAttribute('cx', endX);
+                            endDots[i].setAttribute('cy', endY);
+                        }
+                    });
+
+                    syncArchetypesCollapse();
+                }
+
+                function showFromAnchor() {
+                    if (unlocked) return;
+
+                    clearTimeout(revealTimer);
+
+                    if (!revealed) {
+                        revealed = true;
+                        container.classList.add('dd-user-links--revealed');
+                        updateUserLinks();
+                        applyDashState(true);
+                    }
+
+                    revealTimer = setTimeout(function() {
+                        unlockArchetypes();
+                    }, lineDrawMs);
+                }
+
+                function unlockArchetypes() {
+                    if (unlocked) return;
+                    unlocked = true;
+                    revealTimer = null;
+                    revealed = true;
+                    container.classList.add('dd-user-links--unlocked');
+                    container.classList.add('dd-user-links--revealed');
+                    if (archetypesLayout) archetypesLayout.style.marginBottom = '';
+                    updateUserLinks();
+                    applyDashState(false);
+                }
+
+                function hideLinksBeforeUnlock() {
+                    if (unlocked) return;
+                    clearTimeout(revealTimer);
+                    revealTimer = null;
+                    revealed = false;
+                    container.classList.remove('dd-user-links--revealed');
+                    applyDashState(false);
+                }
+
+                function onAnchorLeave() {
+                    if (unlocked) return;
+                    hideLinksBeforeUnlock();
+                }
+
+                function hasScrolledPastAnchorThreshold() {
+                    const threshold = window.innerHeight * scrollRevealRatio;
+                    return anchor.getBoundingClientRect().top <= threshold;
+                }
+
+                function checkScrollReveal() {
+                    if (unlocked) return;
+                    if (hasScrolledPastAnchorThreshold()) showFromAnchor();
+                }
+
+                let frame = 0;
+                function scheduleUpdate() {
+                    cancelAnimationFrame(frame);
+                    frame = requestAnimationFrame(function() {
+                        updateUserLinks();
+                        applyDashState(false);
+                    });
+                }
+
+                window.addEventListener('resize', function() {
+                    scheduleUpdate();
+                    checkScrollReveal();
+                }, { passive: true });
+                window.addEventListener('scroll', function() {
+                    scheduleUpdate();
+                    checkScrollReveal();
+                }, { passive: true });
+                if (typeof ResizeObserver !== 'undefined') {
+                    const ro = new ResizeObserver(scheduleUpdate);
+                    ro.observe(container);
+                    ro.observe(anchor);
+                    cards.forEach(function(card) { ro.observe(card); });
+                }
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(scheduleUpdate);
+                }
+                container.querySelectorAll('img').forEach(function(img) {
+                    if (!img.complete) img.addEventListener('load', scheduleUpdate);
+                });
+
+                anchor.addEventListener('mouseenter', showFromAnchor);
+                anchor.addEventListener('mouseleave', onAnchorLeave);
+                anchor.addEventListener('focus', showFromAnchor);
+                anchor.addEventListener('blur', function() {
+                    if (!unlocked) hideLinksBeforeUnlock();
+                });
+                if (noHover) {
+                    anchor.addEventListener('click', function(e) {
+                        if (unlocked) return;
+                        e.preventDefault();
+                        showFromAnchor();
+                    });
+                }
+
+                scheduleUpdate();
+                checkScrollReveal();
+            })();
+        });
+    </script>
+</head>
+<body>
+    <div class="dd-close-group">
+        <a class="dd-key" href="/"
+           aria-label="Close"
+           onclick="sessionStorage.setItem('nav-direction','backward')">Esc</a>
+        <a class="dd-key" href="/"
+           aria-label="Home"
+           onclick="sessionStorage.setItem('nav-direction','backward')">Home</a>
+    </div>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+    </button>
+    <div class="nav-overlay"></div>
+
+    <div class="dd-bg-shape" aria-hidden="true"></div>
+
+    <div class="dd-page">
+        <header class="dd-header">
+            <div class="dd-hero-band">
+                <nav class="dd-breadcrumb" aria-label="Breadcrumb">
+                    <a href="/"
+                       onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>
+                    <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                    <a href="/on/">on</a>
+                    <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                    <span class="dd-breadcrumb__current" aria-current="page">Dutch &amp; Dutch control app</span>
+                </nav>
+                <h1>Smart speaker control app<br>for Dutch & Dutch</h1>
+                <div class="dd-layout dd-layout--hero">
+                    <div class="dd-main">
+                        <p class="dd-intro">Dutch &amp; Dutch make award-winning loudspeakers. <a href="https://dutchdutch.com/pages/reviews" target="_blank" rel="noopener noreferrer">Facts</a>.</p>
+
+                        <p class="dd-subtitle">
+                            Using a combination of hardware and software, Dutch & Dutch speakers fully adapt to the listener's room. I'm helping to overhaul the app that lets customers configure, calibrate, and control every part of their listening experience.
+                        </p>
+
+                        <dl class="dd-meta">
+                            <div class="dd-meta__item">
+                                <dt>Date</dt>
+                                <dd>2024 – today</dd>
+                            </div>
+                            <div class="dd-meta__item">
+                                <dt>Role</dt>
+                                <dd>Design, PM, front&#8209;end</dd>
+                            </div>
+                            <div class="dd-meta__item">
+                                <dt>Stack</dt>
+                                <dd>Paper, Figma, Cursor</dd>
+                            </div>
+                        </dl>
+
+                        <button type="button"
+                                class="dd-project-highlight"
+                                data-project-href="/on/dutch-dutch-app/volume-control/">
+                            <span class="dd-project-highlight__label">Read how I redesigned a volume control</span>
+                            <span class="dd-project-highlight__arrow" aria-hidden="true">→</span>
+                        </button>
+
+                        <!--<div class="dd-traits">
+                            <article class="dd-trait-card">
+                                <h3>Accurate</h3>
+                                <p>With its constant directivity from 100 Hz upwards and flat frequency response from 20 Hz upwards, music can now be experienced exactly as it was intended.</p>
+                            </article>
+                            <article class="dd-trait-card">
+                                <h3>Adaptive</h3>
+                                <p>Tune the system to the room, not the room to the system. Your Dutch & Dutch speaker adapt to the room and can be placed very close to room boundaries without losing performance.</p>
+                            </article>
+                            <article class="dd-trait-card">
+                                <h3>All-in-one</h3>
+                                <p>Besides drivers, our small footprint presence holds high-end DACs, amps, subwoofers and a DSP. The system also comes with room matching, sync and streaming capabilities out-of-the-box.</p>
+                            </article>
+                        </div>-->
+                    </div>
+                    <aside class="dd-aside">
+                        <figure class="dd-figure">
+                            <img src="/img/dd_devices.png" alt="Dutch & Dutch 15c, 8c and 6c, and a banana for scale" class="dd-hero-image">
+                            <figcaption>The Dutch & Dutch 15c, 8c and 6c, and a banana for scale.</figcaption>
+                        </figure>
+                    </aside>
+                </div>
+            </div>
+        </header>
+        <div class="dd-layout dd-layout--growth">
+            <!--<p class="dd-intro">Context: gearing up for growth</p>-->
+            <p class="dd-growth-summary">New hardware + design debt + platform plans = full redesign</p>
+            <div class="dd-main">
+                <p class="dd-subtitle">
+                    Dutch & Dutch were getting ready to launch the 6c: a smaller, new and improved version of their initial 8c model. New hardware required new software, the existing app had accrued design debt, and there was a platform play in the works. A redo started to sound increasingly appealing.
+                </p>
+                <section class="dd-goals-section">
+                    <p>
+                        When I joined the project, the ask was two-fold: help us reimagine the software as a platform from the ground up, and help <span class="dd-all-users-anchor" id="dd-all-users-anchor" tabindex="0">all users</span> get the absolute most out of their speakers.
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <figure class="dd-screens-strip-figure">
+            <div class="dd-screens-strip" role="region" aria-label="App screens">
+                <div class="dd-screens-strip__track">
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_2.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_3.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_4.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_5.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_6.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_7.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_8.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                    <figure class="dd-screens-strip__slide"><img src="/img/dd_9.png" alt="Dutch & Dutch app screen" width="1290" height="2796" loading="lazy"></figure>
+                </div>
+            </div>
+            <figcaption>The first version of the redesigned Dutch &amp; Dutch app as listed on the iOS App Store.</figcaption>
+        </figure>
+
+        <div class="dd-no-big-deal">
+            <p class="dd-intro">The audience</p>
+        </div>
+        <div class="dd-layout">
+            <section class="dd-archetypes-section dd-layout__full">
+                <div class="dd-archetypes-reveal">
+                    <p class="dd-archetypes-intro">
+                        Dutch &amp; Dutch speakers attract two distinct audiences. Both care deeply about sound quality and are willing to invest in it — but they show up with different expectations and levels of technical comfort.
+                    </p>
+                    <div class="dd-archetypes-grid">
+                        <article class="dd-card dd-card--bordered dd-card--archetype" data-user-archetype="home">
+                            <div class="dd-card--archetype__media">
+                                <img src="/img/dd_home_user.jpg" alt="Home listener in a living room" width="1463" height="823">
+                            </div>
+                            <div class="dd-card--archetype__body">
+                                <h3>Home users</h3>
+                                <p>Audiophiles who listen for pleasure and want to hear music exactly as it was intended. They care just as much about fidelity, but the experience is personal — less about production workflows, more about getting the most out of a living room or listening space.</p>
+                            </div>
+                        </article>
+                        <article class="dd-card dd-card--bordered dd-card--archetype" data-user-archetype="studio">
+                            <div class="dd-card--archetype__media">
+                                <img src="/img/dd_studio_user.webp" alt="Studio user at a production desk">
+                            </div>
+                            <div class="dd-card--archetype__body">
+                                <h3>Studio users</h3>
+                                <p>Power users who make music for a living. They rely on the speakers as a professional tool — accurate, adaptable, and trustworthy in a workflow that runs all day. Usually more tech-savvy, and comfortable diving into calibration, routing, and fine-grained control.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!--<div class="dd-layout">
+            <section class="dd-layout__full">
+                <figure class="dd-vision-image">
+                    <img src="/img/vision.png" alt="Dutch & Dutch app product vision" width="960" height="540">
+                </figure>
+            </section>
+        </div>-->
+
+        <!--<div class="dd-layout">
+            <div class="dd-main">
+                <section class="dd-principles">
+                    <details class="dd-principles-accordion">
+                        <summary class="dd-principles-accordion__summary">How about some design principles</summary>
+                        <div class="dd-principles-accordion__panel">
+                            <div class="dd-accordion">
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Simple first</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Make setup, configuration, and controlling the speakers as simple as possible, but have detailed help and explanation available.</p>
+                            </div>
+                        </details>
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Targeted help</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Help is targeted and specific.</p>
+                            </div>
+                        </details>
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Gentle guidance</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Recommend and nudge users towards optimal values, but never make them feel the 8c's aren't right for them.</p>
+                            </div>
+                        </details>
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Real-world friction</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Mirror real-world weights and distances; 8c's are heavy, so moving them isn't easy. Distances in the room aren't variable. Don't over optimize for tweaking and re-tweaking these real-world values in the app.</p>
+                            </div>
+                        </details>
+                        <details class="dd-accordion__item">
+                            <summary class="dd-accordion__summary">Digital vs physical</summary>
+                            <div class="dd-accordion__panel">
+                                <p>Digital values on the other hand should be easily changed. Unless… there are real-world consequences. For example, changing the volume too quickly when audio is playing might be a painful exercise.</p>
+                            </div>
+                        </details>
+                            </div>
+                        </div>
+                    </details>
+                </section>
+            </div>
+        </div>-->
+        
+        <div class="dd-no-big-deal">
+            <p class="dd-intro">Control every aspect</p>
+        </div>
+
+        <div class="dd-layout">
+            <div class="dd-main">
+                <p class="dd-subtitle">
+                    Typical active loudspeakers will have limited controls to adjust the speaker's output. Some do this with physical switches, other brands offer apps.
+                </p>
+                <p class="dd-subtitle">
+                    Dutch & Dutch go pretty far with this. The app lets users control gain, mute, sleep, input source, phase mode, EQ. But that's just the start. Users can enter the dimensions of their room, the position of the speakers in the room, and the position of the listener within the room. Based on those measurements, the speakers adjust their output to achieve optimal sound quality.
+                </p>
+                <p class="dd-intro">Microphone calibration</p>
+                <p class="dd-subtitle">
+                    And then to take things even further, it's possible to calibrate the speakers by recording a series of frequency sweeps, analyzing the response, and generating a set of EQ filters to—quite literally—flatten the room response curve.
+                </p>
+            </div>
+            <aside class="dd-aside">
+                <figure class="dd-main-video">
+                    <video
+                        class="dd-main-video__media"
+                        src="/img/gain_slider_new.mov"
+                        loop
+                        playsinline
+                        preload="metadata"
+                        aria-label="New volume control app UI demonstration"></video>
+                </figure>
+            </aside>
+            <div class="dd-main">
+                <p class="dd-intro">Microphone calibration</p>
+                <p class="dd-subtitle">
+                    Here's an overview of some of the things I worked on.
+                </p>
+            </div>
+            <div class="dd-aside-project-flow dd-layout__full">
+                    <div class="dd-aside-project-flow__header">
+                        <p class="dd-aside-project-flow__label">Feature</p>
+                        <p class="dd-aside-project-flow__label">From — (╯°□°)╯︵ ┻━┻</p>
+                        <p class="dd-aside-project-flow__label">To — ٩(^‿^)۶ ♪♬</p>
+                    </div>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Volume control</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">
+                                        A circle with zero affordances that prompted a lot of questions and confusion from users.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--linked"
+                                     data-project-href="/on/dutch-dutch-app/volume-control/"
+                                     tabindex="0"
+                                     aria-label="Volume control case study">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">An instantly familiar volume control that is obvious (but not boring).</p>
+                                    <div class="dd-project-card__footer">
+                                        <button type="button" class="dd-project-card__view">View</button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Room view</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">
+                                        Incorrect usage of bottom bar menu; hard to switch between settings.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">Show all active room settings and their values, make it easy to select and edit settings, and allow layout customization.</p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Onboarding</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">
+                                        A very minimal setup with no explanation of the why and the how and the real power of the Dutch & Dutch speakers.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">Self-serve onboarding that balances speed and sound quality.</p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">RoomMatching Align</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle">Speaker calibration via microphone measurements</p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Settings</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Design system (lite)</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Streaming music</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="dd-aside-project-flow__item">
+                        <div class="dd-aside-project-flow__feature">
+                            <h3 class="dd-aside-project-flow__title">Configure sources</h3>
+                        </div>
+                        <div class="dd-aside-project-flow__from">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="dd-aside-project-flow__to">
+                            <article class="dd-project-card dd-project-card--static">
+                                <div class="dd-project-card__body">
+                                    <p class="dd-project-card__subtitle"></p>
+                                    <div class="dd-project-card__footer">
+                                        <span class="dd-project-card__badge">Coming soon</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+        </div>
+    </div>
+    <script src="/on/dutch-dutch-app/project-cards.js"></script>
+</body>
+</html>

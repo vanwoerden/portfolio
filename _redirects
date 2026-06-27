@@ -2,4 +2,8 @@
 /with/p44/              /
 /with/mparticle/        /
 /with/prosper/          /
-/with/heap/             /                      
+/with/heap/             /
+/dutch-dutch-app/*      /on/dutch-dutch-app/:splat  301
+/experiments/*          /on/experiments/:splat  301
+/principles/*           /on/principles/:splat  301
+/on/cases/distance-to-data/*  /on/distance-to-data/:splat  301

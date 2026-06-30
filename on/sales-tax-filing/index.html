@@ -13,8 +13,8 @@
         .stf-page {
             overflow-x: clip;
             --stf-date-col: 80px;
-            --stf-axis: 80px;
             --stf-content-gap: calc(1rem + 3rem);
+            --stf-axis: calc(var(--stf-date-col) + var(--stf-content-gap) / 2);
             --stf-text-width: 600px;
         }
 
@@ -62,6 +62,7 @@
 
         .stf-timeline .timeline-item {
             gap: 0;
+            container-type: inline-size;
         }
 
         .timeline-title { color: var(--very-light-yellow); }
@@ -218,10 +219,73 @@
             width: 100%;
         }
 
+        .stf-figure {
+            margin: 1.25rem 0 0;
+            line-height: 0;
+            width: 100%;
+            background: transparent;
+        }
+
+        .stf-figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 1.25rem;
+            background: rgb(25, 25, 23);
+        }
+
+        .stf-figure figcaption {
+            margin: 0.75rem 0 0;
+            padding: 0;
+            font-family: "FranklinGothicURW-Boo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.45;
+            color: var(--very-light-yellow-darker);
+        }
+
+        .stf-figure--full {
+            width: calc(100cqw - var(--stf-date-col) - var(--stf-content-gap));
+            max-width: none;
+        }
+
+        .stf-insights {
+            margin-top: 1.25rem;
+        }
+
+        .stf-insights > .timeline-description {
+            margin-top: 0;
+        }
+
+        .stf-insights__list {
+            margin: 0.75rem 0 0;
+            padding-left: 0;
+            list-style: none;
+            font-family: "FranklinGothicURW-Boo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 1.4em;
+            line-height: 1.5;
+            color: var(--very-light-yellow-darker);
+        }
+
+        .stf-insights__list h4 {
+            font-family: "Henrietta Regular";
+            font-size: 1.15rem;
+            font-weight: normal;
+            color: var(--very-light-yellow);
+            margin: 0 0 0.35rem 0;
+            line-height: 1.25;
+        }
+
+        .stf-insights__list li + li {
+            margin-top: 1.25rem;
+        }
+
+        .stf-timeline .timeline-item--insights {
+            margin-top: 3rem;
+        }
+
         @media (max-width: 768px) {
             .stf-page {
                 --stf-date-col: 50px;
-                --stf-axis: 50px;
                 --stf-content-gap: calc(0.75rem + 2rem);
             }
 
@@ -233,7 +297,6 @@
         @media (max-width: 480px) {
             .stf-page {
                 --stf-date-col: 40px;
-                --stf-axis: 45px;
                 --stf-content-gap: calc(0.5rem + 1.5rem);
             }
         }
@@ -315,12 +378,18 @@
                 <div class="timeline-line"></div>
 
                 <article class="timeline-item">
-                    <div class="timeline-left"></div>
+                    <div class="timeline-left">
+                        <span class="timeline-tag timeline-tag-year">2017</span>
+                    </div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <h2 class="timeline-title">Historical context</h2>
-                        <p class="timeline-description">Historically, sales tax had always been a compliance thing; a must have part for businesses to consider QuickBooks as a solid business solution. We had filing in the UK and Australia, but it was never seen as a revenue opportunity. We had acquired a business who specialized in US sales tax filing, but integrating that into QuickBooks and making it work as a business hadn't been successful the first time around (circa 2017).</p>
-                        <p class="timeline-description">5 years later, the market for sales tax filing seemed a lot more attractive, and the team got executive buy in to build towards a profitable sales tax filing business.</p>
+                        <p class="timeline-description">
+                            Historically, sales tax had always been a compliance thing; it was never seen as a revenue opportunity. There had been an acquisition in 2017 and following that, an attempt to roll out filing in the US, but that hadn't stuck.
+                        </p>
+                        <p class="timeline-description">
+                            5 years later, the market for sales tax filing seemed a lot more attractive, and a new  team got buy-in to build towards a profitable sales tax filing business.
+                        </p>
                     </div>
                 </article>
 
@@ -331,12 +400,40 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <h2 class="timeline-title">Foundational research into filing</h2>
-                        <p class="timeline-description">I was put on as the lead designer. My first move was to try and understand the filing journey in detail, for both SMBs and accountants. One trick I employed was sending the interview participants a canvas before the session, with the ask to map their filing process in terms of actions, roles, highs, and lows. This is a tactic our of the context-mapping playbook called sensitization; essentially by having participants create something, and think about the topic in advance, you can prime them and they have something to reflect on immediately when the session starts. This way the output of our sessions had a lot more detail to it. I got about a 2/3 response to this request, with the remaining 1/3 we just mapped during the interview.</p>
+                        <p class="timeline-description">
+                            My first move was to deep dive into the filing journey, for both SMBs and accountants. To prepare for their sessions,I asked participants to map their filing process: actions, roles, tools, highs, and lows. The act of creation, and reflection in advance, gave me a headstart, and meant the output of our sessions had a lot more detail to it. I got about a 2/3 response to this request; with the remaining 1/3 we just mapped during the interview.
+                        </p>
+                        <figure class="stf-figure stf-figure--full">
+                            <img src="/img/filing_process.png" alt="Participant filing process mapping canvas" loading="lazy">
+                            <figcaption>One of the user journeys that the participant started before the session, then further detailed during. Edited for synthesis. </figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="timeline-item timeline-item--insights">
+                    <div class="timeline-left"></div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h2 class="timeline-title">Insights</h2>
+                        <p class="timeline-description">
+                            Almost everyone uses spreadsheets. To beat spreadsheets, we'd need to give users the right numbers to file, in the right format, out of the box. That would also puth us on the path of automation. But automation requires confidence in the books. And because of the complex nature of sales tax, that would prove to be a tall order.
+                        </p>
+                        <p class="timeline-description">
+                            The act of filing is a small part compared to setup, review, prep, crunching numbers in Excel, and cleaning up the books after.
+                        </p>
+                        <p class="timeline-description">
+                            Filing headaches add up as sales tax complexity increases: number of states, number of clients, complexity of state tax rules, and complexity of the business itself. Or any fun combination thereof. 
+                        </p>
+                        <p class="timeline-description">
+                            Accountants express pain around dependency on their clients, especially when it comes to setting up and getting the right access. There is a clear mismatch between need to details, control by the accountant, but a lack of interest and attention to detail from the client. Not unique to sales tax!
+                        </p>
                     </div>
                 </article>
 
                 <article class="timeline-item">
-                    <div class="timeline-left"></div>
+                    <div class="timeline-left">
+                        <span class="timeline-tag timeline-tag-year">January 2024</span>
+                    </div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <h2 class="timeline-title">Mindsets (yes, more research)</h2>
@@ -381,7 +478,12 @@
                                 </article>
                             </div>
                         </div>
-                        <p class="timeline-description">These mindsets remain a helpful frame to this day when evaluating concepts and balancing user needs.</p>
+                        <p class="timeline-description">
+                            These mindsets remain a helpful frame to this day when evaluating concepts and balancing user needs.
+                        </p>
+                        <p class="timeline-description">
+                            (I did not have a hand in creating these mindsets, other than some guidance along the way and the mindset avatars.) 
+                        </p>
                     </div>
                 </article>
 
@@ -429,12 +531,6 @@
                         </p>
                         <p class="timeline-description">
                             So I decided to build a config driven prototype. The Figma MCP was just starting to get good, so I started with a few .md files for config structure, and pointed Cursor at a few return UI designs. 
-                        </p>
-                        <p class="timeline-description">
-                            The prototype was a success. It allowed us to design and prototype 45 * 6 returns, onboarding flows, extra workflows to add to and remove things from the returns, and more.
-                        </p>
-                        <p class="timeline-description">
-                            The prototype was a success. It allowed us to design and prototype 45 * 6 returns, onboarding flows, extra workflows to add to and remove things from the returns, and more.
                         </p>
                     </div>
                 </article>

@@ -47,6 +47,10 @@ html:has(.dd-page) {
     background: var(--dd-surface-deep);
 }
 
+html:has(.dd-page .dd-project-scroll) {
+    overflow-x: clip;
+}
+
 .dd-page {
     position: relative;
     z-index: 1;
@@ -59,12 +63,16 @@ html:has(.dd-page) {
     --dd-text-column-pad-right: clamp(2rem, 4vw, 3.5rem);
 }
 
+.dd-page:has(.dd-project-scroll) {
+    overflow-x: visible;
+}
+
 .dd-page .dd-main,
 .dd-page .dd-header h2,
 .dd-page .dd-no-big-deal,
 .dd-page .dd-archetypes-section h2,
 .dd-page .dd-archetypes-intro,
-.dd-page .dd-project-scroll__content .dd-callout-section {
+.dd-page .dd-project-scroll__content .dd-callout-section:not(.dd-solution-card) {
     padding-right: var(--dd-text-column-pad-right);
 }
 

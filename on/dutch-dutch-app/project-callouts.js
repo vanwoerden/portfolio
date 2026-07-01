@@ -363,7 +363,7 @@
 
         buildCarousel();
 
-        root.querySelectorAll('.dd-project-media__video').forEach(function(video) {
+        root.querySelectorAll('.dd-project-media__video:not([controls]), .dd-solution-video__media:not([controls])').forEach(function(video) {
             video.addEventListener('click', function() {
                 if (video.paused) {
                     video.play();

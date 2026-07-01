@@ -44,13 +44,13 @@
             <div class="dd-project-scroll__content">
                 <section class="dd-callout-section" data-callout-target="context">
                     <p class="dd-callout-section__body">
-                        Adjusting the volume is the most frequent action when playing or working on music. Which is why the volume control is front and center in the app.
+                        Adjusting the volume is the most frequent action when playing or working on music. But Dutch & Dutch speakers don't ship with a physical volume control. 
                     </p>
                     <p class="dd-callout-section__body">
-                        Dutch & Dutch speakers don't ship with a physical volume control. Some users rely on external devices for this: a streaming device, an external gain controller, a mixing desk, etc. Not everyone though; a good example is people who play music using streaming services.
+                        Some users rely on external devices for this: a streaming device, an external gain controller, a mixing desk, etc. Not everyone though; a good example is people who play music using streaming services.
                     </p>
                     <p class="dd-callout-section__body">
-                        For these users, an app without a solid volume control is like shipping a heavy, very expensive brick.
+                        For these users, an app without a decent volume control is like shipping a heavy, very expensive brick. Which is why the volume control is front and center in the app.
                     </p>
                     <p class="dd-callout-section__body">
                         The existing volume control had a few discoverability and usability issues that needed fixing:
@@ -85,47 +85,64 @@
                     </p>
                 </section>
 
-                <section class="dd-callout-section" data-callout-target="conclusion">
-                    <h2 class="dd-callout-section__heading">The verdict</h2>
-                    <p class="dd-callout-section__body">
-                        None of these actions are obvious. There are no visual cues that tell users how to complete any of them. And because the Dutch and Dutch home audience skews a bit older, there's a strong need for the app's interface to feel as familiar and obvious as possible.
-                    </p>
-                    <p class="dd-callout-section__body">
-                        The circle with zero affordances was leading to support tickets.
-                    </p>
-                </section>
-
                 <div class="dd-project-scroll__solution-layout">
-                    <div class="dd-project-scroll__solution-row">
-                        <section class="dd-callout-section dd-solution-card" data-callout-target="solution">
-                            <h2 class="dd-callout-section__heading">The solution</h2>
+                    <div class="dd-project-scroll__solution-block">
+                        <section class="dd-callout-section" data-callout-target="conclusion">
+                            <h2 class="dd-callout-section__heading">The verdict</h2>
                             <p class="dd-callout-section__body">
-                                A summary of the changes I made (the video explains in detail):
+                                None of these actions are obvious. There are no visual cues that tell users how to complete any of them. And because the Dutch and Dutch home audience skews a bit older, there's a strong need for the app's interface to feel as familiar and obvious as possible.
                             </p>
-                            <ul class="dd-callout-list">
-                                <li>A volume wheel makes it extra clear this is a control that can be moved up and down.</li>
-                                <li>An accent line quickly indicates the current relative volume level</li>
-                                <li>Subtle haptic feedback for each 0.5 dB increment</li>
-                                <li>dB level above the wheel is visible while adjusting</li>
-                                <li>Extra large dB level while sliding the wheel provides extra precision and control</li>
-                                <li>Plus, minus, and mute buttons to match most users' expectations (think of typical remote controls)</li>
-                                <li>Sleep becomes a card in the "room view", with the options showing on tap</li>
-                                <li>Lots of room for other room settings to be displayed</li>
-                            </ul>
+                            <p class="dd-callout-section__body">
+                                The circle with zero affordances was leading to support tickets.
+                            </p>
                         </section>
 
-                        <aside class="dd-project-scroll__solution-stage" aria-label="Solution demo">
-                                <figure class="dd-project-media__frame">
-                                    <video
-                                        class="dd-project-media__surface dd-project-media__video"
-                                        src="/img/gain_slider_new.mov"
-                                        loop
-                                        playsinline
-                                        preload="metadata"
-                                        aria-label="New volume control app UI demonstration"></video>
-                            </figure>
-                        </aside>
+                        <div class="dd-project-scroll__solution-block__row">
+                            <section class="dd-callout-section dd-solution-card" data-callout-target="solution">
+                                <h2 class="dd-callout-section__heading">The solution</h2>
+                                <p class="dd-callout-section__body">
+                                    A summary of the changes I made (the video explains in detail):
+                                </p>
+                                <ul class="dd-callout-list">
+                                    <li>A volume wheel makes it extra clear this is a control that can be moved up and down.</li>
+                                    <li>An accent line quickly indicates the current relative volume level</li>
+                                    <li>Subtle haptic feedback for each 0.5 dB increment</li>
+                                    <li>dB level above the wheel is visible while adjusting</li>
+                                    <li>Extra large dB level while sliding the wheel provides extra precision and control</li>
+                                    <li>Plus, minus, and mute buttons to match most users' expectations (think of typical remote controls)</li>
+                                    <li>Sleep becomes a card in the "room view", with the options showing on tap</li>
+                                    <li>Lots of room for other room settings to be displayed</li>
+                                </ul>
+                            </section>
+
+                            <div class="dd-solution-video dd-solution-video--portrait dd-project-scroll__solution-block__video">
+                                <video
+                                    class="dd-solution-video__media"
+                                    autoplay
+                                    loop
+                                    muted
+                                    playsinline
+                                    preload="auto"
+                                    aria-label="New volume control app UI demonstration">
+                                    <source src="/video/gain_slider_new_hevc.mov" type='video/mp4; codecs="hvc1"'>
+                                    <source src="/video/gain_slider_new.webm" type="video/webm">
+                                </video>
+                            </div>
+                        </div>
                     </div>
+
+                    <aside class="dd-project-scroll__solution-demo" aria-label="Before and after comparison">
+                        <div class="dd-solution-video dd-solution-video--wide">
+                            <video
+                                class="dd-solution-video__media"
+                                src="/video/volume_control_before_after.mp4"
+                                controls
+                                loop
+                                playsinline
+                                preload="metadata"
+                                aria-label="Volume control before and after comparison"></video>
+                        </div>
+                    </aside>
 
                     <div class="dd-project-scroll__solution-row">
                         <section class="dd-callout-section" data-callout-target="wheel-rationale">

@@ -455,11 +455,16 @@
 
 .dd-solution-card {
     border-radius: 1.5rem;
-    background: var(--dd-surface);
+    background: var(--dd-surface-inset);
     border: 1px solid rgba(255, 250, 224, 0.08);
     padding: clamp(1.5rem, 3vw, 2rem);
     box-sizing: border-box;
     margin-bottom: 0;
+}
+
+.dd-solution-card .dd-callout-section__body,
+.dd-solution-card .dd-callout-list {
+    font-size: 1.4rem;
 }
 
 .dd-project-scroll__solution-row {

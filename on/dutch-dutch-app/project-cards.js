@@ -31,15 +31,6 @@
         }
     });
 
-    document.querySelectorAll('button.dd-project-highlight[data-project-href]').forEach(function(button) {
-        var href = button.getAttribute('data-project-href');
-        if (!href) return;
-
-        button.addEventListener('click', function() {
-            navigateToProject(href);
-        });
-    });
-
     document.querySelectorAll('.dd-main-video__media').forEach(function(video) {
         video.addEventListener('click', function() {
             if (video.paused) {

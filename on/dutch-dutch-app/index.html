@@ -113,17 +113,12 @@
             box-sizing: border-box;
         }
 
-        .dd-header {
-            padding: 7rem 0 3rem 0;
-        }
-
         .dd-layout {
             display: grid;
             grid-template-columns: var(--dd-main-width) 1fr;
             grid-template-rows: auto;
             column-gap: var(--dd-layout-gap);
             align-items: start;
-            margin: 0 -8vw 3rem -8vw;
             padding: 0 3vw 0 8vw;
         }
 
@@ -223,7 +218,6 @@
 
         .dd-block p {
             font-size: 1.6rem;
-            color: var(--very-light-yellow-darker);
             margin: 0;
             line-height: 1.6;
         }
@@ -242,7 +236,6 @@
 
         .dd-stat__label {
             font-size: 1.1rem;
-            color: var(--very-light-yellow-darker);
             line-height: 1.4;
         }
 
@@ -296,7 +289,6 @@
             flex-direction: row;
             flex-wrap: nowrap;
             gap: 1rem;
-            margin: 1.75rem 0 0 0;
         }
 
         .dd-meta__item {
@@ -311,13 +303,11 @@
             font-family: "Kumbh Sans", sans-serif;
             font-size: 1.2rem;
             letter-spacing: 0.01em;
-            color: var(--very-light-yellow-darkest);
             margin: 0 0 0.4rem 0;
         }
 
         .dd-meta dd {
             font-size: 1.4rem;
-            color: var(--very-light-yellow-darker);
             margin: 0;
             line-height: 1.45;
             white-space: nowrap;
@@ -347,7 +337,6 @@
 
         .dd-trait-card p {
             font-size: 1.3rem;
-            color: var(--very-light-yellow-darker);
             line-height: 1.45;
             margin: 0;
         }
@@ -360,15 +349,10 @@
             line-height: 1.1;
         }
 
-        .dd-header .dd-subtitle {
+        .dd-header .dd-subtitle:not(.dd-subtitle--project-link) {
             font-size: 1.6rem;
-            color: var(--very-light-yellow-darker);
             margin: 0;
             line-height: 1.6;
-        }
-
-        .dd-main .dd-subtitle + .dd-subtitle {
-            margin-top: 1rem;
         }
 
         .dd-hero-image {
@@ -386,7 +370,6 @@
 
         .dd-figure figcaption {
             font-size: 1.4rem;
-            color: var(--very-light-yellow-darker);
             margin-top: -5rem;
             padding: 0 1.25rem;
             line-height: 1.4;
@@ -589,14 +572,13 @@
 
         .dd-accordion__panel p {
             font-size: 1.6rem;
-            color: var(--very-light-yellow-darker);
             margin: 0;
             line-height: 1.6;
         }
 
         /* Project goals */
         .dd-goals-section {
-            margin: 0 0 2rem;
+            margin-bottom: var(--dd-layout-gap);
         }
 
         .dd-goals-section:last-child {
@@ -606,7 +588,6 @@
         .dd-goals-section h2 {
             font-family: "Henrietta Regular";
             font-size: clamp(1rem, 1.8vw, 1.3rem);
-            color: var(--very-light-yellow-darker);
             margin: 0 0 1.2rem 0;
             font-weight: normal;
         }
@@ -634,7 +615,6 @@
         .dd-card p {
             font-family: "Henrietta Regular";
             font-size: clamp(1.1rem, 2.2vw, 1.45rem);
-            color: var(--very-light-yellow);
             line-height: 1.3;
             margin: 0;
         }
@@ -647,7 +627,6 @@
         .dd-archetypes-section h2 {
             font-family: "Henrietta Regular";
             font-size: clamp(1rem, 1.8vw, 1.3rem);
-            color: var(--very-light-yellow-darker);
             margin: 0 0 1.2rem 0;
             font-weight: normal;
             max-width: var(--dd-main-width);
@@ -655,9 +634,8 @@
 
         .dd-archetypes-intro {
             font-size: 1.6rem;
-            color: var(--very-light-yellow-darker);
             line-height: 1.6;
-            margin: 0 0 1.5rem 0;
+            margin: 0;
             max-width: var(--dd-main-width);
             position: relative;
             z-index: 1;
@@ -668,6 +646,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2.4rem;
+            padding-top: var(--dd-viewport-pad);
         }
 
         .dd-card--archetype {
@@ -675,7 +654,7 @@
             align-items: stretch;
             padding: 0;
             overflow: hidden;
-            min-height: 220px;
+            min-height: auto;
         }
 
         .dd-card--archetype__media {
@@ -698,6 +677,9 @@
         .dd-card--archetype__body {
             flex: 1;
             min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             padding: 1.8rem 2rem;
         }
 
@@ -713,7 +695,6 @@
         .dd-card--archetype p {
             font-family: "Kumbh Sans", sans-serif;
             font-size: 1.25rem;
-            color: var(--very-light-yellow-darker);
             line-height: 1.5;
             margin: 0;
         }
@@ -755,18 +736,6 @@
         .dd-all-users-anchor {
             position: relative;
             white-space: nowrap;
-            text-decoration: none;
-            cursor: pointer;
-            background-image: repeating-linear-gradient(
-                to right,
-                var(--link-underline-color, #5452B7) 0,
-                var(--link-underline-color, #5452B7) 6px,
-                transparent 6px,
-                transparent 10px
-            );
-            background-size: 10px 1px;
-            background-repeat: repeat-x;
-            background-position: left calc(100% - 0.05em);
         }
 
         .dd-user-links__svg {
@@ -849,10 +818,8 @@
             grid-row: 2;
             font-family: "Henrietta Regular";
             font-size: clamp(1.6rem, 3.2vw, 2.6rem);
-            color: var(--very-light-yellow);
             line-height: 1.35;
-            margin: 0 0 1.75rem 0;
-            padding: 1.5rem 0;
+            margin: 0;
         }
 
         .dd-layout--growth > .dd-main {
@@ -866,7 +833,6 @@
         }
 
         .dd-no-big-deal {
-            margin: clamp(3rem, 6vw, 5rem) 0 0;
             max-width: var(--dd-main-width);
         }
 
@@ -1189,9 +1155,6 @@
         <a class="dd-key" href="/"
            aria-label="Close"
            onclick="sessionStorage.setItem('nav-direction','backward')">Esc</a>
-        <a class="dd-key" href="/"
-           aria-label="Home"
-           onclick="sessionStorage.setItem('nav-direction','backward')">Home</a>
     </div>
 
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -1215,10 +1178,10 @@
                 <h1>Smart speaker control app<br>for Dutch & Dutch</h1>
                 <div class="dd-layout dd-layout--hero">
                     <div class="dd-main">
-                        <p class="dd-intro">Dutch &amp; Dutch make award-winning loudspeakers. <a href="https://dutchdutch.com/pages/reviews" target="_blank" rel="noopener noreferrer">Facts</a>.</p>
+                        <!--<p class="dd-intro">Dutch &amp; Dutch make award-winning loudspeakers. <a href="https://dutchdutch.com/pages/reviews" target="_blank" rel="noopener noreferrer">Facts</a>.</p>-->
 
                         <p class="dd-subtitle">
-                            Using a combination of hardware and software, Dutch & Dutch speakers fully adapt to the listener's room. I'm helping to overhaul the app that lets customers configure, calibrate, and control every part of their listening experience.
+                            Dutch & Dutch make award-winning loudspeakers. <a href="https://dutchdutch.com/pages/reviews" target="_blank" rel="noopener noreferrer">Facts</a>. Using a combination of hardware and software, the speakers fully adapt to the listener's room. I'm helping to overhaul the app that lets customers configure, calibrate, and control every part of their listening experience.
                         </p>
 
                         <dl class="dd-meta">
@@ -1236,12 +1199,11 @@
                             </div>
                         </dl>
 
-                        <button type="button"
-                                class="dd-project-highlight"
-                                data-project-href="/on/dutch-dutch-app/volume-control/">
-                            <span class="dd-project-highlight__label">Read how I redesigned a volume control</span>
-                            <span class="dd-project-highlight__arrow" aria-hidden="true">→</span>
-                        </button>
+                        <p class="dd-subtitle dd-subtitle--project-link">
+                            <a href="/on/dutch-dutch-app/volume-control/"
+                               onclick="sessionStorage.setItem('nav-direction','sub-forward')"><span aria-hidden="true">›</span> Read how I redesigned a volume control
+                            </a>
+                        </p>
 
                         <!--<div class="dd-traits">
                             <article class="dd-trait-card">
@@ -1305,7 +1267,7 @@
             <section class="dd-archetypes-section dd-layout__full">
                 <div class="dd-archetypes-reveal">
                     <p class="dd-archetypes-intro">
-                        Dutch &amp; Dutch speakers attract two distinct audiences. Both care deeply about sound quality and are willing to invest in it — but they show up with different expectations and levels of technical comfort.
+                        Dutch & Dutch speakers attract two distinct audiences. Both care deeply about sound quality and are willing to invest in it, but they show up with different needs and expectations.
                     </p>
                     <div class="dd-archetypes-grid">
                         <article class="dd-card dd-card--bordered dd-card--archetype" data-user-archetype="home">
@@ -1314,7 +1276,7 @@
                             </div>
                             <div class="dd-card--archetype__body">
                                 <h3>Home users</h3>
-                                <p>Audiophiles who listen for pleasure and want to hear music exactly as it was intended. They care just as much about fidelity, but the experience is personal — less about production workflows, more about getting the most out of a living room or listening space.</p>
+                                <p>Music lovers who listen for pleasure and want to hear music exactly as it was intended. They're looking to get the most out of their listening space, but also expect convenience and comfort.</p>
                             </div>
                         </article>
                         <article class="dd-card dd-card--bordered dd-card--archetype" data-user-archetype="studio">
@@ -1323,7 +1285,7 @@
                             </div>
                             <div class="dd-card--archetype__body">
                                 <h3>Studio users</h3>
-                                <p>Power users who make music for a living. They rely on the speakers as a professional tool — accurate, adaptable, and trustworthy in a workflow that runs all day. Usually more tech-savvy, and comfortable diving into calibration, routing, and fine-grained control.</p>
+                                <p>Power users who make music for a living. They rely on the speakers as a professional tool; they might spend all day in a studio. Comfortable diving into calibration, routing, and fine-grained control.</p>
                             </div>
                         </article>
                     </div>
@@ -1394,9 +1356,18 @@
                 <p class="dd-subtitle">
                     Dutch & Dutch go pretty far with this. The app lets users control gain, mute, sleep, input source, phase mode, EQ. But that's just the start. Users can enter the dimensions of their room, the position of the speakers in the room, and the position of the listener within the room. Based on those measurements, the speakers adjust their output to achieve optimal sound quality.
                 </p>
-                <p class="dd-intro">Microphone calibration</p>
+                <!--<p class="dd-intro">Microphone calibration</p>-->
                 <p class="dd-subtitle">
-                    And then to take things even further, it's possible to calibrate the speakers by recording a series of frequency sweeps, analyzing the response, and generating a set of EQ filters to—quite literally—flatten the room response curve.
+                    And then to take things even further, it's possible to calibrate the speakers by recording a series of frequency sweeps, analyzing the response, and generating a set of EQ filters to flatten the room response curve.
+                </p>
+                <p class="dd-intro">The most important control</p>
+                <p class="dd-subtitle">
+                    But before we tame the room, we need to control the volume. So that's where I started.
+                </p>
+                <p class="dd-subtitle dd-subtitle--project-link">
+                    <a href="/on/dutch-dutch-app/volume-control/"
+                        onclick="sessionStorage.setItem('nav-direction','sub-forward')"><span aria-hidden="true">›</span> Read how I redesigned a volume control
+                    </a>
                 </p>
             </div>
             <aside class="dd-aside">
@@ -1410,7 +1381,7 @@
                         aria-label="New volume control app UI demonstration"></video>
                 </figure>
             </aside>
-            <div class="dd-main">
+            <!--<div class="dd-main">
                 <p class="dd-intro">Microphone calibration</p>
                 <p class="dd-subtitle">
                     Here's an overview of some of the things I worked on.
@@ -1607,7 +1578,7 @@
                             </article>
                         </div>
                     </section>
-                </div>
+                </div>-->
         </div>
     </div>
     <script src="/on/dutch-dutch-app/project-cards.js"></script>

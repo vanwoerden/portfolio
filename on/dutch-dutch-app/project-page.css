@@ -55,6 +55,7 @@ html:has(.dd-page) {
     margin: 0 auto;
     box-sizing: border-box;
     overflow-x: clip;
+    color: var(--very-light-yellow-darker);
     --dd-text-column-pad-right: clamp(2rem, 4vw, 3.5rem);
 }
 
@@ -68,7 +69,7 @@ html:has(.dd-page) {
 }
 
 .dd-header {
-    padding: 7rem 0 3rem 0;
+    padding: calc(var(--dd-header-top) - 3rem) 0 var(--dd-viewport-pad) 0;
 }
 
 .dd-hero-band {
@@ -123,8 +124,12 @@ html:has(.dd-page) {
     grid-template-rows: auto;
     column-gap: var(--dd-layout-gap);
     align-items: start;
-    margin: 0 -8vw 3rem -8vw;
+    margin: 0 -8vw var(--dd-viewport-pad) -8vw;
     padding: 0 3vw 0 8vw;
+}
+
+.dd-layout--growth {
+    margin-top: var(--dd-layout-gap);
 }
 
 .dd-layout:last-child {
@@ -157,6 +162,8 @@ html:has(.dd-page) {
 @media (min-width: 901px) {
     .dd-hero-band {
         min-height: calc(100dvh - var(--dd-viewport-pad) - var(--dd-header-top));
+        --dd-hero-image-bottom-gap: 3rem;
+        --dd-hero-image-max-height: calc(100dvh - var(--dd-viewport-pad) - var(--dd-hero-image-bottom-gap) - var(--dd-header-top) - var(--dd-h1-block) - var(--dd-hero-lead));
     }
 
     .dd-hero-band .dd-layout--hero {
@@ -193,28 +200,34 @@ html:has(.dd-page) {
 
 .dd-main .dd-subtitle {
     font-size: 1.6rem;
-    color: var(--very-light-yellow-darker);
     margin: 0;
     line-height: 1.6;
     max-width: none;
 }
 
 .dd-main .dd-subtitle + .dd-subtitle {
-    margin-top: 1rem;
+    margin-top: var(--dd-layout-gap);
 }
 
 .dd-main .dd-subtitle + .dd-intro {
-    margin-top: 2.5rem;
+    margin-top: var(--dd-viewport-pad);
 }
 
-.dd-layout__full {
-    grid-column: 1 / -1;
+.dd-page .dd-meta {
+    margin: var(--dd-layout-gap) 0 0 0;
+}
+
+.dd-growth-summary {
+    margin-bottom: var(--dd-layout-gap);
+    padding: var(--dd-layout-gap) 0;
+}
+
+.dd-goals-section {
+    margin-top: var(--dd-layout-gap);
 }
 
 .dd-screens-strip-figure {
-    margin: 0 calc(50% - 50vw) 2.5rem;
-    width: 100vw;
-    max-width: 100vw;
+    margin-top: 16rem;
 }
 
 .dd-screens-strip {
@@ -223,6 +236,14 @@ html:has(.dd-page) {
     overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+}
+
+.dd-layout__full {
+    grid-column: 1 / -1;
 }
 
 .dd-screens-strip::-webkit-scrollbar {
@@ -249,24 +270,23 @@ html:has(.dd-page) {
 
 .dd-screens-strip__slide img {
     display: block;
-    height: clamp(380px, 68vh, 720px);
+    height: clamp(475px, 85vh, 900px);
     width: auto;
     border-radius: 0;
 }
 
 .dd-screens-strip-figure figcaption {
     font-size: 1.25rem;
-    color: var(--very-light-yellow-darker);
     line-height: 1.45;
-    margin: 0.75rem auto 0;
-    padding: 0 8vw;
-    max-width: 1680px;
-    box-sizing: border-box;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    max-width: none;
+    text-align: left;
 }
 
 .dd-main .dd-aside-project-flow,
 .dd-aside-project-flow.dd-layout__full {
-    margin-top: 1.25rem;
+    margin-top: var(--dd-layout-gap);
 }
 
 .dd-main-video {
@@ -466,7 +486,6 @@ a.dd-project-card:hover {
 
 .dd-project-card__subtitle {
     font-size: 1.2rem;
-    color: var(--very-light-yellow-darker);
     margin: 0;
     line-height: 1.4;
     min-width: 0;
@@ -562,56 +581,33 @@ article.dd-project-card {
     font-weight: normal;
 }
 
-button.dd-project-highlight {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    width: fit-content;
-    max-width: 100%;
-    margin: 3rem 0 0 0;
-    padding: 1.2rem 1.2rem 0.9rem;
-    border: 1px solid var(--very-light-yellow-darkest);
-    border-radius: 0.55rem;
-    background: transparent;
-    color: var(--very-light-yellow);
-    box-sizing: border-box;
-    font-family: "Kumbh Sans", sans-serif;
-    font-size: 1.4rem;
-    line-height: 1.2;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    transition: border-color 0.15s linear, background 0.15s linear, color 0.15s linear;
+.dd-main .dd-subtitle a,
+.dd-main .dd-subtitle a:visited {
+    color: rgb(54, 168, 98);
+    background: none;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-button.dd-project-highlight:hover {
-    background: rgba(255, 250, 224, 0.06);
-    border-color: var(--very-light-yellow-darker);
-    color: var(--very-light-yellow);
+.dd-main .dd-subtitle a:hover {
+    color: rgb(79, 246, 140);
 }
 
-button.dd-project-highlight:focus {
-    outline: none;
+.dd-main .dd-subtitle.dd-subtitle--project-link {
+    margin-top: 2.4rem;
 }
 
-button.dd-project-highlight:focus-visible {
-    outline: 2px solid rgba(255, 250, 224, 0.45);
-    outline-offset: 3px;
-}
-
-.dd-project-highlight__label {
+.dd-main .dd-subtitle--project-link a > span {
     display: inline-block;
-    color: var(--very-light-yellow);
+    transform: translateY(-2px);
 }
 
-.dd-project-highlight__arrow {
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-    font-size: 1.55em;
-    line-height: 1;
-    color: var(--very-light-yellow);
-    transform: translateY(calc(0.12em - 2px));
+.dd-page .dd-no-big-deal {
+    margin-top: 12rem;
+}
+
+.dd-archetypes-intro {
+    margin-bottom: var(--dd-layout-gap);
 }
 
 .dd-aside-project-cards {
@@ -622,6 +618,11 @@ button.dd-project-highlight:focus-visible {
 
 .dd-hero-band .dd-layout--hero {
     grid-template-columns: min(var(--dd-hero-main-width), 100%) 1fr;
+    margin-top: calc(-1 * var(--dd-layout-gap));
+}
+
+.dd-hero-band .dd-layout--hero .dd-main {
+    padding-bottom: calc(var(--dd-viewport-pad) + 6rem);
 }
 
 .dd-aside-project-flow {
@@ -662,14 +663,12 @@ button.dd-project-highlight:focus-visible {
 .dd-aside-project-flow__label {
     font-family: "Kumbh Sans", sans-serif;
     font-size: 1.25rem;
-    color: var(--very-light-yellow-darkest);
     margin: 0;
     line-height: 1.3;
 }
 
 .dd-aside-project-flow__note {
     font-size: 1.2rem;
-    color: var(--very-light-yellow-darker);
     line-height: 1.5;
     margin: 0;
     min-height: 1.5rem;
@@ -756,7 +755,7 @@ button.dd-project-highlight:focus-visible {
         display: block;
         font-family: "Kumbh Sans", sans-serif;
         font-size: 1.25rem;
-        color: var(--very-light-yellow-darkest);
+        color: var(--very-light-yellow-darker);
         margin-bottom: 0.35rem;
     }
 
@@ -765,7 +764,7 @@ button.dd-project-highlight:focus-visible {
         display: block;
         font-family: "Kumbh Sans", sans-serif;
         font-size: 1.25rem;
-        color: var(--very-light-yellow-darkest);
+        color: var(--very-light-yellow-darker);
         margin-bottom: 0.35rem;
     }
 
@@ -774,7 +773,7 @@ button.dd-project-highlight:focus-visible {
         display: block;
         font-family: "Kumbh Sans", sans-serif;
         font-size: 1.25rem;
-        color: var(--very-light-yellow-darkest);
+        color: var(--very-light-yellow-darker);
         margin-bottom: 0.35rem;
     }
 }

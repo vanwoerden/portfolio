@@ -1,4 +1,4 @@
-# Sales tax filing projects
+# Sales tax filing
 
 ## Ideal state 2026
 date: April 2023

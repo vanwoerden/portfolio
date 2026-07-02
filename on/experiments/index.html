@@ -26,9 +26,38 @@
         /* Timeline dark mode overrides */
         .timeline-title { color: var(--very-light-yellow); }
         .timeline-description { color: var(--very-light-yellow-darker); }
-        .timeline-link { color: var(--very-light-yellow); }
+        .timeline-link,
+        .timeline-link:link,
+        .timeline-link:visited,
+        .timeline-link:hover,
+        .timeline-link:active,
+        .timeline-link:focus,
+        .timeline-link:focus-visible {
+            color: var(--very-light-yellow);
+            background: none;
+        }
         .timeline-link::after { background: var(--link-underline-color, #5452B7); }
-        .timeline-link:hover { color: var(--very-light-yellow); }
+        .dd-breadcrumb a,
+        .dd-breadcrumb a:link,
+        .dd-breadcrumb a:visited,
+        .dd-breadcrumb a:hover,
+        .dd-breadcrumb a:active,
+        .dd-breadcrumb a:focus,
+        .dd-breadcrumb a:focus-visible {
+            color: var(--very-light-yellow-darker);
+            background: none;
+        }
+        .nav-container .nav-link,
+        .nav-container .nav-link:link,
+        .nav-container .nav-link:visited,
+        .nav-container .nav-link:hover,
+        .nav-container .nav-link:active,
+        .nav-container .nav-link:focus,
+        .nav-container .nav-link:focus-visible {
+            color: var(--very-light-yellow);
+            background: none;
+            opacity: 1;
+        }
         .timeline-tag { color: var(--very-light-yellow-darker); border-color: rgba(242, 237, 213, 0.15); }
         .timeline-tag-year { color: var(--darkblue); }
         .timeline-marker { background: var(--very-light-yellow); border-color: var(--darkblue); }

@@ -3,7 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales tax filing projects - ernst.works</title>
+    <style>html:not(.stf-authed) body { visibility: hidden; }</style>
+    <script>
+        (function() {
+            var storageKey = 'stf-auth';
+            var passwordHash = '8c7d0a50340739cdd57c471cdb0b8412d2061ce9df821302161fe7afad21f961';
+
+            function showPage() {
+                document.documentElement.classList.add('stf-authed');
+            }
+
+            function redirect() {
+                location.replace('/on/');
+            }
+
+            function hashPassword(password) {
+                return crypto.subtle.digest('SHA-256', new TextEncoder().encode(password)).then(function(buf) {
+                    return Array.from(new Uint8Array(buf)).map(function(byte) {
+                        return byte.toString(16).padStart(2, '0');
+                    }).join('');
+                });
+            }
+
+            if (sessionStorage.getItem(storageKey) === '1') {
+                showPage();
+                return;
+            }
+
+            var attempt = prompt('Password');
+            if (attempt === null) {
+                redirect();
+                return;
+            }
+
+            hashPassword(attempt).then(function(digest) {
+                if (digest === passwordHash) {
+                    sessionStorage.setItem(storageKey, '1');
+                    showPage();
+                } else {
+                    redirect();
+                }
+            });
+        })();
+    </script>
+    <title>Sales tax filing - ernst.works</title>
     <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <link rel="stylesheet" type="text/css" href="../../css/style-million.css">
@@ -58,6 +101,7 @@
         .stf-timeline .timeline-marker {
             left: var(--stf-axis);
             margin-left: 0;
+            transform: translateX(calc(-50% + 1px)) translateY(-50%);
         }
 
         .stf-timeline .timeline-item {
@@ -216,7 +260,26 @@
 
         .stf-principles-video {
             margin-top: 1.25rem;
-            width: 100%;
+            width: calc(100cqw - var(--stf-date-col) - var(--stf-content-gap));
+            max-width: none;
+        }
+
+        .stf-prototype-hint {
+            color: var(--very-light-yellow-darkest);
+        }
+
+        .stf-prototype-hint kbd {
+            color: inherit;
+        }
+
+        .timeline-description a.green,
+        .timeline-description a.green:visited,
+        .timeline-description a.green:hover {
+            color: var(--green);
+            background: none;
+            text-decoration: underline;
+            text-decoration-color: color-mix(in srgb, var(--green) 45%, transparent);
+            text-underline-offset: 0.14em;
         }
 
         .stf-figure {
@@ -342,9 +405,9 @@
                     <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
                     <a href="/on/">on</a>
                     <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
-                    <span class="dd-breadcrumb__current" aria-current="page">Sales tax filing projects</span>
+                    <span class="dd-breadcrumb__current" aria-current="page">Sales tax filing</span>
                 </nav>
-                <h1 class="welcome">Sales tax filing projects</h1>
+                <h1 class="welcome">Sales tax filing</h1>
             </header>
 
             <div class="timeline-container stf-timeline">
@@ -436,8 +499,8 @@
                     </div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h2 class="timeline-title">Mindsets (yes, more research)</h2>
-                        <p class="timeline-description">We were lucky to have a UX researcher on the team, who synthesized a lot of past research into four indirect tax mindsets.</p>
+                        <h2 class="timeline-title">Mindsets</h2>
+                        <p class="timeline-description">We were lucky to have a UX researcher on the team, who synthesized and crystallized a lot of past research into four indirect tax mindsets.</p>
                         <div class="stf-mindsets">
                             <div class="stf-mindsets-grid">
                                 <article class="stf-mindset-card">
@@ -487,13 +550,13 @@
                     </div>
                 </article>
 
-                <article class="timeline-item">
+                <!-- <article class="timeline-item">
                     <div class="timeline-left"></div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <h2 class="timeline-title">0 - 1 filing</h2>
                     </div>
-                </article>
+                </article> -->
 
                 <article class="timeline-item">
                     <div class="timeline-left"></div>
@@ -501,7 +564,10 @@
                     <div class="timeline-content">
                         <h2 class="timeline-title">Principles</h2>
                         <p class="timeline-description">
-                            Intuit puts a lot of value in principles. But they're not easy to get right. Good design pricinples should help you make decisions. They should be opinionated. We started with very light basic principles, and let things get messy first, instead of defining behavior without knowing enough of the terrain. Over the course of the initiative, similar questions kept popping up, and within the core team, a set of more specific principles started to emerge organically between mostly the PM and myself. I just recorded them first. But then I wasn't happy with the lack of concrete examples. So I decided it was time for an experiment. I built a list of principles and connected each to one or more concrete pieces of UI in the filing system prototype. Now we could link directly to the rationale—in context—when questions about designs and product behavior came up.
+                            Good design principles help you navigate tradeoffs consistently. We started out with unproven assumptions, and then formulated a more solid set of principles that were backed by what we had learned from users, the market, and best practice bookkeeping.
+                        </p>
+                        <p class="timeline-description">
+                            Where relevant, I connected each principle to one or more concrete pieces of UI in our filing prototype. Now we could link directly to the rationale—in context—when questions about designs and product behavior came up.
                         </p>
                         <figure class="stf-video stf-principles-video">
                             <video
@@ -524,13 +590,13 @@
                     <div class="timeline-content">
                         <h2 class="timeline-title">Filing system</h2>
                         <p class="timeline-description">
-                            As we were rolling out filing to all of the 45 states that have sales tax, it started to become painfully clear that designing all of this as static mocks in Figma was not going to cut it. 45 states, with 6 or more statuses for a return, and different credentials, IDs, discount rules, tax types, ways to break down the taxes,and not infrequently a few other baffling esoteric requirements and edge cases, made it clear that we needed to build a more dynamic system.
+                            Designing returns and filing flows for 45 states, with 6 or more statuses for a return, and different credentials, IDs, discount rules, tax types, ways to break down the taxes, and often a few other baffling esoteric requirements and edge cases, made it clear that designing and maintaining all of this as static mocks in Figma was not going to cut it.
                         </p>
                         <p class="timeline-description">
-                            At the same time, there was a need to design some of this in parallel. Figma was to clunky to serve as a data structure. The amount of time I'd have to spend wiring up screens to prototype 45 * 6 returns, onboarding flows, extra workflows to add to and remove things from the returns, was not a favorable outlook.
+                           I decided to build a config driven prototype. The Figma MCP was just starting to get decent, so all it took was a few .md files for config structure, point Cursor at a return UI design, and I was off to the races. Over time I swapped in components, patterns, and primitives from our design systems, instead of the LLMs imagining new styles and components with every prompt.
                         </p>
                         <p class="timeline-description">
-                            So I decided to build a config driven prototype. The Figma MCP was just starting to get good, so I started with a few .md files for config structure, and pointed Cursor at a few return UI designs. 
+                            <a class="green" href="https://kaleidoscopic-sfogliatella-8d5ecf.netlify.app/#/return?state=california&amp;return_status=due&amp;return_type=standard&amp;font=tally&amp;prior_prepay=0&amp;enrollment=not-set" target="_blank" rel="noopener noreferrer">View the filing system prototype</a>. <span class="stf-prototype-hint">(Press <kbd>Cmd + K</kbd> to switch between states and return statuses.)</span>
                         </p>
                     </div>
                 </article>
@@ -539,7 +605,10 @@
                     <div class="timeline-left"></div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h2 class="timeline-title">Agent autonomy map</h2>
+                        <h2 class="timeline-title">A true sales tax agent</h2>
+                        <p class="timeline-description">
+                            Most recently I've been exploring what a true autonomous sales tax agent would look like. Imagine you hired someone to take care of all of your sales tax, from setup, to calculation, filing, and cleanup. 
+                         </p>
                     </div>
                 </article>
             </div>

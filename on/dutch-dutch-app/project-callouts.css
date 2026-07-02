@@ -344,6 +344,222 @@
     opacity: 1;
 }
 
+.dd-project-media__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--dd-layout-gap);
+    width: 100%;
+    opacity: 1;
+}
+
+.dd-project-media__grid-item {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.dd-project-media__grid-card {
+    display: grid;
+    justify-items: start;
+    width: 100%;
+    max-width: 100%;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.dd-project-media__grid-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dd-project-media__grid-title {
+    font-family: "Henrietta Regular";
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    color: var(--very-light-yellow);
+    margin: 0;
+    line-height: 1.2;
+    font-weight: normal;
+}
+
+.dd-project-media__grid-body {
+    font-size: 1.6rem;
+    color: var(--very-light-yellow-darker);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.dd-project-media__grid-media {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.dd-project-media__frame--grid {
+    max-width: none;
+    width: 100%;
+    overflow: visible;
+    line-height: inherit;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel {
+    column-gap: clamp(4rem, 7vw, 6rem);
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel {
+    overflow-x: visible;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel .dd-project-scroll__content {
+    overflow-x: visible;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel .dd-project-scroll__stage {
+    display: flex;
+    justify-content: flex-start;
+    width: calc(100% + var(--dd-volume-stage-bleed-right));
+    margin-right: calc(-1 * var(--dd-volume-stage-bleed-right));
+    min-width: 0;
+    overflow: visible;
+    position: relative;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel .dd-project-scroll__stage::before,
+.dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel .dd-project-scroll__stage::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: var(--dd-volume-carousel-fade-width);
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel .dd-project-scroll__stage::before {
+    left: calc(-1 * var(--dd-volume-carousel-fade-left-shift));
+    width: calc(var(--dd-volume-carousel-fade-width) + var(--dd-volume-carousel-fade-left-shift));
+    background: linear-gradient(
+        to right,
+        var(--dd-surface-deep) 0%,
+        color-mix(in srgb, var(--dd-surface-deep) 55%, transparent) 50%,
+        transparent 100%
+    );
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel .dd-project-scroll__stage::after {
+    right: 0;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        color-mix(in srgb, var(--dd-surface-deep) 55%, transparent) 50%,
+        var(--dd-surface-deep) 100%
+    );
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    gap: clamp(1.15rem, 1.8vw, 1.5rem);
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel-slide {
+    flex: 0 0 var(--dd-volume-carousel-slide-width);
+    min-width: 320px;
+    max-height: none;
+    height: auto;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel-slide__inner.dd-project-media__grid-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+    width: 100%;
+    max-width: 100%;
+    gap: 0.65rem;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__grid-media {
+    width: 100%;
+    display: block;
+    line-height: 0;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__grid-copy {
+    width: var(--dd-volume-carousel-copy-width);
+    max-width: 100%;
+    min-width: 0;
+    padding-left: var(--dd-volume-carousel-copy-padding-left);
+    box-sizing: border-box;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__grid-title,
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__grid-body {
+    width: 100%;
+    max-width: 100%;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__grid-body {
+    font-size: 1.2rem;
+    line-height: 1.55;
+}
+
+.dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__surface {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    border-radius: 1.25rem;
+}
+
+.dd-volume-control-page .dd-project-scroll:not(.dd-project-scroll--stage-carousel) {
+    column-gap: clamp(4rem, 7vw, 6rem);
+}
+
+.dd-volume-control-page .dd-project-scroll__stage {
+    width: 100%;
+    min-width: 0;
+}
+
+.dd-volume-control-page .dd-project-media__grid {
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    width: var(--dd-media-grid-width);
+    max-width: 100%;
+}
+
+.dd-volume-control-page .dd-project-media__grid-card {
+    width: 100%;
+    max-width: 100%;
+}
+
+.dd-volume-control-page .dd-project-media__grid-copy {
+    padding-left: 0.85rem;
+}
+
+.dd-volume-control-page .dd-project-media__grid-card .dd-project-media__surface {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    margin: 0;
+    border-radius: 1.25rem;
+    object-fit: contain;
+    object-position: top center;
+}
+
 .dd-project-media__surface,
 .dd-project-media__frame img,
 .dd-project-media__frame video {
@@ -545,10 +761,117 @@
     font-size: 1.4rem;
 }
 
+.dd-project-scroll__wheel-band {
+    width: 100%;
+    padding-top: calc(12rem + clamp(2rem, 5vw, 3.5rem));
+    padding-bottom: clamp(2rem, 5vw, 3.5rem);
+    background: var(--dd-neutral-75);
+    color: var(--dd-neutral-975);
+    box-sizing: border-box;
+}
+
+.dd-project-scroll__wheel-band__inner {
+    max-width: 1680px;
+    margin: 0 auto;
+    padding-inline: 8vw;
+    box-sizing: border-box;
+}
+
 .dd-project-scroll__solution-row {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
+}
+
+.dd-project-scroll__wheel-band .dd-project-scroll__solution-row {
+    gap: clamp(3.5rem, 6vw, 5rem);
+}
+
+.dd-project-scroll__wheel-band .dd-callout-section {
+    padding-right: 0;
+    margin-bottom: 0;
+    max-width: var(--dd-main-width);
+}
+
+.dd-project-scroll__wheel-band .dd-callout-section__heading,
+.dd-project-scroll__wheel-band .dd-callout-section__body,
+.dd-project-scroll__wheel-band .dd-callout-list {
+    color: var(--dd-neutral-975);
+}
+
+.dd-project-scroll__wheel-band .dd-callout-section__body a,
+.dd-project-scroll__wheel-band .dd-callout-section__body a:visited {
+    color: var(--dd-neutral-975);
+    background: none;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--dd-neutral-975) 35%, transparent);
+    text-underline-offset: 0.14em;
+    text-decoration-thickness: 1px;
+}
+
+.dd-project-scroll__wheel-band .dd-callout-section__body a:hover {
+    color: var(--dd-neutral-800);
+    text-decoration-color: color-mix(in srgb, var(--dd-neutral-800) 45%, transparent);
+}
+
+.dd-project-scroll__wheel-band .dd-project-media__frame figcaption,
+.dd-project-scroll__wheel-band .dd-project-media__frame figcaption a,
+.dd-project-scroll__wheel-band .dd-project-media__frame figcaption a:visited {
+    color: var(--dd-neutral-975);
+    background: none;
+    text-decoration-color: color-mix(in srgb, var(--dd-neutral-975) 35%, transparent);
+}
+
+.dd-project-scroll__wheel-band .dd-project-media__frame figcaption a:hover {
+    color: var(--dd-neutral-800);
+    text-decoration-color: color-mix(in srgb, var(--dd-neutral-800) 45%, transparent);
+}
+
+.dd-project-scroll__wheel-band .dd-inline-volume-demo {
+    --dd-volume-accent: var(--dd-neutral-975);
+    --dd-volume-slider-track-bg: color-mix(in srgb, var(--dd-neutral-975) 22%, transparent);
+}
+
+.dd-project-scroll__wheel-band .dd-volume-slider::-webkit-slider-runnable-track {
+    background: linear-gradient(
+        to right,
+        var(--dd-volume-accent) 0%,
+        var(--dd-volume-accent) var(--volume-fill),
+        var(--dd-volume-slider-track-bg) var(--volume-fill),
+        var(--dd-volume-slider-track-bg) 100%
+    );
+}
+
+.dd-project-scroll__wheel-band .dd-volume-slider::-webkit-slider-thumb {
+    background: var(--dd-neutral-800);
+}
+
+.dd-project-scroll__wheel-band .dd-volume-slider.is-active::-webkit-slider-thumb,
+.dd-project-scroll__wheel-band .dd-volume-slider:focus-visible::-webkit-slider-thumb {
+    background: var(--dd-neutral-975);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--dd-neutral-975) 28%, transparent);
+}
+
+.dd-project-scroll__wheel-band .dd-volume-slider::-moz-range-track {
+    background: var(--dd-volume-slider-track-bg);
+}
+
+.dd-project-scroll__wheel-band .dd-volume-slider::-moz-range-progress {
+    background: var(--dd-volume-accent);
+}
+
+.dd-project-scroll__wheel-band .dd-volume-slider::-moz-range-thumb {
+    background: var(--dd-neutral-800);
+}
+
+.dd-project-scroll__wheel-band .dd-volume-slider.is-active::-moz-range-thumb,
+.dd-project-scroll__wheel-band .dd-volume-slider:focus-visible::-moz-range-thumb {
+    background: var(--dd-neutral-975);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--dd-neutral-975) 28%, transparent);
+}
+
+.dd-project-scroll__wheel-band .dd-volume-slider__value.is-max {
+    color: var(--dd-neutral-975);
 }
 
 .dd-project-scroll__solution-layout .dd-callout-section {
@@ -576,6 +899,22 @@
     height: auto;
     max-height: none;
     border-radius: 2rem;
+}
+
+.dd-project-scroll__wheel-band .dd-project-scroll__solution-stage--wide {
+    width: 100%;
+    min-width: 0;
+}
+
+.dd-project-scroll__wheel-band .dd-project-media__frame--wide {
+    width: 100%;
+    max-width: 100%;
+}
+
+.dd-project-scroll__wheel-band .dd-project-scroll__solution-stage--wide .dd-project-media__surface {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
 }
 
 .dd-project-media__video {
@@ -640,19 +979,26 @@
 }
 
 @media (min-width: 901px) {
-    .dd-project-scroll:not(.dd-project-scroll--has-carousel) {
+    .dd-project-scroll:not(.dd-project-scroll--has-carousel),
+    .dd-volume-control-page .dd-project-scroll--stage-carousel {
         display: grid;
         grid-template-columns: var(--dd-main-width) 1fr;
         column-gap: var(--dd-layout-gap);
         align-items: start;
     }
 
-    .dd-project-scroll:not(.dd-project-scroll--has-carousel) .dd-project-scroll__content {
+    .dd-volume-control-page .dd-project-scroll--stage-carousel {
+        column-gap: clamp(4rem, 7vw, 6rem);
+    }
+
+    .dd-project-scroll:not(.dd-project-scroll--has-carousel) .dd-project-scroll__content,
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__content {
         grid-column: 1;
         grid-row: 1;
     }
 
-    .dd-project-scroll:not(.dd-project-scroll--has-carousel) .dd-project-scroll__stage {
+    .dd-project-scroll:not(.dd-project-scroll--has-carousel) .dd-project-scroll__stage,
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__stage {
         grid-column: 2;
         grid-row: 1;
         position: sticky;
@@ -660,6 +1006,18 @@
         align-self: start;
         display: flex;
         justify-content: flex-start;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__stage {
+        justify-content: stretch;
+        width: calc(100% + var(--dd-volume-stage-bleed-right));
+        margin-right: calc(-1 * var(--dd-volume-stage-bleed-right));
+    }
+
+    .dd-volume-control-page .dd-project-scroll:not(.dd-project-scroll--stage-carousel) .dd-project-scroll__stage {
+        justify-content: stretch;
     }
 
     .dd-project-scroll--has-carousel {
@@ -673,6 +1031,11 @@
         grid-template-columns: var(--dd-main-width) 1fr;
         column-gap: var(--dd-layout-gap);
         align-items: start;
+    }
+
+    .dd-project-scroll__wheel-band .dd-project-scroll__solution-row {
+        grid-template-columns: minmax(0, var(--dd-main-width)) minmax(0, 1fr);
+        column-gap: clamp(4rem, 7vw, 6rem);
     }
 
     .dd-project-scroll__solution-block__row {
@@ -736,6 +1099,23 @@
         object-fit: contain;
     }
 
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__surface {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: none;
+        margin-inline: 0;
+    }
+
+    .dd-volume-control-page .dd-project-media__grid-card .dd-project-media__surface {
+        width: 100%;
+        max-width: 100%;
+        max-height: none;
+        margin-inline: 0;
+        object-fit: contain;
+        object-position: top center;
+    }
+
     .dd-project-scroll__solution-demo {
         margin-right: calc(-1 * (var(--dd-layout-gap) + min(420px, 35vw)));
         width: calc(100% + var(--dd-layout-gap) + min(420px, 35vw));
@@ -770,6 +1150,28 @@
         padding-right: 5vw;
     }
 
+    .dd-volume-control-page .dd-project-scroll--stage-carousel {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__content {
+        display: contents;
+    }
+
+    .dd-volume-control-page .dd-project-scroll__intro {
+        order: 1;
+    }
+
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__stage {
+        order: 2;
+        margin-bottom: 2.5rem;
+    }
+
+    .dd-volume-control-page .dd-project-scroll__solution-layout {
+        order: 3;
+    }
+
     .dd-project-scroll__lines {
         display: none;
     }
@@ -787,10 +1189,36 @@
         max-width: min(680px, 100%);
     }
 
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel {
+        width: 100%;
+        margin-inline: 0;
+    }
+
+    .dd-volume-control-page {
+        --dd-volume-carousel-slide-width: 320px;
+        --dd-volume-carousel-copy-padding-left: 0.95rem;
+        --dd-volume-stage-bleed-right: 5vw;
+    }
+
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__surface {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: none;
+    }
+
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__grid-copy {
+        padding-left: var(--dd-volume-carousel-copy-padding-left);
+    }
+
     .dd-solution-video--portrait,
     .dd-solution-video--wide {
         width: 100%;
         max-width: 100%;
+    }
+
+    .dd-project-scroll__wheel-band__inner {
+        padding-inline: 5vw;
     }
 
     .dd-project-scroll__solution-block__row .dd-solution-card {
@@ -814,11 +1242,23 @@
         padding: var(--dd-carousel-padding-block) 0;
     }
 
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel-slide {
+        height: auto;
+        padding: 0;
+    }
+
     .dd-project-scroll__carousel-slide__inner {
         position: relative;
         width: fit-content;
         max-width: 100%;
         height: 100%;
+    }
+
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel-slide__inner.dd-project-media__grid-card {
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
     }
 
     .dd-project-scroll__carousel-slide__media {

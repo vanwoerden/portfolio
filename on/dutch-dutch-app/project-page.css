@@ -1,6 +1,7 @@
 :root {
     --dd-neutral-white: #FFFFFF;
     --dd-neutral-50: #F5F5F3;
+    --dd-neutral-75: #E7E5E0;
     --dd-neutral-100: #E9E9E6;
     --dd-neutral-200: #D1D1CC;
     --dd-neutral-300: #B2B2AD;
@@ -36,6 +37,16 @@
     --dd-hero-lead: 4.5rem;
     --dd-hero-image-bottom-gap: 1.25rem;
     --dd-hero-image-max-height: calc(100dvh - var(--dd-viewport-pad) - var(--dd-hero-image-bottom-gap) - var(--dd-header-top) - var(--dd-h1-block) - var(--dd-hero-lead));
+}
+
+.dd-volume-control-page {
+    --dd-main-width: 39rem;
+    --dd-volume-carousel-slide-width: 320px;
+    --dd-volume-carousel-copy-width: 88%;
+    --dd-volume-carousel-copy-padding-left: 1.1rem;
+    --dd-volume-carousel-fade-width: clamp(3.5rem, 16%, 9rem);
+    --dd-volume-carousel-fade-left-shift: clamp(2rem, 5vw, 3.5rem);
+    --dd-volume-stage-bleed-right: calc(8vw + max(0px, (100vw - 1680px) / 2));
 }
 
 body {

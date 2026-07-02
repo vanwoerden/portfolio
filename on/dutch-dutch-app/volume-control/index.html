@@ -14,7 +14,7 @@
     <script src="/on/dutch-dutch-app/project-nav.js"></script>
     <script src="/on/dutch-dutch-app/project-callouts.js" defer></script>
 </head>
-<body>
+<body class="dd-volume-control-page">
     <div class="dd-close-group">
         <a class="dd-key" href="/on/dutch-dutch-app/index.html"
            aria-label="Close"
@@ -38,11 +38,11 @@
             <h2>The problem</h2>
         </header>
 
-        <div class="dd-project-scroll" data-dd-project-scroll>
+        <div class="dd-project-scroll dd-project-scroll--has-carousel dd-project-scroll--stage-carousel" data-dd-project-scroll data-dd-media-layout="stage-carousel">
             <svg class="dd-project-scroll__lines" aria-hidden="true"></svg>
 
             <div class="dd-project-scroll__content">
-                <section class="dd-callout-section" data-callout-target="context">
+                <section class="dd-callout-section dd-project-scroll__intro" data-callout-target="context">
                     <p class="dd-callout-section__body">
                         Adjusting the volume is the most frequent action when playing or working on music. But Dutch & Dutch speakers don't ship with a physical volume control. 
                     </p>
@@ -54,34 +54,6 @@
                     </p>
                     <p class="dd-callout-section__body">
                         The existing volume control had a few discoverability and usability issues that needed fixing:
-                    </p>
-                </section>
-
-                <section class="dd-callout-section dd-callout-section--step" data-callout-target="volume">
-                    <h3 class="dd-callout-section__title">How do I change the volume?</h3>
-                    <p class="dd-callout-section__body">
-                        Press and drag within the circle to adjust the volume. Not easily discovered! And your fingers cover the dB value while adjusting it.
-                    </p>
-                </section>
-
-                <section class="dd-callout-section dd-callout-section--step" data-callout-target="mute">
-                    <h3 class="dd-callout-section__title">How do I mute the speakers?</h3>
-                    <p class="dd-callout-section__body">
-                        No visible mute button. Tap the circle to mute and un-mute the speakers.
-                    </p>
-                </section>
-
-                <section class="dd-callout-section dd-callout-section--step" data-callout-target="sleep">
-                    <h3 class="dd-callout-section__title">How do I set a sleep timer?</h3>
-                    <p class="dd-callout-section__body">
-                        Press and hold to put the speakers in sleep mode or set a sleep timer. Simple, right?
-                    </p>
-                </section>
-
-                <section class="dd-callout-section dd-callout-section--step" data-callout-target="sleep-set">
-                    <h3 class="dd-callout-section__title">How do I cancel the sleep timer?</h3>
-                    <p class="dd-callout-section__body">
-                        Press and hold again to stop the sleep timer.
                     </p>
                 </section>
 
@@ -143,76 +115,122 @@
                                 aria-label="Volume control before and after comparison"></video>
                         </div>
                     </aside>
-
-                    <div class="dd-project-scroll__solution-row">
-                        <section class="dd-callout-section" data-callout-target="wheel-rationale">
-                            <h2 class="dd-callout-section__heading">What's with the wheel?</h2>
-                            <p class="dd-callout-section__body">
-                                Why not a typical volume slider? It&rsquo;s very easy to move a simple volume slider from <span class="dd-inline-volume-demo">0 <input type="range" class="dd-volume-slider" id="volume-control-demo" min="0" max="100" value="0" aria-label="Example volume slider"> <span class="dd-volume-slider__reading"><output class="dd-volume-slider__value" for="volume-control-demo">100</output>.<span class="dd-volume-slider__easy" hidden> That was easy.</span></span></span>
-                            </p>
-                            <p class="dd-callout-section__body">
-                                Too easy, in fact.
-                            </p>
-                            <p class="dd-callout-section__body">
-                                Dutch & Dutch speakers go loud. Not just wake up the neighbors loud; ear-damaging loud, if turned up too quickly while sitting too close. We needed some inertia built into the volume control, and we needed to prevent large volume jumps with a single gesture.
-                            </p>
-                            <p class="dd-callout-section__body">
-                                A synthesizer's pitch wheel has obvious use cues and some friction built in. Mimicking a control from the real world that had proven itself over decades felt like a natural fit.
-                            </p>
-                            <p class="dd-callout-section__body">
-                                The other details like the indicator line, the haptic feedback, and the larger than life dB level while dragging were somewhat inspired by <a href="https://notbor.ing/words/the-most-satisfying-checkbox" target="_blank" rel="noopener noreferrer">!Boring's World's Most Satisfying Checkbox</a>; the volume control is the most used control in the app. It should be extremely obvious. But not boring!
-                            </p>
-                        </section>
-
-                        <aside class="dd-project-scroll__solution-stage dd-project-scroll__solution-stage--wide" aria-label="Wheel control reference">
-                            <figure class="dd-project-media__frame dd-project-media__frame--wide">
-                                <img
-                                    class="dd-project-media__surface"
-                                    src="/img/moog_the_rogue.jpg"
-                                    alt="Moog The Rogue synthesizer with pitch and modulation wheels"
-                                    width="1200"
-                                    height="800">
-                                <figcaption>Moog &ldquo;The Rogue&rdquo; with pitch and modulation wheel. From <a href="https://www.sweetwater.com/used/listings/462704-used-moog-1980s-moog-rogue-monophonic-analog-synthesizer-model-342a-serial-9093?mrkgadid=&amp;mrkgcl=28&amp;mrkgen=&amp;mrkgbflag=&amp;mrkgcat=&amp;acctid=21700000001645388&amp;dskeywordid=2187553399136&amp;lid=92700080518145361&amp;ds_s_kwgid=58700008750995430&amp;ds_s_inventory_feed_id=97700000041860162&amp;dsproductgroupid=2187553399136&amp;product_id=GX-462704&amp;prodctry=ZZ&amp;prodlang=en&amp;channel=online&amp;storeid=&amp;device=c&amp;network=g&amp;matchtype=&amp;adpos=largenumber&amp;locationid=9003447&amp;creative=706697184393&amp;targetid=pla-2187553399136&amp;campaignid=21493289649&amp;awsearchcpc=1&amp;gclsrc=aw.ds&amp;gad_source=1&amp;gad_campaignid=21493289649&amp;gbraid=0AAAAAD_RQYmjB-gsXSMkgOCtcQYyHY7Qz&amp;gclid=CjwKCAjwuuPRBhAnEiwA2Ji8eoKovFpOWAyPETLrnjTNLtxAkAjc19n5WpRQGoGC6xpCt9ecaUJcTBoCb8wQAvD_BwE" target="_blank" rel="noopener noreferrer">Sweetwater</a></figcaption>
-                            </figure>
-                        </aside>
-                    </div>
                 </div>
             </div>
 
-            <aside class="dd-project-scroll__stage">
-                <figure class="dd-project-media__frame">
-                    <div class="dd-project-media__stack">
-                        <img
-                            class="dd-project-media__surface"
-                            data-callout-media="volume"
-                            src="/img/gain_slider_old.png"
-                            alt="Previous volume control home screen with circular volume control"
-                            width="990"
-                            height="1978">
-                        <img
-                            class="dd-project-media__surface"
-                            data-callout-media="mute"
-                            src="/img/gain_slider_old_mute.png"
-                            alt="Previous volume control UI showing muted state"
-                            width="994"
-                            height="1980">
-                        <img
-                            class="dd-project-media__surface"
-                            data-callout-media="sleep"
-                            src="/img/gain_slider_old_sleep.png"
-                            alt="Previous volume control UI with sleep mode and timer gesture"
-                            width="992"
-                            height="1982">
-                        <img
-                            class="dd-project-media__surface"
-                            data-callout-media="sleep-set"
-                            src="/img/gain_slider_old_sleep_set.png"
-                            alt="Previous volume control UI stopping the sleep timer"
-                            width="990"
-                            height="1984">
-                    </div>
-                </figure>
+            <aside class="dd-project-scroll__stage" aria-label="Previous volume control screens">
+                <div class="dd-project-scroll__carousel" role="region" aria-label="Previous volume control screens" tabindex="0">
+                    <article class="dd-project-scroll__carousel-slide" data-callout-target="volume">
+                        <div class="dd-project-scroll__carousel-slide__inner dd-project-media__grid-card">
+                            <div class="dd-project-media__grid-media">
+                                <img
+                                    class="dd-project-media__surface"
+                                    src="/img/gain_slider_old.png"
+                                    alt="Previous volume control home screen with circular volume control"
+                                    width="990"
+                                    height="1978">
+                            </div>
+                            <div class="dd-project-media__grid-copy">
+                                <h3 class="dd-project-media__grid-title">How do I change the volume?</h3>
+                                <p class="dd-project-media__grid-body">
+                                    Press and drag within the circle to adjust the volume. Not easily discovered! And your fingers cover the dB value while adjusting it.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="dd-project-scroll__carousel-slide" data-callout-target="mute">
+                        <div class="dd-project-scroll__carousel-slide__inner dd-project-media__grid-card">
+                            <div class="dd-project-media__grid-media">
+                                <img
+                                    class="dd-project-media__surface"
+                                    src="/img/gain_slider_old_mute.png"
+                                    alt="Previous volume control UI showing muted state"
+                                    width="994"
+                                    height="1980">
+                            </div>
+                            <div class="dd-project-media__grid-copy">
+                                <h3 class="dd-project-media__grid-title">How do I mute the speakers?</h3>
+                                <p class="dd-project-media__grid-body">
+                                    No visible mute button. Tap the circle to mute and un-mute the speakers.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="dd-project-scroll__carousel-slide" data-callout-target="sleep">
+                        <div class="dd-project-scroll__carousel-slide__inner dd-project-media__grid-card">
+                            <div class="dd-project-media__grid-media">
+                                <img
+                                    class="dd-project-media__surface"
+                                    src="/img/gain_slider_old_sleep.png"
+                                    alt="Previous volume control UI with sleep mode and timer gesture"
+                                    width="992"
+                                    height="1982">
+                            </div>
+                            <div class="dd-project-media__grid-copy">
+                                <h3 class="dd-project-media__grid-title">How do I set a sleep timer?</h3>
+                                <p class="dd-project-media__grid-body">
+                                    Press and hold to put the speakers in sleep mode or set a sleep timer. Simple, right?
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="dd-project-scroll__carousel-slide" data-callout-target="sleep-set">
+                        <div class="dd-project-scroll__carousel-slide__inner dd-project-media__grid-card">
+                            <div class="dd-project-media__grid-media">
+                                <img
+                                    class="dd-project-media__surface"
+                                    src="/img/gain_slider_old_sleep_set.png"
+                                    alt="Previous volume control UI stopping the sleep timer"
+                                    width="990"
+                                    height="1984">
+                            </div>
+                            <div class="dd-project-media__grid-copy">
+                                <h3 class="dd-project-media__grid-title">How do I cancel the sleep timer?</h3>
+                                <p class="dd-project-media__grid-body">
+                                    Press and hold again to stop the sleep timer.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </aside>
+        </div>
+    </div>
+
+    <div class="dd-project-scroll__wheel-band">
+        <div class="dd-project-scroll__wheel-band__inner">
+            <div class="dd-project-scroll__solution-row">
+                <section class="dd-callout-section" data-callout-target="wheel-rationale">
+                    <h2 class="dd-callout-section__heading">What's with the wheel?</h2>
+                    <p class="dd-callout-section__body">
+                        Why not a typical volume slider? It&rsquo;s very easy to move a simple volume slider from <span class="dd-inline-volume-demo">0 <input type="range" class="dd-volume-slider" id="volume-control-demo" min="0" max="100" value="0" aria-label="Example volume slider"> <span class="dd-volume-slider__reading"><output class="dd-volume-slider__value" for="volume-control-demo">100</output>.<span class="dd-volume-slider__easy" hidden> That was easy.</span></span></span>
+                    </p>
+                    <p class="dd-callout-section__body">
+                        Too easy, in fact.
+                    </p>
+                    <p class="dd-callout-section__body">
+                        Dutch & Dutch speakers go loud. Not just wake up the neighbors loud; ear-damaging loud, if turned up too quickly while sitting too close. We needed some inertia built into the volume control, and we needed to prevent large volume jumps with a single gesture.
+                    </p>
+                    <p class="dd-callout-section__body">
+                        A synthesizer's pitch wheel has obvious use cues and some friction built in. Mimicking a control from the real world that had proven itself over decades felt like a natural fit.
+                    </p>
+                    <p class="dd-callout-section__body">
+                        The other details like the indicator line, the haptic feedback, and the larger than life dB level while dragging were somewhat inspired by <a href="https://notbor.ing/words/the-most-satisfying-checkbox" target="_blank" rel="noopener noreferrer">!Boring's World's Most Satisfying Checkbox</a>; the volume control is the most used control in the app. It should be extremely obvious. But not boring!
+                    </p>
+                </section>
+
+                <aside class="dd-project-scroll__solution-stage dd-project-scroll__solution-stage--wide" aria-label="Wheel control reference">
+                    <figure class="dd-project-media__frame dd-project-media__frame--wide">
+                        <img
+                            class="dd-project-media__surface"
+                            src="/img/moog_the_rogue.jpg"
+                            alt="Moog The Rogue synthesizer with pitch and modulation wheels"
+                            width="1200"
+                            height="800">
+                        <figcaption>Moog &ldquo;The Rogue&rdquo; with pitch and modulation wheel. From <a href="https://www.sweetwater.com/used/listings/462704-used-moog-1980s-moog-rogue-monophonic-analog-synthesizer-model-342a-serial-9093?mrkgadid=&amp;mrkgcl=28&amp;mrkgen=&amp;mrkgbflag=&amp;mrkgcat=&amp;acctid=21700000001645388&amp;dskeywordid=2187553399136&amp;lid=92700080518145361&amp;ds_s_kwgid=58700008750995430&amp;ds_s_inventory_feed_id=97700000041860162&amp;dsproductgroupid=2187553399136&amp;product_id=GX-462704&amp;prodctry=ZZ&amp;prodlang=en&amp;channel=online&amp;storeid=&amp;device=c&amp;network=g&amp;matchtype=&amp;adpos=largenumber&amp;locationid=9003447&amp;creative=706697184393&amp;targetid=pla-2187553399136&amp;campaignid=21493289649&amp;awsearchcpc=1&amp;gclsrc=aw.ds&amp;gad_source=1&amp;gad_campaignid=21493289649&amp;gbraid=0AAAAAD_RQYmjB-gsXSMkgOCtcQYyHY7Qz&amp;gclid=CjwKCAjwuuPRBhAnEiwA2Ji8eoKovFpOWAyPETLrnjTNLtxAkAjc19n5WpRQGoGC6xpCt9ecaUJcTBoCb8wQAvD_BwE" target="_blank" rel="noopener noreferrer">Sweetwater</a></figcaption>
+                    </figure>
+                </aside>
+            </div>
         </div>
     </div>
 </body>

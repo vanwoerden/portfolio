@@ -298,6 +298,82 @@
     }
 }
 
+/* Inline header row: date, title */
+@media (max-width: 900px) {
+    .timeline-line {
+        display: none;
+    }
+
+    .timeline-item {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        column-gap: 0.5rem;
+        row-gap: 0.75rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .timeline-content {
+        display: contents;
+        margin-left: 0;
+        max-width: none;
+        width: auto;
+        padding: 0;
+    }
+
+    .timeline-left {
+        grid-column: 2;
+        grid-row: 1;
+        width: auto;
+        min-width: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .timeline-left:empty {
+        display: none;
+    }
+
+    .timeline-marker {
+        display: none;
+    }
+
+    .timeline-title {
+        grid-column: 1;
+        grid-row: 1;
+        margin: 0;
+        font-size: clamp(1.35rem, 5vw, 1.75rem);
+        line-height: 1.1;
+        align-self: center;
+        min-width: 0;
+    }
+
+    .timeline-item:not(:has(.timeline-left:not(:empty))) .timeline-title {
+        grid-column: 1;
+    }
+
+    .timeline-tag {
+        line-height: 1.2;
+    }
+
+    .timeline-tag-year {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .timeline-description,
+    .timeline-meta,
+    .timeline-link,
+    .timeline-preview-card {
+        grid-column: 1 / -1;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+}
+
 /* Preview card for experiment demos */
 .timeline-preview-card {
     display: block;

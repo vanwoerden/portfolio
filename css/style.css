@@ -1457,9 +1457,9 @@ footer {
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
-    /* Show hamburger menu */
+    /* Nav drawer hidden on mobile; no hamburger toggle */
     .nav-toggle {
-        display: flex !important;
+        display: none !important;
     }
     
     /* Hide nav by default, show when toggled */

@@ -231,6 +231,62 @@
             .stf-mindsets-grid {
                 grid-template-columns: 1fr;
             }
+
+            .stf-page {
+                --stf-mobile-gutter: max(1.5rem, 5vw);
+            }
+
+            .stf-content {
+                max-width: none;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 3rem var(--stf-mobile-gutter) 0 var(--stf-mobile-gutter);
+            }
+
+            .stf-content--tail {
+                padding-bottom: 5rem;
+            }
+
+            .stf-header {
+                max-width: none;
+                padding-left: 0;
+            }
+
+            .stf-timeline.timeline-container {
+                padding: 1.5rem 0 0;
+            }
+
+            .stf-timeline .timeline-description,
+            .stf-timeline .stf-figure,
+            .stf-timeline .stf-mindsets,
+            .stf-timeline .stf-video,
+            .stf-timeline .stf-insights {
+                grid-column: 1 / -1;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+            }
+
+            .stf-timeline .timeline-description {
+                font-size: 1.25rem;
+            }
+
+            .stf-principles-video,
+            .stf-figure--full {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .stf-mindset-card {
+                flex-direction: column;
+            }
+
+            .stf-mindset-card__media {
+                flex: none;
+                max-width: 100%;
+                width: 100%;
+                aspect-ratio: 16 / 10;
+            }
         }
 
         .stf-video {
@@ -346,32 +402,6 @@
             margin-top: 3rem;
         }
 
-        @media (max-width: 768px) {
-            .stf-page {
-                --stf-date-col: 50px;
-                --stf-content-gap: calc(0.75rem + 2rem);
-            }
-
-            .stf-header {
-                padding-left: calc(var(--stf-date-col) + var(--stf-content-gap));
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stf-page {
-                --stf-date-col: 40px;
-                --stf-content-gap: calc(0.5rem + 1.5rem);
-            }
-        }
-
-        @media (max-width: 900px) {
-            .stf-timeline .timeline-content {
-                flex: 1 1 auto;
-                width: auto;
-                min-width: 0;
-                max-width: min(600px, 100%);
-            }
-        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

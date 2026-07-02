@@ -745,6 +745,17 @@
     width: calc(100% + var(--dd-text-column-pad-right, 0px));
 }
 
+.dd-solution-video-figure {
+    margin: 0;
+}
+
+.dd-solution-video-figure figcaption {
+    font-size: 1.25rem;
+    line-height: 1.45;
+    color: var(--very-light-yellow-darker);
+    margin-top: 0.65rem;
+}
+
 .dd-solution-card {
     border-radius: 1.5rem;
     background: color-mix(in srgb, var(--dd-surface-inset) 62%, transparent);
@@ -764,7 +775,7 @@
 .dd-project-scroll__wheel-band {
     width: 100%;
     padding-top: calc(12rem + clamp(2rem, 5vw, 3.5rem));
-    padding-bottom: clamp(2rem, 5vw, 3.5rem);
+    padding-bottom: calc(8rem + clamp(3.5rem, 7vw, 5.5rem));
     background: var(--dd-neutral-75);
     color: var(--dd-neutral-975);
     box-sizing: border-box;
@@ -1122,7 +1133,14 @@
         max-width: var(--dd-solution-wide-max-width);
     }
 
-    .dd-project-scroll__solution-demo .dd-solution-video--wide {
+    .dd-volume-control-page .dd-project-scroll__solution-demo {
+        margin-right: calc(-1 * (var(--dd-layout-gap) + min(480px, 42vw) + var(--dd-volume-stage-bleed-right)));
+        width: calc(100% + var(--dd-layout-gap) + min(480px, 42vw) + var(--dd-volume-stage-bleed-right));
+        max-width: var(--dd-solution-wide-max-width);
+    }
+
+    .dd-volume-control-page .dd-solution-video-figure,
+    .dd-volume-control-page .dd-project-scroll__solution-demo .dd-solution-video--wide {
         width: 100%;
         max-width: 100%;
     }
@@ -1144,19 +1162,21 @@
 
 @media (max-width: 900px) {
     .dd-project-scroll {
-        margin-left: -5vw;
-        margin-right: -5vw;
-        padding-left: 5vw;
-        padding-right: 5vw;
+        margin-left: calc(-1 * var(--dd-mobile-gutter, max(1.5rem, 5vw)));
+        margin-right: calc(-1 * var(--dd-mobile-gutter, max(1.5rem, 5vw)));
+        padding-left: var(--dd-mobile-gutter, max(1.5rem, 5vw));
+        padding-right: var(--dd-mobile-gutter, max(1.5rem, 5vw));
     }
 
     .dd-volume-control-page .dd-project-scroll--stage-carousel {
         display: grid;
         grid-template-columns: 1fr;
+        overflow-x: visible;
     }
 
     .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__content {
         display: contents;
+        overflow-x: visible;
     }
 
     .dd-volume-control-page .dd-project-scroll__intro {
@@ -1165,11 +1185,27 @@
 
     .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__stage {
         order: 2;
+        display: flex;
+        position: static;
+        top: auto;
+        width: 100%;
+        margin-right: 0;
         margin-bottom: 2.5rem;
+        overflow: visible;
+    }
+
+    .dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel .dd-project-scroll__stage::before,
+    .dd-volume-control-page .dd-project-scroll--stage-carousel.dd-project-scroll--has-carousel .dd-project-scroll__stage::after {
+        display: none;
     }
 
     .dd-volume-control-page .dd-project-scroll__solution-layout {
         order: 3;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2rem, 6vh, 3rem);
+        width: 100%;
+        min-width: 0;
     }
 
     .dd-project-scroll__lines {
@@ -1189,15 +1225,30 @@
         max-width: min(680px, 100%);
     }
 
-    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel {
-        width: 100%;
-        margin-inline: 0;
+    .dd-volume-control-page {
+        --dd-volume-carousel-slide-width: 100%;
+        --dd-volume-carousel-copy-width: 100%;
+        --dd-volume-carousel-copy-padding-left: 0.95rem;
+        --dd-volume-stage-bleed-right: 0px;
     }
 
-    .dd-volume-control-page {
-        --dd-volume-carousel-slide-width: 320px;
-        --dd-volume-carousel-copy-padding-left: 0.95rem;
-        --dd-volume-stage-bleed-right: 5vw;
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel {
+        display: flex;
+        width: 100%;
+        margin-inline: 0;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0;
+        padding: 0;
+    }
+
+    .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-scroll__carousel-slide {
+        flex: 0 0 100%;
+        min-width: 0;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
     }
 
     .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__surface {
@@ -1208,7 +1259,55 @@
     }
 
     .dd-volume-control-page .dd-project-scroll--stage-carousel .dd-project-media__grid-copy {
+        width: 100%;
+        max-width: 100%;
         padding-left: var(--dd-volume-carousel-copy-padding-left);
+    }
+
+    .dd-volume-control-page .dd-project-scroll__solution-block {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .dd-volume-control-page .dd-project-scroll__solution-block__row {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+        gap: var(--dd-layout-gap);
+    }
+
+    .dd-volume-control-page .dd-project-scroll__solution-block__row .dd-solution-card {
+        width: 100%;
+        max-width: 100%;
+        margin-inline: 0;
+    }
+
+    .dd-volume-control-page .dd-project-scroll__solution-block__video {
+        width: 100%;
+        max-width: min(420px, 100%);
+        min-height: 0;
+        align-self: center;
+    }
+
+    .dd-volume-control-page .dd-project-scroll__solution-demo {
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+    }
+
+    .dd-volume-control-page .dd-solution-video-figure,
+    .dd-volume-control-page .dd-project-scroll__solution-demo .dd-solution-video--wide {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .dd-volume-control-page .dd-page .dd-project-scroll__content .dd-callout-section:not(.dd-solution-card),
+    .dd-volume-control-page .dd-callout-section {
+        padding-right: 0;
+        max-width: 100%;
     }
 
     .dd-solution-video--portrait,
@@ -1217,12 +1316,31 @@
         max-width: 100%;
     }
 
+    .dd-project-scroll__wheel-band {
+        padding-top: clamp(6rem, 18vh, 10rem);
+    }
+
     .dd-project-scroll__wheel-band__inner {
-        padding-inline: 5vw;
+        padding-inline: var(--dd-mobile-gutter, max(1.5rem, 5vw));
+    }
+
+    .dd-project-scroll__wheel-band .dd-project-scroll__solution-row {
+        display: flex;
+        flex-direction: column;
+        gap: var(--dd-layout-gap);
+    }
+
+    .dd-project-scroll__wheel-band .dd-callout-section {
+        max-width: 100%;
+    }
+
+    .dd-project-scroll__wheel-band .dd-project-scroll__solution-stage--wide {
+        width: 100%;
+        min-width: 0;
     }
 
     .dd-project-scroll__solution-block__row .dd-solution-card {
-        max-width: var(--dd-main-width);
+        max-width: 100%;
         width: 100%;
     }
 

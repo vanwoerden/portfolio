@@ -56,7 +56,7 @@
             --dd-bg-cutback: 0.5rem;
             --dd-header-top: 7rem;
             --dd-h1-block: clamp(5rem, 14vh, 9rem);
-            --dd-devices-max-width: 680px;
+            --dd-devices-max-width: min(56rem, 100%);
             --dd-key-cell-w: 3.75rem;
             --dd-key-cell-h: 2.75rem;
             --dd-key-gap: 0.35rem;
@@ -422,13 +422,11 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .dd-close-group {
-                left: 5.5rem;
-            }
-        }
-
         @media (max-width: 900px) {
+            .dd-close-group {
+                display: none;
+            }
+
             .dd-bg-shape {
                 height: clamp(680px, calc(115vw - var(--dd-bg-cutback)), calc(1100px - var(--dd-bg-cutback)));
             }
@@ -471,6 +469,21 @@
 
             .dd-aside:empty {
                 display: none;
+            }
+
+            .dd-meta {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+
+            .dd-meta__item {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .dd-meta dd {
+                white-space: normal;
             }
         }
 
@@ -699,9 +712,24 @@
             margin: 0;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 900px) {
             .dd-archetypes-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .dd-card--archetype {
+                flex-direction: column;
+            }
+
+            .dd-card--archetype__media {
+                flex: none;
+                max-width: 100%;
+                width: 100%;
+                aspect-ratio: 16 / 10;
+            }
+
+            .dd-card--archetype__media img {
+                height: 100%;
             }
         }
 
@@ -1374,11 +1402,15 @@
                 <figure class="dd-main-video">
                     <video
                         class="dd-main-video__media"
-                        src="/img/gain_slider_new.mov"
+                        autoplay
                         loop
+                        muted
                         playsinline
-                        preload="metadata"
-                        aria-label="New volume control app UI demonstration"></video>
+                        preload="auto"
+                        aria-label="New volume control app UI demonstration">
+                        <source src="/video/gain_slider_new_hevc.mov" type='video/mp4; codecs="hvc1"'>
+                        <source src="/video/gain_slider_new.webm" type="video/webm">
+                    </video>
                 </figure>
             </aside>
             <!--<div class="dd-main">

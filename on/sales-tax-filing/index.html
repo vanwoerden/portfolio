@@ -3,49 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>html:not(.stf-authed) body { visibility: hidden; }</style>
-    <script>
-        (function() {
-            var storageKey = 'stf-auth';
-            var passwordHash = '8c7d0a50340739cdd57c471cdb0b8412d2061ce9df821302161fe7afad21f961';
-
-            function showPage() {
-                document.documentElement.classList.add('stf-authed');
-            }
-
-            function redirect() {
-                location.replace('/on/');
-            }
-
-            function hashPassword(password) {
-                return crypto.subtle.digest('SHA-256', new TextEncoder().encode(password)).then(function(buf) {
-                    return Array.from(new Uint8Array(buf)).map(function(byte) {
-                        return byte.toString(16).padStart(2, '0');
-                    }).join('');
-                });
-            }
-
-            if (sessionStorage.getItem(storageKey) === '1') {
-                showPage();
-                return;
-            }
-
-            var attempt = prompt('Password');
-            if (attempt === null) {
-                redirect();
-                return;
-            }
-
-            hashPassword(attempt).then(function(digest) {
-                if (digest === passwordHash) {
-                    sessionStorage.setItem(storageKey, '1');
-                    showPage();
-                } else {
-                    redirect();
-                }
-            });
-        })();
-    </script>
     <title>Sales tax filing - ernst.works</title>
     <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">

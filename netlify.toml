@@ -1,0 +1,7 @@
+[[edge_functions]]
+  path = "/activate/*"
+  function = "activate"
+
+[[edge_functions]]
+  path = "/*"
+  function = "gate"

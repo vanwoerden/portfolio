@@ -1,0 +1,107 @@
+{
+  "projects": {
+    "sales-tax-filing": {
+      "metrics": [
+        {
+          "id": "states-launched",
+          "label": "States launched",
+          "absolute": {
+            "number": 17,
+            "string": "17 of 45"
+          },
+          "relative": {
+            "number": null,
+            "string": null
+          },
+          "visible": "absolute",
+          "visualization": "KPI",
+          "description": null,
+          "progress": {
+            "value": 17,
+            "max": 45
+          }
+        },
+        {
+          "id": "revenue",
+          "label": "Revenue",
+          "absolute": {
+            "number": 100000,
+            "string": "$100k+"
+          },
+          "relative": {
+            "number": null,
+            "string": null
+          },
+          "visible": "absolute",
+          "visualization": "KPI",
+          "description": null,
+          "series": [1.16, 4.76, 9.4, 15.8, 21.6, 27.28, 37.68, 46.16, 55.64, 68.56, 81, 97.32, 109.2]
+        },
+        {
+          "id": "time-to-file",
+          "label": "Time to file",
+          "absolute": {
+            "number": 60,
+            "string": "< 60 seconds"
+          },
+          "relative": {
+            "number": null,
+            "string": null
+          },
+          "visible": "absolute",
+          "visualization": "KPI",
+          "description": "40% spend less than 60 seconds before filing their return"
+        }
+      ]
+    },
+    "dutch-dutch-app": {
+      "metrics": [
+        {
+          "id": "sketches",
+          "label": "Sketches",
+          "absolute": {
+            "number": 100,
+            "string": "100s"
+          },
+          "relative": {
+            "number": null,
+            "string": null
+          },
+          "visible": "absolute",
+          "visualization": "KPI",
+          "description": null
+        },
+        {
+          "id": "figma-frames",
+          "label": "Figma frames",
+          "absolute": {
+            "number": 1000,
+            "string": "1000s"
+          },
+          "relative": {
+            "number": null,
+            "string": null
+          },
+          "visible": "absolute",
+          "visualization": "KPI",
+          "description": null
+        },
+        {
+          "id": "lines-of-code",
+          "label": "Lines of code",
+          "absolute": {
+            "number": 10000,
+            "string": "10000s"
+          },
+          "relative": {
+            "number": null,
+            "string": null
+          },
+          "visible": "absolute",
+          "visualization": "KPI",
+          "description": null
+        }
+      ]
+    }
+  }
+}

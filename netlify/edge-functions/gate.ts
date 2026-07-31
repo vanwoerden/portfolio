@@ -2,7 +2,7 @@
 // ./lib/access-config.ts for visitors without a valid session cookie.
 
 import { getSession } from "./lib/token.ts";
-import { matchesBlockedPath, findRedactionRule } from "./lib/access-config.ts";
+import { matchesBlockedPath, findMetricGateRule, type MetricGateRule } from "./lib/access-config.ts";
 
 declare const Netlify: { env: { get(key: string): string | undefined } };
 
@@ -33,7 +33,7 @@ function lockedPageResponse(): Response {
 <body>
   <div class="card">
     <h1>This page requires an access link</h1>
-    <p>If you were sent a link to view this page, please open that link. Otherwise, get in touch to request access.</p>
+    <p>If you were sent a link to view this page, please open that link. Otherwise, <a href="mailto:e.vanwoerden@gmail.com" style="color: inherit;">get in touch</a> to request access.</p>
   </div>
 </body>
 </html>`;
@@ -44,17 +44,37 @@ function lockedPageResponse(): Response {
 }
 
 // deno-lint-ignore no-explicit-any
-function deleteMatchingItems(obj: any, arrayPath: string[], matchField: string, matchValues: string[]) {
+function applyMetricGateRule(obj: any, rule: MetricGateRule) {
   let target = obj;
-  for (let i = 0; i < arrayPath.length - 1; i++) {
-    target = target?.[arrayPath[i]];
+  for (let i = 0; i < rule.arrayPath.length - 1; i++) {
+    target = target?.[rule.arrayPath[i]];
     if (target == null) return;
   }
-  const key = arrayPath[arrayPath.length - 1];
+  const key = rule.arrayPath[rule.arrayPath.length - 1];
   const arr = target?.[key];
   if (!Array.isArray(arr)) return;
+
+  const remove = rule.remove || [];
+  const blur = rule.blur || {};
+
   // deno-lint-ignore no-explicit-any
-  target[key] = arr.filter((item: any) => !matchValues.includes(item?.[matchField]));
+  target[key] = arr
+    .filter((item: any) => !remove.includes(item?.[rule.matchField]))
+    // deno-lint-ignore no-explicit-any
+    .map((item: any) => {
+      const fake = blur[item?.[rule.matchField]];
+      if (!fake) return item;
+      return {
+        id: item.id,
+        label: item.label,
+        absolute: fake,
+        relative: { number: null, string: null },
+        visible: "absolute",
+        visualization: item.visualization,
+        description: null,
+        blurred: true,
+      };
+    });
 }
 
 export default async (request: Request, context: { next: () => Promise<Response> }) => {
@@ -74,7 +94,7 @@ export default async (request: Request, context: { next: () => Promise<Response>
     return lockedPageResponse();
   }
 
-  const rule = findRedactionRule(url.pathname);
+  const rule = findMetricGateRule(url.pathname);
   if (rule) {
     if (session) return context.next();
 
@@ -84,7 +104,7 @@ export default async (request: Request, context: { next: () => Promise<Response>
 
     try {
       const data = await response.json();
-      deleteMatchingItems(data, rule.arrayPath, rule.matchField, rule.matchValues);
+      applyMetricGateRule(data, rule);
       return new Response(JSON.stringify(data), {
         status: response.status,
         headers: { "content-type": "application/json; charset=utf-8" },

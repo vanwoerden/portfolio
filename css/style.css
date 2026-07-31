@@ -685,6 +685,12 @@ img.teaser-image-rect {
     letter-spacing: 0;
 }
 
+.project-card__metric-value-text--blurred {
+    filter: blur(6px);
+    user-select: none;
+    cursor: default;
+}
+
 .project-card__sparkline-wrap {
     display: block;
     width: 100%;

@@ -117,7 +117,9 @@ function renderMetric(metric) {
     valueRow.className = 'project-card__metric-value';
 
     const valueText = document.createElement('span');
-    valueText.className = 'project-card__metric-value-text';
+    valueText.className = metric.blurred
+        ? 'project-card__metric-value-text project-card__metric-value-text--blurred'
+        : 'project-card__metric-value-text';
     appendMetricValueText(valueText, value);
 
     if (description) {

@@ -48,12 +48,13 @@ export default async (request: Request) => {
   const store = getStore("access-tokens");
   const key = `jti:${payload.jti}`;
 
-  const created = await store.setJSON(
-    key,
-    { usedAt: new Date().toISOString(), exp: payload.exp },
-    { onlyIfNew: true },
-  );
-  if (!created) return message("This link has already been used.", 403);
+  // @netlify/blobs@7 has no atomic "set if not exists" primitive, so this is a
+  // plain read-then-write. A narrow race on near-simultaneous first use is an
+  // accepted risk given the realistic odds for a single hiring-manager link.
+  const existing = await store.get(key, { type: "json" });
+  if (existing) return message("This link has already been used.", 403);
+
+  await store.setJSON(key, { usedAt: new Date().toISOString(), exp: payload.exp });
 
   const sessionToken = await signPayload(
     { v: 1, jti: randomJti(), exp: payload.exp, typ: "session" },

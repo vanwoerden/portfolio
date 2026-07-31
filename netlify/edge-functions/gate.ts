@@ -22,18 +22,30 @@ function lockedPageResponse(): Response {
     background: rgb(9, 8, 21);
     color: rgb(243, 242, 235);
     font-family: "Kumbh Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    text-align: center;
+    text-align: left;
     padding: 2rem;
   }
   .card { max-width: 26rem; }
   h1 { font-size: 1.4rem; margin-bottom: 0.75rem; }
   p { font-size: 1rem; line-height: 1.5; color: rgb(180, 178, 190); margin: 0; }
+  .back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(243, 242, 235, 0.3);
+    border-radius: 999px;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .back-link:hover { border-color: rgba(243, 242, 235, 0.6); }
 </style>
 </head>
 <body>
   <div class="card">
     <h1>This page requires an access link</h1>
     <p>If you were sent a link to view this page, please open that link. Otherwise, <a href="mailto:e.vanwoerden@gmail.com" style="color: inherit;">get in touch</a> to request access.</p>
+    <a class="back-link" href="/">Back to ernst.works</a>
   </div>
 </body>
 </html>`;

@@ -23,13 +23,30 @@ function message(body: string, status: number): Response {
     background: rgb(9, 8, 21);
     color: rgb(243, 242, 235);
     font-family: "Kumbh Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    text-align: center;
+    text-align: left;
     padding: 2rem;
   }
-  p { max-width: 26rem; font-size: 1rem; line-height: 1.5; }
+  .card { max-width: 26rem; }
+  p { font-size: 1rem; line-height: 1.5; margin: 0; }
+  .back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(243, 242, 235, 0.3);
+    border-radius: 999px;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .back-link:hover { border-color: rgba(243, 242, 235, 0.6); }
 </style>
 </head>
-<body><p>${body}</p></body>
+<body>
+  <div class="card">
+    <p>${body}</p>
+    <a class="back-link" href="/">Back to ernst.works</a>
+  </div>
+</body>
 </html>`;
   return new Response(html, { status, headers: { "content-type": "text/html; charset=utf-8" } });
 }
@@ -52,7 +69,12 @@ export default async (request: Request) => {
   // plain read-then-write. A narrow race on near-simultaneous first use is an
   // accepted risk given the realistic odds for a single hiring-manager link.
   const existing = await store.get(key, { type: "json" });
-  if (existing) return message("This link has already been used.", 403);
+  if (existing) {
+    return message(
+      'This link has already been used. <a href="mailto:e.vanwoerden@gmail.com" style="color: inherit;">Request a new link</a>.',
+      403,
+    );
+  }
 
   await store.setJSON(key, { usedAt: new Date().toISOString(), exp: payload.exp });
 

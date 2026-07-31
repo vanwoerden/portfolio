@@ -3,7 +3,7 @@
 // and redirects to "/" so the token never lingers in the address bar.
 
 import { verifyToken, randomJti, signPayload, serializeSessionCookie } from "./lib/token.ts";
-import { getStore } from "npm:@netlify/blobs@10.7.11";
+import { getStore } from "@netlify/blobs";
 
 declare const Netlify: { env: { get(key: string): string | undefined } };
 

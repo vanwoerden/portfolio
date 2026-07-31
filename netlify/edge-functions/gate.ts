@@ -67,12 +67,14 @@ function applyMetricGateRule(obj: any, rule: MetricGateRule) {
       return {
         id: item.id,
         label: item.label,
-        absolute: fake,
+        absolute: { number: fake.number, string: fake.string },
         relative: { number: null, string: null },
         visible: "absolute",
         visualization: item.visualization,
         description: null,
         blurred: true,
+        ...(fake.series ? { series: fake.series } : {}),
+        ...(fake.revealSuffix ? { revealSuffix: fake.revealSuffix } : {}),
       };
     });
 }

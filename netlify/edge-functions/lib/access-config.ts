@@ -5,6 +5,18 @@
 export interface FakeValue {
   number: number;
   string: string;
+  /**
+   * Optional fabricated sparkline series. When present, the client renders a
+   * (fake) sparkline next to the value instead of hiding it — a visible tease
+   * that never reflects the real trend.
+   */
+  series?: number[];
+  /**
+   * Optional trailing substring of `string` (e.g. "seconds") to leave
+   * unblurred on the client, so only the leading number/prefix is illegible.
+   * Omit to blur the entire value.
+   */
+  revealSuffix?: string;
 }
 
 export interface MetricGateRule {
@@ -18,9 +30,9 @@ export interface MetricGateRule {
   remove?: string[];
   /**
    * matchField values to KEEP (label still shown) but replace with a fabricated
-   * absolute value. The real relative/series/description are dropped so no real
-   * figures leak, and the item is flagged `blurred: true` so the client blurs
-   * the fake value visually.
+   * absolute value. The real relative/description are always dropped so no real
+   * figures leak; series is dropped unless the fake value supplies its own. The
+   * item is flagged `blurred: true` so the client blurs the fake value visually.
    */
   blur?: Record<string, FakeValue>;
 }
@@ -35,8 +47,17 @@ export const metricGateRules: MetricGateRule[] = [
     arrayPath: ["projects", "sales-tax-filing", "metrics"],
     matchField: "id",
     blur: {
-      "revenue": { number: 85000, string: "$85k+" },
-      "time-to-file": { number: 45, string: "< 45 seconds" },
+      "revenue": {
+        number: 85000,
+        string: "$85k+",
+        // Fabricated growth curve — a visible tease, never the real trend.
+        series: [3, 7, 12, 18, 25, 33, 43, 52, 62, 72, 82, 91, 100],
+      },
+      "time-to-file": {
+        number: 45,
+        string: "< 45 seconds",
+        revealSuffix: "seconds",
+      },
     },
   },
 ];

@@ -117,10 +117,24 @@ function renderMetric(metric) {
     valueRow.className = 'project-card__metric-value';
 
     const valueText = document.createElement('span');
-    valueText.className = metric.blurred
-        ? 'project-card__metric-value-text project-card__metric-value-text--blurred'
-        : 'project-card__metric-value-text';
-    appendMetricValueText(valueText, value);
+    valueText.className = 'project-card__metric-value-text';
+
+    if (metric.blurred && metric.revealSuffix && value.endsWith(metric.revealSuffix)) {
+        const suffix = metric.revealSuffix;
+        const prefix = value.slice(0, value.length - suffix.length).trimEnd();
+
+        const blurredPrefix = document.createElement('span');
+        blurredPrefix.className = 'project-card__metric-value-text--blurred';
+        appendMetricValueText(blurredPrefix, prefix);
+
+        valueText.appendChild(blurredPrefix);
+        valueText.appendChild(document.createTextNode(' ' + suffix));
+    } else {
+        appendMetricValueText(valueText, value);
+        if (metric.blurred) {
+            valueText.classList.add('project-card__metric-value-text--blurred');
+        }
+    }
 
     if (description) {
         const asterisk = document.createElement('span');

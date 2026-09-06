@@ -3,6 +3,7 @@
 
 import { getSession } from "./lib/token.ts";
 import { matchesBlockedPath, findMetricGateRule, type MetricGateRule } from "./lib/access-config.ts";
+import { isUnpublishedPrinciplePath } from "./lib/principles.ts";
 
 declare const Netlify: { env: { get(key: string): string | undefined } };
 
@@ -94,6 +95,11 @@ function applyMetricGateRule(obj: any, rule: MetricGateRule) {
 export default async (request: Request, context: { next: () => Promise<Response> }) => {
   const secret = Netlify.env.get("ACCESS_TOKEN_SECRET");
   const url = new URL(request.url);
+
+  // Draft principles: hard-redirect on deploy (keep in sync with on/principles/principles.json)
+  if (isUnpublishedPrinciplePath(url.pathname)) {
+    return Response.redirect(new URL("/", url), 302);
+  }
 
   if (!secret) {
     // Fail closed on blocked pages even if misconfigured; leave everything else alone.

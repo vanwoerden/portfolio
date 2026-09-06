@@ -1041,37 +1041,37 @@ input[type='checkbox'] {
     z-index: 1;
   }
 
-  /* Finger animation - fades in, waits 0.2s, moves left to push toggle, disappears */
+  /* Finger animation - fades in, waits briefly, moves left to push toggle, disappears */
   .toggles.useless.finger-push::before {
-    animation: fingerPush 0.3s ease forwards;
+    animation: fingerPush var(--finger-push-ms, 0.2s) ease forwards;
   }
 
   @keyframes fingerPush {
-    /* Fade in */
+    /* Fade in — inset so the push lands on the thumb */
     0% {
       opacity: 0;
-      right: 2.5em;
+      right: 1.75em;
       width: 0.4em;
     }
     5% {
       opacity: 1;
-      right: 2.5em;
+      right: 1.75em;
     }
-    /* Wait (5% to 20% of 0.6s = 0.09s) */
+    /* Wait (5% to 20%) */
     20% {
       opacity: 1;
-      right: 2.5em;
+      right: 1.75em;
     }
     /* Move left to push toggle (increase right value to move left) */
     90% {
       opacity: 1;
-      right: calc(2.5em + 0.3em); /* Move left by toggle movement distance */
+      right: calc(1.75em + 0.3em);
       /* width: 0.7em; */
     }
     /* Fade out */
     100% {
       opacity: 0;
-      right: calc(2.5em + 0.3em);
+      right: calc(1.75em + 0.3em);
       width: 1.5em;
     }
   }

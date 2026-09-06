@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../css/style-million.css">
     <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
     <link rel="stylesheet" type="text/css" href="/on/index.css">
+    <script src="/on/principles/principles-data.js"></script>
 </head>
 <body class="on-index">
     <div class="container-full flex nowrap padding-top-7">
@@ -30,10 +31,23 @@
                 <p class="large"><a href="/on/dutch-dutch-app/">Dutch &amp; Dutch control app</a></p>
                 <p class="large"><a href="/on/sales-tax-filing/">Sales tax filing</a></p>
                 <p class="large"><a href="/on/experiments/">Experiments</a></p>
-                <p class="large"><a href="/on/principles/design/">Principles</a></p>
+                <p class="large"><a id="principles-entry-link" href="/on/principles/designers-should-code/">Principles</a></p>
                 <p class="large"><a href="/on/distance-to-data/">Distance to data</a></p>
             </div>
         </div>
     </div>
+    <script>
+        (function() {
+            var published = (window.PRINCIPLES || []).filter(function(p) {
+                return p.published;
+            });
+            var link = document.getElementById('principles-entry-link');
+            if (link && published.length) {
+                link.href = '/on/principles/' + published[0].slug + '/';
+            } else if (link) {
+                link.removeAttribute('href');
+            }
+        })();
+    </script>
 </body>
 </html>

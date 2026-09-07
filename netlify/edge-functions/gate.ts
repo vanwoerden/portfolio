@@ -96,7 +96,7 @@ export default async (request: Request, context: { next: () => Promise<Response>
   const secret = Netlify.env.get("ACCESS_TOKEN_SECRET");
   const url = new URL(request.url);
 
-  // Draft principles: hard-redirect on deploy (keep in sync with on/principles/principles.json)
+  // Draft principles: hard-redirect on deploy (local serve has no edge gate)
   if (isUnpublishedPrinciplePath(url.pathname)) {
     return Response.redirect(new URL("/", url), 302);
   }

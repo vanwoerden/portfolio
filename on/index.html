@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
     <link rel="stylesheet" type="text/css" href="/on/index.css">
     <script src="/on/principles/principles-data.js"></script>
+    <script src="/on/principles/principles-drafts.js?v=2"></script>
 </head>
 <body class="on-index">
     <div class="container-full flex nowrap padding-top-7">
@@ -38,12 +39,12 @@
     </div>
     <script>
         (function() {
-            var published = (window.PRINCIPLES || []).filter(function(p) {
-                return p.published;
-            });
+            var list = window.PrinciplesDrafts
+                ? window.PrinciplesDrafts.visiblePrinciples()
+                : (window.PRINCIPLES || []).filter(function(p) { return p.published; });
             var link = document.getElementById('principles-entry-link');
-            if (link && published.length) {
-                link.href = '/on/principles/' + published[0].slug + '/';
+            if (link && list.length) {
+                link.href = '/on/principles/' + list[0].slug + '/';
             } else if (link) {
                 link.removeAttribute('href');
             }

@@ -1,0 +1,69 @@
+/* Shared Esc keycap — absolute path /on/dd-key.css so it loads from any depth.
+   Sized in px so a 16px root (style-million) matches DD's 13px-root rem key.
+   Selectors must beat body.principle-site a (underline + background: none). */
+
+.dd-close-group {
+  --dd-key-cell-w: 48.75px;
+  --dd-key-cell-h: 35.75px;
+  --dd-key-gap: 4.55px;
+  --dd-key-inset: 26px;
+  --dd-key-top: 19.5px;
+  --dd-key-surface: #252523;
+  position: fixed;
+  top: var(--dd-key-top);
+  left: var(--dd-key-inset);
+  display: flex;
+  gap: var(--dd-key-gap);
+  z-index: 10000;
+}
+
+body.principle-site a.dd-key,
+body.principle-site a.dd-key:hover,
+body.principle-site a.dd-key:visited,
+body.principle-site a.dd-key:focus,
+body.principle-site a.dd-key:active,
+a.dd-key,
+a.dd-key:hover,
+a.dd-key:visited,
+a.dd-key:focus,
+a.dd-key:active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--dd-key-cell-w);
+  min-height: var(--dd-key-cell-h);
+  padding: 9.75px 7.8px 6.5px;
+  box-sizing: border-box;
+  background: var(--dd-key-surface) !important;
+  background-image: none !important;
+  border: 1px solid rgba(255, 250, 224, 0.22);
+  border-bottom-width: 3px;
+  border-radius: 6px;
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 15.6px;
+  letter-spacing: 0.2px;
+  line-height: 1;
+  color: var(--very-light-yellow-darker, rgb(204, 199, 170)) !important;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+body.principle-site a.dd-key:hover,
+body.principle-site a.dd-key:visited,
+a.dd-key:hover,
+a.dd-key:visited {
+  color: var(--very-light-yellow-darker, rgb(204, 199, 170)) !important;
+  background: var(--dd-key-surface) !important;
+  background-image: none !important;
+  text-decoration: none !important;
+  opacity: 0.75;
+}
+
+@media (max-width: 900px) {
+  .dd-close-group {
+    display: none;
+  }
+}

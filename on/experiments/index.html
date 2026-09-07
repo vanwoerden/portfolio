@@ -41,8 +41,16 @@
         .timeline-link:active,
         .timeline-link:focus,
         .timeline-link:focus-visible {
-            color: var(--very-light-yellow);
+            color: var(--green);
             background: none;
+        }
+        .timeline-title .timeline-link {
+            display: inline;
+            margin-top: 0;
+            margin-left: 0.55em;
+            font-size: var(--fontsize-body-2);
+            vertical-align: baseline;
+            white-space: nowrap;
         }
         .timeline-link::after { background: var(--link-underline-color, #5452B7); }
         .dd-breadcrumb a,
@@ -77,6 +85,32 @@
                 transparent 6px,
                 transparent 10px
             );
+        }
+
+        /* Left-align breadcrumb + content (override .flex 6rem column gap) */
+        .container-full.flex {
+            gap: 0;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        .nav-container {
+            width: auto;
+            min-width: 9rem;
+            flex: 0 0 auto;
+            padding-left: 0;
+            padding-right: 2rem;
+        }
+        .container-85 {
+            flex: 1 1 auto;
+            max-width: none;
+            margin: 0;
+            padding-left: 0;
+        }
+        .dd-breadcrumb,
+        .intro,
+        .timeline-container {
+            margin-left: 0;
+            text-align: left;
         }
 
         @view-transition { navigation: auto; types: forward, backward; }
@@ -185,7 +219,7 @@
                     </div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h2 class="timeline-title">Project timelines that don't suck</h2>
+                        <h2 class="timeline-title">Project timelines that don't suck <a href="https://vanwoerden.github.io/timelines/" target="_blank" class="timeline-link">Make a timeline →</a></h2>
                         <div class="timeline-meta">
                             <span class="timeline-tag">Cursor.ai</span>
                             <span class="timeline-tag">html</span>
@@ -198,7 +232,6 @@
                            onclick="sessionStorage.setItem('nav-direction','forward')">
                             <img src="/on/experiments/timelines-preview.jpg" alt="Timelines app preview" class="tpc-screenshot">
                         </a>
-                        <a href="https://vanwoerden.github.io/timelines/" target="_blank" class="timeline-link">Make a stupid Gantt chart →</a>
                     </div>
                 </article>
 
@@ -279,7 +312,7 @@
                     </div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h2 class="timeline-title">AQI.fyi: Beijing air quality visualized</h2>
+                        <h2 class="timeline-title">AQI.fyi: Beijing air quality visualized <a href="https://aqi.fyi/beijing" target="_blank" class="timeline-link">AQI.fyi →</a></h2>
                         <div class="timeline-meta">
                             <span class="timeline-tag">html</span>
                             <span class="timeline-tag">css</span>
@@ -289,7 +322,6 @@
                         <a href="https://aqi.fyi/beijing" target="_blank" class="timeline-preview-card">
                             <img src="/on/experiments/aqi-preview.jpg" alt="AQI.fyi Beijing heatmap visualization" class="tpc-screenshot">
                         </a>
-                        <a href="https://aqi.fyi/beijing" target="_blank" class="timeline-link">AQI.fyi →</a>
                     </div>
                 </article>
             </div>

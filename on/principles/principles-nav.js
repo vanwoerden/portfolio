@@ -1,15 +1,19 @@
 (function() {
     // Keep in sync with on/principles/principles.json (loaded via principles-data.js)
-    var PRINCIPLES = window.PRINCIPLES || [];
     var BASE = '/on/principles/';
-
-    function publishedOrder() {
-        return PRINCIPLES.filter(function(p) {
+    function navOrder() {
+        if (window.PrinciplesDrafts) {
+            return window.PrinciplesDrafts.visiblePrinciples().map(function(p) {
+                return p.slug;
+            });
+        }
+        return (window.PRINCIPLES || []).filter(function(p) {
             return p.published;
         }).map(function(p) {
             return p.slug;
         });
     }
+
 
     function currentSlug() {
         var match = window.location.pathname.match(/\/principles\/([^/]+)/);
@@ -33,7 +37,7 @@
     }
 
     function rewriteNavButtons() {
-        var order = publishedOrder();
+        var order = navOrder();
         var buttons = document.querySelectorAll('.nav-button[href]');
         if (buttons.length < 2 || !order.length) {
             return;
@@ -45,7 +49,7 @@
         var next;
 
         if (index === -1) {
-            // Draft page (local): point at first/last published neighbors
+            // Outside active list: point at ends of the list
             prev = order[order.length - 1];
             next = order[0];
         } else {
@@ -69,7 +73,7 @@
             return;
         }
 
-        var order = publishedOrder();
+        var order = navOrder();
         var slug = currentSlug();
         if (!slug || !order.length) {
             return;
@@ -97,7 +101,7 @@
 
     document.querySelectorAll('.nav-button[href]').forEach(function(link) {
         link.addEventListener('click', function() {
-            var order = publishedOrder();
+            var order = navOrder();
             var slug = currentSlug();
             if (!slug || !order.length) {
                 return;
@@ -131,44 +135,147 @@
         return px;
     }
 
+    function titleFirstLineMidY() {
+        var title = document.querySelector('h1.principle');
+        if (!title) {
+            return null;
+        }
+        var rect = title.getBoundingClientRect();
+        var cs = getComputedStyle(title);
+        var lineHeight = parseFloat(cs.lineHeight);
+        if (!lineHeight || isNaN(lineHeight)) {
+            var fontSize = parseFloat(cs.fontSize) || 16;
+            lineHeight = fontSize * 1.1;
+        }
+        return rect.top + lineHeight / 2;
+    }
+
+    function clearNavPositionVars(nav) {
+        if (!nav) {
+            return;
+        }
+        nav.style.removeProperty('--principle-nav-title-mid');
+        nav.style.removeProperty('--principle-nav-right-x');
+    }
+
+    function syncNavSidePositions() {
+        var nav = document.querySelector('.nav-buttons');
+        if (!nav || document.body.classList.contains('principle-nav-bottom')) {
+            clearNavPositionVars(nav);
+            return;
+        }
+
+        var mid = titleFirstLineMidY();
+        if (mid == null) {
+            nav.style.removeProperty('--principle-nav-title-mid');
+        } else {
+            nav.style.setProperty('--principle-nav-title-mid', mid + 'px');
+        }
+
+        var page = document.querySelector('.principle-site__page');
+        var rightBtn = document.querySelector('.nav-buttons .nav-button:last-child');
+        if (!page || !rightBtn) {
+            nav.style.removeProperty('--principle-nav-right-x');
+            return;
+        }
+
+        var styles = getComputedStyle(document.documentElement);
+        var gap = cssLengthToPx(styles.getPropertyValue('--principle-nav-clearance')) || 24;
+        var pageRight = page.getBoundingClientRect().right;
+        nav.style.setProperty('--principle-nav-right-x', (pageRight + gap) + 'px');
+    }
+
     function syncNavLayout() {
         if (!document.body.classList.contains('principle-site')) {
             return;
         }
 
         var styles = getComputedStyle(document.documentElement);
-        var contentPx = cssLengthToPx(
-            getComputedStyle(document.body).getPropertyValue('--principle-main-width')
-            || styles.getPropertyValue('--principle-main-width')
-        );
         var edgePx = cssLengthToPx(styles.getPropertyValue('--principle-nav-edge'));
         var clearancePx = cssLengthToPx(styles.getPropertyValue('--principle-nav-clearance'));
-        var sideReservePx = cssLengthToPx(styles.getPropertyValue('--principle-nav-side-reserve'));
 
         // Measure in side-nav mode so footprints are accurate
         document.body.classList.remove('principle-nav-bottom');
+        clearNavPositionVars(document.querySelector('.nav-buttons'));
 
         var leftBtn = document.querySelector('.nav-buttons .nav-button');
+        var rightBtn = document.querySelector('.nav-buttons .nav-button:last-child');
         var page = document.querySelector('.principle-site__page');
-        if (leftBtn) {
-            sideReservePx = edgePx + leftBtn.getBoundingClientRect().width + clearancePx;
+        var collision = false;
+
+        if (leftBtn && page) {
+            var leftRight = leftBtn.getBoundingClientRect().right;
+            var contentLeft = page.getBoundingClientRect().left;
+            if (contentLeft < leftRight + clearancePx) {
+                collision = true;
+            }
         }
 
-        var collision = window.innerWidth < contentPx + sideReservePx * 2;
-
-        // True overlap only (reserve math already includes clearance)
-        if (!collision && leftBtn && page) {
-            var arrowRight = leftBtn.getBoundingClientRect().right;
-            var contentLeft = page.getBoundingClientRect().left;
-            if (contentLeft < arrowRight) {
+        // Right arrow sits beside the column — need room for it past the column
+        if (!collision && page && rightBtn) {
+            var pageRight = page.getBoundingClientRect().right;
+            var arrowW = rightBtn.getBoundingClientRect().width;
+            if (pageRight + clearancePx + arrowW + edgePx > window.innerWidth) {
                 collision = true;
             }
         }
 
         document.body.classList.toggle('principle-nav-bottom', collision);
+        syncNavSidePositions();
     }
 
-    rewriteNavButtons();
-    syncNavLayout();
+    function refreshNav() {
+        rewriteNavButtons();
+        syncNavLayout();
+    }
+
+    var navRevealScheduled = false;
+
+    function prefersReducedMotion() {
+        return window.matchMedia
+            && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function revealNavArrows() {
+        document.body.classList.add('principle-nav-visible');
+    }
+
+    function scheduleNavReveal(viewTransition) {
+        if (navRevealScheduled) {
+            return;
+        }
+        navRevealScheduled = true;
+        if (prefersReducedMotion()) {
+            revealNavArrows();
+            return;
+        }
+        document.body.classList.remove('principle-nav-visible');
+        if (viewTransition && viewTransition.finished) {
+            viewTransition.finished.then(revealNavArrows).catch(revealNavArrows);
+            return;
+        }
+        // Cold load / no cross-doc transition: short beat, then fade in
+        window.setTimeout(revealNavArrows, 120);
+    }
+
+    refreshNav();
     window.addEventListener('resize', syncNavLayout);
+    window.addEventListener('scroll', syncNavSidePositions, { passive: true });
+    window.addEventListener('pageshow', refreshNav);
+
+    window.addEventListener('pagereveal', function(event) {
+        scheduleNavReveal(event.viewTransition || null);
+    });
+
+    // Fallback when pagereveal is unsupported or already fired
+    if (!('onpagereveal' in window)) {
+        scheduleNavReveal(null);
+    } else {
+        window.setTimeout(function() {
+            if (!document.body.classList.contains('principle-nav-visible')) {
+                navRevealScheduled = false;
+                scheduleNavReveal(null);
+            }
+        }, 700);
+    }
 })();

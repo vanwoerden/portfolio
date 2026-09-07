@@ -57,10 +57,18 @@
     </script>
     <script type="module" src="/js/project-metrics.js"></script>
     <script src="/on/principles/principles-data.js"></script>
+    <script src="/on/principles/principles-drafts.js?v=2"></script>
     <script>
-        // Toggle footer visibility with 'P' key
+        // Toggle principles marquee with P (local: all principles; deploy: published only)
         document.addEventListener('keydown', (event) => {
             if (event.key === 'p' || event.key === 'P') {
+                if (event.metaKey || event.ctrlKey || event.altKey) {
+                    return;
+                }
+                var tag = (event.target && event.target.tagName) || '';
+                if (tag === 'INPUT' || tag === 'TEXTAREA' || (event.target && event.target.isContentEditable)) {
+                    return;
+                }
                 const footerWrapper = document.querySelector('.footer-marquee-wrapper');
                 if (footerWrapper) {
                     footerWrapper.classList.toggle('footer-visible');
@@ -227,31 +235,45 @@
     </footer>
     <script>
         (function() {
-            var track = document.getElementById('principles-marquee-track');
-            var principles = (window.PRINCIPLES || []).filter(function(p) {
-                return p.published;
-            });
-            if (!track || !principles.length) {
-                return;
-            }
-
             function linkFor(principle) {
                 var a = document.createElement('a');
                 a.href = '/on/principles/' + principle.slug + '/';
                 a.className = 'footer-marquee-link';
                 a.textContent = principle.title;
+                if (window.PrinciplesDrafts && window.PrinciplesDrafts.isDraftPrinciple(principle)) {
+                    var badge = document.createElement('span');
+                    badge.className = 'footer-marquee-draft';
+                    badge.textContent = 'Draft';
+                    a.appendChild(document.createTextNode(' '));
+                    a.appendChild(badge);
+                }
                 a.addEventListener('click', function() {
                     sessionStorage.setItem('nav-direction', 'forward');
                 });
                 return a;
             }
 
-            // Two copies for a seamless loop
-            [0, 1].forEach(function() {
-                principles.forEach(function(principle) {
-                    track.appendChild(linkFor(principle));
+            window.renderPrinciplesMarquee = function() {
+                var track = document.getElementById('principles-marquee-track');
+                if (!track) {
+                    return;
+                }
+                var principles = window.PrinciplesDrafts
+                    ? window.PrinciplesDrafts.visiblePrinciples()
+                    : (window.PRINCIPLES || []).filter(function(p) { return p.published; });
+                track.innerHTML = '';
+                if (!principles.length) {
+                    return;
+                }
+                // Two copies for a seamless loop
+                [0, 1].forEach(function() {
+                    principles.forEach(function(principle) {
+                        track.appendChild(linkFor(principle));
+                    });
                 });
-            });
+            };
+
+            window.renderPrinciplesMarquee();
         })();
     </script>
 </body>

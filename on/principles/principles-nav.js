@@ -26,7 +26,13 @@
 
     function navigateTo(slug, direction) {
         sessionStorage.setItem('nav-direction', direction);
-        window.location.href = principleUrl(slug);
+        // Blank content first so the outgoing VT snapshot has no morphing text
+        document.documentElement.classList.add('vt-hide-content');
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                window.location.href = principleUrl(slug);
+            });
+        });
     }
 
     function neighborSlug(order, index, delta) {
@@ -100,7 +106,7 @@
     });
 
     document.querySelectorAll('.nav-button[href]').forEach(function(link) {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(event) {
             var order = navOrder();
             var slug = currentSlug();
             if (!slug || !order.length) {
@@ -112,7 +118,14 @@
                 ? order[order.length - 1]
                 : neighborSlug(order, index, -1);
             var prev = prevSlug ? principleUrl(prevSlug) : null;
-            sessionStorage.setItem('nav-direction', target === prev ? 'backward' : 'forward');
+            var direction = target === prev ? 'backward' : 'forward';
+            var match = target && target.match(/\/principles\/([^/]+)/);
+            if (!match) {
+                sessionStorage.setItem('nav-direction', direction);
+                return;
+            }
+            event.preventDefault();
+            navigateTo(match[1], direction);
         });
     });
 

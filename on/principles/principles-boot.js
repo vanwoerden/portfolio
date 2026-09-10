@@ -23,15 +23,50 @@
         }
     }
 
-    // Incoming page: match home ↔ Dutch & Dutch vertical language for list ↔ detail
-    applyDirection(sessionStorage.getItem('nav-direction'));
+    function isHorizontalPrincipleNav(direction) {
+        return direction === 'forward' || direction === 'backward';
+    }
+
+    var direction = sessionStorage.getItem('nav-direction');
+    applyDirection(direction);
+
+    // Principle ↔ principle: keep incoming title/body invisible until the slide finishes
+    if (isHorizontalPrincipleNav(direction)) {
+        root.classList.add('vt-hide-content');
+    }
+
     sessionStorage.removeItem('nav-direction');
 
-    // Outgoing page: collapse named layers into root before the snapshot is taken
+    window.addEventListener('pagereveal', function(event) {
+        if (!root.classList.contains('vt-hide-content')) {
+            return;
+        }
+        function reveal() {
+            root.classList.remove('vt-hide-content');
+        }
+        if (event.viewTransition && event.viewTransition.finished) {
+            event.viewTransition.finished.then(reveal).catch(reveal);
+        } else {
+            reveal();
+        }
+    });
+
+    // Fallback if pagereveal never fires
+    if (!('onpagereveal' in window) && root.classList.contains('vt-hide-content')) {
+        window.setTimeout(function() {
+            root.classList.remove('vt-hide-content');
+        }, 100);
+    }
+
+    // Outgoing page: keep direction in sync; content is already blanked by principles-nav
     window.addEventListener('pageswap', function() {
-        var direction = sessionStorage.getItem('nav-direction');
-        if (direction === 'up' || direction === 'down') {
-            applyDirection(direction);
+        var nextDirection = sessionStorage.getItem('nav-direction');
+        if (!nextDirection) {
+            return;
+        }
+        applyDirection(nextDirection);
+        if (isHorizontalPrincipleNav(nextDirection)) {
+            root.classList.add('vt-hide-content');
         }
     });
 })();

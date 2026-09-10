@@ -444,6 +444,17 @@ body.principle-site a.dd-key:visited {
   animation-fill-mode: both;
 }
 
+/*
+  Horizontal principle ↔ principle choreography:
+  1) Outgoing title/body blanked before navigate (vt-hide-content)
+  2) Incoming title/body stays blank through the slide
+  3) Content reappears after viewTransition.finished
+*/
+html.vt-hide-content .principle-page {
+  opacity: 0;
+  transition: none;
+}
+
 /* List ↔ detail: full-page root push (same as home ↔ Dutch & Dutch).
    Collapse named layers back into root so background + content move as one sheet. */
 html.vt-vertical .principle-site__header,

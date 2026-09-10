@@ -38,6 +38,11 @@ footer {
     display: block;
 }
 
+/* Clear the fixed marquee so home content isn’t covered */
+body:has(.footer-marquee-wrapper.footer-visible) .container-full {
+    padding-bottom: 5rem;
+}
+
 .footer-marquee-track {
     display: flex;
     flex-direction: row;

@@ -422,6 +422,12 @@ body.principle-site a.dd-key:visited {
   animation: none;
 }
 
+/* Don't morph box size between pages (e.g. short designers-should-code ↔ taller pages) */
+::view-transition-group(principle-content),
+::view-transition-group(principle-breadcrumb) {
+  animation: none;
+}
+
 ::view-transition-new(principle-content),
 ::view-transition-new(principle-breadcrumb) {
   animation-duration: 0.22s;

@@ -33,7 +33,6 @@
         }
 
         /* Keep title + body top-aligned (don't vertically center like other principles) */
-        .principle-page:has(.principle-content.content-hidden),
         .principle-page.content-revealed {
             min-height: 0;
             display: block;
@@ -224,15 +223,30 @@
             });
         }
 
-        function revealContent() {
-            var content = document.querySelector('.principle-content');
+        function mountPrincipleBody() {
+            var page = document.querySelector('.principle-page');
+            var tpl = document.getElementById('principle-body-template');
+            if (!page || !tpl) {
+                return null;
+            }
+            if (document.querySelector('.principle-content')) {
+                return document.querySelector('.principle-content');
+            }
+            var content = tpl.content.querySelector('.principle-content');
+            if (!content) {
+                return null;
+            }
+            var mounted = content.cloneNode(true);
+            page.appendChild(mounted);
+            page.classList.add('content-revealed');
+            prepareAllPieces();
+            return mounted;
+        }
 
+        function revealContent() {
             if (!contentShown) {
                 contentShown = true;
-                if (content) {
-                    content.style.display = 'block';
-                    content.classList.remove('content-hidden');
-                }
+                mountPrincipleBody();
                 showActivePiece(false);
                 return;
             }
@@ -292,8 +306,6 @@
 
             bumpToggleOff(toggle);
         }
-
-        document.addEventListener('DOMContentLoaded', prepareAllPieces);
     </script>
 </head>
 <body class="principle-site">
@@ -318,7 +330,10 @@
             <input type="checkbox" name="designers-should-code" id="designers-should-code" onclick="toggleDesignersCode()">
             <label for="designers-should-code"></label>
         </h1>
-        <div class="principle-content content-hidden" style="display: none;">
+        </div>
+    </div>
+    <template id="principle-body-template">
+        <div class="principle-content">
             <div class="principle-pieces">
                 <div class="principle-piece" data-piece="0">
                     <p class="money-quote">
@@ -350,8 +365,7 @@
                 </div>
             </div>
         </div>
-        </div>
-    </div>
+    </template>
     <div class="nav-buttons">
         <a href="/on/principles/before-and-after/" class="nav-button">➠</a>
         <a href="/on/principles/design/" class="nav-button">➠</a>

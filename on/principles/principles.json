@@ -2,12 +2,12 @@
   {
     "slug": "design",
     "title": "Design brings ideas to life",
-    "published": false
+    "published": true
   },
   {
     "slug": "focus",
     "title": "A great team requires focus",
-    "published": false
+    "published": true
   },
   {
     "slug": "slack-variety-cadence",
@@ -22,17 +22,17 @@
   {
     "slug": "starting-out-informed",
     "title": "It means starting out informed",
-    "published": false
+    "published": true
   },
   {
     "slug": "time-vs-scope",
     "title": "Being flexible about time and scope",
-    "published": false
+    "published": true
   },
   {
     "slug": "quality",
     "title": "Keeping quality constant",
-    "published": false
+    "published": true
   },
   {
     "slug": "before-and-after",

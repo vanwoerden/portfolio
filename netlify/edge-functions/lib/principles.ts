@@ -1,4 +1,5 @@
 // Keep in sync with on/principles/principles.json
+// and on/principles/principles-data.js (slug / title / published).
 
 export interface PrincipleEntry {
   slug: string;
@@ -10,12 +11,12 @@ export const PRINCIPLES: PrincipleEntry[] = [
   {
     slug: "design",
     title: "Design brings ideas to life",
-    published: false,
+    published: true,
   },
   {
     slug: "focus",
     title: "A great team requires focus",
-    published: false,
+    published: true,
   },
   {
     slug: "slack-variety-cadence",
@@ -30,17 +31,17 @@ export const PRINCIPLES: PrincipleEntry[] = [
   {
     slug: "starting-out-informed",
     title: "It means starting out informed",
-    published: false,
+    published: true,
   },
   {
     slug: "time-vs-scope",
     title: "Being flexible about time and scope",
-    published: false,
+    published: true,
   },
   {
     slug: "quality",
     title: "Keeping quality constant",
-    published: false,
+    published: true,
   },
   {
     slug: "before-and-after",

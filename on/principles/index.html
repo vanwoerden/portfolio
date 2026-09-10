@@ -69,28 +69,6 @@
         body.principle-site a.principles-index__link .attention {
             color: rgb(79, 246, 140);
         }
-
-        /* Temporary: highlights-only variation */
-        .principles-index-alt {
-            margin-top: 5rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(255, 250, 224, 0.2);
-        }
-
-        .principles-index-alt__label {
-            margin: 0 0 1.5rem;
-            font-family: "Kumbh Sans", sans-serif;
-            font-size: 0.85rem;
-            color: var(--very-light-yellow-darker);
-        }
-
-        body.principle-site a.principles-index__link--highlights-only,
-        body.principle-site a.principles-index__link--highlights-only:hover,
-        body.principle-site a.principles-index__link--highlights-only:visited,
-        body.principle-site a.principles-index__link--highlights-only:focus,
-        body.principle-site a.principles-index__link--highlights-only:focus-visible {
-            color: rgb(79, 246, 140);
-        }
     </style>
 </head>
 <body class="principle-site">
@@ -109,17 +87,12 @@
         </header>
         <div class="principle-page">
             <ul class="principles-index" id="principles-index"></ul>
-            <div class="principles-index-alt">
-                <p class="principles-index-alt__label">Temporary — highlights only</p>
-                <ul class="principles-index" id="principles-index-highlights"></ul>
-            </div>
         </div>
     </div>
     <script>
         (function () {
             var list = document.getElementById('principles-index');
-            var highlightsList = document.getElementById('principles-index-highlights');
-            if (!list || !highlightsList) return;
+            if (!list) return;
 
             // List content comes only from principles-data.js → window.PRINCIPLES
             if (!window.PRINCIPLES || !window.PRINCIPLES.length) {
@@ -131,36 +104,18 @@
                 ? window.PrinciplesDrafts.visiblePrinciples()
                 : window.PRINCIPLES.filter(function (p) { return p.published; });
 
-            function attentionText(principle) {
-                var html = principle.titleHtml || '';
-                var matches = html.match(/class="attention"[^>]*>([^<]+)/g) || [];
-                return matches.map(function (chunk) {
-                    return chunk.replace(/^class="attention"[^>]*>/, '').trim();
-                }).filter(Boolean).join(' ');
-            }
-
-            function appendLink(target, principle, innerHTML, highlightsOnly) {
+            principles.forEach(function (principle) {
                 var item = document.createElement('li');
                 var link = document.createElement('a');
-                link.className = 'principles-index__link' + (highlightsOnly ? ' principles-index__link--highlights-only' : '');
+                link.className = 'principles-index__link';
                 link.href = '/on/principles/' + principle.slug + '/';
-                link.innerHTML = innerHTML;
+                link.innerHTML = principle.titleHtml || principle.title;
                 link.setAttribute('aria-label', principle.title);
                 link.onclick = function () {
                     sessionStorage.setItem('nav-direction', 'down');
                 };
                 item.appendChild(link);
-                target.appendChild(item);
-            }
-
-            principles.forEach(function (principle) {
-                appendLink(list, principle, principle.titleHtml || principle.title, false);
-                appendLink(
-                    highlightsList,
-                    principle,
-                    '<span class="attention">' + attentionText(principle) + '</span>',
-                    true
-                );
+                list.appendChild(item);
             });
         })();
     </script>

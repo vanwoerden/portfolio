@@ -43,9 +43,7 @@
             <span class="nermal">Keeping </span><span class="attention">quality</span><span class="nermal"> constant.</span>
         </h1>
         <div class="principle-content">
-            <p class="money-quote">
-                Quality is non-negotiable. Quality is non-negotiable. Quality is non-negotiable. Quality is non-negotiable. Quality is non-negotiable.
-            </p>
+            <ul class="quality-litany" id="quality-litany" aria-label="Quality is non-negotiable"></ul>
         </div>
         </div>
     </div>
@@ -53,5 +51,35 @@
         <a href="/on/principles/time-vs-scope/" class="nav-button">➠</a>
         <a href="/on/principles/before-and-after/" class="nav-button">➠</a>
     </div>
+    <style>
+        .quality-litany {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35em;
+            max-width: 660px;
+            font-size: 1.3rem;
+            line-height: 140%;
+            font-weight: 400;
+            color: var(--very-light-yellow-darker);
+            opacity: 0.9;
+        }
+    </style>
+    <script>
+        (function () {
+            var list = document.getElementById('quality-litany');
+            if (!list) return;
+            var frag = document.createDocumentFragment();
+            // 5 on the page before + 493 more
+            for (var i = 0; i < 498; i++) {
+                var item = document.createElement('li');
+                item.textContent = 'Quality is non-negotiable.';
+                frag.appendChild(item);
+            }
+            list.appendChild(frag);
+        })();
+    </script>
 </body>
 </html>

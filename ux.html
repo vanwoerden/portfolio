@@ -44,9 +44,49 @@
 <body>
 <div class="menu">
     <ul>
-        <li><a href="index.html" target="_self">&#8592;</a></li>
+        <li><a id="ux-back" href="/" target="_self" aria-label="Back">&#8592;</a></li>
     </ul>
 </div>
+<script>
+    (function () {
+        var back = document.getElementById('ux-back');
+        if (!back) return;
+
+        var STORAGE_KEY = 'ux-return';
+
+        function sameOriginPath(urlString) {
+            if (!urlString) return null;
+            try {
+                var url = new URL(urlString, location.origin);
+                if (url.origin !== location.origin) return null;
+                var path = url.pathname.replace(/\/+$/, '') || '/';
+                if (path === '/ux.html' || path.endsWith('/ux.html')) return null;
+                return url.pathname + url.search + url.hash;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        var returnTo = sameOriginPath(sessionStorage.getItem(STORAGE_KEY))
+            || sameOriginPath(document.referrer);
+
+        back.href = returnTo || '/';
+
+        back.addEventListener('click', function (event) {
+            event.preventDefault();
+            sessionStorage.removeItem(STORAGE_KEY);
+            if (returnTo) {
+                location.href = returnTo;
+                return;
+            }
+            if (window.history.length > 1) {
+                window.history.back();
+                return;
+            }
+            location.href = '/';
+        });
+    })();
+</script>
     <div class="video-holder">
 	    <article>
 		    <video id="what-is-ux" width="861" height="484" poster="img/what-is-ux.png" loop>

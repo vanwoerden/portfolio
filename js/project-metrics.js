@@ -99,6 +99,10 @@ function renderMetric(metric) {
     const value = formatMetricValue(metric);
     if (!value) return null;
 
+    // Revenue amount stays blurred even with a valid access token; label + sparkline still show.
+    const forceBlur = metric.id === 'revenue';
+    const blurred = Boolean(metric.blurred || forceBlur);
+
     const description = typeof metric.description === 'string' && metric.description.trim()
         ? metric.description.trim()
         : null;
@@ -119,7 +123,7 @@ function renderMetric(metric) {
     const valueText = document.createElement('span');
     valueText.className = 'project-card__metric-value-text';
 
-    if (metric.blurred && metric.revealSuffix && value.endsWith(metric.revealSuffix)) {
+    if (blurred && metric.revealSuffix && value.endsWith(metric.revealSuffix)) {
         const suffix = metric.revealSuffix;
         const prefix = value.slice(0, value.length - suffix.length).trimEnd();
 
@@ -131,7 +135,7 @@ function renderMetric(metric) {
         valueText.appendChild(document.createTextNode(' ' + suffix));
     } else {
         appendMetricValueText(valueText, value);
-        if (metric.blurred) {
+        if (blurred) {
             valueText.classList.add('project-card__metric-value-text--blurred');
         }
     }

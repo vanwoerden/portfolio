@@ -12,8 +12,8 @@
     <title>It means starting out informed - The Works of Ernst</title>
     <script src="/on/principles/principles-boot.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/fonts.css">
-    <link rel="stylesheet" type="text/css" href="/css/style-million.css">
-    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="/css/style-million.css?v=bml7">
+    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css?v=3">
     <link rel="stylesheet" type="text/css" href="/on/principles/shared.css">
     <link rel="stylesheet" type="text/css" href="/on/dd-key.css">
     <script src="/on/principles/principles-data.js"></script>
@@ -23,35 +23,43 @@
     <meta charset="utf-8">
     <script>
         function rotateBML() {
-            console.log("rotateBML");
-            document.getElementById("bml-container").classList.add("rotated");
+            const container = document.getElementById("bml-container");
+            if (container.classList.contains("rotated")) return;
+            container.classList.add("rotated");
             document.getElementById("build").classList.add("rotated-element");
             document.getElementById("measure").classList.add("rotated-element");
             document.getElementById("learn").classList.add("rotated-element");
             document.getElementById("learn").innerHTML = "Learn first";
             document.getElementById("build").innerHTML = "Then build";
             document.getElementById("measure").innerHTML = "Then measure";
-            document.getElementById("reset").innerHTML = "(reset)";
+            document.getElementById("bml-action").classList.remove("fake-link");
+            const reset = document.getElementById("reset");
+            reset.innerHTML = "(reset)";
+            reset.classList.add("fake-link");
             document.getElementById("bml-title").innerHTML = "Learn, build, measure.";
-            rotated = true;
         }
 
         function rotateBMLBack() {
-            document.getElementById("bml-container").classList.remove("rotated");
+            const container = document.getElementById("bml-container");
+            if (!container.classList.contains("rotated")) return;
+            container.classList.remove("rotated");
             document.getElementById("build").classList.remove("rotated-element");
             document.getElementById("measure").classList.remove("rotated-element");
             document.getElementById("learn").classList.remove("rotated-element");
             document.getElementById("learn").innerHTML = "Learn";
             document.getElementById("build").innerHTML = "Build";
             document.getElementById("measure").innerHTML = "Measure";
-            document.getElementById("reset").innerHTML = "";
+            document.getElementById("bml-action").classList.add("fake-link");
+            const reset = document.getElementById("reset");
+            reset.innerHTML = "";
+            reset.classList.remove("fake-link");
             document.getElementById("bml-title").innerHTML = "Build, measure, learn?";
         }
     </script>
 </head>
 <body class="principle-site">
     <div class="dd-close-group">
-        <a class="dd-key" href="/" aria-label="Close" onclick="sessionStorage.setItem('nav-direction','backward')">Esc</a>
+        <a class="dd-key" href="/on/principles/" aria-label="Close" onclick="sessionStorage.setItem('nav-direction','up')">Esc</a>
     </div>
     <div class="principle-site__page">
         <header class="principle-site__header">
@@ -59,6 +67,8 @@
                 <a href="/" onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>
                 <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
                 <a href="/on/">on</a>
+                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                <a href="/on/principles/" onclick="sessionStorage.setItem('nav-direction','up')">principles</a>
                 <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
                 <span class="dd-breadcrumb__current" aria-current="page">Starting out informed</span>
             </nav>
@@ -73,7 +83,7 @@
             </h2>
             <p class="money-quote">
                 Don't start out building. 
-                <span class="fake-link" onclick="rotateBML()">Start out informed.</span> 
+                <span class="fake-link" id="bml-action" onclick="rotateBML()">Start out informed.</span>
                 <span class="reset" id="reset" onclick="rotateBMLBack()"></span>
             </p>
             <div class="" id="bml-container">

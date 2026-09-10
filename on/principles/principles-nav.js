@@ -276,6 +276,6 @@
                 navRevealScheduled = false;
                 scheduleNavReveal(null);
             }
-        }, 700);
+        }, 350);
     }
 })();

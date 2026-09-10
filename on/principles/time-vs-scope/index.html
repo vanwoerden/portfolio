@@ -13,7 +13,7 @@
     <script src="/on/principles/principles-boot.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/fonts.css">
     <link rel="stylesheet" type="text/css" href="/css/style-million.css">
-    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css?v=3">
     <link rel="stylesheet" type="text/css" href="/on/principles/shared.css">
     <link rel="stylesheet" type="text/css" href="/on/dd-key.css">
     <script src="/on/principles/principles-data.js"></script>
@@ -21,27 +21,137 @@
     <script src="/on/principles/principles-nav.js?v=6" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <script>
-        function fixedTime(){
-            console.log("fixedTime");
-            var timeToggle = document.getElementById("time");
-            var scopeToggle = document.getElementById("scope");
-
-            scopeToggle.checked = false;
+    <style>
+        /* Match designers-should-code switch pixel size; body labels left-aligned */
+        .tvs-toggles {
+            /* Title toggle is 0.6/1.3/0.65/0.7em at ~51.2px → these rem values */
+            --tvs-switch-width: 4.16rem;
+            --tvs-switch-height: 1.92rem;
+            --tvs-thumb: 2.08rem;
+            --tvs-movement: 2.24rem;
+            --tvs-track-border: 0.25rem;
+            --tvs-thumb-border: 0.1875rem;
+            margin: 0;
+            padding: 0;
+            border: none;
+            max-width: none;
         }
 
-        function fixedScope(){
-            console.log("fixedScope");
-            var timeToggle = document.getElementById("time");
-            var scopeToggle = document.getElementById("scope");
+        .principle-content:has(.tvs-toggles) {
+            margin-top: 3.25rem;
+        }
 
-            timeToggle.checked = false;
+        form.useless:has(.tvs-toggles) {
+            padding: 0;
+            max-width: none;
+            display: block;
+        }
+
+        fieldset.tvs-toggles.toggles.useless {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
+        }
+
+        fieldset.tvs-toggles.toggles.useless > div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            padding: 0;
+        }
+
+        fieldset.tvs-toggles.toggles.useless > div:first-of-type {
+            margin-top: 0;
+        }
+
+        fieldset.tvs-toggles.toggles.useless > div:last-of-type {
+            margin-bottom: 0;
+        }
+
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"] + label {
+            display: inline-flex;
+            align-items: center;
+            width: auto;
+            max-width: none;
+            box-sizing: border-box;
+            min-height: var(--tvs-thumb);
+            height: var(--tvs-thumb);
+            margin: 0;
+            padding: 0 0 0 calc(var(--tvs-switch-width) + 1.35rem);
+            font-size: 1.75rem;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--very-light-yellow-darker);
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"]:hover + label,
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"]:focus + label,
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"]:checked + label {
+            color: var(--very-light-yellow-darker);
+        }
+
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"]:hover + label::before,
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"]:focus + label::before {
+            box-shadow: none;
+        }
+
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"]:hover + label::after,
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"]:focus + label::after {
+            background-image: none;
+        }
+
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"] + label::before,
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"] + label::after {
+            left: 0;
+            right: auto;
+            /* Sit slightly above geometric mid so label text reads centered */
+            top: calc(50% - 0.12em);
+            margin-top: 0;
+            transform: translateY(-50%);
+            transition: left 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+        }
+
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"] + label::before {
+            width: var(--tvs-switch-width);
+            height: var(--tvs-switch-height);
+            border-width: var(--tvs-track-border);
+            border-radius: calc(var(--tvs-switch-height) * 0.8);
+        }
+
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"] + label::after {
+            width: var(--tvs-thumb);
+            height: var(--tvs-thumb);
+            border-width: var(--tvs-thumb-border);
+            left: 0;
+        }
+
+        fieldset.tvs-toggles.toggles.useless [type="checkbox"]:checked + label::after {
+            left: var(--tvs-movement);
+            right: auto;
+        }
+    </style>
+    <script>
+        function fixedTime() {
+            document.getElementById("scope").checked = false;
+        }
+
+        function fixedScope() {
+            document.getElementById("time").checked = false;
         }
     </script>
 </head>
 <body class="principle-site">
     <div class="dd-close-group">
-        <a class="dd-key" href="/" aria-label="Close" onclick="sessionStorage.setItem('nav-direction','backward')">Esc</a>
+        <a class="dd-key" href="/on/principles/" aria-label="Close" onclick="sessionStorage.setItem('nav-direction','up')">Esc</a>
     </div>
     <div class="principle-site__page">
         <header class="principle-site__header">
@@ -50,30 +160,28 @@
                 <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
                 <a href="/on/">on</a>
                 <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                <a href="/on/principles/" onclick="sessionStorage.setItem('nav-direction','up')">principles</a>
+                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
                 <span class="dd-breadcrumb__current" aria-current="page">Time vs scope</span>
             </nav>
         </header>
         <div class="principle-page">
             <h1 class="principle principle-title">
-            <span class="nermal">Being </span><span class="attention">flexible about time and scope.</span> <span class="nermal"></span>
+            <span class="nermal">Being </span><span class="attention">flexible about time and scope.</span>
         </h1>
         <div class="principle-content">
-            <div>
-                <h1>
-                    <form>
-                        <fieldset class="toggles">
-                            <div>
-                            <input type="checkbox" name="time" id="time" checked onclick="fixedTime()">
-                            <label for="time">Deliver the project on time. </label>
-                            </div>
-                            <div>
-                            <input type="checkbox" name="scope" id="scope" onclick="fixedScope()">
-                            <label for="scope">Deliver 100% of the scope.</label>
-                            </div>
-                        </fieldset>
-                    </form>
-                </h1>
-            </div>
+            <form class="useless">
+                <fieldset class="toggles useless tvs-toggles">
+                    <div>
+                        <input type="checkbox" name="time" id="time" checked onclick="fixedTime()">
+                        <label for="time">Deliver the project on time.</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="scope" id="scope" onclick="fixedScope()">
+                        <label for="scope">Deliver 100% of the scope.</label>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
     </div>

@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <link rel="stylesheet" type="text/css" href="../../css/style-million.css">
     <link rel="stylesheet" type="text/css" href="../../css/timeline.css">
-    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css?v=3">
     <script>
         (function() {
             const d = sessionStorage.getItem('nav-direction');
@@ -53,27 +53,6 @@
             white-space: nowrap;
         }
         .timeline-link::after { background: var(--link-underline-color, #5452B7); }
-        .dd-breadcrumb a,
-        .dd-breadcrumb a:link,
-        .dd-breadcrumb a:visited,
-        .dd-breadcrumb a:hover,
-        .dd-breadcrumb a:active,
-        .dd-breadcrumb a:focus,
-        .dd-breadcrumb a:focus-visible {
-            color: var(--very-light-yellow-darker);
-            background: none;
-        }
-        .nav-container .nav-link,
-        .nav-container .nav-link:link,
-        .nav-container .nav-link:visited,
-        .nav-container .nav-link:hover,
-        .nav-container .nav-link:active,
-        .nav-container .nav-link:focus,
-        .nav-container .nav-link:focus-visible {
-            color: var(--very-light-yellow);
-            background: none;
-            opacity: 1;
-        }
         .timeline-tag { color: var(--very-light-yellow-darker); border-color: rgba(242, 237, 213, 0.15); }
         .timeline-tag-year { color: var(--darkblue); }
         .timeline-marker { background: var(--very-light-yellow); border-color: var(--darkblue); }
@@ -93,13 +72,6 @@
             justify-content: flex-start;
             align-items: flex-start;
         }
-        .nav-container {
-            width: auto;
-            min-width: 9rem;
-            flex: 0 0 auto;
-            padding-left: 0;
-            padding-right: 2rem;
-        }
         .container-85 {
             flex: 1 1 auto;
             max-width: none;
@@ -113,6 +85,23 @@
             text-align: left;
         }
 
+        /* Align page title + breadcrumb with timeline headings (.timeline-content inset) */
+        .intro,
+        .dd-breadcrumb {
+            margin-left: calc(80px + 0.45rem + 1rem + 3rem);
+        }
+
+        .intro h1.welcome {
+            margin-left: 0;
+        }
+
+        @media (max-width: 900px) {
+            .intro,
+            .dd-breadcrumb {
+                margin-left: 0;
+            }
+        }
+
         @view-transition { navigation: auto; types: forward, backward; }
         @keyframes push-in-from-bottom { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes push-in-from-top    { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -122,45 +111,7 @@
         ::view-transition-old(root) { animation-name: var(--vt-old-animation, push-out-to-top); animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); }
     </style>
     <script>
-        // Mobile navigation toggle
         document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.querySelector('.nav-toggle');
-            const navContainer = document.querySelector('.nav-container');
-            const navOverlay = document.querySelector('.nav-overlay');
-            
-            function toggleNav() {
-                const isOpen = navContainer.classList.contains('nav-open');
-                navContainer.classList.toggle('nav-open');
-                navToggle.classList.toggle('nav-toggle-open');
-                navToggle.setAttribute('aria-expanded', !isOpen);
-                if (navOverlay) {
-                    navOverlay.classList.toggle('active');
-                }
-            }
-            
-            if (navToggle && navContainer) {
-                navToggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    toggleNav();
-                });
-                
-                // Close nav when clicking overlay
-                if (navOverlay) {
-                    navOverlay.addEventListener('click', function() {
-                        toggleNav();
-                    });
-                }
-                
-                // Close nav when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (navContainer.classList.contains('nav-open') && 
-                        !navContainer.contains(event.target) && 
-                        !navToggle.contains(event.target)) {
-                        toggleNav();
-                    }
-                });
-            }
-
             // Scroll reveal animations
             const timelineItems = document.querySelectorAll('.timeline-item');
             const observerOptions = {
@@ -186,17 +137,7 @@
     </script>
 </head>
 <body>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span class="nav-toggle-icon"></span>
-    </button>
-    <div class="nav-overlay"></div>
     <div class="container-full flex nowrap padding-top-7">
-        <nav class="nav-container">
-            <a href="/" class="nav-link home">ernst.works</a>
-            <a href="/likes/anwb-paddenstoel" class="nav-link likes">Likes</a>
-            <a href="/on/experiments/index.html" class="nav-link experiments">Experiments</a>
-            <a href="https://www.linkedin.com/in/evanwoerden/" target="_blank" class="nav-link writing">LinkedIn</a>
-        </nav>
         <div class="container-85">
             <nav class="dd-breadcrumb" aria-label="Breadcrumb">
                 <a href="/" onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>

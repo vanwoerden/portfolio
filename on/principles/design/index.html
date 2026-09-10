@@ -9,11 +9,11 @@
             person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
         })
     </script>
-    <title>Design is the manifestation of ideas - The Works of Ernst</title>
+    <title>Design brings ideas to life - The Works of Ernst</title>
     <script src="/on/principles/principles-boot.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/fonts.css">
     <link rel="stylesheet" type="text/css" href="/css/style-million.css">
-    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css?v=3">
     <link rel="stylesheet" type="text/css" href="/on/principles/shared.css">
     <link rel="stylesheet" type="text/css" href="/on/dd-key.css">
     <script src="/on/principles/principles-data.js"></script>
@@ -24,7 +24,7 @@
 </head>
 <body class="principle-site">
     <div class="dd-close-group">
-        <a class="dd-key" href="/" aria-label="Close" onclick="sessionStorage.setItem('nav-direction','backward')">Esc</a>
+        <a class="dd-key" href="/on/principles/" aria-label="Close" onclick="sessionStorage.setItem('nav-direction','up')">Esc</a>
     </div>
     <div class="principle-site__page">
         <header class="principle-site__header">
@@ -33,17 +33,30 @@
                 <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
                 <a href="/on/">on</a>
                 <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                <a href="/on/principles/" onclick="sessionStorage.setItem('nav-direction','up')">principles</a>
+                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
                 <span class="dd-breadcrumb__current" aria-current="page">Design</span>
             </nav>
         </header>
         <div class="principle-page">
             <h1 class="principle principle-title">
-            <span class="attention">Design is</span> <span class="nermal"> the manifestation of ideas.</span>
+            <span class="attention">Design</span> <span class="nermal">brings ideas to life.</span>
         </h1>
         <div class="principle-content">
-            <p class="money-quote">Ask a million designers and you'll get a million definitions. It doesn't matter a great deal. But my story has to start somewhere, right?</p>
-            <p class="money-quote">I tried to define user experience design <a href="/ux.html" target="_blank">here.</a> Tell me if I was right by calling 1-800-design.</p>
-        </div>
+            <p class="money-quote">Good design brings good ideas to life.</p>
+            <!-- <p class="money-quote">(Ask a million designers and you'll get a million definitions. It doesn't matter a great deal. But my story has to start somewhere, right?)</p> -->
+            <p class="money-quote">In real life, users encounter our designs in the wild. They interact with the products and services we create. The result of that interaction is an experience. (I tried to define user experience design <a href="/ux.html" onclick="sessionStorage.setItem('ux-return', location.href)">here.)</a>
+            </p>
+            <p class="money-quote">
+                Good experiences, good outcomes. 
+            </p>
+            <p class="money-quote">
+                Good outcomes ← good experiences ← good ideas ← all trace back to good design. 
+            </p>
+            <p class="money-quote">
+                So how do we get to Good Design™? 
+            </p>
+
         </div>
     </div>
     <div class="nav-buttons">

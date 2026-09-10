@@ -121,6 +121,26 @@ body.principle-site a:hover {
   color: var(--very-light-yellow);
 }
 
+/* Breadcrumbs: no underline until hover (shared project-breadcrumb.css) */
+body.principle-site .dd-breadcrumb a,
+body.principle-site .dd-breadcrumb a:link,
+body.principle-site .dd-breadcrumb a:visited,
+body.principle-site .dd-breadcrumb a:active,
+body.principle-site .dd-breadcrumb a:focus,
+body.principle-site .dd-breadcrumb a:focus-visible {
+  color: var(--very-light-yellow-darker);
+  text-decoration: none;
+  background: none;
+}
+
+body.principle-site .dd-breadcrumb a:hover {
+  color: var(--very-light-yellow);
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline-color, #5452B7);
+  text-underline-offset: 0.12em;
+  text-decoration-thickness: 2px;
+}
+
 body.principle-site a.nav-button,
 body.principle-site a.nav-button:hover,
 body.principle-site a.nav-button:visited {
@@ -313,7 +333,7 @@ body.principle-site a.dd-key:visited {
 
 @keyframes push-in-from-right {
   from {
-    transform: translateX(100%);
+    transform: translateX(40%);
     opacity: 0;
   }
   to {
@@ -324,7 +344,7 @@ body.principle-site a.dd-key:visited {
 
 @keyframes push-in-from-left {
   from {
-    transform: translateX(-100%);
+    transform: translateX(-40%);
     opacity: 0;
   }
   to {
@@ -335,47 +355,108 @@ body.principle-site a.dd-key:visited {
 
 @keyframes push-out-to-left {
   from {
-    transform: translateX(0);
     opacity: 1;
   }
   to {
-    transform: translateX(-100%);
     opacity: 0;
   }
 }
 
 @keyframes push-out-to-right {
   from {
-    transform: translateX(0);
     opacity: 1;
   }
   to {
-    transform: translateX(100%);
     opacity: 0;
   }
 }
 
+/* Vertical push — same motion as home ↔ Dutch & Dutch */
+@keyframes push-in-from-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes push-in-from-top {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes push-out-to-top {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes push-out-to-bottom {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Principle ↔ principle: keep root still; only named content slides */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
 }
 
-::view-transition-old(principle-content),
 ::view-transition-new(principle-content),
-::view-transition-old(principle-breadcrumb),
 ::view-transition-new(principle-breadcrumb) {
+  animation-duration: 0.22s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-name: var(--vt-new-animation, push-in-from-right);
+}
+
+/* Outgoing page content drops away almost immediately (horizontal nav) */
+::view-transition-old(principle-content),
+::view-transition-old(principle-breadcrumb) {
+  animation-duration: 0.08s;
+  animation-timing-function: ease-out;
+  animation-name: var(--vt-old-animation, push-out-to-left);
+  animation-fill-mode: both;
+}
+
+/* List ↔ detail: full-page root push (same as home ↔ Dutch & Dutch).
+   Collapse named layers back into root so background + content move as one sheet. */
+html.vt-vertical .principle-site__header,
+html.vt-vertical .principle-page,
+html.vt-vertical .dd-close-group,
+html.vt-vertical .nav-buttons,
+html.vt-vertical .principle-draft-badge {
+  view-transition-name: none;
+}
+
+html.vt-vertical::view-transition-old(root),
+html.vt-vertical::view-transition-new(root) {
+  animation-name: var(--vt-new-animation, push-in-from-bottom);
   animation-duration: 0.5s;
   animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-::view-transition-new(principle-content),
-::view-transition-new(principle-breadcrumb) {
-  animation-name: var(--vt-new-animation, push-in-from-right);
-}
-
-::view-transition-old(principle-content),
-::view-transition-old(principle-breadcrumb) {
-  animation-name: var(--vt-old-animation, push-out-to-left);
+html.vt-vertical::view-transition-old(root) {
+  animation-name: var(--vt-old-animation, push-out-to-top);
 }
 
 ::view-transition-group(principle-close),

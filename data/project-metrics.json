@@ -6,8 +6,8 @@
           "id": "states-launched",
           "label": "States launched",
           "absolute": {
-            "number": 17,
-            "string": "17 of 45"
+            "number": 19,
+            "string": "19 of 45"
           },
           "relative": {
             "number": null,
@@ -17,7 +17,7 @@
           "visualization": "KPI",
           "description": null,
           "progress": {
-            "value": 17,
+            "value": 19,
             "max": 45
           }
         },
@@ -35,6 +35,7 @@
           "visible": "absolute",
           "visualization": "KPI",
           "description": null,
+          "blurred": true,
           "series": [1.16, 4.76, 9.4, 15.8, 21.6, 27.28, 37.68, 46.16, 55.64, 68.56, 81, 97.32, 109.2]
         },
         {
@@ -50,7 +51,7 @@
           },
           "visible": "absolute",
           "visualization": "KPI",
-          "description": "40% spend less than 60 seconds before filing their return"
+          "description": "*40% spend less than 60 seconds before filing their return"
         }
       ]
     },

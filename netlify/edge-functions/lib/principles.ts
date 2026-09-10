@@ -9,7 +9,7 @@ export interface PrincipleEntry {
 export const PRINCIPLES: PrincipleEntry[] = [
   {
     slug: "design",
-    title: "Design is the manifestation of ideas",
+    title: "Design brings ideas to life",
     published: false,
   },
   {

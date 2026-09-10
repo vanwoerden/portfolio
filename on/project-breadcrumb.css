@@ -1,8 +1,11 @@
+/* Shared breadcrumb styles — keep dutch-dutch-app/project-breadcrumb.css in sync
+   (or prefer linking this file from every page). */
+
 .dd-breadcrumb {
     font-family: "Kumbh Sans", sans-serif;
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-size: 16px;
     line-height: 1.4;
-    color: var(--very-light-yellow-darker);
+    color: var(--very-light-yellow-darker, #ccc7aa);
     margin: 0 0 1rem 0;
     display: flex;
     flex-wrap: wrap;
@@ -12,13 +15,18 @@
 }
 
 .dd-breadcrumb a,
-.dd-breadcrumb a:visited {
-    color: var(--very-light-yellow-darker);
+.dd-breadcrumb a:link,
+.dd-breadcrumb a:visited,
+.dd-breadcrumb a:active,
+.dd-breadcrumb a:focus,
+.dd-breadcrumb a:focus-visible {
+    color: var(--very-light-yellow-darker, #ccc7aa);
+    background: none;
     text-decoration: none;
 }
 
 .dd-breadcrumb a:hover {
-    color: var(--very-light-yellow);
+    color: var(--very-light-yellow, #fffae0);
     text-decoration: underline;
     text-decoration-color: var(--link-underline-color, #5452B7);
     text-underline-offset: 0.12em;
@@ -31,5 +39,5 @@
 }
 
 .dd-breadcrumb__current {
-    color: var(--very-light-yellow-darker);
+    color: var(--very-light-yellow-darker, #ccc7aa);
 }

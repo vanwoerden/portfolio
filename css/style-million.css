@@ -72,6 +72,13 @@ a.dd-project-card,
     background: none;
 }
 
+.dd-breadcrumb a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline-color, #5452B7);
+  text-underline-offset: 0.12em;
+  text-decoration-thickness: 2px;
+}
+
 .nav-link {
   text-decoration: none;
 }
@@ -586,10 +593,16 @@ p.designer {
 
 #bml-container {
   /* border: 1px dashed #777; */
-  width: 12em;
-  height: 12em;
+  position: relative;
+  width: 20rem;
+  height: 16rem;
   border-radius: 10em;
   margin-top: 6em;
+  margin-bottom: 3rem;
+  margin-left: 0;
+  /* Centroid of equilateral triangle of circle centers (incl. 1px borders) */
+  transform-origin: 10.0625rem 7.1984rem;
+  transition: transform 0.4s;
 }
 
 .bml {
@@ -603,8 +616,12 @@ p.designer {
   width: 5em;
   height: 5em;
   position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
   font-size: 1.2rem;
-  /* transition: all 0.4s; */
+  box-sizing: content-box;
+  transition: transform 0.4s;
 }
 
 .bml-title {
@@ -623,23 +640,30 @@ p.designer {
   margin-right: 0.2rem;
 }
 
+/* Equilateral: base 12rem, height 6√3 rem ≈ 10.3923rem */
 #build {
-  margin-left: 2.5em;
-  margin-top: -3.5em;
+  left: 6rem;
+  top: -3.7923rem;
 }
 
 #measure {
-  margin-top: 5.5em;
-  margin-left: 7.5em;
+  left: 12rem;
+  top: 6.6rem;
 }
 
 #learn {
-  margin-top: 5.5em;
-  margin-left: -2.5em;
+  left: 0;
+  top: 6.6rem;
 }
 
 #reset {
   transition: all 0.2s;
+}
+
+span.reset {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 span.fake-link {
@@ -650,20 +674,12 @@ span.fake-link {
   cursor: pointer;
 }
 
-span.reset {
-  color: rgb(86, 86, 86);
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .rotated {
   transform: rotate(120deg);
-  transition: all 0.4s;
 }
 
 .rotated-element {
   transform: rotate(-120deg);
-  transition: all 0.4s;
 }
 
 #designers-should-code {

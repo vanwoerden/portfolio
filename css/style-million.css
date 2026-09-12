@@ -1058,6 +1058,61 @@ input[type='checkbox'] {
     z-index: 1;
   }
 
+  /* Title finger is positioned on the switch, not the full-width title box */
+  .principle-title.toggles.useless::before {
+    content: none;
+  }
+
+  .principle-toggle {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+  }
+
+  .principle-toggle::before {
+    content: "";
+    position: absolute;
+    width: 1.625em;
+    height: 0.65em;
+    background-color: var(--very-light-yellow-darker);
+    border-radius: 0.325em;
+    right: -1.14em;
+    top: calc((1em - 0.65em) / 2 + 0.05em);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .principle-title.toggles.useless.finger-push .principle-toggle::before {
+    animation: fingerPushTitle var(--finger-push-ms, 0.2s) ease forwards;
+  }
+
+  @keyframes fingerPushTitle {
+    0% {
+      opacity: 0;
+      right: -1.14em;
+      width: 0.4em;
+    }
+    5% {
+      opacity: 1;
+      right: -1.14em;
+    }
+    20% {
+      opacity: 1;
+      right: -1.14em;
+    }
+    90% {
+      opacity: 1;
+      right: -0.84em;
+    }
+    100% {
+      opacity: 0;
+      right: -0.84em;
+      width: 1.5em;
+    }
+  }
+
   /* Finger animation - fades in, waits briefly, moves left to push toggle, disappears */
   .toggles.useless.finger-push::before {
     animation: fingerPush var(--finger-push-ms, 0.2s) ease forwards;

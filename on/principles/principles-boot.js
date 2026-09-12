@@ -2,6 +2,7 @@
     var root = document.documentElement;
 
     function applyDirection(direction) {
+        root.classList.toggle('vt-backward', direction === 'backward');
         if (direction === 'up') {
             root.style.setProperty('--vt-new-animation', 'push-in-from-top');
             root.style.setProperty('--vt-old-animation', 'push-out-to-bottom');

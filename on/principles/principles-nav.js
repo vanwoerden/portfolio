@@ -129,117 +129,8 @@
         });
     });
 
-    function cssLengthToPx(value) {
-        if (!value) {
-            return 0;
-        }
-        var trimmed = String(value).trim();
-        if (!trimmed) {
-            return 0;
-        }
-        if (trimmed.endsWith('px')) {
-            return parseFloat(trimmed) || 0;
-        }
-        var probe = document.createElement('div');
-        probe.style.cssText = 'position:absolute;visibility:hidden;width:' + trimmed + ';pointer-events:none;';
-        document.body.appendChild(probe);
-        var px = probe.offsetWidth;
-        document.body.removeChild(probe);
-        return px;
-    }
-
-    function titleFirstLineMidY() {
-        var title = document.querySelector('h1.principle');
-        if (!title) {
-            return null;
-        }
-        var rect = title.getBoundingClientRect();
-        var cs = getComputedStyle(title);
-        var lineHeight = parseFloat(cs.lineHeight);
-        if (!lineHeight || isNaN(lineHeight)) {
-            var fontSize = parseFloat(cs.fontSize) || 16;
-            lineHeight = fontSize * 1.1;
-        }
-        return rect.top + lineHeight / 2;
-    }
-
-    function clearNavPositionVars(nav) {
-        if (!nav) {
-            return;
-        }
-        nav.style.removeProperty('--principle-nav-title-mid');
-        nav.style.removeProperty('--principle-nav-right-x');
-    }
-
-    function syncNavSidePositions() {
-        var nav = document.querySelector('.nav-buttons');
-        if (!nav || document.body.classList.contains('principle-nav-bottom')) {
-            clearNavPositionVars(nav);
-            return;
-        }
-
-        var mid = titleFirstLineMidY();
-        if (mid == null) {
-            nav.style.removeProperty('--principle-nav-title-mid');
-        } else {
-            nav.style.setProperty('--principle-nav-title-mid', mid + 'px');
-        }
-
-        var page = document.querySelector('.principle-site__page');
-        var rightBtn = document.querySelector('.nav-buttons .nav-button:last-child');
-        if (!page || !rightBtn) {
-            nav.style.removeProperty('--principle-nav-right-x');
-            return;
-        }
-
-        var styles = getComputedStyle(document.documentElement);
-        var gap = cssLengthToPx(styles.getPropertyValue('--principle-nav-clearance')) || 24;
-        var pageRight = page.getBoundingClientRect().right;
-        nav.style.setProperty('--principle-nav-right-x', (pageRight + gap) + 'px');
-    }
-
-    function syncNavLayout() {
-        if (!document.body.classList.contains('principle-site')) {
-            return;
-        }
-
-        var styles = getComputedStyle(document.documentElement);
-        var edgePx = cssLengthToPx(styles.getPropertyValue('--principle-nav-edge'));
-        var clearancePx = cssLengthToPx(styles.getPropertyValue('--principle-nav-clearance'));
-
-        // Measure in side-nav mode so footprints are accurate
-        document.body.classList.remove('principle-nav-bottom');
-        clearNavPositionVars(document.querySelector('.nav-buttons'));
-
-        var leftBtn = document.querySelector('.nav-buttons .nav-button');
-        var rightBtn = document.querySelector('.nav-buttons .nav-button:last-child');
-        var page = document.querySelector('.principle-site__page');
-        var collision = false;
-
-        if (leftBtn && page) {
-            var leftRight = leftBtn.getBoundingClientRect().right;
-            var contentLeft = page.getBoundingClientRect().left;
-            if (contentLeft < leftRight + clearancePx) {
-                collision = true;
-            }
-        }
-
-        // Right arrow sits beside the column — need room for it past the column
-        if (!collision && page && rightBtn) {
-            var pageRight = page.getBoundingClientRect().right;
-            var arrowW = rightBtn.getBoundingClientRect().width;
-            if (pageRight + clearancePx + arrowW + edgePx > window.innerWidth) {
-                collision = true;
-            }
-        }
-
-        document.body.classList.toggle('principle-nav-bottom', collision);
-        syncNavSidePositions();
-    }
-
     function refreshNav() {
         rewriteNavButtons();
-        syncNavLayout();
     }
 
     var navRevealScheduled = false;
@@ -272,8 +163,6 @@
     }
 
     refreshNav();
-    window.addEventListener('resize', syncNavLayout);
-    window.addEventListener('scroll', syncNavSidePositions, { passive: true });
     window.addEventListener('pageshow', refreshNav);
 
     window.addEventListener('pagereveal', function(event) {

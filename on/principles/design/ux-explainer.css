@@ -1,0 +1,208 @@
+/* UX explainer on the design principle page. Destination type and color only. */
+
+body.principle-site:has(.ux-explainer) {
+  --principle-title-width: 48rem;
+}
+
+body.principle-site:has(.ux-explainer) .principle-site__page {
+  max-width: none;
+  padding-right: 0;
+}
+
+body.principle-site:has(.ux-explainer) .principle-site__header {
+  max-width: var(--principle-main-width);
+}
+
+body.principle-site:has(.ux-explainer) .principle-page {
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(0, var(--principle-title-width)) minmax(16rem, 1fr);
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+.ux-explainer {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  min-width: 0;
+  scroll-margin-top: 2rem;
+}
+
+.ux-explainer__title {
+  margin: 0;
+  width: auto;
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--very-light-yellow);
+}
+
+.ux-explainer__subtitle {
+  margin: 0.35rem 0 0;
+  max-width: none;
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--very-light-yellow-darker);
+  opacity: 1;
+}
+
+.ux-explainer__stage,
+.ux-compare__frame {
+  position: relative;
+  width: 100%;
+  margin-top: 1rem;
+  overflow: hidden;
+  background: var(--principle-surface-deep);
+}
+
+.ux-explainer__stage {
+  aspect-ratio: 1280 / 720;
+  isolation: isolate;
+}
+
+.ux-explainer__filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ux-explainer__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  filter: url(#ux-cream);
+  mix-blend-mode: screen;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ux-explainer__video:focus-visible {
+  outline: 2px solid var(--very-light-yellow);
+  outline-offset: 3px;
+}
+
+.ux-compare {
+  display: flex;
+  flex-direction: column;
+}
+
+.ux-compare__frame {
+  aspect-ratio: 1280 / 620;
+  container-type: inline-size;
+  cursor: ew-resize;
+}
+
+.ux-compare__layer,
+.ux-compare__clip {
+  position: absolute;
+  isolation: isolate;
+  background: var(--principle-surface-deep);
+}
+
+.ux-compare__layer {
+  inset: 0;
+}
+
+.ux-compare__clip {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(var(--ux-reveal, 0.5) * 100%);
+  overflow: hidden;
+}
+
+.ux-compare__art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+  filter: url(#ux-cream);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.ux-compare__art--over {
+  width: 100cqi;
+  height: 100%;
+}
+
+.ux-compare__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--ux-reveal, 0.5) * 100%);
+  z-index: 2;
+  width: 2px;
+  background: var(--very-light-yellow);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.ux-compare__hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  margin: 0;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(255, 250, 224, 0.35);
+  border-radius: 4px;
+  background: var(--principle-surface-deep);
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: var(--very-light-yellow);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.ux-compare__hint.is-dismissed {
+  opacity: 0;
+}
+
+.ux-compare__range {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+
+.ux-compare__frame:has(.ux-compare__range:focus-visible) {
+  outline: 2px solid var(--very-light-yellow);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1180px) {
+  body.principle-site:has(.ux-explainer) .principle-site__page {
+    max-width: calc(max(var(--principle-title-width), var(--principle-main-width)) + clamp(2rem, 4vw, 3.5rem));
+    padding-right: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  body.principle-site:has(.ux-explainer) .principle-page {
+    grid-template-columns: minmax(0, max(var(--principle-title-width), var(--principle-main-width)));
+  }
+
+  .ux-explainer {
+    margin-top: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ux-compare__hint {
+    transition: none;
+  }
+}

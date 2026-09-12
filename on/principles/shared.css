@@ -10,6 +10,7 @@
   --principle-pad-bottom: 8rem;
   --principle-header-top: 7rem;
   --principle-main-width: 40rem;
+  --principle-title-width: 48rem;
   --principle-nav-edge: 1rem;
   --principle-nav-arrow-size: 3rem;
   --principle-nav-button-pad: 0.75rem;
@@ -46,7 +47,7 @@ body.principle-site.principle-nav-bottom {
 }
 
         .principle-site__page {
-  max-width: var(--principle-main-width);
+  max-width: calc(max(var(--principle-title-width), var(--principle-main-width)) + clamp(2rem, 4vw, 3.5rem));
   padding-right: clamp(2rem, 4vw, 3.5rem);
   box-sizing: border-box;
 }
@@ -54,7 +55,19 @@ body.principle-site.principle-nav-bottom {
 .principle-site__header {
   padding-top: var(--principle-header-top);
   margin-bottom: 2rem;
-  view-transition-name: principle-breadcrumb;
+}
+
+/* Path stays put; only the current principle name transitions. */
+body.principle-site .dd-breadcrumb__prefix {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  view-transition-name: principle-breadcrumb-prefix;
+}
+
+body.principle-site .dd-breadcrumb__prefix + .dd-breadcrumb__current {
+  view-transition-name: principle-breadcrumb-slug;
 }
 
 .principle-draft-badge {
@@ -76,7 +89,7 @@ body.principle-site.principle-nav-bottom {
 }
 
 .principle-page {
-  max-width: var(--principle-main-width);
+  max-width: max(var(--principle-title-width), var(--principle-main-width));
   margin: 0;
   padding: 0;
   view-transition-name: principle-content;
@@ -85,6 +98,7 @@ body.principle-site.principle-nav-bottom {
 
 .principle-content {
   margin-top: 2rem;
+  max-width: var(--principle-main-width);
 }
 
 .principle-page:has(.principle-content.content-hidden) {
@@ -102,6 +116,7 @@ body.principle-site.principle-nav-bottom {
 body.principle-site h1.principle {
   display: block;
   color: var(--very-light-yellow);
+  text-wrap: pretty;
 }
 
 body.principle-site p.money-quote {
@@ -141,36 +156,26 @@ body.principle-site .dd-breadcrumb a:hover {
   text-decoration-thickness: 2px;
 }
 
-body.principle-site a.nav-button,
-body.principle-site a.nav-button:hover,
-body.principle-site a.nav-button:visited {
-  color: var(--very-light-yellow-darker);
-  text-decoration: none;
-  background: none;
-}
-
-body.principle-site a.nav-button:hover {
-  color: var(--very-light-yellow);
-}
-
+/* Previous / next sit as a keyboard pair, same keycaps as Esc */
 .nav-buttons {
+  --dd-key-cell-w: 48.75px;
+  --dd-key-cell-h: 35.75px;
+  --dd-key-gap: 4.55px;
+  --dd-key-inset: 26px;
+  --dd-key-surface: #252523;
   position: fixed;
-  inset: 0;
+  right: var(--dd-key-inset);
+  bottom: var(--dd-key-inset);
+  left: auto;
+  top: auto;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  gap: var(--dd-key-gap);
   width: auto;
-  padding: 0 var(--principle-nav-edge);
-  /* Center arrow hitbox on the title's first line (set by principles-nav.js) */
-  padding-top: calc(
-    var(--principle-nav-title-mid, 50vh)
-    - (var(--principle-nav-arrow-size) / 2)
-    - var(--principle-nav-button-pad)
-    + 0.55rem
-  );
+  padding: 0;
   box-sizing: border-box;
   pointer-events: none;
-  z-index: 100;
+  z-index: 10000;
   view-transition-name: principle-nav;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -180,54 +185,39 @@ body.principle-nav-visible .nav-buttons {
   opacity: 1;
 }
 
-.nav-button {
-  padding: var(--principle-nav-button-pad);
-  background: transparent;
-  border: none;
-  color: var(--very-light-yellow-darker);
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
-  font-family: "Henrietta Regular";
-  font-size: 3.5rem;
-  line-height: 1;
+body.principle-site a.nav-button.dd-key,
+body.principle-site a.nav-button.dd-key:hover,
+body.principle-site a.nav-button.dd-key:visited,
+body.principle-site a.nav-button.dd-key:focus,
+body.principle-site a.nav-button.dd-key:active {
+  position: static;
+  width: var(--dd-key-cell-w);
+  height: var(--dd-key-cell-h);
+  min-width: var(--dd-key-cell-w);
+  min-height: var(--dd-key-cell-h);
+  padding: 2px 4px 0;
+  box-sizing: border-box;
+  transform: none;
   pointer-events: all;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--principle-nav-arrow-size);
-  height: var(--principle-nav-arrow-size);
-  box-sizing: content-box;
   flex-shrink: 0;
 }
 
-.nav-button:first-child {
-  transform: rotate(180deg);
+.nav-button__arrow {
+  display: block;
+  font-family: "Henrietta Regular";
+  font-size: 28px;
+  line-height: 1;
+  pointer-events: none;
+  transform: translate(2px, -1px);
 }
 
-/* Sit beside the text column (x set by principles-nav.js) */
-.nav-button:not(:first-child) {
-  position: absolute;
-  left: var(--principle-nav-right-x, auto);
-  right: auto;
-  top: calc(
-    var(--principle-nav-title-mid, 50vh)
-    - (var(--principle-nav-arrow-size) / 2)
-    - var(--principle-nav-button-pad)
-    + 0.55rem
-  );
+.nav-button:first-child .nav-button__arrow {
+  transform: translate(-2px, 1px) rotate(180deg);
 }
 
-.nav-button:hover {
-  color: var(--very-light-yellow);
-  opacity: 0.8;
-}
-
-.nav-button:first-child:hover {
-  transform: rotate(180deg) scale(1.1);
-}
-
-.nav-button:not(:first-child):hover {
-  transform: scale(1.1);
+body.principle-site a.nav-button:hover {
+  transform: none;
+  opacity: 0.75;
 }
 
 .nav-button:disabled,
@@ -235,31 +225,6 @@ body.principle-nav-visible .nav-buttons {
   opacity: 0.3;
   cursor: not-allowed;
   pointer-events: none;
-}
-
-/* Bottom bar when side arrows would collide with content */
-body.principle-nav-bottom .nav-buttons {
-  inset: auto 0 0 0;
-  align-items: center;
-  padding: 1rem var(--principle-pad-x);
-  background: rgba(22, 20, 18, 0.95);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 250, 224, 0.08);
-}
-
-body.principle-nav-bottom .nav-button {
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 2.8rem;
-  padding: 0.5rem;
-  min-width: 44px;
-  min-height: 44px;
-}
-
-body.principle-nav-bottom .nav-button:not(:first-child) {
-  position: static;
-  left: auto;
-  top: auto;
 }
 
 /* Esc control — same chrome/position as Dutch & Dutch project pages.
@@ -416,6 +381,37 @@ body.principle-site a.dd-key:visited {
   }
 }
 
+@keyframes slug-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slug-in-from-right {
+  from {
+    transform: translateX(1.75rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slug-in-from-left {
+  from {
+    transform: translateX(-1.75rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 /* Principle ↔ principle: keep root still; only named content slides */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -423,25 +419,66 @@ body.principle-site a.dd-key:visited {
 }
 
 /* Don't morph box size between pages (e.g. short designers-should-code ↔ taller pages) */
-::view-transition-group(principle-content),
-::view-transition-group(principle-breadcrumb) {
+::view-transition-group(principle-content) {
   animation: none;
 }
 
-::view-transition-new(principle-content),
-::view-transition-new(principle-breadcrumb) {
+::view-transition-group(principle-breadcrumb-slug) {
+  animation: none;
+  overflow: clip;
+}
+
+::view-transition-image-pair(principle-breadcrumb-slug) {
+  overflow: clip;
+}
+
+::view-transition-old(principle-breadcrumb-slug),
+::view-transition-new(principle-breadcrumb-slug) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(principle-content) {
   animation-duration: 0.22s;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   animation-name: var(--vt-new-animation, push-in-from-right);
 }
 
-/* Outgoing page content drops away almost immediately (horizontal nav) */
-::view-transition-old(principle-content),
-::view-transition-old(principle-breadcrumb) {
+/* Incoming principle name slides in with the nav direction */
+::view-transition-new(principle-breadcrumb-slug) {
+  animation-duration: 0.22s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-name: slug-in-from-right;
+  animation-fill-mode: both;
+}
+
+html.vt-backward::view-transition-new(principle-breadcrumb-slug) {
+  animation-name: slug-in-from-left;
+}
+
+/* Outgoing page content and the old principle name drop away almost immediately */
+::view-transition-old(principle-content) {
   animation-duration: 0.08s;
   animation-timing-function: ease-out;
   animation-name: var(--vt-old-animation, push-out-to-left);
   animation-fill-mode: both;
+}
+
+::view-transition-old(principle-breadcrumb-slug) {
+  animation-duration: 0.06s;
+  animation-timing-function: ease-out;
+  animation-name: slug-fade-out;
+  animation-fill-mode: both;
+}
+
+/* "ernst.works / on / principles /" does not move or crossfade */
+::view-transition-group(principle-breadcrumb-prefix),
+::view-transition-old(principle-breadcrumb-prefix),
+::view-transition-new(principle-breadcrumb-prefix) {
+  animation: none;
+}
+
+::view-transition-old(principle-breadcrumb-prefix) {
+  opacity: 0;
 }
 
 /*
@@ -458,6 +495,8 @@ html.vt-hide-content .principle-page {
 /* List ↔ detail: full-page root push (same as home ↔ Dutch & Dutch).
    Collapse named layers back into root so background + content move as one sheet. */
 html.vt-vertical .principle-site__header,
+html.vt-vertical .dd-breadcrumb__prefix,
+html.vt-vertical .dd-breadcrumb__current,
 html.vt-vertical .principle-page,
 html.vt-vertical .dd-close-group,
 html.vt-vertical .nav-buttons,

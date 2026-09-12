@@ -10,17 +10,19 @@
         })
     </script>
     <title>Design brings ideas to life - The Works of Ernst</title>
-    <script src="/on/principles/principles-boot.js?v=2"></script>
+    <script src="/on/principles/principles-boot.js?v=3"></script>
     <link rel="stylesheet" type="text/css" href="/css/fonts.css">
     <link rel="stylesheet" type="text/css" href="/css/style-million.css">
     <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css?v=3">
-    <link rel="stylesheet" type="text/css" href="/on/principles/shared.css">
+    <link rel="stylesheet" type="text/css" href="/on/principles/shared.css?v=16">
     <link rel="stylesheet" type="text/css" href="/on/dd-key.css">
+    <link rel="stylesheet" type="text/css" href="/on/principles/design/ux-explainer.css?v=8">
     <script src="/on/principles/principles-data.js"></script>
     <script src="/on/principles/principles-drafts.js?v=3"></script>
-    <script src="/on/principles/principles-nav.js?v=7" defer></script>
+    <script src="/on/principles/principles-nav.js?v=8" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
+    <script src="/on/principles/design/ux-explainer.js" defer></script>
 </head>
 <body class="principle-site">
     <div class="dd-close-group">
@@ -29,23 +31,26 @@
     <div class="principle-site__page">
         <header class="principle-site__header">
             <nav class="dd-breadcrumb" aria-label="Breadcrumb">
-                <a href="/" onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>
-                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
-                <a href="/on/">on</a>
-                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
-                <a href="/on/principles/" onclick="sessionStorage.setItem('nav-direction','up')">principles</a>
-                <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                <span class="dd-breadcrumb__prefix">
+                    <a href="/" onclick="sessionStorage.setItem('nav-direction','backward')">ernst.works</a>
+                    <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                    <a href="/on/">on</a>
+                    <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                    <a href="/on/principles/" onclick="sessionStorage.setItem('nav-direction','up')">principles</a>
+                    <span class="dd-breadcrumb__sep" aria-hidden="true">/</span>
+                </span>
                 <span class="dd-breadcrumb__current" aria-current="page">Design</span>
             </nav>
         </header>
         <div class="principle-page">
+            <div class="principle-page__copy">
             <h1 class="principle principle-title">
             <span class="attention">Design</span> <span class="nermal">brings ideas to life.</span>
         </h1>
         <div class="principle-content">
             <p class="money-quote">Good design brings good ideas to life.</p>
             <!-- <p class="money-quote">(Ask a million designers and you'll get a million definitions. It doesn't matter a great deal. But my story has to start somewhere, right?)</p> -->
-            <p class="money-quote">In real life, users encounter our designs in the wild. They interact with the products and services we create. The result of that interaction is an experience. (I tried to define user experience design <a href="/ux.html" onclick="sessionStorage.setItem('ux-return', location.href)">here.)</a>
+            <p class="money-quote">In real life, users encounter our designs in the wild. They interact with the products and services we create. The result of that interaction is an experience. (I tried to define user experience design <a href="#ux-explainer">here.)</a>
             </p>
             <p class="money-quote">
                 Good experiences, good outcomes. 
@@ -56,12 +61,78 @@
             <p class="money-quote">
                 So how do we get to Good Design™? 
             </p>
-
+            </div>
         </div>
+
+            <section id="ux-explainer" class="ux-explainer" aria-label="User experience">
+                <svg class="ux-explainer__filters" aria-hidden="true" focusable="false" width="0" height="0">
+                    <filter id="ux-cream" color-interpolation-filters="sRGB">
+                        <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -0.980392 0 0 0.980392  0 0 -0.878431 0 0.878431  0 0 0 1 0"></feColorMatrix>
+                    </filter>
+                </svg>
+                <div class="ux-explainer__stage">
+                    <video id="what-is-ux" class="ux-explainer__video" width="1280" height="720" poster="/img/what-is-ux.png" loop playsinline tabindex="0" aria-label="Play">
+                        <source src="/video/what-is-ux.mp4" type="video/mp4">
+                        <source src="/video/what-is-ux.webm" type="video/webm">
+                        <source src="/video/what-is-ux.ogv" type="video/ogg">
+                    </video>
+                </div>
+
+                <article class="ux-compare">
+                    <h2 id="ux-compare-context-title" class="ux-explainer__title">User experience is…</h2>
+                    <p id="ux-compare-context-subtitle" class="ux-explainer__subtitle">Context-dependent</p>
+                    <div class="ux-compare__frame">
+                        <div class="ux-compare__layer">
+                            <img class="ux-compare__art" src="/img/ux-is-white.png" width="1280" height="620" alt="A smiling person holding a ball">
+                        </div>
+                        <div class="ux-compare__clip">
+                            <img class="ux-compare__art ux-compare__art--over" src="/img/ux-context-dependent-white.png" width="1280" height="620" alt="The same person standing in the rain, the ball on the ground">
+                        </div>
+                        <div class="ux-compare__divider" aria-hidden="true"></div>
+                        <p class="ux-compare__hint">Move</p>
+                        <input class="ux-compare__range" type="range" min="0" max="100" value="50" aria-labelledby="ux-compare-context-title ux-compare-context-subtitle">
+                    </div>
+                </article>
+
+                <article class="ux-compare">
+                    <h2 id="ux-compare-subjective-title" class="ux-explainer__title">User experience is…</h2>
+                    <p id="ux-compare-subjective-subtitle" class="ux-explainer__subtitle">Subjective: it's different for everyone</p>
+                    <div class="ux-compare__frame">
+                        <div class="ux-compare__layer">
+                            <img class="ux-compare__art" src="/img/ux-is-white.png" width="1280" height="620" alt="A smiling person holding a ball">
+                        </div>
+                        <div class="ux-compare__clip">
+                            <img class="ux-compare__art ux-compare__art--over" src="/img/ux-subjective-white.png" width="1280" height="620" alt="A person with glasses thinking “A ball. Really?” while holding a ball">
+                        </div>
+                        <div class="ux-compare__divider" aria-hidden="true"></div>
+                        <input class="ux-compare__range" type="range" min="0" max="100" value="50" aria-labelledby="ux-compare-subjective-title ux-compare-subjective-subtitle">
+                    </div>
+                </article>
+
+                <article class="ux-compare">
+                    <h2 id="ux-compare-dynamic-title" class="ux-explainer__title">User experience is…</h2>
+                    <p id="ux-compare-dynamic-subtitle" class="ux-explainer__subtitle">Dynamic: it changes over time</p>
+                    <div class="ux-compare__frame">
+                        <div class="ux-compare__layer">
+                            <img class="ux-compare__art" src="/img/ux-is-white.png" width="1280" height="620" alt="A smiling person holding a ball">
+                        </div>
+                        <div class="ux-compare__clip">
+                            <img class="ux-compare__art ux-compare__art--over" src="/img/ux-dynamic-white.png" width="1280" height="620" alt="An older person with a cane standing on a worn ball">
+                        </div>
+                        <div class="ux-compare__divider" aria-hidden="true"></div>
+                        <input class="ux-compare__range" type="range" min="0" max="100" value="50" aria-labelledby="ux-compare-dynamic-title ux-compare-dynamic-subtitle">
+                    </div>
+                </article>
+
+                <div class="ux-explainer__close">
+                    <h2 class="ux-explainer__title">User experience design is…</h2>
+                    <p class="ux-explainer__subtitle">Using design methods and techniques to (positively) impact user experience</p>
+                </div>
+            </section>
     </div>
     <div class="nav-buttons">
-        <a href="/on/principles/designers-should-code/" class="nav-button">➠</a>
-        <a href="/on/principles/focus/" class="nav-button">➠</a>
+        <a href="/on/principles/designers-should-code/" class="nav-button dd-key" aria-label="Previous"><span class="nav-button__arrow" aria-hidden="true">➠</span></a>
+        <a href="/on/principles/focus/" class="nav-button dd-key" aria-label="Next"><span class="nav-button__arrow" aria-hidden="true">➠</span></a>
     </div>
 </body>
 </html>

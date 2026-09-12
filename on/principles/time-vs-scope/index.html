@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/css/fonts.css">
     <link rel="stylesheet" type="text/css" href="/css/style-million.css">
     <link rel="stylesheet" type="text/css" href="/on/project-breadcrumb.css?v=3">
-    <link rel="stylesheet" type="text/css" href="/on/principles/shared.css?v=16">
+    <link rel="stylesheet" type="text/css" href="/on/principles/shared.css?v=20">
     <link rel="stylesheet" type="text/css" href="/on/dd-key.css">
     <script src="/on/principles/principles-data.js"></script>
     <script src="/on/principles/principles-drafts.js?v=3"></script>
@@ -137,6 +137,32 @@
         fieldset.tvs-toggles.toggles.useless [type="checkbox"]:checked + label::after {
             left: var(--tvs-movement);
             right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .tvs-toggles {
+                --tvs-switch-width: 2.5rem;
+                --tvs-switch-height: 1.15rem;
+                --tvs-thumb: 1.25rem;
+                --tvs-movement: 1.35rem;
+                --tvs-track-border: 0.14rem;
+                --tvs-thumb-border: 0.1rem;
+            }
+
+            fieldset.tvs-toggles.toggles.useless {
+                gap: 1.15rem;
+            }
+
+            fieldset.tvs-toggles.toggles.useless [type="checkbox"] + label {
+                padding-left: calc(var(--tvs-switch-width) + 0.7rem);
+                font-size: 1rem;
+            }
+
+            .principle-content:has(.tvs-toggles),
+            form.useless:has(.tvs-toggles) {
+                max-width: 100%;
+                overflow-x: clip;
+            }
         }
     </style>
     <script>

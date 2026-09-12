@@ -201,6 +201,12 @@ body.principle-site:has(.ux-explainer) .principle-page {
   }
 }
 
+@media (max-width: 768px) {
+  body.principle-site:has(.ux-explainer) .principle-site__page {
+    padding-right: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ux-compare__hint {
     transition: none;

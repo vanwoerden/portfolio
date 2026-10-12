@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_macros.html" import todo, event %}
+{% block body %}
+<h1>This week <small>{{ v.start | day }} – {{ v.end | day }}</small></h1>
+{% if v.carried %}<section><h2 class="warn">Carried over</h2><ul class="list">{% for t in v.carried %}{{ todo(t) }}{% endfor %}</ul></section>{% endif %}
+<div class="week">
+{% for d in v.days %}
+  <section class="day {% if d.is_today %}today{% endif %}">
+    <h2>{{ d.label }}</h2>
+    <ul class="list">
+      {% for e in d.events %}{{ event(e) }}{% endfor %}
+      {% for t in d.deadlines %}<li class="todo"><span class="box"></span><div><div class="title">{{ t.title }}</div><div class="meta deadline">deadline</div></div></li>{% endfor %}
+      {% for t in d.todos %}{{ todo(t) }}{% endfor %}
+      {% if not (d.events or d.deadlines or d.todos) %}<li class="empty">—</li>{% endif %}
+    </ul>
+  </section>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="120">
+<title>Home</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/today" {% if nav == 'today' %}class="on"{% endif %}>Today</a>
+    <a href="/week" {% if nav == 'week' %}class="on"{% endif %}>This week</a>
+    <a href="/projects" {% if nav in ('projects','project') %}class="on"{% endif %}>Projects</a>
+  </nav>
+  <span class="sync {% if stale %}stale{% endif %}">
+    {% if synced %}Synced {{ synced[:16].replace('T',' ') }} UTC{% if stale %} · stale{% endif %}{% else %}Not synced{% endif %}
+  </span>
+</header>
+<main>{% block body %}{% endblock %}</main>
+</body>
+</html>

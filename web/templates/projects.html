@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>Projects</h1>
+<div class="cards">
+{% for p in v %}
+  <a class="card" href="/projects/{{ p.id }}">
+    <div class="title">{{ p.title }}</div>
+    <div class="bar"><div style="width: {{ p.percent }}%"></div></div>
+    <div class="meta"><span>{{ p.completed }}/{{ p.total }} done · {{ p.percent }}%</span>
+      {% if p.overdue %}<span class="deadline">{{ p.overdue }} overdue</span>{% endif %}
+      {% if p.deadline %}<span>due {{ p.deadline | day }}</span>{% endif %}</div>
+  </a>
+{% else %}<p class="empty">No projects in the Home area.</p>{% endfor %}
+</div>
+{% endblock %}

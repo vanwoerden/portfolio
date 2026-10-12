@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_macros.html" import todo %}
+{% block body %}
+<p><a href="/projects">← Projects</a></p>
+<h1>{{ p.title }}</h1>
+<div class="bar big"><div style="width: {{ p.percent }}%"></div></div>
+<p class="meta">{{ p.completed }}/{{ p.total }} done · {{ p.percent }}%</p>
+{% if p.notes %}<p class="notes">{{ p.notes }}</p>{% endif %}
+{% for heading, items in p.todos | groupby('heading') %}
+  <section>{% if heading %}<h2>{{ heading }}</h2>{% endif %}
+  <ul class="list">{% for t in items %}{{ todo(t, False) }}{% endfor %}</ul></section>
+{% endfor %}
+{% endblock %}

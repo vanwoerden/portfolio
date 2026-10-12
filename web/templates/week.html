@@ -1,19 +1,22 @@
 {% extends "base.html" %}
-{% from "_macros.html" import todo, event %}
+{% from "_carbon.html" import todo, event, section, tag %}
 {% block body %}
-<h1>This week <small>{{ v.start | day }} – {{ v.end | day }}</small></h1>
-{% if v.carried %}<section><h2 class="warn">Carried over</h2><ul class="list">{% for t in v.carried %}{{ todo(t) }}{% endfor %}</ul></section>{% endif %}
-<div class="week">
+<h1 class="app-title">This week</h1>
+<p class="app-subtitle">{{ v.start | day }} – {{ v.end | day }}</p>
+{% if v.carried %}{% call section("Carried over", alert=True) %}<ul>{% for t in v.carried %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
+<div class="cds--css-grid cds--css-grid--condensed app-grid" style="padding-inline: 0">
 {% for d in v.days %}
-  <section class="day {% if d.is_today %}today{% endif %}">
-    <h2>{{ d.label }}</h2>
-    <ul class="list">
-      {% for e in d.events %}{{ event(e) }}{% endfor %}
-      {% for t in d.deadlines %}<li class="todo"><span class="box"></span><div><div class="title">{{ t.title }}</div><div class="meta deadline">deadline</div></div></li>{% endfor %}
-      {% for t in d.todos %}{{ todo(t) }}{% endfor %}
-      {% if not (d.events or d.deadlines or d.todos) %}<li class="empty">—</li>{% endif %}
-    </ul>
-  </section>
+  <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-4">
+    <section class="cds--tile app-day{% if d.is_today %} app-day--today{% endif %}">
+      <h2 class="app-section__title">{{ d.label }}{% if d.is_today %} · today{% endif %}</h2>
+      <ul>
+        {% for e in d.events %}{{ event(e) }}{% endfor %}
+        {% for t in d.deadlines %}<li class="app-todo"><span>{{ t.title }}</span><div class="app-meta">{{ tag("Deadline", "red") }}</div></li>{% endfor %}
+        {% for t in d.todos %}{{ todo(t) }}{% endfor %}
+        {% if not (d.events or d.deadlines or d.todos) %}<li class="app-empty">Nothing planned</li>{% endif %}
+      </ul>
+    </section>
+  </div>
 {% endfor %}
 </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_carbon.html" import notification %}
 {% block body %}
-<p class="empty">No snapshot yet. Run <code>python -m things_home.sync</code> on the Mac.</p>
+{{ notification("No snapshot yet", "Run `python -m things_home.sync` on the Mac, or start the sync agent.", "warning") }}
 {% endblock %}

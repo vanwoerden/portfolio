@@ -1,0 +1,13 @@
+{
+  "name": "things-home-frontend",
+  "private": true,
+  "scripts": {
+    "build": "sass --load-path=node_modules --load-path=../node_modules --style=compressed --quiet-deps carbon.scss ../web/static/carbon.css && node copy-fonts.mjs"
+  },
+  "dependencies": {
+    "@carbon/styles": "1.117.0",
+    "@ibm/plex-mono": "2.5.0",
+    "@ibm/plex-sans": "1.1.0",
+    "sass": "1.105.1"
+  }
+}

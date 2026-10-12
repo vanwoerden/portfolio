@@ -1,13 +1,11 @@
 {% extends "base.html" %}
-{% from "_macros.html" import todo %}
+{% from "_carbon.html" import todo, progress, breadcrumb, section %}
 {% block body %}
-<p><a href="/projects">← Projects</a></p>
-<h1>{{ p.title }}</h1>
-<div class="bar big"><div style="width: {{ p.percent }}%"></div></div>
-<p class="meta">{{ p.completed }}/{{ p.total }} done · {{ p.percent }}%</p>
-{% if p.notes %}<p class="notes">{{ p.notes }}</p>{% endif %}
+{{ breadcrumb([("Projects", "/projects")], p.title) }}
+<h1 class="app-title">{{ p.title }}</h1>
+{{ progress(p.percent, "Progress", p.completed ~ " of " ~ p.total ~ " done · " ~ p.percent ~ "%", big=True) }}
+{% if p.notes %}<p class="app-subtitle" style="white-space: pre-wrap">{{ p.notes }}</p>{% endif %}
 {% for heading, items in p.todos | groupby('heading') %}
-  <section>{% if heading %}<h2>{{ heading }}</h2>{% endif %}
-  <ul class="list">{% for t in items %}{{ todo(t, False) }}{% endfor %}</ul></section>
+  {% call section(heading or "To-dos") %}<ul>{% for t in items %}{{ todo(t, False) }}{% endfor %}</ul>{% endcall %}
 {% endfor %}
 {% endblock %}

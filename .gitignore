@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 .pytest_cache/
 build/
+frontend/node_modules/
+web/static/carbon.css.map

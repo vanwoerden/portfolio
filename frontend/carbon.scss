@@ -1,0 +1,16 @@
+// Carbon (White theme at :root, Gray 100 when the system is dark) + app layer.
+@use '@carbon/styles' with (
+  $css--font-face: false,
+  $prefix: 'cds'
+);
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme';
+@use 'fonts';
+@use 'app';
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    @include theme.theme(themes.$g100);
+  }
+}

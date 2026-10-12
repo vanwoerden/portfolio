@@ -4,6 +4,7 @@ import os
 from datetime import date, datetime, timezone
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -14,6 +15,7 @@ HERE = os.path.dirname(__file__)
 SNAPSHOT_PATH = os.environ.get("THINGS_HOME_SNAPSHOT", snapshot.DEFAULT_PATH)
 
 app = FastAPI(title="Home")
+app.add_middleware(GZipMiddleware, minimum_size=1024)  # carbon.css is ~1.2 MB raw
 app.mount("/static", StaticFiles(directory=os.path.join(HERE, "static")), name="static")
 templates = Jinja2Templates(directory=os.path.join(HERE, "templates"))
 
@@ -28,6 +30,13 @@ def _fmt_time(iso: str) -> str:
 
 templates.env.filters["day"] = _fmt_day
 templates.env.filters["time"] = _fmt_time
+
+
+def _fmt_localtime(iso: str) -> str:
+    return datetime.fromisoformat(iso).astimezone().strftime("%a %H:%M")
+
+
+templates.env.filters["localtime"] = _fmt_localtime
 
 
 def _page(request: Request, name: str, **ctx):

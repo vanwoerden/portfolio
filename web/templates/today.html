@@ -1,10 +1,12 @@
 {% extends "base.html" %}
-{% from "_macros.html" import todo, event %}
+{% from "_carbon.html" import todo, event, section %}
 {% block body %}
-<h1>Today <small>{{ v.date | day }}</small></h1>
-{% if v.events %}<section><h2>Calendar</h2><ul class="list">{% for e in v.events %}{{ event(e) }}{% endfor %}</ul></section>{% endif %}
-{% if v.due %}<section><h2 class="warn">Due</h2><ul class="list">{% for t in v.due %}{{ todo(t) }}{% endfor %}</ul></section>{% endif %}
-<section><ul class="list">{% for t in v.morning %}{{ todo(t) }}{% else %}{% if not v.evening and not v.due %}<li class="empty">Nothing scheduled for today.</li>{% endif %}{% endfor %}</ul></section>
-{% if v.evening %}<section><h2>This evening</h2><ul class="list">{% for t in v.evening %}{{ todo(t) }}{% endfor %}</ul></section>{% endif %}
-{% if v.done %}<section><h2>Done today</h2><ul class="list">{% for t in v.done %}{{ todo(t) }}{% endfor %}</ul></section>{% endif %}
+<h1 class="app-title">Today</h1>
+<p class="app-subtitle">{{ v.date | day }}</p>
+{% if v.events %}{% call section("Calendar") %}<ul>{% for e in v.events %}{{ event(e) }}{% endfor %}</ul>{% endcall %}{% endif %}
+{% if v.due %}{% call section("Due", alert=True) %}<ul>{% for t in v.due %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
+{% if v.morning %}{% call section("To-dos") %}<ul>{% for t in v.morning %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}
+{% elif not v.evening and not v.due and not v.events %}<p class="app-empty">Nothing scheduled for today.</p>{% endif %}
+{% if v.evening %}{% call section("This evening") %}<ul>{% for t in v.evening %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
+{% if v.done %}{% call section("Done today") %}<ul>{% for t in v.done %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
 {% endblock %}

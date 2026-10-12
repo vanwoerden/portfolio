@@ -1,15 +1,21 @@
 {% extends "base.html" %}
+{% from "_carbon.html" import progress, tag %}
 {% block body %}
-<h1>Projects</h1>
-<div class="cards">
+<h1 class="app-title">Projects</h1>
+<p class="app-subtitle">{{ v | length }} in the Home area</p>
+<div class="cds--css-grid cds--css-grid--condensed app-grid" style="padding-inline: 0">
 {% for p in v %}
-  <a class="card" href="/projects/{{ p.id }}">
-    <div class="title">{{ p.title }}</div>
-    <div class="bar"><div style="width: {{ p.percent }}%"></div></div>
-    <div class="meta"><span>{{ p.completed }}/{{ p.total }} done · {{ p.percent }}%</span>
-      {% if p.overdue %}<span class="deadline">{{ p.overdue }} overdue</span>{% endif %}
-      {% if p.deadline %}<span>due {{ p.deadline | day }}</span>{% endif %}</div>
-  </a>
-{% else %}<p class="empty">No projects in the Home area.</p>{% endfor %}
+  <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-4">
+    <a class="cds--tile cds--tile--clickable app-card" href="/projects/{{ p.id }}">
+      <div class="app-tile-title">{{ p.title }}</div>
+      {{ progress(p.percent, "Progress", p.completed ~ " of " ~ p.total ~ " done · " ~ p.percent ~ "%") }}
+      <div class="app-meta">
+        {{ tag(p.open ~ " open", "blue") }}
+        {% if p.overdue %}{{ tag(p.overdue ~ " overdue", "red") }}{% endif %}
+        {% if p.deadline %}{{ tag("Due " ~ (p.deadline | day), "gray") }}{% endif %}
+      </div>
+    </a>
+  </div>
+{% else %}<p class="app-empty">No projects in the Home area.</p>{% endfor %}
 </div>
 {% endblock %}

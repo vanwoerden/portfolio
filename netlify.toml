@@ -6,6 +6,19 @@
   path = "/activate/*"
   function = "activate"
 
+# Family area: token-gated, pre-rendered pages uploaded from the Mac (see family/).
+[[edge_functions]]
+  path = "/family"
+  function = "family"
+
+[[edge_functions]]
+  path = "/family/*"
+  function = "family"
+
+[[edge_functions]]
+  path = "/family-ingest"
+  function = "family-ingest"
+
 [[edge_functions]]
   path = "/*"
   function = "gate"

@@ -3,7 +3,9 @@
 
 export const COOKIE_NAME = "__stf_session";
 
-export type TokenType = "activation" | "session";
+// "family-link" is the shared, reusable link for ernst.works/family; "family" is the
+// cookie it exchanges for. Both are signed with FAMILY_TOKEN_SECRET, never ACCESS_TOKEN_SECRET.
+export type TokenType = "activation" | "session" | "family-link" | "family";
 
 export interface TokenPayload {
   v: number;
@@ -115,4 +117,26 @@ export function randomJti(): string {
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   return Array.from(bytes).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+// ---- Family area (/family) -------------------------------------------------
+// One shared link sets a long-lived cookie that is renewed on every visit, so it
+// effectively never expires. Rotating FAMILY_TOKEN_SECRET revokes every link and cookie.
+
+export const FAMILY_COOKIE_NAME = "__fam_session";
+export const FAMILY_COOKIE_MAX_AGE = 10 * 365 * 24 * 60 * 60; // ~10 years, in seconds
+
+export async function mintFamilySessionToken(secret: string): Promise<string> {
+  const exp = Math.floor(Date.now() / 1000) + FAMILY_COOKIE_MAX_AGE;
+  return signPayload({ v: 1, jti: randomJti(), exp, typ: "family" }, secret);
+}
+
+export function serializeFamilyCookie(token: string): string {
+  return `${FAMILY_COOKIE_NAME}=${encodeURIComponent(token)}; Path=/family; HttpOnly; Secure; SameSite=Lax; Max-Age=${FAMILY_COOKIE_MAX_AGE}`;
+}
+
+export async function getFamilySession(request: Request, secret: string): Promise<TokenPayload | null> {
+  const raw = parseCookies(request)[FAMILY_COOKIE_NAME];
+  if (!raw) return null;
+  return verifyToken(raw, "family", secret);
 }

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="refresh" content="120">
+<title>Home</title>
+<link rel="stylesheet" href="/static/carbon.css?v={{ asset_version('carbon.css') }}">
+</head>
+<body>
+<a class="cds--skip-to-content" href="#main">Skip to main content</a>
+<header class="cds--header" role="banner" aria-label="Home">
+  <a class="cds--header__name" href="/today">Home</a>
+  <nav class="cds--header__nav" aria-label="Views">
+    <ul class="cds--header__menu-bar">
+      <li><a class="cds--header__menu-item" href="/today" {% if nav == 'today' %}aria-current="page"{% endif %}><span class="cds--text-truncate-end">Today</span></a></li>
+      <li><a class="cds--header__menu-item" href="/week" {% if nav == 'week' %}aria-current="page"{% endif %}><span class="cds--text-truncate-end">This week</span></a></li>
+      <li><a class="cds--header__menu-item" href="/projects" {% if nav in ('projects','project') %}aria-current="page"{% endif %}><span class="cds--text-truncate-end">Projects</span></a></li>
+    </ul>
+  </nav>
+  <div class="app-sync">
+    <span class="app-sync__text{% if stale or not synced %} app-sync__text--stale{% endif %}">{% if synced %}Synced {{ synced | localtime }}{% else %}Not synced{% endif %}</span>
+  </div>
+</header>
+<main id="main" class="app-page" style="margin-block-start: 3rem">{% block body %}{% endblock %}</main>
+<footer class="app-foot">{% if synced %}<span class="app-sync__text{% if stale %} app-sync__text--stale{% endif %}">Synced {{ synced | localtime }}</span>{% endif %}</footer>
+</body>
+</html>

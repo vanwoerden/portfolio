@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "_carbon.html" import todo, event, section, tag %}
+{% block body %}
+<h1 class="app-title">This week</h1>
+<p class="app-subtitle">{{ v.start | day }} – {{ v.end | day }}</p>
+{% if v.carried %}{% call section("Carried over", alert=True) %}<ul>{% for t in v.carried %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
+<div class="cds--css-grid cds--css-grid--condensed app-grid" style="padding-inline: 0">
+{% for d in v.days %}
+  <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-4">
+    <section class="cds--tile app-day{% if d.is_today %} app-day--today{% endif %}">
+      <h2 class="app-day__title"><span class="app-day__num">{{ d.num }}</span><span class="app-day__name">{{ d.name }}</span></h2>
+      <ul>
+        {% for e in d.events %}{{ event(e, compact=True) }}{% endfor %}
+        {% for t in d.deadlines %}<li class="app-todo"><span>{{ t.title }}</span><div class="app-meta">{{ tag("Deadline", "red") }}</div></li>{% endfor %}
+        {% for t in d.todos %}{{ todo(t) }}{% endfor %}
+        {% if not (d.events or d.deadlines or d.todos) %}<li class="app-empty">Nothing planned</li>{% endif %}
+      </ul>
+    </section>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

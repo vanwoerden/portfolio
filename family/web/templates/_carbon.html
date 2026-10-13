@@ -1,0 +1,76 @@
+{# Carbon component markup as Jinja macros. Class names verified against @carbon/styles. #}
+
+{% macro tag(text, color="gray") -%}
+<span class="cds--tag cds--tag--{{ color }} cds--tag--sm"><span class="cds--tag__label">{{ text }}</span></span>
+{%- endmacro %}
+
+{# `label` is always the accessible name; it is only shown when show_label is true. #}
+{% macro progress(percent, label, helper=None, big=False, show_label=False) -%}
+<div class="cds--progress-bar{% if big %} cds--progress-bar--big{% endif %}">
+  {% if show_label %}<div class="cds--progress-bar__label"><span class="cds--progress-bar__label-text">{{ label }}</span></div>{% endif %}
+  <div class="cds--progress-bar__track" role="progressbar" aria-label="{{ label }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ percent }}">
+    <div class="cds--progress-bar__bar" style="transform: scaleX({{ percent / 100 }})"></div>
+  </div>
+  {% if helper %}<div class="cds--progress-bar__helper-text">{{ helper }}</div>{% endif %}
+</div>
+{%- endmacro %}
+
+{% macro notification(title, subtitle="", kind="info") -%}
+<div class="cds--inline-notification cds--inline-notification--{{ kind }}" role="status">
+  <div class="cds--inline-notification__details">
+    <div class="cds--inline-notification__text-wrapper">
+      <div class="cds--inline-notification__title">{{ title }}</div>
+      {% if subtitle %}<div class="cds--inline-notification__subtitle">{{ subtitle }}</div>{% endif %}
+    </div>
+  </div>
+</div>
+{%- endmacro %}
+
+{% macro breadcrumb(items, current) -%}
+<nav class="cds--breadcrumb" aria-label="Breadcrumb">
+  {% for label, href in items %}<div class="cds--breadcrumb-item"><a class="cds--link" href="{{ href }}">{{ label }}</a></div>{% endfor %}
+  <div class="cds--breadcrumb-item cds--breadcrumb-item--current"><span class="cds--link" aria-current="page">{{ current }}</span></div>
+</nav>
+{%- endmacro %}
+
+{% macro section(title, alert=False) -%}
+<section class="app-section">
+  <h2 class="app-section__title{% if alert %} app-section__title--alert{% endif %}">{{ title }}</h2>
+  {{ caller() }}
+</section>
+{%- endmacro %}
+
+{# A read-only to-do: disabled Carbon checkbox plus meta tags. #}
+{% macro todo(t, show_project=True) -%}
+<li class="app-todo{% if t.done %} app-todo__done{% endif %}">
+  <div class="cds--form-item cds--checkbox-wrapper">
+    <input class="cds--checkbox" type="checkbox" id="todo-{{ t.id }}" disabled{% if t.done %} checked{% endif %}>
+    <label class="cds--checkbox-label" for="todo-{{ t.id }}"><span class="cds--checkbox-label-text">{{ t.title }}</span></label>
+  </div>
+  <div class="app-meta app-todo__meta">
+    {% if show_project and t.project %}<a class="cds--link" href="/projects/{{ t.project_id }}">{{ t.project }}</a>{% endif %}
+    {% if show_project and t.heading %}<span>{{ t.heading }}</span>{% endif %}
+    {% if t.deadline %}{{ tag("Due " ~ (t.deadline | day), "red") }}{% endif %}
+    {% for name in t.tags %}{{ tag(name) }}{% endfor %}
+    {% if t.checklist %}{{ tag((t.checklist | selectattr('done') | list | length) ~ "/" ~ (t.checklist | length) ~ " checklist", "cool-gray") }}{% endif %}
+  </div>
+</li>
+{%- endmacro %}
+
+{# compact: one plain line (time, title, calendar), used inside cards. #}
+{% macro event(e, compact=False) -%}
+{% if compact %}
+<li class="app-event-line" title="{{ e.title }} · {{ e.calendar }}">
+  <span class="app-time">{% if e.all_day %}All day{% else %}{{ e.start | time }}{% endif %}</span>
+  <span class="app-event-line__text">{{ e.title }}{% if e.calendar %} <span class="app-meta-inline">{{ e.calendar }}</span>{% endif %}</span>
+</li>
+{% else %}
+<li class="cds--tile app-event">
+  <span class="app-time">{% if e.all_day %}All day{% else %}{{ e.start | time }}{% endif %}</span>
+  <span>
+    <span class="app-event__title">{{ e.title }}</span>
+    {% if e.calendar %}<span class="app-meta">{{ e.calendar }}</span>{% endif %}
+  </span>
+</li>
+{% endif %}
+{%- endmacro %}

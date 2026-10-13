@@ -32,11 +32,12 @@ def test_today_sections():
         todo("c", start_date="2026-10-14", evening=True),
         todo("d", deadline="2026-10-13"),
         todo("e", start_date="2026-10-15"),
-        todo("f", start="someday", start_date="2026-10-14"),
+        todo("f", start="someday", start_date="2026-10-14"),  # scheduled for today
+        todo("h", start="someday"),  # genuinely unscheduled
         todo("g", done=True, completed_at="2026-10-14T08:00:00+00:00"),
     ])
     v = views.today_view(s, TODAY)
-    assert {t["id"] for t in v["morning"]} == {"a", "b"}
+    assert {t["id"] for t in v["morning"]} == {"a", "b", "f"}
     assert [t["id"] for t in v["evening"]] == ["c"]
     assert [t["id"] for t in v["due"]] == ["d"]
     assert [t["id"] for t in v["done"]] == ["g"]
@@ -100,3 +101,16 @@ def test_project_groups_mix_loose_and_headed_todos():
     groups = views.projects_view(s, TODAY)[0]["groups"]
     assert [g["heading"] for g in groups] == [None, "Now", "Later"]
     assert [t["id"] for t in groups[2]["todos"]] == ["d", "a"]
+
+
+def test_future_scheduled_todos_are_someday_with_a_date():
+    # Things stores "scheduled for Tuesday" as start=someday + startDate.
+    s = snap([
+        todo("a", start="someday", start_date="2026-10-15"),
+        todo("b", start="someday"),
+    ])
+    v = views.week_view(s, TODAY)
+    by_day = {d["date"]: d for d in v["days"]}
+    assert [t["id"] for t in by_day["2026-10-15"]["todos"]] == ["a"]
+    assert all(t["id"] != "b" for d in v["days"] for t in d["todos"])
+    assert views.today_view(s, TODAY)["morning"] == []

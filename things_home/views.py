@@ -5,6 +5,12 @@ from datetime import date, timedelta
 from typing import Any, Dict, List
 
 
+def _is_planned(todo: Dict[str, Any]) -> bool:
+    """Things stores a to-do scheduled for a future date as "someday" with a
+    start date, so only dateless someday items are truly unscheduled."""
+    return todo["start"] != "someday" or bool(todo["start_date"])
+
+
 def _by_order(todos: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return sorted(todos, key=lambda t: (t["today_index"] or 0, t["index"] or 0))
 
@@ -25,7 +31,7 @@ def _events_on(snapshot: Dict[str, Any], day: str) -> List[Dict[str, Any]]:
 def today_view(snapshot: Dict[str, Any], today: date) -> Dict[str, Any]:
     day = today.isoformat()
     todos = [_decorate(snapshot, t) for t in snapshot["todos"]]
-    open_ = [t for t in todos if not t["done"] and t["start"] != "someday"]
+    open_ = [t for t in todos if not t["done"] and _is_planned(t)]
     scheduled = [t for t in open_ if t["start_date"] and t["start_date"] <= day]
     ids = {t["id"] for t in scheduled}
     due = [
@@ -54,7 +60,7 @@ def week_view(snapshot: Dict[str, Any], today: date) -> Dict[str, Any]:
     days = [start + timedelta(days=i) for i in range(7)]
     first, last = days[0].isoformat(), days[-1].isoformat()
     todos = [_decorate(snapshot, t) for t in snapshot["todos"] if not t["done"]]
-    todos = [t for t in todos if t["start"] != "someday"]
+    todos = [t for t in todos if _is_planned(t)]
 
     # Open items from before this week stay visible until handled.
     carried = [

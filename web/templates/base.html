@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="/static/carbon.css">
 </head>
 <body>
-{% from "_carbon.html" import tag %}
 <a class="cds--skip-to-content" href="#main">Skip to main content</a>
 <header class="cds--header" role="banner" aria-label="Home">
   <a class="cds--header__name" href="/today">Home</a>
@@ -21,10 +20,10 @@
     </ul>
   </nav>
   <div class="app-sync">
-    {% if synced %}{{ tag("Synced " ~ (synced | localtime), "red" if stale else "gray") }}{% else %}{{ tag("Not synced", "red") }}{% endif %}
+    <span class="app-sync__text{% if stale or not synced %} app-sync__text--stale{% endif %}">{% if synced %}Synced {{ synced | localtime }}{% else %}Not synced{% endif %}</span>
   </div>
 </header>
 <main id="main" class="app-page" style="margin-block-start: 3rem">{% block body %}{% endblock %}</main>
-<footer class="app-foot">{% if synced %}{{ tag("Synced " ~ (synced | localtime), "red" if stale else "gray") }}{% endif %}</footer>
+<footer class="app-foot">{% if synced %}<span class="app-sync__text{% if stale %} app-sync__text--stale{% endif %}">Synced {{ synced | localtime }}</span>{% endif %}</footer>
 </body>
 </html>

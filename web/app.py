@@ -28,6 +28,12 @@ def _fmt_time(iso: str) -> str:
     return datetime.fromisoformat(iso).strftime("%H:%M")
 
 
+def _asset_version(name: str) -> int:
+    """Cache-buster so a rebuilt stylesheet is never served stale."""
+    return int(os.path.getmtime(os.path.join(HERE, "static", name)))
+
+
+templates.env.globals["asset_version"] = _asset_version
 templates.env.filters["day"] = _fmt_day
 templates.env.filters["time"] = _fmt_time
 

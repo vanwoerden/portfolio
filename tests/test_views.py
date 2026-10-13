@@ -114,3 +114,16 @@ def test_future_scheduled_todos_are_someday_with_a_date():
     assert [t["id"] for t in by_day["2026-10-15"]["todos"]] == ["a"]
     assert all(t["id"] != "b" for d in v["days"] for t in d["todos"])
     assert views.today_view(s, TODAY)["morning"] == []
+
+
+def test_week_day_titles_are_number_and_name():
+    days = views.week_view(snap([]), TODAY)["days"]  # Wednesday 14th
+    assert [(d["num"], d["name"]) for d in days] == [
+        (12, "Monday"), (13, "Tuesday"), (14, "Today"), (15, "Tomorrow"),
+        (16, "Friday"), (17, "Saturday"), (18, "Sunday"),
+    ]
+
+
+def test_today_view_has_number_and_long_date():
+    v = views.today_view(snap([]), TODAY)
+    assert v["num"] == 14 and v["long_date"] == "Wednesday 14 October"

@@ -57,7 +57,14 @@
 </li>
 {%- endmacro %}
 
-{% macro event(e) -%}
+{# compact: one plain line (time, title, calendar), used inside cards. #}
+{% macro event(e, compact=False) -%}
+{% if compact %}
+<li class="app-event-line" title="{{ e.title }} · {{ e.calendar }}">
+  <span class="app-time">{% if e.all_day %}All day{% else %}{{ e.start | time }}{% endif %}</span>
+  <span class="app-event-line__text">{{ e.title }}{% if e.calendar %} <span class="app-meta-inline">{{ e.calendar }}</span>{% endif %}</span>
+</li>
+{% else %}
 <li class="cds--tile app-event">
   <span class="app-time">{% if e.all_day %}All day{% else %}{{ e.start | time }}{% endif %}</span>
   <span>
@@ -65,4 +72,5 @@
     {% if e.calendar %}<span class="app-meta">{{ e.calendar }}</span>{% endif %}
   </span>
 </li>
+{% endif %}
 {%- endmacro %}

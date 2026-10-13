@@ -1,12 +1,19 @@
 {% extends "base.html" %}
 {% from "_carbon.html" import todo, event, section %}
 {% block body %}
-<h1 class="app-title">Today</h1>
-<p class="app-subtitle">{{ v.date | day }}</p>
-{% if v.events %}{% call section("Calendar") %}<ul>{% for e in v.events %}{{ event(e) }}{% endfor %}</ul>{% endcall %}{% endif %}
-{% if v.due %}{% call section("Due", alert=True) %}<ul>{% for t in v.due %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
-{% if v.morning %}{% call section("To-dos") %}<ul>{% for t in v.morning %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}
-{% elif not v.evening and not v.due and not v.events %}<p class="app-empty">Nothing scheduled for today.</p>{% endif %}
-{% if v.evening %}{% call section("This evening") %}<ul>{% for t in v.evening %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
-{% if v.done %}{% call section("Done today") %}<ul>{% for t in v.done %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
+<div class="cds--css-grid cds--css-grid--condensed" style="padding-inline: 0">
+  <div class="cds--sm:col-span-4 cds--md:col-span-8 cds--lg:col-span-8">
+    <section class="cds--tile app-day">
+      <h1 class="app-day__title"><span class="app-day__num">{{ v.num }}</span><span class="app-day__name">Today</span></h1>
+      <p class="app-meta app-day__date">{{ v.long_date }}</p>
+
+      {% if v.events %}<ul>{% for e in v.events %}{{ event(e, compact=True) }}{% endfor %}</ul>{% endif %}
+      {% if v.due %}{% call section("Due", alert=True) %}<ul>{% for t in v.due %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
+      {% if v.morning %}<ul class="app-day__todos">{% for t in v.morning %}{{ todo(t) }}{% endfor %}</ul>{% endif %}
+      {% if v.evening %}{% call section("This evening") %}<ul>{% for t in v.evening %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
+      {% if v.done %}{% call section("Done today") %}<ul>{% for t in v.done %}{{ todo(t) }}{% endfor %}</ul>{% endcall %}{% endif %}
+      {% if not (v.events or v.due or v.morning or v.evening or v.done) %}<p class="app-empty">Nothing scheduled for today.</p>{% endif %}
+    </section>
+  </div>
+</div>
 {% endblock %}

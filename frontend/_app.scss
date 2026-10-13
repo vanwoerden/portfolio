@@ -38,10 +38,15 @@ body { min-height: 100vh; }
 
 // To-do rows
 .app-todo { padding-block: $spacing-04; border-block-end: 1px solid var(--cds-border-subtle); }
+.app-todo:last-child { border-block-end: none; }
+// Breathing room where the calendar rows end and the to-dos begin.
+.app-event-line + .app-todo { margin-block-start: $spacing-06; }
 .app-todo .cds--form-item { margin-block-end: $spacing-02; }
 .app-todo .cds--checkbox:disabled + .cds--checkbox-label { cursor: default; color: var(--cds-text-primary); }
 .app-todo .cds--checkbox:disabled + .cds--checkbox-label .cds--checkbox-label-text { color: var(--cds-text-primary); }
 .app-todo .cds--checkbox:disabled + .cds--checkbox-label::before { border-color: var(--cds-icon-secondary); }
+// Carbon indents the box by 3px; drop that so to-dos share the card's left edge with calendar rows.
+.app-todo .cds--checkbox-label::before { margin-inline-start: 0; }
 .app-todo.app-todo__done .cds--checkbox:disabled + .cds--checkbox-label .cds--checkbox-label-text { text-decoration: line-through; color: var(--cds-text-secondary); }
 .app-todo__meta { padding-inline-start: $spacing-07; }
 
@@ -53,7 +58,20 @@ body { min-height: 100vh; }
 .app-tile-title { @include type-style('heading-03'); margin-block-end: $spacing-05; }
 .cds--tile.app-day { block-size: 100%; }
 .cds--tile.app-day--today { outline: 2px solid var(--cds-border-interactive); outline-offset: -2px; }
-.app-day .app-section__title { margin-block-start: 0; }
+.app-day__title { display: flex; align-items: baseline; gap: $spacing-03; margin-block-end: $spacing-05; }
+.app-day__date { margin-block: (-$spacing-03) $spacing-05; }
+// Sections and to-do lists inside a day card are spaced like the calendar-to-to-do gap.
+.app-day .app-section { margin-block: $spacing-06 0; }
+.app-event-line + .app-section, .app-event-line ~ .app-day__todos { margin-block-start: $spacing-06; }
+.app-day__num { @include type-style('heading-06'); }
+.app-day__name { @include type-style('heading-03'); color: var(--cds-text-secondary); }
+
+// One-line calendar rows: time, title and calendar name share a line, no card chrome,
+// so their left edge lines up with to-dos and deadlines in the same card.
+.app-event-line { display: flex; gap: $spacing-04; align-items: baseline; padding-block: $spacing-02; min-inline-size: 0; }
+.app-event-line .app-time { flex: none; min-inline-size: 4rem; @include type-style('body-compact-01'); }
+.app-event-line__text { @include type-style('body-compact-01'); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-inline-size: 0; }
+.app-meta-inline { @include type-style('helper-text-01'); color: var(--cds-text-secondary); margin-inline-start: $spacing-02; }
 .app-empty { color: var(--cds-text-helper); padding-block: $spacing-04; }
 .cds--css-grid.app-grid { gap: $spacing-05; }
 .cds--tile--clickable.app-card { display: block; text-decoration: none; color: var(--cds-text-primary); }

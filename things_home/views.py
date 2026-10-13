@@ -43,12 +43,22 @@ def today_view(snapshot: Dict[str, Any], today: date) -> Dict[str, Any]:
     ]
     return {
         "date": day,
+        "num": today.day,
+        "long_date": today.strftime("%A %-d %B"),
         "events": _events_on(snapshot, day),
         "morning": _by_order([t for t in scheduled if not t["evening"]]),
         "evening": _by_order([t for t in scheduled if t["evening"]]),
         "due": sorted(due, key=lambda t: t["deadline"]),
         "done": done_today,
     }
+
+
+def _day_name(d: date, today: date) -> str:
+    if d == today:
+        return "Today"
+    if d == today + timedelta(days=1):
+        return "Tomorrow"
+    return d.strftime("%A")
 
 
 def week_start(today: date) -> date:
@@ -82,6 +92,8 @@ def week_view(snapshot: Dict[str, Any], today: date) -> Dict[str, Any]:
             {
                 "date": iso,
                 "label": d.strftime("%a %-d %b"),
+                "num": d.day,
+                "name": _day_name(d, today),
                 "is_today": d == today,
                 "todos": _by_order(starting),
                 "deadlines": deadlines,

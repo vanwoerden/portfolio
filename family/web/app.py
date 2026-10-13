@@ -10,8 +10,9 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from things_home import snapshot, views
+from web import templating
 
-HERE = os.path.dirname(__file__)
+HERE = templating.HERE
 SNAPSHOT_PATH = os.environ.get("THINGS_HOME_SNAPSHOT", snapshot.DEFAULT_PATH)
 
 app = FastAPI(title="Home")
@@ -20,29 +21,7 @@ app.mount("/static", StaticFiles(directory=os.path.join(HERE, "static")), name="
 templates = Jinja2Templates(directory=os.path.join(HERE, "templates"))
 
 
-def _fmt_day(iso: str) -> str:
-    return date.fromisoformat(iso).strftime("%a %-d %b")
-
-
-def _fmt_time(iso: str) -> str:
-    return datetime.fromisoformat(iso).strftime("%H:%M")
-
-
-def _asset_version(name: str) -> int:
-    """Cache-buster so a rebuilt stylesheet is never served stale."""
-    return int(os.path.getmtime(os.path.join(HERE, "static", name)))
-
-
-templates.env.globals["asset_version"] = _asset_version
-templates.env.filters["day"] = _fmt_day
-templates.env.filters["time"] = _fmt_time
-
-
-def _fmt_localtime(iso: str) -> str:
-    return datetime.fromisoformat(iso).astimezone().strftime("%a %H:%M")
-
-
-templates.env.filters["localtime"] = _fmt_localtime
+templating.configure(templates.env)
 
 
 def _page(request: Request, name: str, **ctx):

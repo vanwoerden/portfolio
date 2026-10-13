@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% from "_carbon.html" import todo, progress, breadcrumb, section %}
 {% block body %}
-{{ breadcrumb([("Projects", "/projects")], p.title) }}
+{{ breadcrumb([("Projects", base ~ "/projects")], p.title) }}
 <h1 class="app-title">{{ p.title }}</h1>
 {{ progress(p.percent, "Progress", p.completed ~ " of " ~ p.total ~ " done · " ~ p.percent ~ "%", big=True) }}
 {% if p.notes %}<p class="app-subtitle" style="white-space: pre-wrap">{{ p.notes }}</p>{% endif %}

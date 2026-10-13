@@ -6,7 +6,7 @@
 <div class="cds--css-grid cds--css-grid--condensed app-grid" style="padding-inline: 0">
 {% for p in v %}
   <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-4">
-    <a class="cds--tile cds--tile--clickable app-card" href="/projects/{{ p.id }}">
+    <a class="cds--tile cds--tile--clickable app-card" href="{{ base }}/projects/{{ p.id }}">
       <div class="app-tile-title">{{ p.title }}</div>
       {{ progress(p.percent, "Progress", p.completed ~ " of " ~ p.total ~ " done · " ~ p.percent ~ "%") }}
       <div class="app-meta">

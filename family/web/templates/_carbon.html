@@ -48,7 +48,7 @@
     <label class="cds--checkbox-label" for="todo-{{ t.id }}"><span class="cds--checkbox-label-text">{{ t.title }}</span></label>
   </div>
   <div class="app-meta app-todo__meta">
-    {% if show_project and t.project %}<a class="cds--link" href="/projects/{{ t.project_id }}">{{ t.project }}</a>{% endif %}
+    {% if show_project and t.project %}<a class="cds--link" href="{{ base }}/projects/{{ t.project_id }}">{{ t.project }}</a>{% endif %}
     {% if show_project and t.heading %}<span>{{ t.heading }}</span>{% endif %}
     {% if t.deadline %}{{ tag("Due " ~ (t.deadline | day), "red") }}{% endif %}
     {% for name in t.tags %}{{ tag(name) }}{% endfor %}

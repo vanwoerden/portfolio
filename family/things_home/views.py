@@ -66,6 +66,7 @@ def week_start(today: date) -> date:
 
 
 def week_view(snapshot: Dict[str, Any], today: date) -> Dict[str, Any]:
+    """The Monday-Sunday week containing `today`."""
     start = week_start(today)
     days = [start + timedelta(days=i) for i in range(7)]
     first, last = days[0].isoformat(), days[-1].isoformat()

@@ -5,7 +5,7 @@ import argparse
 import os
 import time
 
-from . import events, snapshot
+from . import events, publish, snapshot
 from .reader import find_database
 
 
@@ -24,6 +24,7 @@ def run_once() -> None:
         evs = []
     snap = snapshot.build(events=evs)
     snapshot.write(snap)
+    print(publish.publish(snap))
     print("synced: %d projects, %d to-dos, %d events"
           % (len(snap["projects"]), len(snap["todos"]), len(snap["events"])))
 

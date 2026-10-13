@@ -2,6 +2,9 @@
 @use '@carbon/styles/scss/type' as *;
 
 // App layer: Carbon tokens only (no raw colors), Carbon type styles and spacing.
+// App-level token for the one thing Carbon has no token for: rounded cards.
+:root { --app-radius-card: 16px; }
+.cds--tile { border-radius: var(--app-radius-card); }
 body { min-height: 100vh; }
 
 // Header: keep the nav visible on small screens (Carbon hides it below `lg`
@@ -24,8 +27,6 @@ body { min-height: 100vh; }
 .app-section__title {
   @include type-style('label-01');
   color: var(--cds-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.32px;
   margin-block-end: $spacing-03;
 }
 .app-section__title--alert { color: var(--cds-text-error); }
@@ -43,7 +44,7 @@ body { min-height: 100vh; }
 .app-todo__meta { padding-inline-start: $spacing-07; }
 
 // Events
-.app-event { display: flex; gap: $spacing-05; align-items: baseline; padding: $spacing-04 $spacing-05; margin-block-end: $spacing-02; border-inline-start: 3px solid var(--cds-support-info); }
+.app-event { display: flex; gap: $spacing-05; align-items: baseline; padding: $spacing-04 $spacing-05; margin-block-end: $spacing-02; }
 .app-event__title { @include type-style('body-compact-01'); }
 
 // Tiles / cards
@@ -57,3 +58,4 @@ body { min-height: 100vh; }
 
 .cds--breadcrumb { margin-block-end: $spacing-05; }
 .cds--progress-bar { margin-block-end: $spacing-05; }
+.cds--breadcrumb-item--current::after { display: none; }

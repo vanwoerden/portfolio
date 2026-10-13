@@ -5,7 +5,7 @@
 <h1 class="app-title">{{ p.title }}</h1>
 {{ progress(p.percent, "Progress", p.completed ~ " of " ~ p.total ~ " done · " ~ p.percent ~ "%", big=True) }}
 {% if p.notes %}<p class="app-subtitle" style="white-space: pre-wrap">{{ p.notes }}</p>{% endif %}
-{% for heading, items in p.todos | groupby('heading') %}
-  {% call section(heading or "To-dos") %}<ul>{% for t in items %}{{ todo(t, False) }}{% endfor %}</ul>{% endcall %}
+{% for g in p.groups %}
+  {% call section(g.heading or "To-dos") %}<ul>{% for t in g.todos %}{{ todo(t, False) }}{% endfor %}</ul>{% endcall %}
 {% endfor %}
 {% endblock %}

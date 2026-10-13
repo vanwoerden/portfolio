@@ -4,9 +4,10 @@
 <span class="cds--tag cds--tag--{{ color }} cds--tag--sm"><span class="cds--tag__label">{{ text }}</span></span>
 {%- endmacro %}
 
-{% macro progress(percent, label, helper=None, big=False) -%}
+{# `label` is always the accessible name; it is only shown when show_label is true. #}
+{% macro progress(percent, label, helper=None, big=False, show_label=False) -%}
 <div class="cds--progress-bar{% if big %} cds--progress-bar--big{% endif %}">
-  <div class="cds--progress-bar__label"><span class="cds--progress-bar__label-text">{{ label }}</span></div>
+  {% if show_label %}<div class="cds--progress-bar__label"><span class="cds--progress-bar__label-text">{{ label }}</span></div>{% endif %}
   <div class="cds--progress-bar__track" role="progressbar" aria-label="{{ label }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ percent }}">
     <div class="cds--progress-bar__bar" style="transform: scaleX({{ percent / 100 }})"></div>
   </div>
@@ -48,7 +49,7 @@
   </div>
   <div class="app-meta app-todo__meta">
     {% if show_project and t.project %}<a class="cds--link" href="/projects/{{ t.project_id }}">{{ t.project }}</a>{% endif %}
-    {% if t.heading %}<span>{{ t.heading }}</span>{% endif %}
+    {% if show_project and t.heading %}<span>{{ t.heading }}</span>{% endif %}
     {% if t.deadline %}{{ tag("Due " ~ (t.deadline | day), "red") }}{% endif %}
     {% for name in t.tags %}{{ tag(name) }}{% endfor %}
     {% if t.checklist %}{{ tag((t.checklist | selectattr('done') | list | length) ~ "/" ~ (t.checklist | length) ~ " checklist", "cool-gray") }}{% endif %}

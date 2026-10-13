@@ -85,6 +85,18 @@ def week_view(snapshot: Dict[str, Any], today: date) -> Dict[str, Any]:
     return {"start": first, "end": last, "carried": carried, "days": out_days}
 
 
+def group_by_heading(todos: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Loose to-dos first, then each heading in Things order."""
+    groups: Dict[Any, Dict[str, Any]] = {}
+    for t in sorted(todos, key=lambda t: t["index"] or 0):
+        g = groups.setdefault(
+            t["heading"],
+            {"heading": t["heading"], "order": t.get("heading_index") or 0, "todos": []},
+        )
+        g["todos"].append(t)
+    return sorted(groups.values(), key=lambda g: (g["heading"] is not None, g["order"]))
+
+
 def projects_view(snapshot: Dict[str, Any], today: date) -> List[Dict[str, Any]]:
     day = today.isoformat()
     out = []
@@ -94,6 +106,7 @@ def projects_view(snapshot: Dict[str, Any], today: date) -> List[Dict[str, Any]]
         overdue = [t for t in open_ if t["deadline"] and t["deadline"] < day]
         pct = round(100 * p["completed"] / p["total"]) if p["total"] else 0
         out.append(
-            dict(p, open=len(open_), overdue=len(overdue), percent=pct, todos=mine)
+            dict(p, open=len(open_), overdue=len(overdue), percent=pct, todos=mine,
+             groups=group_by_heading(mine))
         )
     return out

@@ -70,3 +70,33 @@ def test_projects_progress():
 def test_disabled_calendars_filtered():
     raw = [{"calendar_id": "x"}, {"calendar_id": "y"}]
     assert events.filter_events(raw, {"x"}) == [{"calendar_id": "y"}]
+
+
+def test_completed_in_the_evening_counts_as_done_today(monkeypatch):
+    import os
+    import time
+
+    monkeypatch.setenv("TZ", "America/New_York")
+    time.tzset()
+    try:
+        # 2026-10-12 20:47 EDT == 2026-10-13 00:47 UTC
+        ts = 1791852472
+        stamp = reader.decode_ts(ts)
+        assert stamp.startswith("2026-10-12T20:47")
+        s = snap([todo("g", done=True, completed_at=stamp)])
+        assert [t["id"] for t in views.today_view(s, date(2026, 10, 12))["done"]] == ["g"]
+    finally:
+        monkeypatch.undo()
+        time.tzset()
+
+
+def test_project_groups_mix_loose_and_headed_todos():
+    s = snap([
+        todo("a", heading="Later", heading_index=2, index=1),
+        todo("b", heading=None, index=5),
+        todo("c", heading="Now", heading_index=1, index=3),
+        todo("d", heading="Later", heading_index=2, index=0),
+    ])
+    groups = views.projects_view(s, TODAY)[0]["groups"]
+    assert [g["heading"] for g in groups] == [None, "Now", "Later"]
+    assert [t["id"] for t in groups[2]["todos"]] == ["d", "a"]

@@ -4,7 +4,7 @@ from __future__ import annotations
 import glob
 import os
 import sqlite3
-from datetime import date, datetime, timezone
+from datetime import date, datetime
 from typing import Any, Dict, List, Optional
 
 THINGS_GLOB = os.path.expanduser(
@@ -32,9 +32,11 @@ def decode_date(value: Optional[int]) -> Optional[str]:
 
 
 def decode_ts(value: Optional[float]) -> Optional[str]:
+    """Unix timestamp -> ISO string in the machine's local zone, so its date
+    part is the local calendar day (what "done today" compares against)."""
     if not value:
         return None
-    return datetime.fromtimestamp(value, tz=timezone.utc).isoformat()
+    return datetime.fromtimestamp(value).astimezone().isoformat()
 
 
 def connect(path: Optional[str] = None) -> sqlite3.Connection:
@@ -108,6 +110,7 @@ def read_home(conn: sqlite3.Connection, area_title: str = HOME_AREA) -> Dict[str
                 "done": t["status"] == STATUS_DONE,
                 "project_id": pid if pid in home_projects else None,
                 "heading": heading["title"] if heading else None,
+                "heading_index": heading["idx"] if heading else None,
                 "start": {0: "inbox", 1: "anytime", 2: "someday"}.get(t["start"], "anytime"),
                 "start_date": decode_date(t["startDate"]),
                 "deadline": decode_date(t["deadline"]),
